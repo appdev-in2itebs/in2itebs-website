@@ -1,0 +1,20 @@
+import type { Client } from "@/content/types";
+import { ClientLogo } from "./client-logo";
+import { Stagger, StaggerItem} from "@/components/motion/reveal";
+
+/** Static grid of client logos for industry pages. */
+export function ClientWall({ clients }: { clients: Client[] }) {
+  if (!clients.length) return null;
+  return (
+    <Stagger className="grid grid-cols-2 gap-px overflow-hidden rounded-xl2 border border-navy/5 bg-navy/5 sm:grid-cols-3 lg:grid-cols-4">
+      {clients.map((c) => (
+        <StaggerItem
+          key={c.slug}
+          className="group/logo flex h-28 items-center justify-center bg-logo-surface px-6"
+        >
+          <ClientLogo client={c} />
+        </StaggerItem>
+      ))}
+    </Stagger>
+  );
+}

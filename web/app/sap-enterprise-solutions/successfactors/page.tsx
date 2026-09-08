@@ -1,0 +1,196 @@
+import {pageMetadata} from "@/lib/metadata";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+import { Container, Section } from "@/components/ui/container";
+import { Eyebrow, Accent, SectionHeading } from "@/components/ui/typography";
+import { Card } from "@/components/ui/card";
+import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
+import { PageHero } from "@/components/sections/page-hero";
+import { FeatureGrid } from "@/components/sections/feature-grid";
+import { CtaSection } from "@/components/sections/cta-section";
+import { HeroMotif, practiceIcon } from "@/components/sections/hero-motif";
+
+export const metadata = pageMetadata("/sap-enterprise-solutions/successfactors/", {
+  title: "SAP SuccessFactors / HXM",
+  description:
+    "Human experience management on SAP SuccessFactors — Core HR, Talent, Cloud Payroll, Work Zone and people analytics, delivered by a deep certified consultant pool.",
+});
+
+/** The SuccessFactors / HXM capability map — Blueprint §8.3. */
+const capabilities = [
+  {
+    title: "Core HR & Talent",
+    body: "Employee Central as the single system of record, with the talent suite built on top.",
+    bullets: [
+      "Employee Central core HR",
+      "Recruiting & onboarding",
+      "Performance & goals",
+      "Succession & development",
+    ],
+  },
+  {
+    title: "Cloud Payroll & Compensation",
+    body: "Pay and reward, run accurately and on policy.",
+    bullets: [
+      "Employee Central Payroll",
+      "Compensation & variable pay",
+      "Country-specific configurations",
+      "Finance and posting integration",
+    ],
+  },
+  {
+    title: "Time & Attendance",
+    body: "Time captured, costed and compliant.",
+    bullets: [
+      "Time tracking & management",
+      "Absence & leave rules",
+      "Shift and roster scheduling",
+      "Time-to-payroll integration",
+    ],
+  },
+  {
+    title: "Learning & Talent Intelligence",
+    body: "Skills, growth and mobility, joined up.",
+    bullets: [
+      "Learning management (LMS)",
+      "Skills & competency frameworks",
+      "Talent intelligence insights",
+      "Internal mobility & career paths",
+    ],
+  },
+  {
+    title: "Employee Experience",
+    body: "A workplace people want to stay in.",
+    bullets: [
+      "HR Work Zone digital workplace",
+      "Guided employee journeys",
+      "Listening & feedback cycles",
+      "Self-service across the lifecycle",
+    ],
+  },
+  {
+    title: "People Analytics & Planning",
+    body: "Decisions made on workforce evidence.",
+    bullets: [
+      "People analytics & reporting",
+      "Workforce planning",
+      "Headcount & cost modelling",
+      "Stories in People Analytics",
+    ],
+  },
+];
+
+/** Accelerators & highlights — Blueprint §8.3. */
+const accelerators = [
+  {
+    title: "HR Work Zone instances",
+    body: "Production HR Work Zone digital-workplace instances stood up and tuned to each client's employee journeys.",
+  },
+  {
+    title: "Certified consultant pool",
+    body: "A deep bench of certified HXM consultants spanning Core HR, Talent, Payroll and analytics — sized for full programmes, not single modules.",
+  },
+  {
+    title: "iTAM accelerator",
+    body: "Our integrated talent and application management accelerator, shortening configuration of the talent suite and its integrations.",
+  },
+  {
+    title: "EBSx rapid-deployment kit",
+    body: "Pre-built configuration, data templates and test packs that compress the path from kick-off to a working SuccessFactors landscape.",
+  },
+  {
+    title: "Joule-for-HR enablement playbook",
+    body: "A structured playbook to switch on the Joule copilot for HR — use cases, guardrails and adoption steps for self-service and HR teams.",
+  },
+];
+
+export default function SuccessFactorsPage() {
+  return (
+    <>
+      <PageHero
+        eyebrow="SAP Enterprise Solutions · SuccessFactors / HXM"
+        headline="Human experience management,"
+        accentWord="at scale."
+        subhead="SAP SuccessFactors across Core HR, Talent, Cloud Payroll, Work Zone and people analytics — one human-experience platform, delivered by a deep certified consultant pool."
+        media={<HeroMotif icon={practiceIcon("sap-enterprise-solutions")} />}
+      />
+
+      {/* CAPABILITY MAP */}
+      <Section tone="white">
+        <Container>
+          <Reveal className="mb-12 max-w-2xl">
+            <SectionHeading
+              eyebrow="Capability map"
+              lead="The full SuccessFactors suite, joined up — from the system of record through talent, pay, time, learning and analytics, rather than a scatter of point modules."
+            >
+              The full HXM <Accent>suite</Accent>.
+            </SectionHeading>
+          </Reveal>
+          <FeatureGrid features={capabilities} columns={3} bezel />
+        </Container>
+      </Section>
+
+      {/* ACCELERATORS & HIGHLIGHTS */}
+      <Section tone="light">
+        <Container>
+          <Reveal className="mb-12 max-w-2xl">
+            <SectionHeading
+              eyebrow="Accelerators & highlights"
+              lead="The assets and people that take SuccessFactors live faster — proven instances, a certified pool and pre-built kits, rather than a standing start."
+            >
+              Built to move <Accent>faster</Accent>.
+            </SectionHeading>
+          </Reveal>
+          <FeatureGrid features={accelerators} columns={3} />
+          <Reveal delay={0.1} className="mt-8">
+            <Link
+              href="/sap-enterprise-solutions/health-check-360/"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-blue-accent hover:text-navy"
+            >
+              See Health Check 360&deg; <ArrowUpRight size={16} strokeWidth={1.5} />
+            </Link>
+          </Reveal>
+        </Container>
+      </Section>
+
+      {/* PROOF BAND */}
+      <Section tone="navy" className="relative overflow-hidden">
+        <div aria-hidden className="pointer-events-none absolute inset-0 opacity-[0.07]">
+          <div className="absolute -right-24 top-10 h-[30rem] w-[30rem] origin-center rotate-45 border-[64px] border-blue-light" />
+        </div>
+        <Container>
+          <Reveal className="mb-10 max-w-2xl">
+            <Eyebrow onDark>Proof</Eyebrow>
+            <h2 className="mt-5 font-serif text-h2 font-bold text-white">
+              Delivered, <Accent>repeatedly</Accent>.
+            </h2>
+          </Reveal>
+          <Stagger className="grid gap-5 md:grid-cols-3">
+            {[
+              { value: "125+", label: "Projects delivered" },
+              { value: "87+", label: "Certified HXM consultants" },
+              { value: "10+", label: "Live proofs of concept" },
+            ].map((s) => (
+              <StaggerItem key={s.label} className="h-full">
+                <Card tone="navy" bezel={false} className="h-full ring-1 ring-white/10">
+                  <div className="font-serif text-[2.5rem] font-bold leading-none text-white">{s.value}</div>
+                  <p className="mt-3 text-[0.95rem] leading-relaxed text-blue-light">{s.label}</p>
+                </Card>
+              </StaggerItem>
+            ))}
+          </Stagger>
+        </Container>
+      </Section>
+
+      <CtaSection
+        eyebrow="SuccessFactors / HXM"
+        heading={
+          <>
+            Discuss SuccessFactors <Accent>transformation</Accent>.
+          </>
+        }
+        body="Tell us where your people processes strain today. We'll map a SuccessFactors rollout across Core HR, Talent, Payroll and analytics — accelerated by our kits and certified pool."
+      />
+    </>
+  );
+}

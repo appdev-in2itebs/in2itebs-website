@@ -1,0 +1,11 @@
+web/node_modules/
+web/.next/
+web/.env*
+!web/.env.example
+web/tsconfig.tsbuildinfo
+web/playwright-report/
+web/test-results/
+.website-backups/
+.website-runtime/
+web/.impeccable/
+.remember/tmp/
