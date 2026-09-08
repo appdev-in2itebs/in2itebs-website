@@ -1,5 +1,21 @@
 import {createHash, randomUUID} from "node:crypto";
 import {leadSchema, type Lead} from "./lead-schema";
+import {SITE_URL} from "./utils";
+/** Origins a browser may submit from: the socket origin, the public site (with and without www),
+ *  the proxy-forwarded origin when TRUST_PROXY_HEADERS=1, and any ALLOWED_ORIGINS entries. */
+export function allowedOrigins(request:Request) {
+  const origins = new Set<string>([new URL(request.url).origin]);
+  const site = new URL(SITE_URL);
+  origins.add(site.origin);
+  origins.add(`${site.protocol}//www.${site.host.replace(/^www\./,"")}`);
+  if(process.env.TRUST_PROXY_HEADERS === "1") {
+    const proto = request.headers.get("x-forwarded-proto")?.split(",")[0].trim();
+    const host = (request.headers.get("x-forwarded-host") ?? request.headers.get("host"))?.split(",")[0].trim();
+    if(proto && host) origins.add(`${proto}://${host}`);
+  }
+  for(const extra of (process.env.ALLOWED_ORIGINS ?? "").split(",")) { const o=extra.trim(); if(o) origins.add(o); }
+  return origins;
+}
 const MAX_BYTES = 16_384;
 const windowMs = 60_000;
 const buckets = new Map<string, {start:number; count:number}>();
@@ -30,7 +46,8 @@ const json = (status:number, body:object, extra:Record<string,string>={}) =>
 export async function handleLead(request:Request, transport?:LeadTransport) {
   if(!request.headers.get("content-type")?.startsWith("application/json")) return json(415,{ok:false,error:"Use JSON."});
   const origin = request.headers.get("origin");
-  if(origin && origin !== new URL(request.url).origin) return json(403,{ok:false,error:"Invalid origin."});
+  const sameSite = request.headers.get("sec-fetch-site") === "same-origin";
+  if(origin && !sameSite && !allowedOrigins(request).has(origin)) return json(403,{ok:false,error:"Invalid origin."});
   // Trust forwarding headers only when a configured ingress overwrites them.
   const address = process.env.TRUST_PROXY_HEADERS === "1" ? request.headers.get("x-forwarded-for")?.split(",")[0].trim() ?? "unknown" : "shared";
   const key = createHash("sha256").update(address).digest("hex");

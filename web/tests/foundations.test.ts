@@ -78,3 +78,30 @@ test('every partner logo path resolves to a file and the homepage grid mirrors t
   const withLogo: string[]=homeEcosystem.filter(e=>e.logo).map(e=>e.name);
   for(const name of ['SAP','Microsoft','Oracle','Salesforce','Workday','IBM','HP','OpenText','SAP Concur','Qualtrics']) assert.ok(withLogo.includes(name), `${name} should have artwork`);
 });
+
+// --- Enquiry origin allowlist (public site + trusted proxy forwarding) ---
+
+test('browser origins that match the public site or trusted forwarded headers are accepted',async()=>{
+  const previous=process.env.TRUST_PROXY_HEADERS;
+  process.env.TRUST_PROXY_HEADERS='1';
+  try{
+    let delivered=0;
+    const forwarded=await handleLead(request(valid,{origin:'https://in2itebs.com',host:'in2itebs.com','x-forwarded-proto':'https','x-forwarded-host':'in2itebs.com'}),async()=>{delivered++;});
+    assert.equal(forwarded.status,200);
+    const preview=await handleLead(request(valid,{origin:'https://preview.example.net','x-forwarded-proto':'https','x-forwarded-host':'preview.example.net'}),async()=>{delivered++;});
+    assert.equal(preview.status,200);
+    const foreign=await handleLead(request(valid,{origin:'https://foreign.example','x-forwarded-proto':'https','x-forwarded-host':'in2itebs.com'}),async()=>{delivered++;});
+    assert.equal(foreign.status,403);
+    assert.equal(delivered,2);
+  } finally { if(previous===undefined) delete process.env.TRUST_PROXY_HEADERS; else process.env.TRUST_PROXY_HEADERS=previous; }
+});
+test('the public site origin is accepted even when forwarded headers are not trusted',async()=>{
+  const previous=process.env.TRUST_PROXY_HEADERS;
+  delete process.env.TRUST_PROXY_HEADERS;
+  try{
+    const response=await handleLead(request(valid,{origin:'https://in2itebs.com'}),async()=>{});
+    assert.equal(response.status,200);
+    const www=await handleLead(request(valid,{origin:'https://www.in2itebs.com'}),async()=>{});
+    assert.equal(www.status,200);
+  } finally { if(previous===undefined) delete process.env.TRUST_PROXY_HEADERS; else process.env.TRUST_PROXY_HEADERS=previous; }
+});

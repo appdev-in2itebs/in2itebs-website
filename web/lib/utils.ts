@@ -9,4 +9,4 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export const SITE_URL = "https://in2itebs.com";
+export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://in2itebs.com").replace(/\/$/, "");
