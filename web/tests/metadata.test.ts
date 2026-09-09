@@ -63,3 +63,13 @@ test('every inner page renders a breadcrumb trail',()=>{
     assert.ok(source.includes('<BreadcrumbJsonLd'),`${path.relative(process.cwd(),file)} has no BreadcrumbJsonLd`);
   }
 });
+import {breadcrumbItems, isKnownPage} from '../lib/json-ld';
+test('breadcrumbs skip intermediate levels that are not pages',()=>{
+  const legal=breadcrumbItems('/legal/privacy-policy/',undefined,isKnownPage);
+  assert.deepEqual(legal.map(i=>i.name),['Home','Privacy Policy']);
+  assert.equal(legal[1].item,'https://in2itebs.com/legal/privacy-policy/');
+  const concur=breadcrumbItems('/sap-enterprise-solutions/concur/',undefined,isKnownPage);
+  assert.deepEqual(concur.map(i=>i.name),['Home','SAP Enterprise Solutions','Concur']);
+  const study=breadcrumbItems('/case-studies/wipro-infrastructure-engineering/','Wipro Infrastructure Engineering',isKnownPage);
+  assert.deepEqual(study.map(i=>i.name),['Home','Clients & Case Studies','Wipro Infrastructure Engineering']);
+});

@@ -1,9 +1,7 @@
 import { social, site } from "@/content/site";
 import { offices } from "@/content/offices";
-import { primaryNav, footerNav } from "@/content/nav";
-import type { NavItem } from "@/content/types";
 import { SITE_URL } from "@/lib/utils";
-import { safeJsonLd } from "@/lib/json-ld";
+import { breadcrumbItems, isKnownPage, safeJsonLd } from "@/lib/json-ld";
 
 function Script({ data }: { data: unknown }) {
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(data) }} />;
@@ -39,28 +37,9 @@ export function OrganizationJsonLd() {
   return <Script data={data} />;
 }
 
-const labels = new Map<string, string>();
-function collect(items: NavItem[]) { for (const item of items) { labels.set(item.href.replace(/#.*$/, ""), item.label); if (item.children) collect(item.children); } }
-collect(primaryNav);
-collect([...footerNav.company, ...footerNav.practices, ...footerNav.legal]);
-
-function labelFor(path: string) {
-  const known = labels.get(path);
-  if (known) return known;
-  const last = path.split("/").filter(Boolean).pop() ?? "";
-  return last.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
-}
-
 /** BreadcrumbList for an inner page; `name` overrides the label of the final crumb. */
 export function BreadcrumbJsonLd({ path, name }: { path: string; name?: string }) {
-  const segments = path.split("/").filter(Boolean);
-  const items = [{ name: "Home", item: `${SITE_URL}/` }];
-  let current = "";
-  for (const [index, segment] of segments.entries()) {
-    current += `/${segment}`;
-    const crumbPath = `${current}/`;
-    items.push({ name: index === segments.length - 1 && name ? name : labelFor(crumbPath), item: `${SITE_URL}${crumbPath}` });
-  }
+  const items = breadcrumbItems(path, name, isKnownPage);
   const data = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
