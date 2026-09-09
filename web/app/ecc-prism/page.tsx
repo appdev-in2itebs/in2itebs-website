@@ -29,7 +29,7 @@ const pathways = [
 export default function EccPrismPage() {
   return (
     <>
-      <BreadcrumbJsonLd path="/ecc-prism/" />
+      <BreadcrumbJsonLd path="/ecc-prism/" name="ECC Prism™" />
       <PageHero
         eyebrow="SAP Enterprise Solutions"
         headline="Know your ECC estate before you"

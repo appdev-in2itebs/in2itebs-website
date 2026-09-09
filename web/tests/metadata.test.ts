@@ -61,6 +61,8 @@ test('every inner page renders a breadcrumb trail',()=>{
     const match=source.match(/pageMetadata\((["'`])([^"'`]+)\1/);
     if(!match||match[2]==='/'||match[2]==='/404/') continue;
     assert.ok(source.includes('<BreadcrumbJsonLd'),`${path.relative(process.cwd(),file)} has no BreadcrumbJsonLd`);
+    if(file.includes('[slug]')) continue;
+    assert.ok(source.includes(`BreadcrumbJsonLd path="${match[2]}"`),`${path.relative(process.cwd(),file)}: breadcrumb path does not match pageMetadata path ${match[2]}`);
   }
 });
 import {breadcrumbItems, isKnownPage} from '../lib/json-ld';
@@ -71,5 +73,17 @@ test('breadcrumbs skip intermediate levels that are not pages',()=>{
   const concur=breadcrumbItems('/sap-enterprise-solutions/concur/',undefined,isKnownPage);
   assert.deepEqual(concur.map(i=>i.name),['Home','SAP Enterprise Solutions','Concur']);
   const study=breadcrumbItems('/case-studies/wipro-infrastructure-engineering/','Wipro Infrastructure Engineering',isKnownPage);
-  assert.deepEqual(study.map(i=>i.name),['Home','Clients & Case Studies','Wipro Infrastructure Engineering']);
+  assert.deepEqual(study.map(i=>i.name),['Home','Client stories','Wipro Infrastructure Engineering']);
+});
+test('nav labels do not depend on collection order',()=>{
+  // Hash children such as /advisory/#change-assurance must not claim the parent path.
+  for(const [p,label] of [['/advisory/','Advisory Services'],['/digital-data-ai/','Digital, Data & AI'],['/delivery-excellence/','Delivery Excellence']] as const){
+    assert.deepEqual(breadcrumbItems(p).map(i=>i.name),['Home',label],p);
+  }
+  // Deep nav children are still known, so intermediate crumbs survive.
+  assert.ok(isKnownPage('/sap-enterprise-solutions/rise-vs-grow/'));
+  assert.deepEqual(breadcrumbItems('/sap-enterprise-solutions/rise-vs-grow/').map(i=>i.name),['Home','SAP Enterprise Solutions','RISE vs GROW']);
+  // The default predicate applies the no-404 guard; an explicit passthrough restores the old behaviour.
+  assert.deepEqual(breadcrumbItems('/legal/disclaimer/').map(i=>i.name),['Home','Disclaimer']);
+  assert.deepEqual(breadcrumbItems('/legal/disclaimer/',undefined,()=>true).map(i=>i.name),['Home','Legal','Disclaimer']);
 });
