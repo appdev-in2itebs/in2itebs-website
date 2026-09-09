@@ -38,3 +38,14 @@ test('named case studies carry a summary of at most 155 characters',()=>{
   }
   for(const article of insights) assert.ok(article.excerpt.length<=160,article.slug);
 });
+import sitemap from '../app/sitemap';
+import {contentUpdated} from '../content/site';
+test('every sitemap entry has a valid lastModified and the homepage is included',()=>{
+  const entries=sitemap();
+  assert.ok(entries.some(e=>e.url==='https://in2itebs.com/'));
+  for(const entry of entries){
+    assert.ok(entry.lastModified instanceof Date && !Number.isNaN(entry.lastModified.getTime()),entry.url);
+    assert.ok(!entry.url.endsWith('/thank-you/'));
+  }
+  assert.match(contentUpdated,/^\d{4}-\d{2}-\d{2}$/);
+});

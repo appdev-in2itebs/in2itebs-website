@@ -21,6 +21,9 @@ export const footerCertifications = [
   "PCE Partner",
 ];
 
+/** Bump when site copy changes; feeds sitemap lastModified for pages without their own date. */
+export const contentUpdated = "2026-09-08";
+
 export const regions: Region[] = [
   { code: "IN", name: "India", email: "info@in2itebs.com" },
   { code: "KE", name: "Kenya", email: "info@in2itebs.co.ke" },

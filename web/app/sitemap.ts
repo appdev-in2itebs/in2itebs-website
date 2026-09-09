@@ -3,6 +3,8 @@ import { sapChildren } from "@/content/nav";
 import { industries } from "@/content/industries";
 import { insights } from "@/content/insights";
 import { caseStudies } from "@/content/case-studies";
+import { insightBodies } from "@/content/insight-bodies";
+import { contentUpdated } from "@/content/site";
 import { SITE_URL } from "@/lib/utils";
 
 /** Canonical route inventory — three-pillar IA. All paths use trailing slashes. */
@@ -48,8 +50,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const all = Array.from(new Set([...staticPaths, ...dynamicPaths]));
 
+  const dateFor = (path: string) => {
+    const slug = path.match(/^\/insights\/([^/]+)\/$/)?.[1];
+    const articleDate = slug ? insightBodies[slug]?.date : "";
+    return new Date(articleDate || contentUpdated);
+  };
+
   return all.map((path) => ({
     url: `${SITE_URL}${path}`,
+    lastModified: dateFor(path),
     changeFrequency: path === "/" ? "weekly" : "monthly",
     priority: path === "/" ? 1 : 0.7,
   }));
