@@ -39,10 +39,33 @@ test('honeypots, oversized bodies and foreign origins are rejected',async()=>{
   assert.equal((await handleLead(request({...valid,message:'x'.repeat(17000)}),async()=>{})).status,413);
   assert.equal((await handleLead(request(valid,{origin:'https://foreign.example'}),async()=>{})).status,403);
 });
-test('rate limit returns retry guidance',async()=>{
-  for(let i=0;i<10;i++) await handleLead(request({}),async()=>{});
-  const response=await handleLead(request(valid),async()=>{});
-  assert.equal(response.status,429);assert.equal(response.headers.get('retry-after'),'60');
+test('a trusted client address is limited to ten requests a minute',async()=>{
+  process.env.TRUST_PROXY_HEADERS='1';
+  try{
+    for(let i=0;i<10;i++) await handleLead(request({},{'x-forwarded-for':'203.0.113.7'}),async()=>{});
+    const blocked=await handleLead(request(valid,{'x-forwarded-for':'203.0.113.7'}),async()=>{});
+    assert.equal(blocked.status,429);assert.equal(blocked.headers.get('retry-after'),'60');
+    const other=await handleLead(request(valid,{'x-forwarded-for':'203.0.113.8'}),async()=>{});
+    assert.equal(other.status,200);
+  } finally { delete process.env.TRUST_PROXY_HEADERS; }
+});
+test('without trusted addresses, eleven visitors are not locked out together',async()=>{
+  delete process.env.TRUST_PROXY_HEADERS;
+  for(let i=0;i<11;i++) assert.equal((await handleLead(request({...valid,email:`person${i}@example.com`}),async()=>{})).status,200);
+});
+test('the same email address is limited to three requests a minute',async()=>{
+  delete process.env.TRUST_PROXY_HEADERS;
+  for(let i=0;i<3;i++) assert.equal((await handleLead(request(valid),async()=>{})).status,200);
+  assert.equal((await handleLead(request(valid),async()=>{})).status,429);
+});
+test('the receipt cookie is Secure behind a TLS-terminating proxy',async()=>{
+  const previous=process.env.TRUST_PROXY_HEADERS;
+  process.env.TRUST_PROXY_HEADERS='1';
+  try{
+    const response=await handleLead(request(valid,{'x-forwarded-proto':'https'}),async()=>{});
+    assert.equal(response.status,200);
+    assert.match(response.headers.get('set-cookie') ?? '',/; Secure/);
+  } finally { if(previous===undefined) delete process.env.TRUST_PROXY_HEADERS; else process.env.TRUST_PROXY_HEADERS=previous; }
 });
 
 // --- Logo data integrity (client ribbon + partner ecosystem) ---
