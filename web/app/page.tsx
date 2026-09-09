@@ -32,7 +32,7 @@ import { site, stats } from "@/content/site";
 import { clients } from "@/content/clients";
 
 export const metadata = pageMetadata("/", {
-  title: "In2IT EBS — Enterprise transformation under control",
+  title: { absolute: "In2IT EBS — Enterprise transformation under control" },
   description:
     "SAP-led enterprise transformation, advisory, digital engineering and managed operations across more than 30 countries.",
 });
