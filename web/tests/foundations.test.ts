@@ -90,9 +90,11 @@ test('browser origins that match the public site or trusted forwarded headers ar
     assert.equal(forwarded.status,200);
     const preview=await handleLead(request(valid,{origin:'https://preview.example.net','x-forwarded-proto':'https','x-forwarded-host':'preview.example.net'}),async()=>{delivered++;});
     assert.equal(preview.status,200);
+    const defaultPort=await handleLead(request(valid,{origin:'https://tunnel.example.net','x-forwarded-proto':'https','x-forwarded-host':'tunnel.example.net:443'}),async()=>{delivered++;});
+    assert.equal(defaultPort.status,200,'a forwarded host carrying the default port must normalise to the browser origin');
     const foreign=await handleLead(request(valid,{origin:'https://foreign.example','x-forwarded-proto':'https','x-forwarded-host':'in2itebs.com'}),async()=>{delivered++;});
     assert.equal(foreign.status,403);
-    assert.equal(delivered,2);
+    assert.equal(delivered,3);
   } finally { if(previous===undefined) delete process.env.TRUST_PROXY_HEADERS; else process.env.TRUST_PROXY_HEADERS=previous; }
 });
 test('the public site origin is accepted even when forwarded headers are not trusted',async()=>{
@@ -103,5 +105,22 @@ test('the public site origin is accepted even when forwarded headers are not tru
     assert.equal(response.status,200);
     const www=await handleLead(request(valid,{origin:'https://www.in2itebs.com'}),async()=>{});
     assert.equal(www.status,200);
+    const untrusted=await handleLead(request(valid,{origin:'https://preview.example.net','x-forwarded-proto':'https','x-forwarded-host':'preview.example.net'}),async()=>{});
+    assert.equal(untrusted.status,403,'forwarded headers must not be trusted unless TRUST_PROXY_HEADERS=1');
   } finally { if(previous===undefined) delete process.env.TRUST_PROXY_HEADERS; else process.env.TRUST_PROXY_HEADERS=previous; }
+});
+test('ALLOWED_ORIGINS entries are normalised before they are matched',async()=>{
+  const previousTrust=process.env.TRUST_PROXY_HEADERS;
+  const previousAllowed=process.env.ALLOWED_ORIGINS;
+  delete process.env.TRUST_PROXY_HEADERS;
+  process.env.ALLOWED_ORIGINS='https://staging.example.com/';
+  try{
+    const staging=await handleLead(request(valid,{origin:'https://staging.example.com'}),async()=>{});
+    assert.equal(staging.status,200,'a trailing slash in ALLOWED_ORIGINS must not stop the entry matching');
+    const foreign=await handleLead(request(valid,{origin:'https://foreign.example'}),async()=>{});
+    assert.equal(foreign.status,403);
+  } finally {
+    if(previousTrust===undefined) delete process.env.TRUST_PROXY_HEADERS; else process.env.TRUST_PROXY_HEADERS=previousTrust;
+    if(previousAllowed===undefined) delete process.env.ALLOWED_ORIGINS; else process.env.ALLOWED_ORIGINS=previousAllowed;
+  }
 });

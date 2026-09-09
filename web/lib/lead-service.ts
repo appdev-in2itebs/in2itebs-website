@@ -3,7 +3,7 @@ import {leadSchema, type Lead} from "./lead-schema";
 import {SITE_URL} from "./utils";
 /** Origins a browser may submit from: the socket origin, the public site (with and without www),
  *  the proxy-forwarded origin when TRUST_PROXY_HEADERS=1, and any ALLOWED_ORIGINS entries. */
-export function allowedOrigins(request:Request) {
+export function allowedOrigins(request:Request): Set<string> {
   const origins = new Set<string>([new URL(request.url).origin]);
   const site = new URL(SITE_URL);
   origins.add(site.origin);
@@ -11,9 +11,9 @@ export function allowedOrigins(request:Request) {
   if(process.env.TRUST_PROXY_HEADERS === "1") {
     const proto = request.headers.get("x-forwarded-proto")?.split(",")[0].trim();
     const host = (request.headers.get("x-forwarded-host") ?? request.headers.get("host"))?.split(",")[0].trim();
-    if(proto && host) origins.add(`${proto}://${host}`);
+    if(proto && host) try{ origins.add(new URL(`${proto}://${host}`).origin); } catch {}
   }
-  for(const extra of (process.env.ALLOWED_ORIGINS ?? "").split(",")) { const o=extra.trim(); if(o) origins.add(o); }
+  for(const extra of (process.env.ALLOWED_ORIGINS ?? "").split(",")) { const o=extra.trim(); if(o) try{ origins.add(new URL(o).origin); } catch {} }
   return origins;
 }
 const MAX_BYTES = 16_384;
