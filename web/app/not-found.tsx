@@ -1,11 +1,13 @@
+import {pageMetadata} from "@/lib/metadata";
 import { Container } from "@/components/ui/container";
 import { Eyebrow, Accent, Headline, Lead } from "@/components/ui/typography";
 import { Button } from "@/components/ui/button";
 
-export const metadata = {
+export const metadata = pageMetadata("/404/", {
   title: "Page not found",
-  description: "The page you were looking for could not be found.",
-};
+  description: "The page you were looking for could not be found. It may have moved, or the link may be out of date.",
+  robots: {index: false, follow: true},
+});
 
 export default function NotFound() {
   return (
