@@ -42,6 +42,8 @@ Careers now links to the existing official LinkedIn company page and honestly sa
 
 Production DNS/TLS/CDN was not changed. A read-only HTTPS request to in2itebs.com failed TLS from this environment; this does **not** prove the transcript's caching/redirect explanation. Hosting access, reproducible traces, legal/claim approvals and release authority remain required.
 
+HSTS is sent with `includeSubDomains` but without `preload`; submitting the domain to the preload list is irreversible and needs owner approval. The CSP allows inline scripts because Next.js emits inline hydration scripts on static pages; any future analytics tag must be added to `script-src` and `connect-src` explicitly.
+
 ## Verification
 
 `npm run check` runs lint, type checking and server/unit tests. `npm run test:browser` expects the running built website on 3107 and installed Chrome; it uses isolated test profiles. It covers keyboard navigation, seven widths, both themes, no-JavaScript rendering, token contrast and all sitemap routes. Screenshots and retained failing traces are generated under web/test-results/. `node docs/audits/check-local-site.mjs http://127.0.0.1:3107` runs from the repository root and reports routes, links, hashes and assets.
