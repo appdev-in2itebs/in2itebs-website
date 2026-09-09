@@ -14,7 +14,7 @@ const socials = [
 function LinkColumn({ title, links }: { title: string; links: { label: string; href: string }[] }) {
   return (
     <div>
-      <h3 className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-brand-muted">{title}</h3>
+      <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-muted">{title}</h3>
       <ul className="mt-5 space-y-3">
         {links.map((link) => (
           <li key={link.href}>
@@ -53,7 +53,7 @@ export function Footer() {
         <div className="grid gap-8 border-b border-on-brand/20 py-7 lg:grid-cols-[1fr_auto] lg:items-center">
           <div className="flex flex-wrap gap-x-5 gap-y-2">
             {footerCertifications.map((certification) => (
-              <span key={certification} className="text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-brand-muted">
+              <span key={certification} className="text-xs font-semibold uppercase tracking-[0.14em] text-brand-muted">
                 {certification}
               </span>
             ))}
