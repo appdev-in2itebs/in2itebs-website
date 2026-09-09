@@ -41,8 +41,16 @@ test('static content and persisted theme work without JavaScript',async({browser
   const context=await browser.newContext({javaScriptEnabled:false});
   await context.addCookies([{name:'in2it-theme',value:'dark',domain:'127.0.0.1',path:'/'}]);
   const page=await context.newPage();await page.goto('http://127.0.0.1:3107/');
-  await expect(page.locator('html')).toHaveClass(/theme-dark/);
+  // Static pages ship the light theme; the cookie is applied by a before-interactive script, so no-JS visitors get light.
+  await expect(page.locator('html')).toHaveClass(/theme-light/);
   await expect(page.getByRole('heading',{level:1})).toBeVisible();
   await expect(page.locator('main')).not.toContainText('being prepared');
   await context.close();
+});
+test('the theme cookie is applied before hydration on a static page',async({page,context})=>{
+  await context.addCookies([{name:'in2it-theme',value:'dark',domain:'127.0.0.1',path:'/'}]);
+  await page.goto('/about/',{waitUntil:'domcontentloaded'});
+  await expect(page.locator('html')).toHaveClass(/theme-dark/);
+  const cacheControl=(await page.request.get('/about/')).headers()['cache-control'] ?? '';
+  expect(cacheControl).not.toContain('no-store');
 });

@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { IBM_Plex_Sans } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { OrganizationJsonLd } from "@/components/seo/json-ld";
 import { SITE_URL } from "@/lib/utils";
-import { cookies } from "next/headers";
-import { resolveTheme } from "@/lib/themes";
 import { RegionProvider } from "@/components/layout/region-preference";
 import { MeasurementSignals } from "@/components/layout/measurement-signals";
 import { QuickContact } from "@/components/layout/quick-contact";
@@ -18,6 +17,9 @@ const plex = IBM_Plex_Sans({
   display: "swap",
 });
 
+/** Applies the persisted theme before first paint; pages are prerendered light. */
+const THEME_INIT = `(function(){try{var m=document.cookie.match(/(?:^|; )in2it-theme=(dark|light)(?:;|$)/);if(m&&m[1]==="dark"){var c=document.documentElement.classList;c.remove("theme-light");c.add("theme-dark");}}catch(e){}})();`;
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
@@ -26,23 +28,13 @@ export const metadata: Metadata = {
   },
   description:
     "10+ years of enterprise transformation, delivered globally. SAP Gold Partner with adjacent strength across Salesforce, Workday, Oracle, Microsoft, cloud and application services.",
-  openGraph: {
-    type: "website",
-    siteName: "In2IT EBS",
-    url: SITE_URL,
-    title: "In2IT EBS — Enterprise transformation, delivered globally",
-    description:
-      "SAP Gold Partner. 300+ consultants. Salesforce, Workday and application services across 30+ countries.",
-  },
-  twitter: { card: "summary_large_image" },
-  alternates: { canonical: "/" },
 };
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const theme = resolveTheme((await cookies()).get("in2it-theme")?.value);
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`theme-${theme} ${plex.variable}`}>
+    <html lang="en" className={`theme-light ${plex.variable}`} suppressHydrationWarning>
       <body className="grain">
+        <Script id="theme-init" strategy="beforeInteractive">{THEME_INIT}</Script>
         <RegionProvider>
         <MeasurementSignals />
         <OrganizationJsonLd />

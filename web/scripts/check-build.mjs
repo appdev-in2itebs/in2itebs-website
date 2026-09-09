@@ -16,5 +16,8 @@ if (env === "production") {
   if (!/Disallow: \/\s*$/m.test(robots)) failures.push("preview build must disallow crawling in robots.txt");
   if (!hasNoindex) failures.push("preview build must send X-Robots-Tag noindex");
 }
+const prerender = JSON.parse(readFileSync(".next/prerender-manifest.json", "utf8"));
+const prerenderedPages = Object.keys(prerender.routes).filter((r) => !/\.(xml|txt)$/.test(r) && r !== "/opengraph-image");
+if (prerenderedPages.length < 60) failures.push(`only ${prerenderedPages.length} pages are prerendered; expected at least 60 (is cookies()/headers() used in a layout?)`);
 if (failures.length) { for (const f of failures) console.error(`check-build: ${f}`); process.exit(1); }
 console.log(`check-build: ok (SITE_ENV=${env}, noindex=${hasNoindex})`);

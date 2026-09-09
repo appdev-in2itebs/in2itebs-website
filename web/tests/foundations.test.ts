@@ -3,7 +3,6 @@ import assert from 'node:assert/strict';
 import {cn} from '../lib/utils';
 import {handleLead, resetRateLimitsForTest} from '../lib/lead-service';
 import {measurementPayload} from '../lib/measurement';
-import {resolveTheme} from '../lib/themes';
 
 const valid = {name:'Test Person', email:'test@example.com', company:'Test Company', region:'IN', interest:'SAP', message:'Test only', offer:'conversation', assessment:''};
 const request = (body:unknown, headers:Record<string,string>={}) => new Request('http://localhost/api/lead/', {method:'POST',headers:{'content-type':'application/json',...headers},body:JSON.stringify(body)});
@@ -12,9 +11,6 @@ test('measurement allowlist cannot carry personal data',()=>{
   assert.deepEqual(measurementPayload('lead_accepted'),{name:'lead_accepted'});
   assert.equal(measurementPayload({name:'lead_accepted',email:'person@example.com'}),null);
   assert.equal(measurementPayload('person@example.com'),null);
-});
-test('theme cookie uses a safe default for unknown values',()=>{
-  assert.equal(resolveTheme('dark'),'dark');assert.equal(resolveTheme('invalid'),'light');assert.equal(resolveTheme(undefined),'light');
 });
 test('custom heading sizes survive colour merging',()=>{
   assert.equal(cn('text-h1 text-foreground'),'text-h1 text-foreground');
