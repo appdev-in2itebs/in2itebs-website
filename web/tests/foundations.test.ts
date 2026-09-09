@@ -157,3 +157,11 @@ test('colour opacity modifiers use values Tailwind can generate',()=>{
   for(const root of roots) walk(path.join(process.cwd(),root));
   assert.deepEqual(offenders,[]);
 });
+test('class names used in markup are either Tailwind utilities or defined in globals.css',()=>{
+  const css=readFileSync(path.join(process.cwd(),'app/globals.css'),'utf8');
+  for(const hook of ['content-reveal','cta-light','flow-line','metric-grid']){
+    const defined=new RegExp(`\.${hook}\b`).test(css);
+    const used=['components/motion/reveal.tsx','components/sections/cta-section.tsx','app/page.tsx'].some(f=>readFileSync(path.join(process.cwd(),f),'utf8').includes(hook));
+    assert.ok(defined||!used,`${hook} is used but never defined`);
+  }
+});

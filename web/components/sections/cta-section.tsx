@@ -18,7 +18,7 @@ export function CtaSection({
   ctaHref?: string;
 }) {
   return (
-    <section className="cta-light relative overflow-hidden border-t border-border-subtle bg-surface py-24 text-foreground md:py-32">
+    <section className="relative overflow-hidden border-t border-border-subtle bg-surface py-24 text-foreground md:py-32">
       <div aria-hidden className="absolute inset-0 section-tint-b" />
       <div aria-hidden className="ambient-orb ambient-orb-c absolute -right-24 top-10 h-80 w-80 rounded-full bg-action/[0.10] blur-[100px]" />
       <Container className="relative">

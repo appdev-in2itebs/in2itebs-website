@@ -146,7 +146,7 @@ export default function HomePage() {
         <Container>
           <h2 id="platform-practices-title" className="mb-5 text-lg font-semibold text-foreground">Find your platform practice</h2>
           <PlatformPracticeLinks />
-          <div className="mt-10"><dl className="metric-grid grid border-t border-border-subtle sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-10"><dl className="grid border-t border-border-subtle sm:grid-cols-2 lg:grid-cols-4">
             {stats.slice(0, 4).map((stat) => (
               <div key={stat.label} className="metric-item relative border-b border-border-subtle py-7 sm:border-r sm:px-6 sm:first:pl-0 lg:border-b-0 lg:last:border-r-0 lg:last:pr-0">
                 <dd className="text-3xl font-semibold tabular-nums tracking-[-0.04em] text-foreground md:text-4xl">{stat.value}</dd>
@@ -265,7 +265,7 @@ export default function HomePage() {
           </Reveal>
 
           <Stagger className="relative mt-16 grid gap-3 lg:grid-cols-12">
-            <div aria-hidden className="flow-line absolute left-[6%] right-[6%] top-10 hidden h-px bg-border-strong lg:block">
+            <div aria-hidden className="absolute left-[6%] right-[6%] top-10 hidden h-px bg-border-strong lg:block">
               <span className="flow-signal absolute top-1/2 h-2 w-2 -translate-y-1/2 rounded-full bg-action" />
             </div>
             {transformationStages.map((stage) => (
