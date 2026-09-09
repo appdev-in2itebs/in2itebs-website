@@ -51,9 +51,11 @@ test('the theme cookie is applied before hydration on a static page',async({page
   await context.addCookies([{name:'in2it-theme',value:'dark',domain:'127.0.0.1',path:'/'}]);
   await page.goto('/about/',{waitUntil:'domcontentloaded'});
   await expect(page.locator('html')).toHaveClass(/theme-dark/);
-  const cacheControl=(await page.request.get('/about/')).headers()['cache-control'] ?? '';
+  const response=await page.request.get('/about/');
+  const cacheControl=response.headers()['cache-control'] ?? '';
   expect(cacheControl).not.toContain('no-store');
-  const html=await (await page.request.get('/about/')).text();
-  expect(html.indexOf('in2it-theme')).toBeGreaterThan(-1);
-  expect(html.indexOf('in2it-theme')).toBeLessThan(html.indexOf('<header'));
+  const html=await response.text();
+  expect(html.indexOf('<script id="theme-init">')).toBeGreaterThan(-1);
+  expect(html.indexOf('<header')).toBeGreaterThan(-1);
+  expect(html.indexOf('<script id="theme-init">')).toBeLessThan(html.indexOf('<header'));
 });
