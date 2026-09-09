@@ -153,14 +153,15 @@ test('the canonical host is defined once',()=>{
 test('colour opacity modifiers use values Tailwind can generate',()=>{
   const roots=['app','components'];
   const offenders:string[]=[];
-  const walk=(dir:string)=>{for(const entry of readdirSync(dir)){const full=path.join(dir,entry);if(statSync(full).isDirectory())walk(full);else if(/\.tsx?$/.test(entry)){const source=readFileSync(full,'utf8');for(const m of source.matchAll(/\b(?:text|bg|border|via|from|to|ring|fill|stroke|divide|outline|decoration|placeholder)-[a-z][a-z-]*\/(\d{1,3})(?![\d\]])/g)){if(/^text-(?:xs|sm|base|lg|\dxl)\//.test(m[0])) continue; /* line-height shorthand, not opacity */ if(Number(m[1])%5!==0)offenders.push(`${path.relative(process.cwd(),full)}: ${m[0]}`);}}}};
+  const walk=(dir:string)=>{for(const entry of readdirSync(dir)){const full=path.join(dir,entry);if(statSync(full).isDirectory())walk(full);else if(/\.tsx?$/.test(entry)){const source=readFileSync(full,'utf8');for(const m of source.matchAll(/\b(?:text|bg|border|via|from|to|ring|fill|stroke|divide|outline|decoration|placeholder)-[a-z][a-z-]*\/(\d{1,3})(?![\d\]])/g)){if(/^text-(?:xs|sm|base|lg|\d?xl)\//.test(m[0])) continue; /* line-height shorthand, not opacity */ if(Number(m[1])%5!==0)offenders.push(`${path.relative(process.cwd(),full)}: ${m[0]}`);}}}};
   for(const root of roots) walk(path.join(process.cwd(),root));
   assert.deepEqual(offenders,[]);
 });
 test('class names used in markup are either Tailwind utilities or defined in globals.css',()=>{
   const css=readFileSync(path.join(process.cwd(),'app/globals.css'),'utf8');
+  assert.ok(new RegExp(`\\.stage-card-featured\\b`).test(css),'the "defined" branch must be able to match a class globals.css really defines');
   for(const hook of ['content-reveal','cta-light','flow-line','metric-grid']){
-    const defined=new RegExp(`\.${hook}\b`).test(css);
+    const defined=new RegExp(`\\.${hook}\\b`).test(css);
     const used=['components/motion/reveal.tsx','components/sections/cta-section.tsx','app/page.tsx'].some(f=>readFileSync(path.join(process.cwd(),f),'utf8').includes(hook));
     assert.ok(defined||!used,`${hook} is used but never defined`);
   }
