@@ -53,4 +53,7 @@ test('the theme cookie is applied before hydration on a static page',async({page
   await expect(page.locator('html')).toHaveClass(/theme-dark/);
   const cacheControl=(await page.request.get('/about/')).headers()['cache-control'] ?? '';
   expect(cacheControl).not.toContain('no-store');
+  const html=await (await page.request.get('/about/')).text();
+  expect(html.indexOf('in2it-theme')).toBeGreaterThan(-1);
+  expect(html.indexOf('in2it-theme')).toBeLessThan(html.indexOf('<header'));
 });

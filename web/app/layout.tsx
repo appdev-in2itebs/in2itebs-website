@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import { IBM_Plex_Sans } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/header";
@@ -34,7 +33,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`theme-light ${plex.variable}`} suppressHydrationWarning>
       <body className="grain">
-        <Script id="theme-init" strategy="beforeInteractive">{THEME_INIT}</Script>
+        <script id="theme-init" dangerouslySetInnerHTML={{ __html: THEME_INIT }} />
         <RegionProvider>
         <MeasurementSignals />
         <OrganizationJsonLd />
