@@ -138,4 +138,51 @@ export const redirects = [
   // --- Lorem / demo ---
   p("/slide-anything-popup-preview", "/"),
   p("/event-2024", "/insights/"),
+
+  // --- Legacy blog posts with exact new equivalents (audit H4, 2026-09-08) ---
+  p("/how-rise-with-sap-s-4hana-cloud-can-transform-your-business", "/insights/rise-with-sap-s4hana-cloud-transform-business/"),
+  p("/revolutionizing-hr-with-sap-successfactors-a-strategic-approach-to-modern-hcm-solutions", "/insights/revolutionizing-hr-with-sap-successfactors/"),
+  p("/igniting-organizational-potential-sap-successfactors-ai-innovations-revealed-at-sap-successconnect-las-vegas", "/insights/successfactors-ai-innovations-successconnect/"),
+  p("/grow-with-sap", "/sap-enterprise-solutions/rise-vs-grow/"),
+  p("/grow-with-sap-leadership-forum-event", "/sap-enterprise-solutions/rise-vs-grow/"),
+  // --- SuccessFactors local landing pages and campaigns ---
+  p("/in2it-ebs-simplify-hiring", "/sap-enterprise-solutions/successfactors/"),
+  p("/in2it-ebs-simplify-talent-2", "/sap-enterprise-solutions/successfactors/"),
+  p("/sap-successfactors-partner-in-india", "/sap-enterprise-solutions/successfactors/"),
+  p("/sap-success-factors-in-bangalore", "/sap-enterprise-solutions/successfactors/"),
+  p("/sap-successfactors-partner-in-mumbai", "/sap-enterprise-solutions/successfactors/"),
+  p("/sap-successfactors-partner-in-chennai", "/sap-enterprise-solutions/successfactors/"),
+  p("/sap-successfactors-partner-in-delhi", "/sap-enterprise-solutions/successfactors/"),
+  p("/sap-successfactors-partner-in-kolkata", "/sap-enterprise-solutions/successfactors/"),
+  p("/sap-success-factors-in-hyderabad", "/sap-enterprise-solutions/successfactors/"),
+  p("/sap-success-factors-in-bhubaneswar", "/sap-enterprise-solutions/successfactors/"),
+  p("/unlock-the-power-of-hr-technology-transformation", "/sap-enterprise-solutions/successfactors/"),
+  p("/unlock-the-power-of-hr-technology-transformation-register-now", "/sap-enterprise-solutions/successfactors/"),
+  p("/unlock-the-power-of-hr-technology-transformation-register-now1", "/sap-enterprise-solutions/successfactors/"),
+  // --- Careers, FAQ, leadership profiles, news archive ---
+  p("/join-our-team", "/careers/"),
+  p("/apply-now", "/careers/"),
+  p("/our-culture", "/careers/"),
+  p("/sap-and-success-factor-consultant", "/careers/"),
+  p("/events-celebrations-3", "/careers/"),
+  p("/faq", "/contact/"),
+  p("/dharmendra-sharma", "/about/"),
+  p("/anil-kumar-soleti", "/about/"),
+  p("/rajat-kapoor", "/about/"),
+  p("/news/page/2", "/insights/"),
+  p("/global-webinar", "/insights/"),
+];
+
+/** WordPress theme-demo URLs that never held In2IT content: served as HTTP 410 via a rewrite to /api/gone/. */
+export const goneSources = [
+  "/attract-and-retain-quality-high-paying-customers",
+  "/coronavirus-lockdown-leads-to-more-gaming-and-e-sports",
+  "/future-where-technology-creates-good-jobs",
+  "/live-stream-from-awwwards-showcasing-trends",
+  "/solutions-for-all-small-and-large-business",
+  "/what-you-do-today-improve-your-tomorrows",
+  "/case",
+  "/case/:path*",
+  "/event",
+  "/event/:path*",
 ];

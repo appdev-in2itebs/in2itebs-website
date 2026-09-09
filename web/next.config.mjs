@@ -1,4 +1,4 @@
-import { redirects as redirectMap } from "./content/redirects.mjs";
+import { redirects as redirectMap, goneSources } from "./content/redirects.mjs";
 
 const siteEnv = process.env.SITE_ENV;
 if (process.env.NODE_ENV === "production" && siteEnv !== "production" && siteEnv !== "preview") {
@@ -43,6 +43,9 @@ const nextConfig = {
   },
   async redirects() {
     return redirectMap;
+  },
+  async rewrites() {
+    return { beforeFiles: goneSources.map((source) => ({ source, destination: "/api/gone/" })) };
   },
 };
 
