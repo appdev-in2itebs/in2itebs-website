@@ -14,7 +14,7 @@ import { HomePartners } from "@/components/sections/home-partners";
 export const metadata = pageMetadata("/partners/", {
   title: "Partners",
   description:
-    "Strategic alliances across platforms, hyperscalers, data and specialist vendors — certified delivery, joint go-to-market roadmaps and pre-built integration accelerators that extend our reach.",
+    "Strategic alliances across platforms, hyperscalers, data and specialist vendors, with certified delivery and pre-built integration accelerators.",
 });
 
 /** Why our alliances matter — Blueprint §10.3. */

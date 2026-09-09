@@ -11,7 +11,7 @@ import { HeroMotif, practiceIcon } from "@/components/sections/hero-motif";
 export const metadata = pageMetadata("/sap-enterprise-solutions/analytics-cloud/", {
   title: "SAP Analytics Cloud",
   description:
-    "SAP Analytics Cloud as the front door to enterprise data — business intelligence, planning and predictive analytics in one experience, natively connected to S/4HANA, Datasphere, BW/4HANA and non-SAP sources.",
+    "The front door to your enterprise data — SAP Analytics Cloud brings business intelligence, planning and predictive analytics into one experience.",
 });
 
 /** Value pillars — Blueprint §8.10. */

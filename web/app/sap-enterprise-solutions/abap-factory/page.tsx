@@ -11,7 +11,7 @@ import { HeroMotif, practiceIcon } from "@/components/sections/hero-motif";
 export const metadata = pageMetadata("/sap-enterprise-solutions/abap-factory/", {
   title: "ABAP Factory",
   description:
-    "An offshore ABAP service-centre model for predictable throughput — RICEFW objects delivered to a sprint cadence across reports, interfaces, conversions, enhancements, forms and workflow.",
+    "An offshore ABAP service-centre model for predictable throughput — RICEFW objects scoped, built and delivered to a sprint cadence.",
 });
 
 /** The RICEFW model — Blueprint §8.11. */

@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!study) return pageMetadata(`/case-studies/${slug}/`, { title: "Case study" });
   return pageMetadata(`/case-studies/${slug}/`, {
     title: `${study.client} — ${study.featuredSolution}`,
-    description: study.scenario,
+    description: study.summary ?? study.scenario.slice(0, 155),
   });
 }
 

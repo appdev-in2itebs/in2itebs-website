@@ -11,7 +11,7 @@ import { HeroMotif, practiceIcon } from "@/components/sections/hero-motif";
 export const metadata = pageMetadata("/sap-enterprise-solutions/health-check-360/", {
   title: "Health Check 360",
   description:
-    "A proprietary AI diagnostic for SAP SuccessFactors — auditing configuration, adoption and AI readiness, benchmarking you against your peers and producing a quantified roadmap.",
+    "A proprietary AI diagnostic for SAP SuccessFactors — auditing configuration, adoption and AI readiness, then benchmarking you against your peers.",
 });
 
 /** The diagnostic — Blueprint §8.4. */

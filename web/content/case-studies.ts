@@ -14,6 +14,7 @@ export interface CaseStudy {
   employees: string;
   region: string;
   scenario: string;
+  summary?: string; // ≤155 characters, used as the page meta description (named studies only)
   benefits: string[];
   solution: string[];
   differentiator: string;
@@ -72,6 +73,8 @@ export const caseStudies: CaseStudy[] = [
     region: "Telangana, India",
     scenario:
       "Telangana State Northern Power Distribution Co. migrated its existing SAP ERP estate from ECC (SOH) to RISE with S/4HANA, with phased delivery, document management, analytics and integration uplift.",
+    summary:
+      "Telangana State Northern Power Distribution Co. moved its SAP ERP estate from ECC to RISE with S/4HANA in phases, reaching an integrated SAP landscape.",
     benefits: [
       "Streamlined procurement, materials, service performance and invoicing",
       "SAC dashboards for real-time operational decision-making",
@@ -92,6 +95,8 @@ export const caseStudies: CaseStudy[] = [
     region: "20+ facilities across 4 continents",
     scenario:
       "An industrial engineering business spanning Hydraulics, Industrial Automation, Aerospace, Water Treatment and Additive Manufacturing. Brownfield migration to S/4HANA 2022 on RISE with SAP (Azure), end-to-end lift-and-shift in 5 months.",
+    summary:
+      "Wipro Infrastructure Engineering moved to S/4HANA 2022 on RISE with SAP (Azure) in a 5-month brownfield migration — minimal disruption across 4 continents.",
     benefits: [
       "Streamlined domestic and export sourcing and procurement",
       "End-to-end traceability for recall management and compliance",
@@ -112,6 +117,8 @@ export const caseStudies: CaseStudy[] = [
     region: "India",
     scenario:
       "India's largest and fastest-growing agri-commerce company scaling a complex supply chain from soil to sale. Migration to RISE with SAP on Azure completed end-to-end in 8 weeks.",
+    summary:
+      "WayCool Foods, India's largest agri-commerce company, moved to RISE with SAP S/4HANA on Azure in an 8-week end-to-end lift-and-shift.",
     benefits: [
       "Single platform unifying procurement, finance and sales",
       "Streamlined end-to-end manufacturing with capacity planning",
@@ -132,6 +139,8 @@ export const caseStudies: CaseStudy[] = [
     region: "130 countries",
     scenario:
       "A homegrown wellness brand bringing handpicked Indian teas and superfoods directly to consumers in 130 countries, pioneering digital-first FMCG. GROW with SAP completed in 12 months, delivering an 18% reduction in manpower cost.",
+    summary:
+      "VAHDAM India, a digital-first tea and superfoods brand in 130 countries, went live on GROW with SAP in 12 months with an 18% manpower cost reduction.",
     benefits: [
       "Streamlined supply chain through a unified business platform",
       "Improved capacity planning for manpower and machinery",
@@ -172,6 +181,8 @@ export const caseStudies: CaseStudy[] = [
     region: "80+ countries",
     scenario:
       "A leading OEM of steam turbines up to 100 MWe serving power generation across sugar, steel, distillery, biomass, pulp & paper, palm oil, IPP and chemicals. Brownfield migration to RISE with SAP on Azure delivered in 5 months.",
+    summary:
+      "Triveni Turbines, a leading OEM of steam turbines up to 100 MWe, completed a brownfield migration to RISE with SAP on Azure in 5 months.",
     benefits: [
       "Unified domestic and export procurement for cost optimisation",
       "End-to-end traceability for recall management",
@@ -192,6 +203,8 @@ export const caseStudies: CaseStudy[] = [
     region: "Kenya & East Africa",
     scenario:
       "A State Corporation under the Ministry of Transport, established in 1978, operating the 930 km Mombasa–Kisumu mainline and a 2,778 km network. A 10-month fresh implementation migrated from legacy to SAP ECC 6.3.",
+    summary:
+      "Kenya Railways moved from legacy systems to SAP ECC 6.3 in a 10-month fresh implementation, streamlining operations for a national rail operator.",
     benefits: [
       "Streamlined transport management across Kenya and East Africa",
       "New processes tailored for government: Finance, Procurement, Sales, HR",
@@ -212,6 +225,8 @@ export const caseStudies: CaseStudy[] = [
     region: "Andhra Pradesh, India",
     scenario:
       "Andhra Pradesh Power Transmission Corporation engaged In2IT EBS for a three-year onsite application-management engagement to stabilise a critical ERP backbone.",
+    summary:
+      "Andhra Pradesh Power Transmission Corporation ran a three-year onsite AMS engagement that kept a critical ERP backbone stable and uninterrupted.",
     benefits: [
       "Reduced incident resolution time by 40% through robust ticket management",
       "Event-monitoring tools significantly reduced unplanned outages",
@@ -232,6 +247,8 @@ export const caseStudies: CaseStudy[] = [
     region: "Delhi, India",
     scenario:
       "Annual maintenance support across the SAP ERP estate — resolving downtime, automating legacy processes and adapting to evolving regulatory standards.",
+    summary:
+      "Annual maintenance support across Delhi Transco Limited's SAP ERP estate — resolving downtime, automating legacy processes and keeping operations running.",
     benefits: [
       "99.9% system availability for critical business processes",
       "Workflows accelerated by 30% via integration and Fiori enhancements",

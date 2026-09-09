@@ -13,7 +13,7 @@ import { HeroMotif, practiceIcon } from "@/components/sections/hero-motif";
 export const metadata = pageMetadata("/sap-enterprise-solutions/successfactors/", {
   title: "SAP SuccessFactors / HXM",
   description:
-    "Human experience management on SAP SuccessFactors — Core HR, Talent, Cloud Payroll, Work Zone and people analytics, delivered by a deep certified consultant pool.",
+    "SAP SuccessFactors across Core HR, Talent, Cloud Payroll, Work Zone and people analytics — delivered by a deep certified consultant pool.",
 });
 
 /** The SuccessFactors / HXM capability map — Blueprint §8.3. */

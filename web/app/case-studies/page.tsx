@@ -13,7 +13,7 @@ import { caseStudies } from "@/content/case-studies";
 export const metadata = pageMetadata("/case-studies/", {
   title: "Clients & Case Studies",
   description:
-    "150+ global enterprises delivered to one standard. Browse our SAP case studies across industries and delivery paths — from RISE migrations to multi-year AMS engagements.",
+    "150+ global enterprises delivered to one standard. Browse SAP case studies across industries and delivery paths, from RISE migrations to AMS engagements.",
 });
 
 export default function CaseStudiesPage() {

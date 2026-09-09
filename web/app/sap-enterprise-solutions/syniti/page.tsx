@@ -11,7 +11,7 @@ import { HeroMotif, practiceIcon } from "@/components/sections/hero-motif";
 export const metadata = pageMetadata("/sap-enterprise-solutions/syniti/", {
   title: "Syniti Data Management",
   description:
-    "Data-first SAP migration with Syniti — a five-stage approach across profile, cleanse, construct, migrate and govern, so your S/4HANA transformation lands on data you can trust.",
+    "Data-first SAP migration with Syniti — profile, cleanse, construct, migrate and govern, so your S/4HANA transformation lands on data you can trust.",
 });
 
 /** The five-stage Syniti approach — Blueprint §8.9. */

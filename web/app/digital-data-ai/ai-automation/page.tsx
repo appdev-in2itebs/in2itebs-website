@@ -10,7 +10,7 @@ import { HeroMotif, practiceIcon } from "@/components/sections/hero-motif";
 export const metadata = pageMetadata("/digital-data-ai/ai-automation/", {
   title: "AI & Automation",
   description:
-    "End-to-end digital transformation using industrial IoT, computer vision, applied AI and GenAI, and ERP integration — delivered by one accountable OT, AI and ERP team.",
+    "End-to-end digital transformation using industrial IoT, applied AI, computer vision and ERP integration — delivered by one accountable team.",
 });
 
 const capabilities = [

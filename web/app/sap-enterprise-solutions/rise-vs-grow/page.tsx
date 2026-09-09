@@ -12,7 +12,7 @@ import { HeroMotif, practiceIcon } from "@/components/sections/hero-motif";
 export const metadata = pageMetadata("/sap-enterprise-solutions/rise-vs-grow/", {
   title: "RISE vs GROW with SAP",
   description:
-    "RISE and GROW are both valid paths to S/4HANA Cloud. We recommend based on your business profile — not internal convenience — with a two-week Pathway Assessment.",
+    "RISE and GROW are both valid paths to S/4HANA Cloud. We recommend based on your business profile — and prove it in a two-week Pathway Assessment.",
 });
 
 /** Decision rows — Blueprint §8.1 comparison section, exact attributes. */

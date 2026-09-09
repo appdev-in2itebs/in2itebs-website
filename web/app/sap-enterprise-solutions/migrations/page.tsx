@@ -13,7 +13,7 @@ import { HeroMotif, practiceIcon } from "@/components/sections/hero-motif";
 export const metadata = pageMetadata("/sap-enterprise-solutions/migrations/", {
   title: "SAP Migrations",
   description:
-    "ECC to S/4HANA, on-premise to cloud, brownfield to selective transition — a risk-managed decision chosen by complexity, risk profile, regulatory constraints and timeline, not convenience.",
+    "ECC to S/4HANA, on-premise to cloud, brownfield to selective transition — a risk-managed decision chosen by complexity, risk and timeline, not convenience.",
 });
 
 /** The three migration approaches — Blueprint §8.2. */

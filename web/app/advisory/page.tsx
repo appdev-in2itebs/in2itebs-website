@@ -11,7 +11,7 @@ import { Compass } from "lucide-react";
 export const metadata = pageMetadata("/advisory/", {
   title: "Advisory Services",
   description:
-    "The trusted layer that defines the why and what — transformation advisory, strategy and governance, enterprise architecture and change assurance — before platforms and engineering deliver the how.",
+    "The trusted layer that defines the why and what — transformation advisory, strategy and governance, enterprise architecture and change assurance.",
 });
 
 const transformationAdvisory = [

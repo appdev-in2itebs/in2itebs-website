@@ -15,3 +15,26 @@ test('an absolute title is used verbatim',()=>{
   const m=pageMetadata('/',{title:{absolute:'In2IT EBS — Enterprise transformation under control'},description:'y'.repeat(80)});
   assert.equal((m.openGraph as {title:string}).title,'In2IT EBS — Enterprise transformation under control');
 });
+import {readFileSync, readdirSync, statSync} from 'node:fs';
+import path from 'node:path';
+import {caseStudies} from '../content/case-studies';
+import {insights} from '../content/insights';
+
+function pages(dir:string):string[]{ return readdirSync(dir).flatMap(entry=>{const full=path.join(dir,entry);return statSync(full).isDirectory()?pages(full):entry==='page.tsx'?[full]:[];}); }
+test('static page descriptions stay within 70 to 160 characters',()=>{
+  for(const file of pages(path.join(process.cwd(),'app'))){
+    const source=readFileSync(file,'utf8');
+    const match=source.match(/description:\s*\n?\s*"([^"]+)"/);
+    if(!match||file.includes('[slug]')) continue;
+    const length=match[1].length;
+    const noindex=/robots:\s*\{index: false/.test(source);
+    assert.ok(length<=160,`${path.relative(process.cwd(),file)}: description is ${length} characters`);
+    if(!noindex) assert.ok(length>=70,`${path.relative(process.cwd(),file)}: description is only ${length} characters`);
+  }
+});
+test('named case studies carry a summary of at most 155 characters',()=>{
+  for(const study of caseStudies.filter(s=>s.named)){
+    assert.ok(study.summary && study.summary.length>=60 && study.summary.length<=155,`${study.slug}: summary length ${study.summary?.length ?? 0}`);
+  }
+  for(const article of insights) assert.ok(article.excerpt.length<=160,article.slug);
+});
