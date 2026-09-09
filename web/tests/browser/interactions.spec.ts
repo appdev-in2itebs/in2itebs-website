@@ -27,6 +27,7 @@ test('offer, result and region are carried into the preview form',async({page})=
   await expect(page.locator('select[name="interest"]')).toHaveValue('SAP');
   await page.locator('select[name="region"]').selectOption('KE');await page.reload();
   await expect(page.locator('select[name="region"]')).toHaveValue('KE');
+  await expect(page.getByRole('status')).toContainText('Online enquiries are not enabled');
   await expect(page.getByRole('button',{name:'Send enquiry'})).toBeDisabled();
 });
 test('comparison remains scrollable at 320px',async({page})=>{

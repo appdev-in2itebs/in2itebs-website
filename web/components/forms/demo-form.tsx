@@ -6,8 +6,14 @@ import {interests, offers} from "@/lib/lead-schema";
 import {useRegion} from "@/components/layout/region-preference";
 import {signalMeasurement} from '@/lib/measurement';
 const field = "min-h-11 w-full rounded-control border border-border-strong bg-surface px-4 py-3 text-base text-foreground focus-visible:outline-2 focus-visible:outline-offset-2";
-export function DemoForm({deliveryEnabled = false}: {deliveryEnabled?:boolean}) {
+export function DemoForm() {
   const router=useRouter();
+  const [deliveryEnabled,setDeliveryEnabled]=useState<boolean|null>(null);
+  useEffect(()=>{
+    const controller=new AbortController();
+    fetch('/api/health/',{signal:controller.signal,cache:'no-store'}).then(r=>r.json()).then(h=>setDeliveryEnabled(Boolean(h.leadDeliveryConfigured))).catch(()=>setDeliveryEnabled(false));
+    return ()=>controller.abort();
+  },[]);
   const {code,choose}=useRegion();
   const [busy,setBusy]=useState(false);
   const [error,setError]=useState("");
@@ -42,7 +48,8 @@ export function DemoForm({deliveryEnabled = false}: {deliveryEnabled?:boolean}) 
   }
   return <form onSubmit={submit} className="flex flex-col gap-5">
     <p className="text-sm text-foreground-muted">Fields marked * are required.</p>
-    {!deliveryEnabled && <p role="status" className="rounded-control border border-border-strong bg-surface-subtle p-4 text-sm text-foreground">Online enquiries are not enabled in this preview. Please <a className="font-semibold text-action underline" href="mailto:info@in2itebs.com">email info@in2itebs.com</a>. This form will not report a request as delivered.</p>}
+    {deliveryEnabled===null && <p role="status" className="text-sm text-foreground-muted">Checking whether online enquiries are available…</p>}
+    {deliveryEnabled===false && <p role="status" className="rounded-control border border-border-strong bg-surface-subtle p-4 text-sm text-foreground">Online enquiries are not enabled in this preview. Please <a className="font-semibold text-action underline" href="mailto:info@in2itebs.com">email info@in2itebs.com</a>. This form will not report a request as delivered.</p>}
     <input type="text" name="company_url" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden />
     <div className="grid gap-4 sm:grid-cols-2">
       <label className="grid gap-2"><span className="text-sm font-semibold">Name *</span><input name="name" required minLength={2} maxLength={120} autoComplete="name" className={field}/></label>
@@ -59,6 +66,6 @@ export function DemoForm({deliveryEnabled = false}: {deliveryEnabled?:boolean}) 
     <label className="grid gap-2"><span className="text-sm font-semibold">Message (optional)</span><textarea name="message" rows={5} maxLength={5000} className={field+" resize-y"} /></label>
     <p className="text-sm text-foreground-muted">We use these details to respond to your enquiry. Read our <Link href="/legal/privacy-notice/" className="text-action underline">privacy notice</Link>. Submitting a request does not book an appointment or subscribe you to marketing.</p>
     {error && <p ref={errorRef} tabIndex={-1} role="alert" className="rounded-control border border-error p-4 text-sm text-error">{error} <a className="underline" href="mailto:info@in2itebs.com">Email us</a>.</p>}
-    <button disabled={busy || !deliveryEnabled} aria-busy={busy} className="min-h-12 rounded-control bg-action px-5 py-3 font-semibold text-on-action hover:bg-action-hover disabled:cursor-not-allowed disabled:opacity-70">{busy?"Sending request…":"Send enquiry"}</button>
+    <button disabled={busy || deliveryEnabled!==true} aria-busy={busy} className="min-h-12 rounded-control bg-action px-5 py-3 font-semibold text-on-action hover:bg-action-hover disabled:cursor-not-allowed disabled:opacity-70">{busy?"Sending request…":"Send enquiry"}</button>
   </form>;
 }

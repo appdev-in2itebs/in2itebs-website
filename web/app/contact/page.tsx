@@ -72,7 +72,7 @@ export default function ContactPage() {
                   A focused conversation, <Accent>not</Accent> a sales pitch.
                 </SectionHeading>
                 <Card tone="light" className="p-7 md:p-8">
-                  <DemoForm deliveryEnabled={Boolean(process.env.LEAD_WEBHOOK_URL && process.env.LEAD_WEBHOOK_TOKEN)} />
+                  <DemoForm />
                 </Card>
               </div>
             </Reveal>
