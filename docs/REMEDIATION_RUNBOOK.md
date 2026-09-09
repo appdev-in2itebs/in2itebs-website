@@ -8,14 +8,17 @@ Run commands from web/. Node dependencies are pinned in package-lock.json.
 
 ```powershell
 npm ci
+$env:SITE_ENV = "preview"   # build-time: decides robots.txt and X-Robots-Tag; use "production" only for the approved release build
 npm run check
-npm run build
+npm run build               # runs scripts/check-build.mjs afterwards
 npm start
 ```
 
-Open http://127.0.0.1:3107/. `npm run dev` uses the same dedicated port; never run dev and start on it together. `npm run build` fetches the existing Google font when not cached and therefore needs network access. Stop the website-owned server before replacing its .next build. Do not stop any process by image name, kill all Node processes, or touch port 3000.
+`SITE_ENV` is read when `next build` runs, not when the server starts; a production build made without it is refused, and a preview build deployed to production stays de-indexed.
 
-`GET /api/health/` returns app `in2it-ebs-website` and release `2026-09-07-remediation`. It does not establish dependency/provider health. The default preview sends X-Robots-Tag noindex/nofollow/noarchive and robots disallow. **Noindex is not access control.** Private pre-release material requires an approved authenticated gateway before public sharing.
+Open http://127.0.0.1:3107/. `npm run dev` uses the same dedicated port; never run dev and start on it together. `npm run build` fetches the existing Google font when not cached and therefore needs network access. Stop the website-owned server before replacing its .next build. Playwright reuses an existing server on 3107; stop or rebuild-and-restart that server before `npm run check:full`, otherwise the browser suite tests a stale build. Do not stop any process by image name, kill all Node processes, or touch port 3000.
+
+`GET /api/health/` returns app `in2it-ebs-website`, release `2026-09-08-phase-2` and the build's `siteEnv`. It does not establish dependency/provider health. The default preview sends X-Robots-Tag noindex/nofollow/noarchive and robots disallow. **Noindex is not access control.** Private pre-release material requires an approved authenticated gateway before public sharing.
 
 ## Ngrok isolation
 

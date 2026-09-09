@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "next dev --hostname 127.0.0.1 --port 3107",
     "build": "next build",
+    "postbuild": "node scripts/check-build.mjs",
     "start": "next start --hostname 127.0.0.1 --port 3107",
     "lint": "eslint app components content lib tests --max-warnings 0",
     "typecheck": "tsc --noEmit",
