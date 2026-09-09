@@ -143,3 +143,10 @@ test('ALLOWED_ORIGINS entries are normalised before they are matched',async()=>{
     if(previousAllowed===undefined) delete process.env.ALLOWED_ORIGINS; else process.env.ALLOWED_ORIGINS=previousAllowed;
   }
 });
+test('the canonical host is defined once',()=>{
+  for(const file of ['app/sitemap.ts','app/robots.ts','components/seo/json-ld.tsx','lib/metadata.ts']){
+    const source=readFileSync(path.join(process.cwd(),file),'utf8');
+    assert.ok(!/const BASE\s*=\s*"https:\/\//.test(source),`${file} redefines the site host`);
+    assert.ok(source.includes('SITE_URL'),`${file} must import SITE_URL`);
+  }
+});

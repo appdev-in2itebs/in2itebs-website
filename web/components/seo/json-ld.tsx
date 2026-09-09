@@ -1,6 +1,5 @@
 import { social, site } from "@/content/site";
-
-const BASE = "https://in2itebs.com";
+import { SITE_URL } from "@/lib/utils";
 
 /**
  * Injects Organization + WebSite JSON-LD for In2IT EBS.
@@ -12,11 +11,11 @@ export function OrganizationJsonLd() {
     "@graph": [
       {
         "@type": "Organization",
-        "@id": `${BASE}/#organization`,
+        "@id": `${SITE_URL}/#organization`,
         name: site.name,
         legalName: site.legalName,
-        url: BASE,
-        logo: `${BASE}/brand/in2it-ebs-navy.svg`,
+        url: SITE_URL,
+        logo: `${SITE_URL}/brand/in2it-ebs-navy.svg`,
         description: site.description,
         sameAs: [social.linkedin, social.x, social.youtube, social.instagram],
         contactPoint: {
@@ -27,10 +26,10 @@ export function OrganizationJsonLd() {
       },
       {
         "@type": "WebSite",
-        "@id": `${BASE}/#website`,
+        "@id": `${SITE_URL}/#website`,
         name: site.name,
-        url: BASE,
-        publisher: { "@id": `${BASE}/#organization` },
+        url: SITE_URL,
+        publisher: { "@id": `${SITE_URL}/#organization` },
       },
     ],
   };

@@ -3,8 +3,7 @@ import { sapChildren } from "@/content/nav";
 import { industries } from "@/content/industries";
 import { insights } from "@/content/insights";
 import { caseStudies } from "@/content/case-studies";
-
-const BASE = "https://in2itebs.com";
+import { SITE_URL } from "@/lib/utils";
 
 /** Canonical route inventory — three-pillar IA. All paths use trailing slashes. */
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -50,7 +49,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const all = Array.from(new Set([...staticPaths, ...dynamicPaths]));
 
   return all.map((path) => ({
-    url: `${BASE}${path}`,
+    url: `${SITE_URL}${path}`,
     changeFrequency: path === "/" ? "weekly" : "monthly",
     priority: path === "/" ? 1 : 0.7,
   }));
