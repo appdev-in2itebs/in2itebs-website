@@ -1,15 +1,10 @@
 import type { MetadataRoute } from "next";
-
-const BASE = "https://in2itebs.com";
+import { SITE_URL } from "@/lib/utils";
 
 export default function robots(): MetadataRoute.Robots {
-  if (process.env.SITE_ENV !== "production") return {rules:{userAgent:"*",disallow:"/"}};
+  if (process.env.SITE_ENV !== "production") return { rules: { userAgent: "*", disallow: "/" } };
   return {
-    rules: {
-      userAgent: "*",
-      allow: "/",
-    },
-    sitemap: `${BASE}/sitemap.xml`,
-    host: BASE,
+    rules: { userAgent: "*", allow: "/", disallow: ["/api/", "/thank-you/"] },
+    sitemap: `${SITE_URL}/sitemap.xml`,
   };
 }

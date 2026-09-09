@@ -12,6 +12,8 @@ const failures = [];
 if (env === "production") {
   if (!/Allow: \//.test(robots) || /Disallow: \/\s*$/m.test(robots)) failures.push("production build has a robots.txt that blocks crawling");
   if (hasNoindex) failures.push("production build still sends X-Robots-Tag noindex");
+  if (!/Disallow: \/api\//.test(robots) || !/Disallow: \/thank-you\//.test(robots)) failures.push("production robots.txt must disallow /api/ and /thank-you/");
+  if (/^Host:/m.test(robots)) failures.push("robots.txt must not use the non-standard Host directive");
 } else {
   if (!/Disallow: \/\s*$/m.test(robots)) failures.push("preview build must disallow crawling in robots.txt");
   if (!hasNoindex) failures.push("preview build must send X-Robots-Tag noindex");

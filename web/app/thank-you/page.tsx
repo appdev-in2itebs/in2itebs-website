@@ -6,7 +6,7 @@ import { Reveal } from "@/components/motion/reveal";
 import {cookies} from 'next/headers';
 
 export const metadata = pageMetadata("/thank-you/", {
-  robots: {index: false, follow: false},
+  robots: {index: false, follow: true},
   title: "Thank You",
   description: "Enquiry confirmation and next steps.",
 });
