@@ -1,4 +1,5 @@
 import {pageMetadata} from "@/lib/metadata";
+import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
 import { Container, Section } from "@/components/ui/container";
 import { Eyebrow, Accent, SectionHeading } from "@/components/ui/typography";
 import { Card } from "@/components/ui/card";
@@ -75,6 +76,7 @@ const serviceAreas = [
 export default function SynitiPage() {
   return (
     <>
+      <BreadcrumbJsonLd path="/sap-enterprise-solutions/syniti/" />
       <PageHero
         eyebrow="SAP Enterprise Solutions · Syniti Data Management"
         headline="70% of SAP transformations slip because of data, not"

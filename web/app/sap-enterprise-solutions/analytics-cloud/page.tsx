@@ -1,4 +1,5 @@
 import {pageMetadata} from "@/lib/metadata";
+import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
 import { Container, Section } from "@/components/ui/container";
 import { Eyebrow, Accent, SectionHeading } from "@/components/ui/typography";
 import { Card } from "@/components/ui/card";
@@ -62,6 +63,7 @@ const coverage = [
 export default function AnalyticsCloudPage() {
   return (
     <>
+      <BreadcrumbJsonLd path="/sap-enterprise-solutions/analytics-cloud/" />
       <PageHero
         eyebrow="SAP Enterprise Solutions · SAP Analytics Cloud"
         headline="The front door to your"

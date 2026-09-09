@@ -1,4 +1,5 @@
 import {pageMetadata} from "@/lib/metadata";
+import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Container, Section } from "@/components/ui/container";
@@ -28,6 +29,7 @@ const pathways = [
 export default function EccPrismPage() {
   return (
     <>
+      <BreadcrumbJsonLd path="/ecc-prism/" />
       <PageHero
         eyebrow="SAP Enterprise Solutions"
         headline="Know your ECC estate before you"

@@ -1,4 +1,5 @@
 import {pageMetadata} from "@/lib/metadata";
+import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Container, Section } from "@/components/ui/container";
@@ -38,6 +39,7 @@ export default function IndustriesPage() {
 
   return (
     <>
+      <BreadcrumbJsonLd path="/industries/" />
       <PageHero
         eyebrow="Industries"
         headline="150+ global enterprises. Across regulated, complex"

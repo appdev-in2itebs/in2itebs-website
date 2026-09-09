@@ -1,4 +1,5 @@
 import {pageMetadata} from "@/lib/metadata";
+import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
 import { Container, Section } from "@/components/ui/container";
 import { Eyebrow, Accent, SectionHeading } from "@/components/ui/typography";
 import { Card } from "@/components/ui/card";
@@ -50,6 +51,7 @@ function OfficeCard({
 export default function ContactPage() {
   return (
     <>
+      <BreadcrumbJsonLd path="/contact/" />
       <PageHero
         eyebrow="Contact"
         headline="Let's talk about your"

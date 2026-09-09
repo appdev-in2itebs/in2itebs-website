@@ -1,4 +1,5 @@
 import {pageMetadata} from "@/lib/metadata";
+import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
 import { PlatformPracticeLinks } from "@/components/sections/platform-practice-links";
 import { Container, Section } from "@/components/ui/container";
 import { Accent, SectionHeading } from "@/components/ui/typography";
@@ -78,6 +79,7 @@ const deliveryEngine = [
 export default function WhatWeDoPage() {
   return (
     <>
+      <BreadcrumbJsonLd path="/what-we-do/" />
       <PageHero
         eyebrow="What We Do"
         headline="Three tiers."

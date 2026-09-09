@@ -1,4 +1,5 @@
 import {pageMetadata} from "@/lib/metadata";
+import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
 import { Container, Section } from "@/components/ui/container";
 import { Accent, SectionHeading } from "@/components/ui/typography";
 import { Card } from "@/components/ui/card";
@@ -83,6 +84,7 @@ const pathwaySteps = [
 export default function RiseVsGrowPage() {
   return (
     <>
+      <BreadcrumbJsonLd path="/sap-enterprise-solutions/rise-vs-grow/" />
       <PageHero
         eyebrow="RISE vs GROW with SAP"
         headline="Two valid paths."

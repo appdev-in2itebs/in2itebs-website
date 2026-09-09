@@ -1,4 +1,5 @@
 import {pageMetadata} from "@/lib/metadata";
+import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
 import { Container, Section } from "@/components/ui/container";
 import { Eyebrow, Accent, SectionHeading } from "@/components/ui/typography";
 import { Card } from "@/components/ui/card";
@@ -67,6 +68,7 @@ const integrations = [
 export default function ConcurPage() {
   return (
     <>
+      <BreadcrumbJsonLd path="/sap-enterprise-solutions/concur/" />
       <PageHero
         eyebrow="SAP Enterprise Solutions · Concur"
         headline="Travel, expense and invoice —"

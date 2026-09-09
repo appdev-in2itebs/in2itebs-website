@@ -1,4 +1,5 @@
 import {pageMetadata} from "@/lib/metadata";
+import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
 import { Container, Section } from "@/components/ui/container";
 import { Accent, SectionHeading } from "@/components/ui/typography";
 import { Button } from "@/components/ui/button";
@@ -19,6 +20,7 @@ export const metadata = pageMetadata("/why-in2it-ebs/", {
 export default function WhyIn2ITEBSPage() {
   return (
     <>
+      <BreadcrumbJsonLd path="/why-in2it-ebs/" />
       <PageHero
         eyebrow="Why In2IT EBS"
         headline="Three reasons enterprises choose us — and"

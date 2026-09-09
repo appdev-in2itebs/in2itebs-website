@@ -1,4 +1,5 @@
 import {pageMetadata} from "@/lib/metadata";
+import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Container, Section } from "@/components/ui/container";
@@ -107,6 +108,7 @@ const accelerators = [
 export default function SuccessFactorsPage() {
   return (
     <>
+      <BreadcrumbJsonLd path="/sap-enterprise-solutions/successfactors/" />
       <PageHero
         eyebrow="SAP Enterprise Solutions · SuccessFactors / HXM"
         headline="Human experience management,"

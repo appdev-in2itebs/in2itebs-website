@@ -1,4 +1,5 @@
 import {pageMetadata} from "@/lib/metadata";
+import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Container, Section } from "@/components/ui/container";
@@ -69,6 +70,7 @@ const deRisk = [
 export default function MigrationsPage() {
   return (
     <>
+      <BreadcrumbJsonLd path="/sap-enterprise-solutions/migrations/" />
       <PageHero
         eyebrow="SAP Enterprise Solutions · Migrations"
         headline="ECC to S/4HANA, on-premise to cloud —"

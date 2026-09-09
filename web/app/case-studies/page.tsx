@@ -1,4 +1,5 @@
 import {pageMetadata} from "@/lib/metadata";
+import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
 import { Container, Section } from "@/components/ui/container";
 import { Accent, SectionHeading } from "@/components/ui/typography";
 import { Reveal } from "@/components/motion/reveal";
@@ -19,6 +20,7 @@ export const metadata = pageMetadata("/case-studies/", {
 export default function CaseStudiesPage() {
   return (
     <>
+      <BreadcrumbJsonLd path="/case-studies/" />
       <PageHero
         eyebrow="Clients & Case Studies"
         headline="150+ global enterprises,"

@@ -1,4 +1,5 @@
 import {pageMetadata} from "@/lib/metadata";
+import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
 import Link from "next/link";
 import { Container, Section } from "@/components/ui/container";
 import { Accent, SectionHeading } from "@/components/ui/typography";
@@ -15,6 +16,7 @@ export const metadata = pageMetadata("/insights/", {
 export default function InsightsPage() {
   return (
     <>
+      <BreadcrumbJsonLd path="/insights/" />
       <PageHero
         eyebrow="Insights"
         headline="Perspectives on enterprise"

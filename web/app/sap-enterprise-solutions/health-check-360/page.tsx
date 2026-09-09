@@ -1,4 +1,5 @@
 import {pageMetadata} from "@/lib/metadata";
+import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
 import { Container, Section } from "@/components/ui/container";
 import { Eyebrow, Accent, SectionHeading } from "@/components/ui/typography";
 import { Card } from "@/components/ui/card";
@@ -105,6 +106,7 @@ const roadmap = [
 export default function HealthCheck360Page() {
   return (
     <>
+      <BreadcrumbJsonLd path="/sap-enterprise-solutions/health-check-360/" />
       <PageHero
         eyebrow="Signature Tool · Health Check 360"
         headline="Your SuccessFactors estate,"

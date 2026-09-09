@@ -1,4 +1,5 @@
 import {pageMetadata} from "@/lib/metadata";
+import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
 import { Container, Section } from "@/components/ui/container";
 import { Reveal } from "@/components/motion/reveal";
 import { PageHero } from "@/components/sections/page-hero";
@@ -22,6 +23,7 @@ const toc = [
 export default function PrivacyPolicyPage() {
   return (
     <>
+      <BreadcrumbJsonLd path="/legal/privacy-policy/" />
       <PageHero
         eyebrow="Legal"
         headline="Privacy"

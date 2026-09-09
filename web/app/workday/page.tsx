@@ -1,4 +1,5 @@
 import {pageMetadata} from "@/lib/metadata";
+import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
 import { Container, Section } from "@/components/ui/container";
 import { SectionHeading, Accent, Lead } from "@/components/ui/typography";
 import { Reveal } from "@/components/motion/reveal";
@@ -61,6 +62,7 @@ const services = [
 export default function WorkdayPage() {
   return (
     <>
+      <BreadcrumbJsonLd path="/workday/" />
       <PageHero
         eyebrow="Workday"
         headline="HR and finance on a single"

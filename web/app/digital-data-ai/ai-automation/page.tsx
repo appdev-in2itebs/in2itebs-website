@@ -1,4 +1,5 @@
 import {pageMetadata} from "@/lib/metadata";
+import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
 import { Container, Section } from "@/components/ui/container";
 import { Accent, SectionHeading } from "@/components/ui/typography";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
@@ -89,6 +90,7 @@ const principles = [
 export default function AiAutomationPage() {
   return (
     <>
+      <BreadcrumbJsonLd path="/digital-data-ai/ai-automation/" />
       <PageHero
         eyebrow="Digital, Data & AI · AI & Automation"
         headline="Industrial IoT, computer vision and applied AI, in one accountable"

@@ -1,4 +1,5 @@
 import {pageMetadata} from "@/lib/metadata";
+import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
 import { Container, Section } from "@/components/ui/container";
 import { Eyebrow, Accent, SectionHeading } from "@/components/ui/typography";
 import { Card } from "@/components/ui/card";
@@ -73,6 +74,7 @@ const capabilities = [
 export default function AbapFactoryPage() {
   return (
     <>
+      <BreadcrumbJsonLd path="/sap-enterprise-solutions/abap-factory/" />
       <PageHero
         eyebrow="SAP Enterprise Solutions · ABAP Factory"
         headline="ABAP delivery, on a"

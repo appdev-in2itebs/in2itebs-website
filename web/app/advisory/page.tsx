@@ -1,4 +1,5 @@
 import {pageMetadata} from "@/lib/metadata";
+import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
 import { Container, Section } from "@/components/ui/container";
 import { Accent, SectionHeading } from "@/components/ui/typography";
 import { Reveal } from "@/components/motion/reveal";
@@ -93,6 +94,7 @@ const changeAssurance = [
 export default function AdvisoryPage() {
   return (
     <>
+      <BreadcrumbJsonLd path="/advisory/" />
       <PageHero
         eyebrow="Advisory Services"
         headline="Advisory that gets to"

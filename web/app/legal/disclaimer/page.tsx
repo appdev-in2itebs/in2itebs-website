@@ -1,4 +1,5 @@
 import {pageMetadata} from "@/lib/metadata";
+import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
 import { Container, Section } from "@/components/ui/container";
 import { Reveal } from "@/components/motion/reveal";
 import { PageHero } from "@/components/sections/page-hero";
@@ -13,6 +14,7 @@ export const metadata = pageMetadata("/legal/disclaimer/", {
 export default function DisclaimerPage() {
   return (
     <>
+      <BreadcrumbJsonLd path="/legal/disclaimer/" />
       <PageHero
         eyebrow="Legal"
         headline="Website"

@@ -1,4 +1,5 @@
 import {pageMetadata} from "@/lib/metadata";
+import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
 import { Container, Section } from "@/components/ui/container";
 import { Accent, SectionHeading } from "@/components/ui/typography";
 import { Reveal, Stagger, StaggerItem} from "@/components/motion/reveal";
@@ -85,6 +86,7 @@ const engagements = [
 export default function SalesforcePage() {
   return (
     <>
+      <BreadcrumbJsonLd path="/salesforce/" />
       <PageHero
         eyebrow="Salesforce"
         headline="Reimagining the customer"

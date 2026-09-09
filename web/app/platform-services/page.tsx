@@ -1,4 +1,5 @@
 import {pageMetadata} from "@/lib/metadata";
+import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Container, Section } from "@/components/ui/container";
@@ -72,6 +73,7 @@ const futurePlatforms = ["ServiceNow", "Adobe"];
 export default function PlatformServicesPage() {
   return (
     <>
+      <BreadcrumbJsonLd path="/platform-services/" />
       <PageHero
         eyebrow="Platform Services"
         headline="Platform-led transformation, one accountable"

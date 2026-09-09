@@ -1,4 +1,5 @@
 import {pageMetadata} from "@/lib/metadata";
+import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
 import { Container, Section } from "@/components/ui/container";
 import { Accent, SectionHeading } from "@/components/ui/typography";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
@@ -69,6 +70,7 @@ const estate = [
 export default function ApplicationEngineeringPage() {
   return (
     <>
+      <BreadcrumbJsonLd path="/digital-data-ai/application-engineering/" />
       <PageHero
         eyebrow="Digital, Data & AI · Application Engineering"
         headline="Custom development, integration and support across every"

@@ -1,4 +1,5 @@
 import {pageMetadata} from "@/lib/metadata";
+import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
 import { notFound } from "next/navigation";
 import { Container, Section } from "@/components/ui/container";
 import { Eyebrow, Accent, SectionHeading } from "@/components/ui/typography";
@@ -41,6 +42,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
   return (
     <>
+      <BreadcrumbJsonLd path={`/case-studies/${study.slug}/`} name={study.client} />
       <PageHero
         eyebrow={study.industry}
         headline={study.client}

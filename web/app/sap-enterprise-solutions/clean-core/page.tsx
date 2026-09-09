@@ -1,4 +1,5 @@
 import {pageMetadata} from "@/lib/metadata";
+import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
 import { Container, Section } from "@/components/ui/container";
 import { Eyebrow, Accent, SectionHeading } from "@/components/ui/typography";
 import { Card } from "@/components/ui/card";
@@ -73,6 +74,7 @@ const s4hana = [
 export default function CleanCorePage() {
   return (
     <>
+      <BreadcrumbJsonLd path="/sap-enterprise-solutions/clean-core/" />
       <PageHero
         eyebrow="SAP Enterprise Solutions · Clean Core & BTP"
         headline="Innovate alongside the core, not"

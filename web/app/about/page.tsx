@@ -1,4 +1,5 @@
 import {pageMetadata} from "@/lib/metadata";
+import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
 import { Container, Section } from "@/components/ui/container";
 import { Eyebrow, Accent, SectionHeading } from "@/components/ui/typography";
 import { Card } from "@/components/ui/card";
@@ -59,6 +60,7 @@ const leadership = [
 export default function AboutPage() {
   return (
     <>
+      <BreadcrumbJsonLd path="/about/" />
       <PageHero
         eyebrow="Who we are"
         headline="Three pillars."

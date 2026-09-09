@@ -1,4 +1,5 @@
 import {pageMetadata} from "@/lib/metadata";
+import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container, Section } from "@/components/ui/container";
@@ -37,6 +38,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
 
   return (
     <>
+      <BreadcrumbJsonLd path={`/industries/${ind.slug}/`} name={ind.name} />
       <PageHero
         eyebrow="Industries"
         headline={ind.headline}

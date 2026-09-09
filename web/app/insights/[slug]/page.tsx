@@ -1,4 +1,5 @@
 import {pageMetadata} from "@/lib/metadata";
+import {ArticleJsonLd, BreadcrumbJsonLd} from "@/components/seo/json-ld";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container, Section } from "@/components/ui/container";
@@ -42,6 +43,8 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
 
   return (
     <>
+      <BreadcrumbJsonLd path={`/insights/${article.slug}/`} name={article.title} />
+      <ArticleJsonLd slug={article.slug} title={article.title} date={article.date} excerpt={article.excerpt} author={insightBodies[article.slug].author} />
       {/* ARTICLE HEADER */}
       <section className="relative overflow-hidden bg-off-white pt-36 pb-16 md:pt-44 md:pb-20">
         <div aria-hidden className="pointer-events-none absolute right-0 top-20 h-[26rem] w-[26rem] opacity-[0.05]">

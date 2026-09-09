@@ -1,4 +1,5 @@
 import {pageMetadata} from "@/lib/metadata";
+import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Container, Section } from "@/components/ui/container";
@@ -136,6 +137,7 @@ function SubPracticeCard({
 export default function DigitalDataAiPage() {
   return (
     <>
+      <BreadcrumbJsonLd path="/digital-data-ai/" />
       <PageHero
         eyebrow="Digital, Data & AI"
         headline="Engineering-led innovation across application, data and"

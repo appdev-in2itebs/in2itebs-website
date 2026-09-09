@@ -49,3 +49,17 @@ test('every sitemap entry has a valid lastModified and the homepage is included'
   }
   assert.match(contentUpdated,/^\d{4}-\d{2}-\d{2}$/);
 });
+import {safeJsonLd} from '../lib/json-ld';
+test('json-ld output cannot close its script tag early',()=>{
+  const out=safeJsonLd({name:'</script><script>alert(1)</script>'});
+  assert.ok(!out.includes('</script'));
+  assert.deepEqual(JSON.parse(out),{name:'</script><script>alert(1)</script>'});
+});
+test('every inner page renders a breadcrumb trail',()=>{
+  for(const file of pages(path.join(process.cwd(),'app'))){
+    const source=readFileSync(file,'utf8');
+    const match=source.match(/pageMetadata\((["'`])([^"'`]+)\1/);
+    if(!match||match[2]==='/'||match[2]==='/404/') continue;
+    assert.ok(source.includes('<BreadcrumbJsonLd'),`${path.relative(process.cwd(),file)} has no BreadcrumbJsonLd`);
+  }
+});

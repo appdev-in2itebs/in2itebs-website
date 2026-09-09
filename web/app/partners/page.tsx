@@ -1,4 +1,5 @@
 import {pageMetadata} from "@/lib/metadata";
+import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
 import { Container, Section } from "@/components/ui/container";
 import { Eyebrow, Accent, SectionHeading } from "@/components/ui/typography";
 import { Card } from "@/components/ui/card";
@@ -36,6 +37,7 @@ const value = [
 export default function PartnersPage() {
   return (
     <>
+      <BreadcrumbJsonLd path="/partners/" />
       <PageHero
         eyebrow="Partners"
         headline="Strategic alliances that"

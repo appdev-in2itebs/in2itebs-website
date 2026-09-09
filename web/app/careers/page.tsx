@@ -1,4 +1,5 @@
 import {pageMetadata} from "@/lib/metadata";
+import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
 import { Container, Section } from "@/components/ui/container";
 import { Eyebrow, Accent, SectionHeading } from "@/components/ui/typography";
 import { Button } from "@/components/ui/button";
@@ -34,6 +35,7 @@ const whyWeSucceed = [
 export default function CareersPage() {
   return (
     <>
+      <BreadcrumbJsonLd path="/careers/" />
       <PageHero
         eyebrow="Careers"
         headline="Build a career with endless"

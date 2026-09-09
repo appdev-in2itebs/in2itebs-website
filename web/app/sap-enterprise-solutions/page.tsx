@@ -1,4 +1,5 @@
 import {pageMetadata} from "@/lib/metadata";
+import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Container, Section } from "@/components/ui/container";
@@ -32,6 +33,7 @@ const clusters = [
 export default function SapEnterpriseSolutionsPage() {
   return (
     <>
+      <BreadcrumbJsonLd path="/sap-enterprise-solutions/" />
       <PageHero
         eyebrow="SAP Enterprise Solutions"
         headline="SAP, run by a"

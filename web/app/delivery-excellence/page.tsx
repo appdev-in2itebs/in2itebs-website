@@ -1,4 +1,5 @@
 import {pageMetadata} from "@/lib/metadata";
+import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
 import { Container, Section } from "@/components/ui/container";
 import { SectionHeading, Accent, Eyebrow } from "@/components/ui/typography";
 import { Card } from "@/components/ui/card";
@@ -24,6 +25,7 @@ export const metadata = pageMetadata("/delivery-excellence/", {
 export default function DeliveryExcellencePage() {
   return (
     <>
+      <BreadcrumbJsonLd path="/delivery-excellence/" />
       <PageHero
         eyebrow="Delivery Excellence"
         headline="Delivery"
