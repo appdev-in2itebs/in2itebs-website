@@ -38,7 +38,7 @@ export function Footer() {
             <p className="mt-6 max-w-sm text-lg font-medium leading-relaxed tracking-[-0.02em] text-on-brand">
               Enterprise transformation for organisations that cannot afford operational ambiguity.
             </p>
-            <p className="mt-4 max-w-sm text-sm leading-relaxed text-on-brand/58">
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-on-brand/[0.58]">
               SAP Gold Partner with delivery across 30+ countries and adjacent strength in advisory, data, AI and digital engineering.
             </p>
           </div>
@@ -75,7 +75,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col justify-between gap-5 pt-7 text-xs text-on-brand/52 md:flex-row md:items-center">
+        <div className="flex flex-col justify-between gap-5 pt-7 text-xs text-on-brand/[0.52] md:flex-row md:items-center">
           <p>© {site.copyrightYear} {site.legalName}. All rights reserved.</p>
           <Link href="/contact/" className="group inline-flex min-h-11 items-center gap-3 text-sm font-semibold text-on-brand">
             Bengaluru · Singapore · Dubai · Nairobi · Johannesburg · Austin

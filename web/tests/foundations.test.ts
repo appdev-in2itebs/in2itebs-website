@@ -66,7 +66,7 @@ test('the receipt cookie is Secure behind a TLS-terminating proxy',async()=>{
 
 // --- Logo data integrity (client ribbon + partner ecosystem) ---
 import {createHash} from 'node:crypto';
-import {existsSync, readFileSync} from 'node:fs';
+import {existsSync, readFileSync, readdirSync, statSync} from 'node:fs';
 import path from 'node:path';
 import {clients} from '../content/clients';
 import {homeEcosystem, partnerCategories} from '../content/partner-ecosystem';
@@ -149,4 +149,11 @@ test('the canonical host is defined once',()=>{
     assert.ok(!/const BASE\s*=\s*"https:\/\//.test(source),`${file} redefines the site host`);
     assert.ok(source.includes('SITE_URL'),`${file} must import SITE_URL`);
   }
+});
+test('colour opacity modifiers use values Tailwind can generate',()=>{
+  const roots=['app','components'];
+  const offenders:string[]=[];
+  const walk=(dir:string)=>{for(const entry of readdirSync(dir)){const full=path.join(dir,entry);if(statSync(full).isDirectory())walk(full);else if(/\.tsx?$/.test(entry)){const source=readFileSync(full,'utf8');for(const m of source.matchAll(/\b(?:text|bg|border|via|from|to|ring|fill|stroke|divide|outline|decoration|placeholder)-[a-z][a-z-]*\/(\d{1,3})(?![\d\]])/g)){if(/^text-(?:xs|sm|base|lg|\dxl)\//.test(m[0])) continue; /* line-height shorthand, not opacity */ if(Number(m[1])%5!==0)offenders.push(`${path.relative(process.cwd(),full)}: ${m[0]}`);}}}};
+  for(const root of roots) walk(path.join(process.cwd(),root));
+  assert.deepEqual(offenders,[]);
 });

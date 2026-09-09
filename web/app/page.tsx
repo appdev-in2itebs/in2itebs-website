@@ -319,7 +319,7 @@ export default function HomePage() {
               <StaggerItem key={industry.name} className={industry.className}>
                 <Link href={industry.href} className="industry-tile group relative block h-full overflow-hidden bg-brand">
                   <Image src={industry.image} alt="" fill sizes="(min-width: 768px) 58vw, 100vw" className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035]" />
-                  <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-brand/95 via-brand/12 to-transparent transition-colors duration-300 group-hover:from-brand" />
+                  <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-brand/95 via-brand/[0.12] to-transparent transition-colors duration-300 group-hover:from-brand" />
                   <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-6 p-6 text-on-brand md:p-8">
                     <div>
                       <industry.Icon aria-hidden size={18} strokeWidth={1.5} className="mb-4 text-brand-muted" />
