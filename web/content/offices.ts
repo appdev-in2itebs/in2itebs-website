@@ -111,3 +111,11 @@ export const countries = [
   "India", "UK", "US", "Canada", "Singapore", "UAE", "Thailand",
   "KSA", "Kenya", "Australia", "South Africa", "Belgium", "Sri Lanka",
 ];
+
+/** One entry per distinct mailbox; the shared info@in2itebs.com is labelled Global. */
+export const regionalContacts = Array.from(
+  new Map(offices.filter((o) => o.email).map((o) => [o.email as string, o])).values(),
+).map((o) => ({ region: o.email === "info@in2itebs.com" ? "Global" : o.name, email: o.email as string }));
+
+/** Cities in office order, for the footer line. */
+export const officeCities = offices.map((o) => o.city);

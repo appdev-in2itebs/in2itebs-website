@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { footerNav } from "@/content/nav";
+import { officeCities } from "@/content/offices";
 import { footerCertifications, site, social } from "@/content/site";
 import { Logo } from "@/components/ui/logo";
 
@@ -78,7 +79,7 @@ export function Footer() {
         <div className="flex flex-col justify-between gap-5 pt-7 text-xs text-on-brand/[0.52] md:flex-row md:items-center">
           <p>© {site.copyrightYear} {site.legalName}. All rights reserved.</p>
           <Link href="/contact/" className="group inline-flex min-h-11 items-center gap-3 text-sm font-semibold text-on-brand">
-            Bengaluru · Singapore · Dubai · Nairobi · Johannesburg · Austin
+            {officeCities.join(" · ")}
             <ArrowUpRight aria-hidden size={15} className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
           </Link>
         </div>

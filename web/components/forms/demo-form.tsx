@@ -3,6 +3,7 @@ import Link from "next/link";
 import {useEffect, useRef, useState} from "react";
 import {useRouter} from "next/navigation";
 import {interests, offers} from "@/lib/lead-schema";
+import {regions} from "@/content/site";
 import {useRegion} from "@/components/layout/region-preference";
 import {signalMeasurement} from '@/lib/measurement';
 const field = "min-h-11 w-full rounded-control border border-border-strong bg-surface px-4 py-3 text-base text-foreground focus-visible:outline-2 focus-visible:outline-offset-2";
@@ -57,7 +58,7 @@ export function DemoForm() {
     </div>
     <label className="grid gap-2"><span className="text-sm font-semibold">Company *</span><input name="company" required minLength={2} maxLength={160} autoComplete="organization" className={field}/></label>
     <div className="grid gap-4 sm:grid-cols-2">
-      <label className="grid gap-2"><span className="text-sm font-semibold">Contact region</span><select name="region" value={code} onChange={e=>choose(e.target.value)} className={field}><option value="IN">India</option><option value="KE">Kenya</option><option value="ZA">South Africa</option><option value="ME">Middle East</option></select></label>
+      <label className="grid gap-2"><span className="text-sm font-semibold">Contact region</span><select name="region" value={code} onChange={e=>choose(e.target.value)} className={field}>{regions.map(r=><option key={r.code} value={r.code}>{r.name}</option>)}</select></label>
       <label className="grid gap-2"><span className="text-sm font-semibold">Interest area</span><select name="interest" value={interest} onChange={e=>setInterest(e.target.value)} className={field}>{interests.map(i=><option key={i}>{i}</option>)}</select></label>
     </div>
     <label className="grid gap-2"><span className="text-sm font-semibold">Request</span><select name="offer" value={offer} onChange={e=>setOffer(e.target.value as keyof typeof offers)} className={field}>{Object.entries(offers).map(([key,label])=><option key={key} value={key}>{label}</option>)}</select></label>

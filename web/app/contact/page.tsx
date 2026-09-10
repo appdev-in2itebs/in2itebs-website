@@ -6,7 +6,7 @@ import { Card } from "@/components/ui/card";
 import { Reveal, Stagger, StaggerItem} from "@/components/motion/reveal";
 import { PageHero } from "@/components/sections/page-hero";
 import { DemoForm } from "@/components/forms/demo-form";
-import { offices } from "@/content/offices";
+import { offices, regionalContacts } from "@/content/offices";
 import { footerCertifications } from "@/content/site";
 
 export const metadata = pageMetadata("/contact/", {
@@ -17,14 +17,6 @@ export const metadata = pageMetadata("/contact/", {
 
 const indiaOffices = offices.filter((o) => o.kind.includes("india-office"));
 const globalEntities = offices.filter((o) => o.kind.includes("global-entity") || !o.kind.includes("india-office"));
-
-const regionalEmails = [
-  { region: "Global", email: "info@in2itebs.com" },
-  { region: "South Africa", email: "info@in2itebs.co.za" },
-  { region: "Kenya", email: "info@in2itebs.co.ke" },
-  { region: "Dubai", email: "info@in2itebs.ae" },
-  { region: "Singapore", email: "info@in2itebs.sg" },
-];
 
 function OfficeCard({
   office,
@@ -127,7 +119,7 @@ export default function ContactPage() {
               <div className="flex flex-col gap-6">
                 <Eyebrow>Regional contacts</Eyebrow>
                 <div className="flex flex-wrap gap-x-10 gap-y-4">
-                  {regionalEmails.map((r) => (
+                  {regionalContacts.map((r) => (
                     <div key={r.region} className="flex flex-col gap-1">
                       <span className="label-caps text-grey-muted">{r.region}</span>
                       <a

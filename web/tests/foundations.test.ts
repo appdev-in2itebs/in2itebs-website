@@ -4,6 +4,7 @@ import {cn} from '../lib/utils';
 import {handleLead, resetRateLimitsForTest} from '../lib/lead-service';
 import {measurementPayload} from '../lib/measurement';
 
+// The per-email rate limit accepts at most three submissions of `valid` per test.
 const valid = {name:'Test Person', email:'test@example.com', company:'Test Company', region:'IN', interest:'SAP', message:'Test only', offer:'conversation', assessment:''};
 const request = (body:unknown, headers:Record<string,string>={}) => new Request('http://localhost/api/lead/', {method:'POST',headers:{'content-type':'application/json',...headers},body:JSON.stringify(body)});
 beforeEach(resetRateLimitsForTest);
@@ -36,6 +37,7 @@ test('honeypots, oversized bodies and foreign origins are rejected',async()=>{
   assert.equal((await handleLead(request(valid,{origin:'https://foreign.example'}),async()=>{})).status,403);
 });
 test('a trusted client address is limited to ten requests a minute',async()=>{
+  const previous=process.env.TRUST_PROXY_HEADERS;
   process.env.TRUST_PROXY_HEADERS='1';
   try{
     for(let i=0;i<10;i++) await handleLead(request({},{'x-forwarded-for':'203.0.113.7'}),async()=>{});
@@ -43,16 +45,22 @@ test('a trusted client address is limited to ten requests a minute',async()=>{
     assert.equal(blocked.status,429);assert.equal(blocked.headers.get('retry-after'),'60');
     const other=await handleLead(request(valid,{'x-forwarded-for':'203.0.113.8'}),async()=>{});
     assert.equal(other.status,200);
-  } finally { delete process.env.TRUST_PROXY_HEADERS; }
+  } finally { if(previous===undefined) delete process.env.TRUST_PROXY_HEADERS; else process.env.TRUST_PROXY_HEADERS=previous; }
 });
 test('without trusted addresses, eleven visitors are not locked out together',async()=>{
+  const previous=process.env.TRUST_PROXY_HEADERS;
   delete process.env.TRUST_PROXY_HEADERS;
-  for(let i=0;i<11;i++) assert.equal((await handleLead(request({...valid,email:`person${i}@example.com`}),async()=>{})).status,200);
+  try{
+    for(let i=0;i<11;i++) assert.equal((await handleLead(request({...valid,email:`person${i}@example.com`}),async()=>{})).status,200);
+  } finally { if(previous===undefined) delete process.env.TRUST_PROXY_HEADERS; else process.env.TRUST_PROXY_HEADERS=previous; }
 });
 test('the same email address is limited to three requests a minute',async()=>{
+  const previous=process.env.TRUST_PROXY_HEADERS;
   delete process.env.TRUST_PROXY_HEADERS;
-  for(let i=0;i<3;i++) assert.equal((await handleLead(request(valid),async()=>{})).status,200);
-  assert.equal((await handleLead(request(valid),async()=>{})).status,429);
+  try{
+    for(let i=0;i<3;i++) assert.equal((await handleLead(request(valid),async()=>{})).status,200);
+    assert.equal((await handleLead(request(valid),async()=>{})).status,429);
+  } finally { if(previous===undefined) delete process.env.TRUST_PROXY_HEADERS; else process.env.TRUST_PROXY_HEADERS=previous; }
 });
 test('the receipt cookie is Secure behind a TLS-terminating proxy',async()=>{
   const previous=process.env.TRUST_PROXY_HEADERS;
@@ -165,4 +173,15 @@ test('class names used in markup are either Tailwind utilities or defined in glo
     const used=['components/motion/reveal.tsx','components/sections/cta-section.tsx','app/page.tsx'].some(f=>readFileSync(path.join(process.cwd(),f),'utf8').includes(hook));
     assert.ok(defined||!used,`${hook} is used but never defined`);
   }
+});
+
+// --- Contact data from one source ---
+import {offices, regionalContacts, officeCities} from '../content/offices';
+import {regions} from '../content/site';
+test('regional contacts and office cities are derived from the office list',()=>{
+  assert.equal(regionalContacts[0].region,'Global');
+  assert.equal(new Set(regionalContacts.map(c=>c.email)).size,regionalContacts.length);
+  for(const c of regionalContacts) assert.ok(offices.some(o=>o.email===c.email),c.email);
+  assert.deepEqual(officeCities,offices.map(o=>o.city));
+  for(const region of regions) assert.ok(offices.some(o=>o.email===region.email),`${region.code} email is not an office email`);
 });

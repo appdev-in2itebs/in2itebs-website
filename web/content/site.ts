@@ -1,6 +1,6 @@
 import type { Region, Stat } from "./types";
 
-/** Authoritative figures — docs/CONTENT_SOURCE_OF_TRUTH.md (SOT-02), owner-confirmed. */
+/** Headline figures — Deck 2 (Corporate Capability, May 2026) via the Features Plan; SOT-02 of the first deck says 350+ employees. Owner to confirm one source (audit M7). */
 export const stats: Stat[] = [
   { value: "10+", label: "Years of experience" },
   { value: "380+", label: "Employees" },
