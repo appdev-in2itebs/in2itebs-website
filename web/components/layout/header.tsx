@@ -53,10 +53,20 @@ export function Header() {
       mq.removeEventListener("change", resize);
     };
   }, [mobileOpen]);
+  useEffect(() => {
+    const el = header.current;
+    if (!el) return;
+    const update = () => {
+      el.dataset.scrolled = String(window.scrollY > 20);
+    };
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    return () => window.removeEventListener("scroll", update);
+  }, []);
   return (
     <header
       ref={header}
-      className="fixed inset-x-0 top-0 z-40 border-b border-border-subtle bg-surface text-foreground"
+      className="glass-elevated fixed inset-x-0 top-0 z-40 border-x-0 border-t-0 border-b border-border-subtle text-foreground transition-[background-color,box-shadow] duration-300 data-[scrolled=true]:[--glass-alpha-elevated:0.9] data-[scrolled=true]:border-gold-soft/60 data-[scrolled=true]:shadow-glass-hover"
       onKeyDown={(event) => {
         if (event.key === "Escape" && expanded) {
           event.preventDefault();
@@ -68,7 +78,7 @@ export function Header() {
         if (!event.currentTarget.contains(event.relatedTarget as Node)) setExpanded(null);
       }}
     >
-      <div className="border-b border-border-subtle bg-surface-subtle">
+      <div className="border-b border-border-subtle/70 bg-transparent">
         <div className="container flex min-h-11 items-center justify-between gap-3 text-xs sm:text-sm">
           <a
             href="mailto:info@in2itebs.com"
@@ -78,7 +88,7 @@ export function Header() {
           </a>
           <Link
             href="/contact/"
-            className="inline-flex min-h-11 items-center gap-2 px-2 font-semibold text-action hover:underline"
+            className="glass-gold inline-flex min-h-9 items-center gap-2 rounded-full px-3.5 text-xs font-semibold sm:text-sm"
           >
             Talk to us <span aria-hidden>↗</span>
           </Link>
@@ -99,8 +109,8 @@ export function Header() {
                   href={item.href}
                   aria-current={active ? "page" : undefined}
                   className={cn(
-                    "inline-flex min-h-11 items-center px-2 text-sm font-semibold hover:text-action",
-                    active && "text-action",
+                    "nav-link inline-flex min-h-11 items-center px-2 text-sm font-semibold transition-colors hover:text-gold",
+                    active && "text-gold",
                   )}
                 >
                   {item.label}
@@ -116,14 +126,14 @@ export function Header() {
                       aria-expanded={expanded === item.href}
                       aria-controls={id}
                       onClick={() => setExpanded(expanded === item.href ? null : item.href)}
-                      className="inline-flex h-11 w-8 items-center justify-center rounded-control hover:bg-surface-subtle"
+                      className="inline-flex h-11 w-8 items-center justify-center rounded-control hover:bg-glass/60"
                     >
                       <ChevronDown aria-hidden size={15} className={expanded === item.href ? "rotate-180" : ""} />
                     </button>
                     <div
                       id={id}
                       hidden={expanded !== item.href}
-                      className="absolute inset-x-0 top-full max-h-[calc(100dvh-10rem)] overflow-y-auto rounded-b-feature border border-border-subtle bg-surface p-7 shadow-[var(--shadow-navigation)]"
+                      className="glass-elevated absolute inset-x-0 top-full max-h-[calc(100dvh-10rem)] overflow-y-auto rounded-b-feature border-t-0 p-7"
                     >
                       <div className={item.label === "What We Do" ? "grid grid-cols-4 gap-7" : "flex flex-wrap gap-5"}>
                         {item.children.map((child) => (
@@ -131,7 +141,7 @@ export function Header() {
                             <Link
                               onClick={close}
                               href={child.href}
-                              className="inline-flex min-h-11 items-center text-base font-semibold text-action hover:underline"
+                              className="inline-flex min-h-11 items-center text-base font-semibold text-foreground hover:text-gold"
                             >
                               {child.label}
                             </Link>
@@ -142,7 +152,7 @@ export function Header() {
                                     <Link
                                       onClick={close}
                                       href={practice.href}
-                                      className="inline-flex min-h-10 items-center text-sm text-foreground-muted hover:text-action hover:underline"
+                                      className="inline-flex min-h-10 items-center text-sm text-foreground-muted hover:text-gold"
                                     >
                                       {practice.label}
                                     </Link>
@@ -206,10 +216,10 @@ export function Header() {
           setMobileOpen(false);
           if (opener.current?.getClientRects().length) opener.current.focus();
         }}
-        className="fixed inset-0 m-0 h-dvh max-h-dvh w-screen max-w-none overflow-y-auto bg-surface p-5 text-foreground backdrop:bg-brand/60"
+        className="fixed inset-0 m-0 h-dvh max-h-dvh w-screen max-w-none overflow-y-auto bg-canvas p-5 text-foreground backdrop:bg-brand/60"
       >
         <div className="mb-5 flex items-center justify-between border-b border-border-subtle pb-4">
-          <h2 id="mobile-menu-title" className="text-xl font-semibold">
+          <h2 id="mobile-menu-title" className="heading-plain text-xl font-semibold">
             Explore In2IT EBS
           </h2>
           <button

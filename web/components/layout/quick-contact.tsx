@@ -50,21 +50,21 @@ export function QuickContact() {
         aria-expanded={open}
         aria-controls="quick-contact-panel"
         onClick={() => setOpen(!open)}
-        className="ml-auto flex min-h-12 items-center gap-2 rounded-control bg-action px-4 font-semibold text-on-action shadow-soft hover:bg-action-hover"
+        className="btn-shimmer ml-auto flex min-h-12 items-center gap-2 rounded-full bg-action px-5 font-semibold text-on-action shadow-glass hover:bg-action-hover hover:shadow-glass-hover"
       >
         {open ? <X size={20} aria-hidden /> : <Plus size={20} aria-hidden />}Contact
       </button>
       <div
         id="quick-contact-panel"
         hidden={!open}
-        className="absolute bottom-full right-0 mb-3 w-72 max-w-[calc(100vw-2.5rem)] rounded-feature border border-border-subtle bg-surface p-5 text-foreground shadow-soft"
+        className="glass-elevated absolute bottom-full right-0 mb-3 w-72 max-w-[calc(100vw-2.5rem)] rounded-feature p-5 text-foreground"
       >
         <p className="text-lg font-semibold">How can we help?</p>
         <p className="mt-2 text-sm text-foreground-muted">Connect with our enterprise services team.</p>
         <Link
           href="/contact/"
           onClick={() => setOpen(false)}
-          className="mt-4 flex min-h-11 items-center justify-between text-sm font-semibold text-action"
+          className="mt-4 flex min-h-11 items-center justify-between text-sm font-semibold text-gold"
         >
           Talk to us <ArrowUpRight size={17} aria-hidden />
         </Link>

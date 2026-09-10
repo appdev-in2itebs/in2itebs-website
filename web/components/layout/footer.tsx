@@ -15,11 +15,11 @@ const socials = [
 function LinkColumn({ title, links }: { title: string; links: { label: string; href: string }[] }) {
   return (
     <div>
-      <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-muted">{title}</h3>
+      <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-gold-on-brand">{title}</h3>
       <ul className="mt-5 space-y-3">
         {links.map((link) => (
           <li key={link.href}>
-            <Link href={link.href} className="text-sm text-on-brand/70 transition-colors hover:text-on-brand">
+            <Link href={link.href} className="text-sm text-on-brand/70 transition-colors hover:text-gold-on-brand">
               {link.label}
             </Link>
           </li>
@@ -31,7 +31,8 @@ function LinkColumn({ title, links }: { title: string; links: { label: string; h
 
 export function Footer() {
   return (
-    <footer className="theme-on-brand border-t border-on-brand/15 bg-brand pb-20 text-on-brand">
+    <footer className="theme-on-brand relative bg-brand pb-20 text-on-brand">
+      <div aria-hidden className="rule-gold absolute inset-x-0 top-0" />
       <div className="container py-16 md:py-20">
         <div className="grid gap-12 border-b border-on-brand/20 pb-14 lg:grid-cols-12">
           <div className="lg:col-span-5">
@@ -55,7 +56,10 @@ export function Footer() {
         <div className="grid gap-8 border-b border-on-brand/20 py-7 lg:grid-cols-[1fr_auto] lg:items-center">
           <div className="flex flex-wrap gap-x-5 gap-y-2">
             {footerCertifications.map((certification) => (
-              <span key={certification} className="text-xs font-semibold uppercase tracking-[0.14em] text-brand-muted">
+              <span
+                key={certification}
+                className="text-xs font-semibold uppercase tracking-[0.14em] text-gold-on-brand"
+              >
                 {certification}
               </span>
             ))}
@@ -69,7 +73,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
-                className="flex min-h-11 items-center justify-center border border-on-brand/20 px-3 text-sm text-brand-muted transition-colors hover:border-on-brand/50 hover:text-on-brand"
+                className="glass-pill min-h-11 bg-on-brand/10 px-3.5 text-sm text-on-brand/80 transition-colors hover:border-gold-on-brand/60 hover:text-gold-on-brand"
               >
                 {label}
               </a>
