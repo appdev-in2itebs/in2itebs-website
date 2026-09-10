@@ -142,7 +142,7 @@ export const clients: Client[] = [
     slug: "nalco",
     name: "National Aluminium Company (NALCO)",
     sectors: ["Metals & Mining", "PSUs"],
-    logo: "/logos/clients/nalco.svg",
+    logo: "/logos/clients/nalco.png",
   },
   { slug: "vedanta", name: "Vedanta Limited", sectors: ["Metals & Mining"], logo: "/logos/clients/vedanta.svg" },
   { slug: "jsw", name: "JSW Group", sectors: ["Metals & Mining"], logo: "/logos/clients/jsw.svg" },
