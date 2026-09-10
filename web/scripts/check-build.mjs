@@ -1,5 +1,5 @@
 // Asserts that the artefacts in .next match SITE_ENV. Runs automatically after `next build` (postbuild).
-import { readFileSync, existsSync } from "node:fs";
+import { readFileSync, existsSync, readdirSync, statSync } from "node:fs";
 const env = process.env.SITE_ENV;
 if (env !== "production" && env !== "preview") {
   console.error(`check-build: SITE_ENV must be production or preview, got ${JSON.stringify(env)}`);
@@ -34,6 +34,21 @@ if (prerenderedPages.length < 60)
   failures.push(
     `only ${prerenderedPages.length} pages are prerendered; expected at least 60 (is cookies()/headers() used in a layout?)`,
   );
+// Premium restyle: three.js must stay in one lazily loaded chunk.
+const chunkDir = ".next/static/chunks";
+const chunkFiles = existsSync(chunkDir) ? readdirSync(chunkDir).filter((f) => f.endsWith(".js")) : [];
+const withThree = chunkFiles.filter((f) => readFileSync(`${chunkDir}/${f}`, "utf8").includes("TorusKnotGeometry"));
+if (withThree.length !== 1) {
+  failures.push(`expected exactly one chunk containing three.js, found ${withThree.length}: ${withThree.join(", ")}`);
+} else {
+  const [threeChunk] = withThree;
+  const appManifest = readFileSync(".next/app-build-manifest.json", "utf8");
+  if (appManifest.includes(threeChunk))
+    failures.push(`three.js chunk ${threeChunk} is referenced as initial JavaScript`);
+  const size = statSync(`${chunkDir}/${threeChunk}`).size;
+  if (size > 700_000) failures.push(`three.js chunk ${threeChunk} is ${size} bytes, budget is 700000`);
+  console.log(`three.js chunk ${threeChunk}: ${size} bytes, lazy only`);
+}
 if (failures.length) {
   for (const f of failures) console.error(`check-build: ${f}`);
   process.exit(1);

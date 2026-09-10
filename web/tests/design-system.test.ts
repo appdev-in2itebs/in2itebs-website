@@ -139,3 +139,22 @@ test("MotionObserver is mounted before main and MotionControls declares ownershi
   assert.match(observer, /dataset\.reveal = "in"/);
   assert.match(observer, /motionOwner/);
 });
+
+test("the hero scene imports three by named specifiers and the loader defers it", () => {
+  const scene = read("components/hero/hero-3d.tsx");
+  assert.ok(!/import \* as/.test(scene), "namespace import defeats tree-shaking");
+  assert.match(scene, /from "three"/);
+  assert.match(scene, /TorusKnotGeometry/);
+  const loader = read("components/hero/hero-3d-loader.tsx");
+  assert.match(loader, /import\("\.\/hero-3d"\)/);
+  assert.match(loader, /ssr: false/);
+  for (const reason of ["viewport", "reduced-motion", "save-data", "no-webgl", "hidden"])
+    assert.ok(loader.includes(`"${reason}"`), `loader lacks reason ${reason}`);
+});
+
+test("check-build enforces the three.js chunk budget", () => {
+  const script = read("scripts/check-build.mjs");
+  assert.match(script, /TorusKnotGeometry/);
+  assert.match(script, /app-build-manifest\.json/);
+  assert.match(script, /700000|700_000/);
+});
