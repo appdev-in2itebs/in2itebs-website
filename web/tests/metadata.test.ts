@@ -27,7 +27,7 @@ test('static page descriptions stay within 70 to 160 characters',()=>{
     const match=source.match(/description:\s*\n?\s*"([^"]+)"/);
     if(!match||file.includes('[slug]')) continue;
     const length=match[1].length;
-    const noindex=/robots:\s*\{index: false/.test(source);
+    const noindex=/robots:\s*\{\s*index: false/.test(source);
     assert.ok(length<=160,`${path.relative(process.cwd(),file)}: description is ${length} characters`);
     if(!noindex) assert.ok(length>=70,`${path.relative(process.cwd(),file)}: description is only ${length} characters`);
   }
