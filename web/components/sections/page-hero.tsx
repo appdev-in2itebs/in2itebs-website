@@ -35,7 +35,9 @@ export function PageHero({
             <h1 className="text-display font-serif font-bold text-navy">
               {headline} {accentWord ? <Accent>{accentWord}</Accent> : null}
             </h1>
-            {subhead ? <p className="max-w-measure text-lg leading-relaxed text-grey-muted md:text-xl">{subhead}</p> : null}
+            {subhead ? (
+              <p className="max-w-measure text-lg leading-relaxed text-grey-muted md:text-xl">{subhead}</p>
+            ) : null}
             {cta ? (
               <div className="pt-2">
                 <Button href={site.primaryCta.href} variant="primary" withArrow>

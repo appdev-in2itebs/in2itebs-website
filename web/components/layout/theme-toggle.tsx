@@ -11,7 +11,7 @@ export function ThemeToggle({ onBrand = false }: { onBrand?: boolean }) {
     const sync = () => setDark(document.documentElement.classList.contains("theme-dark"));
     sync();
     const observer = new MutationObserver(sync);
-    observer.observe(document.documentElement, {attributes:true, attributeFilter:["class"]});
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
     return () => observer.disconnect();
   }, []);
 

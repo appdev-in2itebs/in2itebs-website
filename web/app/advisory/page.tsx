@@ -1,5 +1,5 @@
-import {pageMetadata} from "@/lib/metadata";
-import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
+import { pageMetadata } from "@/lib/metadata";
+import { BreadcrumbJsonLd } from "@/components/seo/json-ld";
 import { Container, Section } from "@/components/ui/container";
 import { Accent, SectionHeading } from "@/components/ui/typography";
 import { Reveal } from "@/components/motion/reveal";

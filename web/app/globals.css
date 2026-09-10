@@ -20,29 +20,83 @@ html:not([data-motion-ready]) [class*="system-"],
 html:not([data-motion-ready]) .ambient-orb,
 html:not([data-motion-ready]) .motion-rail span,
 html:not([data-motion-ready]) .stage-card-featured,
-html:not([data-motion-ready]) .flow-signal { animation: none !important; }
-html[data-motion-paused="true"] *, html[data-motion-paused="true"] *::before,
-html[data-motion-paused="true"] *::after { animation-play-state: paused !important; }
+html:not([data-motion-ready]) .flow-signal {
+  animation: none !important;
+}
+html[data-motion-paused="true"] *,
+html[data-motion-paused="true"] *::before,
+html[data-motion-paused="true"] *::after {
+  animation-play-state: paused !important;
+}
 /* Pausing decorative loops must never freeze essential entrance content. */
-html[data-motion-paused="true"] .hero-enter { opacity: 1 !important; transform: none !important; animation: none !important; }
+html[data-motion-paused="true"] .hero-enter {
+  opacity: 1 !important;
+  transform: none !important;
+  animation: none !important;
+}
 /* Keep motion on composited signals; do not continuously repaint shadows/halos. */
-[data-motion-offscreen="true"] *, [data-motion-offscreen="true"] *::before,
-[data-motion-offscreen="true"] *::after { animation-play-state: paused !important; }
-.system-status, .system-halo, .stage-card-featured, .ambient-orb { animation: none !important; }
-html:not([data-motion-ready]) .client-ribbon { overflow-x: auto; }
-.client-ribbon[data-expanded="true"] { overflow: visible; }
-.client-ribbon[data-expanded="true"] .client-ribbon-track { width: 100%; transform: none; animation: none !important; }
-.client-ribbon[data-expanded="true"] .client-ribbon-list { width: 100%; flex-wrap: wrap; justify-content: center; gap: 1px; }
-.client-ribbon[data-expanded="true"] .client-ribbon-copy { display: none; }
-.client-ribbon-list img { max-width: 100%; }
-.client-ribbon[data-expanded="true"] .client-ribbon-list > div { width: min(11rem, calc(50% - 1px)); }
+[data-motion-offscreen="true"] *,
+[data-motion-offscreen="true"] *::before,
+[data-motion-offscreen="true"] *::after {
+  animation-play-state: paused !important;
+}
+.system-status,
+.system-halo,
+.stage-card-featured,
+.ambient-orb {
+  animation: none !important;
+}
+html:not([data-motion-ready]) .client-ribbon {
+  overflow-x: auto;
+}
+.client-ribbon[data-expanded="true"] {
+  overflow: visible;
+}
+.client-ribbon[data-expanded="true"] .client-ribbon-track {
+  width: 100%;
+  transform: none;
+  animation: none !important;
+}
+.client-ribbon[data-expanded="true"] .client-ribbon-list {
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1px;
+}
+.client-ribbon[data-expanded="true"] .client-ribbon-copy {
+  display: none;
+}
+.client-ribbon-list img {
+  max-width: 100%;
+}
+.client-ribbon[data-expanded="true"] .client-ribbon-list > div {
+  width: min(11rem, calc(50% - 1px));
+}
 @media (prefers-reduced-motion: reduce) {
-  .client-ribbon { overflow: visible; mask-image: none; }
-  .client-ribbon-track { width: 100%; transform: none; animation: none !important; }
-  .client-ribbon-list { flex-wrap: wrap; width: 100%; }
-  .client-ribbon-list > div { width: min(11rem, 50%); }
-  .client-ribbon-copy { display: none; }
-  .hero-enter { opacity: 1 !important; transform: none !important; animation: none !important; }
+  .client-ribbon {
+    overflow: visible;
+    mask-image: none;
+  }
+  .client-ribbon-track {
+    width: 100%;
+    transform: none;
+    animation: none !important;
+  }
+  .client-ribbon-list {
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  .client-ribbon-list > div {
+    width: min(11rem, 50%);
+  }
+  .client-ribbon-copy {
+    display: none;
+  }
+  .hero-enter {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
 }
 
 @layer base {
@@ -54,21 +108,21 @@ html:not([data-motion-ready]) .client-ribbon { overflow-x: auto; }
 
     /* Semantic theme roles. Values are OKLCH channels so Tailwind opacity modifiers remain available. */
     --color-bg-canvas: 97.25% 0.006 255;
-    --color-bg-surface: 99.20% 0.003 255;
+    --color-bg-surface: 99.2% 0.003 255;
     --color-bg-subtle: 93.25% 0.013 255;
-    --color-bg-brand: 20.50% 0.047 261;
-    --color-fg-primary: 20.50% 0.047 261;
-    --color-fg-secondary: 42.50% 0.041 258;
-    --color-fg-on-brand: 98.20% 0.006 258.32;
-    --color-fg-brand-muted: 83.60% 0.055 239;
-    --color-bg-logo: 98.20% 0.006 258.32;
+    --color-bg-brand: 20.5% 0.047 261;
+    --color-fg-primary: 20.5% 0.047 261;
+    --color-fg-secondary: 42.5% 0.041 258;
+    --color-fg-on-brand: 98.2% 0.006 258.32;
+    --color-fg-brand-muted: 83.6% 0.055 239;
+    --color-bg-logo: 98.2% 0.006 258.32;
     --color-fg-logo: 25.28% 0.0558 265.15;
-    --color-action: 44.50% 0.105 244;
-    --color-action-hover: 38.50% 0.096 244;
-    --color-fg-on-action: 98.20% 0.006 258.32;
-    --color-border-subtle: 82.50% 0.02 258;
+    --color-action: 44.5% 0.105 244;
+    --color-action-hover: 38.5% 0.096 244;
+    --color-fg-on-action: 98.2% 0.006 258.32;
+    --color-border-subtle: 82.5% 0.02 258;
     --color-border-strong: 56% 0.04 258;
-    --color-focus: 44.50% 0.105 244;
+    --color-focus: 44.5% 0.105 244;
     --color-feedback-success: 39% 0.09 155;
     --color-feedback-error: 46% 0.13 19;
 
@@ -92,14 +146,14 @@ html:not([data-motion-ready]) .client-ribbon { overflow-x: auto; }
   .theme-dark {
     color-scheme: dark;
     --color-bg-canvas: 18% 0.032 258;
-    --color-bg-surface: 22.50% 0.038 258;
-    --color-bg-subtle: 27.50% 0.042 258;
+    --color-bg-surface: 22.5% 0.038 258;
+    --color-bg-subtle: 27.5% 0.042 258;
     --color-bg-brand: 21% 0.05 265;
     --color-fg-primary: 95% 0.012 258;
-    --color-fg-secondary: 80.50% 0.028 258;
-    --color-fg-on-brand: 98.20% 0.006 258.32;
-    --color-fg-brand-muted: 83.60% 0.055 239;
-    --color-bg-logo: 98.20% 0.006 258.32;
+    --color-fg-secondary: 80.5% 0.028 258;
+    --color-fg-on-brand: 98.2% 0.006 258.32;
+    --color-fg-brand-muted: 83.6% 0.055 239;
+    --color-bg-logo: 98.2% 0.006 258.32;
     --color-fg-logo: 25.28% 0.0558 265.15;
     --color-action: 78% 0.078 239;
     --color-action-hover: 86% 0.052 239;
@@ -107,7 +161,7 @@ html:not([data-motion-ready]) .client-ribbon { overflow-x: auto; }
     --color-border-subtle: 42% 0.045 260;
     --color-border-strong: 62% 0.052 258;
     --color-focus: 82% 0.075 239;
-    --color-feedback-success: 82% 0.10 160;
+    --color-feedback-success: 82% 0.1 160;
     --color-feedback-error: 80% 0.115 13;
 
     --color-legacy-navy: var(--color-fg-primary);
@@ -131,7 +185,9 @@ html:not([data-motion-ready]) .client-ribbon { overflow-x: auto; }
 
   body {
     @apply bg-canvas font-sans text-foreground antialiased;
-    transition: background-color 200ms ease-out, color 200ms ease-out;
+    transition:
+      background-color 200ms ease-out,
+      color 200ms ease-out;
   }
 
   ::selection {
@@ -139,7 +195,10 @@ html:not([data-motion-ready]) .client-ribbon { overflow-x: auto; }
     color: oklch(var(--color-fg-on-action));
   }
 
-  h1, h2, h3, h4 {
+  h1,
+  h2,
+  h3,
+  h4 {
     @apply font-display;
     text-wrap: balance;
   }
@@ -152,7 +211,9 @@ html:not([data-motion-ready]) .client-ribbon { overflow-x: auto; }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
+    *,
+    *::before,
+    *::after {
       animation-duration: 0.001ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.001ms !important;
@@ -184,7 +245,9 @@ html:not([data-motion-ready]) .client-ribbon { overflow-x: auto; }
     --color-legacy-blue-pale: var(--color-fg-brand-muted);
   }
 
-  [id] { scroll-margin-top: 11rem; }
+  [id] {
+    scroll-margin-top: 11rem;
+  }
 
   .theme-light .theme-logo-dark,
   .theme-dark .theme-logo-light {
@@ -195,7 +258,6 @@ html:not([data-motion-ready]) .client-ribbon { overflow-x: auto; }
   .rule-sand {
     @apply h-px w-full bg-sand/60;
   }
-
 }
 
 @layer utilities {
@@ -223,7 +285,11 @@ html:not([data-motion-ready]) .client-ribbon { overflow-x: auto; }
       radial-gradient(circle at 20% 55%, oklch(var(--color-fg-brand-muted) / 0.13), transparent 31rem),
       linear-gradient(oklch(var(--color-border-subtle) / 0.18) 1px, transparent 1px),
       linear-gradient(90deg, oklch(var(--color-border-subtle) / 0.18) 1px, transparent 1px);
-    background-size: auto, auto, 5rem 5rem, 5rem 5rem;
+    background-size:
+      auto,
+      auto,
+      5rem 5rem,
+      5rem 5rem;
     -webkit-mask-image: linear-gradient(to bottom, black 0%, black 76%, transparent 100%);
     mask-image: linear-gradient(to bottom, black 0%, black 76%, transparent 100%);
   }
@@ -233,7 +299,14 @@ html:not([data-motion-ready]) .client-ribbon { overflow-x: auto; }
     position: absolute;
     inset: 0 0 auto;
     height: 1px;
-    background: linear-gradient(90deg, transparent, oklch(var(--color-border-subtle) / 0.7) 18%, oklch(var(--color-action) / 0.3) 50%, oklch(var(--color-border-subtle) / 0.7) 82%, transparent);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      oklch(var(--color-border-subtle) / 0.7) 18%,
+      oklch(var(--color-action) / 0.3) 50%,
+      oklch(var(--color-border-subtle) / 0.7) 82%,
+      transparent
+    );
   }
 
   .section-tint-a,
@@ -245,20 +318,35 @@ html:not([data-motion-ready]) .client-ribbon { overflow-x: auto; }
   .section-tint-a {
     background:
       radial-gradient(ellipse at 10% 15%, oklch(var(--color-action) / 0.07), transparent 37rem),
-      linear-gradient(180deg, oklch(var(--color-bg-surface)), oklch(var(--color-bg-canvas) / 0.62), oklch(var(--color-bg-surface)));
+      linear-gradient(
+        180deg,
+        oklch(var(--color-bg-surface)),
+        oklch(var(--color-bg-canvas) / 0.62),
+        oklch(var(--color-bg-surface))
+      );
   }
 
   .section-tint-b {
     background:
       radial-gradient(ellipse at 82% 32%, oklch(var(--color-fg-brand-muted) / 0.13), transparent 34rem),
       radial-gradient(ellipse at 15% 80%, oklch(var(--color-action) / 0.055), transparent 30rem),
-      linear-gradient(180deg, oklch(var(--color-bg-surface)), oklch(var(--color-bg-canvas) / 0.52), oklch(var(--color-bg-surface)));
+      linear-gradient(
+        180deg,
+        oklch(var(--color-bg-surface)),
+        oklch(var(--color-bg-canvas) / 0.52),
+        oklch(var(--color-bg-surface))
+      );
   }
 
   .section-tint-c {
     background:
       radial-gradient(circle at 50% 44%, oklch(var(--color-action) / 0.075), transparent 32rem),
-      linear-gradient(180deg, oklch(var(--color-bg-surface)), oklch(var(--color-bg-canvas) / 0.68), oklch(var(--color-bg-surface)));
+      linear-gradient(
+        180deg,
+        oklch(var(--color-bg-surface)),
+        oklch(var(--color-bg-canvas) / 0.68),
+        oklch(var(--color-bg-surface))
+      );
   }
 
   .blueprint-light {
@@ -266,7 +354,10 @@ html:not([data-motion-ready]) .client-ribbon { overflow-x: auto; }
       radial-gradient(circle at 72% 28%, oklch(var(--color-action) / 0.075), transparent 25rem),
       linear-gradient(oklch(var(--color-border-subtle) / 0.24) 1px, transparent 1px),
       linear-gradient(90deg, oklch(var(--color-border-subtle) / 0.24) 1px, transparent 1px);
-    background-size: auto, 5rem 5rem, 5rem 5rem;
+    background-size:
+      auto,
+      5rem 5rem,
+      5rem 5rem;
   }
 
   .system-map-grid {
@@ -274,7 +365,10 @@ html:not([data-motion-ready]) .client-ribbon { overflow-x: auto; }
       radial-gradient(circle at 50% 50%, oklch(var(--color-action) / 0.12), transparent 43%),
       linear-gradient(oklch(var(--color-border-subtle) / 0.26) 1px, transparent 1px),
       linear-gradient(90deg, oklch(var(--color-border-subtle) / 0.26) 1px, transparent 1px);
-    background-size: auto, 3rem 3rem, 3rem 3rem;
+    background-size:
+      auto,
+      3rem 3rem,
+      3rem 3rem;
   }
 
   .system-ring {
@@ -288,9 +382,15 @@ html:not([data-motion-ready]) .client-ribbon { overflow-x: auto; }
     animation: system-dash 9s linear infinite;
   }
 
-  .system-link-b { animation-delay: -2.25s; }
-  .system-link-c { animation-delay: -4.5s; }
-  .system-link-d { animation-delay: -6.75s; }
+  .system-link-b {
+    animation-delay: -2.25s;
+  }
+  .system-link-c {
+    animation-delay: -4.5s;
+  }
+  .system-link-d {
+    animation-delay: -6.75s;
+  }
 
   .system-orbit {
     transform-box: fill-box;
@@ -302,9 +402,15 @@ html:not([data-motion-ready]) .client-ribbon { overflow-x: auto; }
     animation: system-float 6s cubic-bezier(0.77, 0, 0.175, 1) infinite alternate;
   }
 
-  .system-node-b { animation-delay: -1.5s; }
-  .system-node-c { animation-delay: -3s; }
-  .system-node-d { animation-delay: -4.5s; }
+  .system-node-b {
+    animation-delay: -1.5s;
+  }
+  .system-node-c {
+    animation-delay: -3s;
+  }
+  .system-node-d {
+    animation-delay: -4.5s;
+  }
 
   .system-status {
     box-shadow: 0 0 0 0 oklch(var(--color-action) / 0.3);
@@ -323,7 +429,13 @@ html:not([data-motion-ready]) .client-ribbon { overflow-x: auto; }
 
   .system-scan {
     opacity: 0;
-    background: linear-gradient(90deg, transparent, oklch(var(--color-action) / 0.08), oklch(var(--color-action) / 0.16), transparent);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      oklch(var(--color-action) / 0.08),
+      oklch(var(--color-action) / 0.16),
+      transparent
+    );
     transform: translateX(-120%);
     animation: system-scan 7.5s cubic-bezier(0.77, 0, 0.175, 1) infinite;
   }
@@ -353,18 +465,32 @@ html:not([data-motion-ready]) .client-ribbon { overflow-x: auto; }
     animation: hero-enter 700ms cubic-bezier(0.23, 1, 0.32, 1) forwards;
   }
 
-  .hero-enter-1 { animation-delay: 40ms; }
-  .hero-enter-2 { animation-delay: 100ms; }
-  .hero-enter-3 { animation-delay: 160ms; }
-  .hero-enter-4 { animation-delay: 220ms; }
+  .hero-enter-1 {
+    animation-delay: 40ms;
+  }
+  .hero-enter-2 {
+    animation-delay: 100ms;
+  }
+  .hero-enter-3 {
+    animation-delay: 160ms;
+  }
+  .hero-enter-4 {
+    animation-delay: 220ms;
+  }
 
   .ambient-orb {
     will-change: transform, opacity;
     animation: ambient-drift 10s cubic-bezier(0.77, 0, 0.175, 1) infinite alternate;
   }
 
-  .ambient-orb-b { animation-delay: -4s; animation-duration: 13s; }
-  .ambient-orb-c { animation-delay: -2.5s; animation-duration: 11s; }
+  .ambient-orb-b {
+    animation-delay: -4s;
+    animation-duration: 13s;
+  }
+  .ambient-orb-c {
+    animation-delay: -2.5s;
+    animation-duration: 11s;
+  }
 
   .metric-item::before {
     content: "";
@@ -378,9 +504,15 @@ html:not([data-motion-ready]) .client-ribbon { overflow-x: auto; }
     animation: metric-draw 900ms cubic-bezier(0.23, 1, 0.32, 1) forwards;
   }
 
-  .metric-item:nth-child(2)::before { animation-delay: 90ms; }
-  .metric-item:nth-child(3)::before { animation-delay: 180ms; }
-  .metric-item:nth-child(4)::before { animation-delay: 270ms; }
+  .metric-item:nth-child(2)::before {
+    animation-delay: 90ms;
+  }
+  .metric-item:nth-child(3)::before {
+    animation-delay: 180ms;
+  }
+  .metric-item:nth-child(4)::before {
+    animation-delay: 270ms;
+  }
 
   .motion-rail span {
     position: absolute;
@@ -399,7 +531,13 @@ html:not([data-motion-ready]) .client-ribbon { overflow-x: auto; }
     top: 1.75rem;
     bottom: 1.75rem;
     width: 1px;
-    background: linear-gradient(to bottom, transparent, oklch(var(--color-action) / 0.25) 15%, oklch(var(--color-action) / 0.25) 85%, transparent);
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      oklch(var(--color-action) / 0.25) 15%,
+      oklch(var(--color-action) / 0.25) 85%,
+      transparent
+    );
     pointer-events: none;
   }
 
@@ -433,70 +571,139 @@ html:not([data-motion-ready]) .client-ribbon { overflow-x: auto; }
   }
 
   @keyframes hero-enter {
-    to { opacity: 1; transform: translateY(0); }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   @keyframes system-dash {
-    to { stroke-dashoffset: -64; }
+    to {
+      stroke-dashoffset: -64;
+    }
   }
 
   @keyframes system-orbit {
-    to { transform: rotate(360deg); }
+    to {
+      transform: rotate(360deg);
+    }
   }
 
   @keyframes system-float {
-    from { transform: translateY(-3px); }
-    to { transform: translateY(5px); }
+    from {
+      transform: translateY(-3px);
+    }
+    to {
+      transform: translateY(5px);
+    }
   }
 
   @keyframes system-status {
-    70%, 100% { box-shadow: 0 0 0 8px oklch(var(--color-action) / 0); }
+    70%,
+    100% {
+      box-shadow: 0 0 0 8px oklch(var(--color-action) / 0);
+    }
   }
 
   @keyframes system-halo {
-    from { opacity: 0.7; }
-    to { opacity: 1; }
+    from {
+      opacity: 0.7;
+    }
+    to {
+      opacity: 1;
+    }
   }
 
   @keyframes system-travel {
-    from { offset-distance: 0%; opacity: 0; }
-    12%, 85% { opacity: 1; }
-    to { offset-distance: 100%; opacity: 0; }
+    from {
+      offset-distance: 0%;
+      opacity: 0;
+    }
+    12%,
+    85% {
+      opacity: 1;
+    }
+    to {
+      offset-distance: 100%;
+      opacity: 0;
+    }
   }
 
   @keyframes flow-signal {
-    from { transform: translateX(0); opacity: 0.35; }
-    to { transform: translateX(455%); opacity: 1; }
+    from {
+      transform: translateX(0);
+      opacity: 0.35;
+    }
+    to {
+      transform: translateX(455%);
+      opacity: 1;
+    }
   }
 
   @keyframes ambient-drift {
-    from { transform: translate3d(-1.5%, -1%, 0) scale(0.97); opacity: 0.72; }
-    to { transform: translate3d(3%, 2%, 0) scale(1.04); opacity: 1; }
+    from {
+      transform: translate3d(-1.5%, -1%, 0) scale(0.97);
+      opacity: 0.72;
+    }
+    to {
+      transform: translate3d(3%, 2%, 0) scale(1.04);
+      opacity: 1;
+    }
   }
 
   @keyframes system-scan {
-    0%, 12% { transform: translateX(-120%); opacity: 0; }
-    24%, 70% { opacity: 1; }
-    84%, 100% { transform: translateX(760%); opacity: 0; }
+    0%,
+    12% {
+      transform: translateX(-120%);
+      opacity: 0;
+    }
+    24%,
+    70% {
+      opacity: 1;
+    }
+    84%,
+    100% {
+      transform: translateX(760%);
+      opacity: 0;
+    }
   }
 
   @keyframes system-core {
-    from { transform: translate(-50%, -50%) scale(0.985); }
-    to { transform: translate(-50%, -50%) scale(1.015); }
+    from {
+      transform: translate(-50%, -50%) scale(0.985);
+    }
+    to {
+      transform: translate(-50%, -50%) scale(1.015);
+    }
   }
 
   @keyframes metric-draw {
-    to { transform: scaleX(1); }
+    to {
+      transform: scaleX(1);
+    }
   }
 
   @keyframes rail-travel {
-    from { transform: translateX(-110%); opacity: 0; }
-    15%, 80% { opacity: 1; }
-    to { transform: translateX(760%); opacity: 0; }
+    from {
+      transform: translateX(-110%);
+      opacity: 0;
+    }
+    15%,
+    80% {
+      opacity: 1;
+    }
+    to {
+      transform: translateX(760%);
+      opacity: 0;
+    }
   }
 
   @keyframes stage-breathe {
-    from { transform: translateY(0); }
-    to { transform: translateY(-5px); }
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-5px);
+    }
   }
 }

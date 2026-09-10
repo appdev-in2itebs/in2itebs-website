@@ -1,5 +1,5 @@
-import {pageMetadata} from "@/lib/metadata";
-import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
+import { pageMetadata } from "@/lib/metadata";
+import { BreadcrumbJsonLd } from "@/components/seo/json-ld";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Container, Section } from "@/components/ui/container";
@@ -108,9 +108,8 @@ export default function MigrationsPage() {
           <FeatureGrid features={deRisk} columns={3} />
           <Reveal delay={0.1} className="mt-8 max-w-2xl">
             <p className="text-[0.95rem] leading-relaxed text-grey-muted">
-              Migration accuracy is a data-management discipline, not an afterthought.
-              Where the data is complex, we bring in Syniti to profile, cleanse and reconcile
-              it ahead of every load.
+              Migration accuracy is a data-management discipline, not an afterthought. Where the data is complex, we
+              bring in Syniti to profile, cleanse and reconcile it ahead of every load.
             </p>
             <Link
               href="/sap-enterprise-solutions/syniti/"

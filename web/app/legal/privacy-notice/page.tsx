@@ -1,5 +1,5 @@
-import {pageMetadata} from "@/lib/metadata";
-import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
+import { pageMetadata } from "@/lib/metadata";
+import { BreadcrumbJsonLd } from "@/components/seo/json-ld";
 import { Container, Section } from "@/components/ui/container";
 import { Reveal } from "@/components/motion/reveal";
 import { PageHero } from "@/components/sections/page-hero";
@@ -7,8 +7,7 @@ import { CtaSection } from "@/components/sections/cta-section";
 
 export const metadata = pageMetadata("/legal/privacy-notice/", {
   title: "Privacy Notice",
-  description:
-    "How In2IT EBS collects, uses, shares and protects your personal data, and the rights available to you.",
+  description: "How In2IT EBS collects, uses, shares and protects your personal data, and the rights available to you.",
 });
 
 export default function PrivacyNoticePage() {

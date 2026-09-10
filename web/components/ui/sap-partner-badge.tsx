@@ -4,13 +4,7 @@ import { cn } from "@/lib/utils";
  *  (public SAP logo) + the partner tier, with a gold accent bar to signal the
  *  Gold level. The white chip keeps the SAP mark legible on light and dark.
  *  (SAP's official PartnerEdge badge file can be dropped in to replace this.) */
-export function SapPartnerBadge({
-  onDark = false,
-  className,
-}: {
-  onDark?: boolean;
-  className?: string;
-}) {
+export function SapPartnerBadge({ onDark = false, className }: { onDark?: boolean; className?: string }) {
   return (
     <span
       role="img"
@@ -27,7 +21,12 @@ export function SapPartnerBadge({
       </span>
       <span className="flex items-center gap-1.5">
         <span aria-hidden className="h-3.5 w-[3px] rounded-full bg-sand" />
-        <span className={cn("text-[0.68rem] font-semibold uppercase leading-tight tracking-[0.12em]", onDark ? "text-on-brand" : "text-foreground")}> 
+        <span
+          className={cn(
+            "text-[0.68rem] font-semibold uppercase leading-tight tracking-[0.12em]",
+            onDark ? "text-on-brand" : "text-foreground",
+          )}
+        >
           Gold Partner
         </span>
       </span>

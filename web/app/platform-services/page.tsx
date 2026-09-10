@@ -1,5 +1,5 @@
-import {pageMetadata} from "@/lib/metadata";
-import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
+import { pageMetadata } from "@/lib/metadata";
+import { BreadcrumbJsonLd } from "@/components/seo/json-ld";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Container, Section } from "@/components/ui/container";
@@ -31,13 +31,22 @@ const lifecycle = [
 ];
 
 // SAP / Salesforce / Workday cards, drawn from platformPractices (Blueprint §6).
-const cardCopy: Record<
-  string,
-  { eyebrow: string; bullets: string[]; cta: string }
-> = {
-  successfactors: {eyebrow:"Human experience",bullets:["Core HR and payroll","Talent and workforce experience","Integration and ongoing support"],cta:"Explore SuccessFactors"},
-  oracle: {eyebrow:"Enterprise applications",bullets:["Oracle E-Business Suite and JD Edwards","Oracle Cloud ERP","Database and middleware services"],cta:"Explore Oracle"},
-  microsoft: {eyebrow:"Connected business",bullets:["Dynamics 365 ERP and CRM","Microsoft 365 and SharePoint","Azure cloud services"],cta:"Explore Microsoft"},
+const cardCopy: Record<string, { eyebrow: string; bullets: string[]; cta: string }> = {
+  successfactors: {
+    eyebrow: "Human experience",
+    bullets: ["Core HR and payroll", "Talent and workforce experience", "Integration and ongoing support"],
+    cta: "Explore SuccessFactors",
+  },
+  oracle: {
+    eyebrow: "Enterprise applications",
+    bullets: ["Oracle E-Business Suite and JD Edwards", "Oracle Cloud ERP", "Database and middleware services"],
+    cta: "Explore Oracle",
+  },
+  microsoft: {
+    eyebrow: "Connected business",
+    bullets: ["Dynamics 365 ERP and CRM", "Microsoft 365 and SharePoint", "Azure cloud services"],
+    cta: "Explore Microsoft",
+  },
   sap: {
     eyebrow: "Flagship practice",
     bullets: [
@@ -111,8 +120,8 @@ export default function PlatformServicesPage() {
 
           <Reveal delay={0.1} className="mt-8">
             <p className="max-w-measure border-l-2 border-sand pl-5 text-[0.95rem] leading-relaxed text-grey-muted">
-              One delivery engine — FastForward methodology, development factory, global AMS bench
-              and account-level governance — runs beneath every stage.{" "}
+              One delivery engine — FastForward methodology, development factory, global AMS bench and account-level
+              governance — runs beneath every stage.{" "}
               <Link
                 href="/delivery-excellence/"
                 className="font-semibold text-blue-accent underline-offset-4 hover:underline"
@@ -144,18 +153,11 @@ export default function PlatformServicesPage() {
                 <StaggerItem key={practice.slug} className="h-full">
                   <Card className="flex h-full flex-col">
                     <Eyebrow>{copy.eyebrow}</Eyebrow>
-                    <h3 className="mt-3 font-serif text-h3 font-bold text-navy">
-                      {practice.name}
-                    </h3>
-                    <p className="mt-3 text-[0.95rem] leading-relaxed text-grey-muted">
-                      {practice.tagline}
-                    </p>
+                    <h3 className="mt-3 font-serif text-h3 font-bold text-navy">{practice.name}</h3>
+                    <p className="mt-3 text-[0.95rem] leading-relaxed text-grey-muted">{practice.tagline}</p>
                     <ul className="mt-5 space-y-2">
                       {copy.bullets.map((b) => (
-                        <li
-                          key={b}
-                          className="flex gap-2.5 text-[0.9rem] leading-relaxed text-grey-muted"
-                        >
+                        <li key={b} className="flex gap-2.5 text-[0.9rem] leading-relaxed text-grey-muted">
                           <span aria-hidden className="mt-2 h-1 w-1 shrink-0 rounded-full bg-blue-accent" />
                           <span>{b}</span>
                         </li>
@@ -185,8 +187,8 @@ export default function PlatformServicesPage() {
             <Card tone="white">
               <Eyebrow>Future platform expansion</Eyebrow>
               <p className="mt-4 max-w-measure text-[0.95rem] leading-relaxed text-grey-muted">
-                ServiceNow and Adobe remain areas of planned expansion. Our current practice routes
-                cover SAP, SuccessFactors, Salesforce, Workday, Oracle and Microsoft.
+                ServiceNow and Adobe remain areas of planned expansion. Our current practice routes cover SAP,
+                SuccessFactors, Salesforce, Workday, Oracle and Microsoft.
               </p>
               <ul className="mt-6 flex flex-wrap gap-x-2.5 gap-y-3">
                 {futurePlatforms.map((platform) => (

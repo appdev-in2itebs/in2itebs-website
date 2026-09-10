@@ -1,5 +1,5 @@
-import {pageMetadata} from "@/lib/metadata";
-import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
+import { pageMetadata } from "@/lib/metadata";
+import { BreadcrumbJsonLd } from "@/components/seo/json-ld";
 import { Container, Section } from "@/components/ui/container";
 import { Accent, SectionHeading } from "@/components/ui/typography";
 import { Card } from "@/components/ui/card";
@@ -160,9 +160,7 @@ export default function RiseVsGrowPage() {
             {pathwaySteps.map((step, i) => (
               <StaggerItem key={step.title} className="h-full">
                 <Card className="h-full">
-                  <span className="label-caps text-blue-accent">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
+                  <span className="label-caps text-blue-accent">{String(i + 1).padStart(2, "0")}</span>
                   <h3 className="mt-3 font-serif text-h3 font-bold text-navy">{step.title}</h3>
                   <p className="mt-3 text-[0.95rem] leading-relaxed text-grey-muted">{step.body}</p>
                 </Card>

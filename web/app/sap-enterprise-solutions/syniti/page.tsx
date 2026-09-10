@@ -1,5 +1,5 @@
-import {pageMetadata} from "@/lib/metadata";
-import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
+import { pageMetadata } from "@/lib/metadata";
+import { BreadcrumbJsonLd } from "@/components/seo/json-ld";
 import { Container, Section } from "@/components/ui/container";
 import { Eyebrow, Accent, SectionHeading } from "@/components/ui/typography";
 import { Card } from "@/components/ui/card";
@@ -100,9 +100,7 @@ export default function SynitiPage() {
             {stages.map((s, i) => (
               <StaggerItem key={s.stage} className="h-full">
                 <div className="flex h-full flex-col gap-2 rounded-xl2 border border-navy/5 bg-off-white p-6">
-                  <span className="font-serif text-h3 font-bold text-blue-light">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
+                  <span className="font-serif text-h3 font-bold text-blue-light">{String(i + 1).padStart(2, "0")}</span>
                   <span className="label-caps text-blue-accent">{s.stage}</span>
                   <p className="text-[0.9rem] leading-relaxed text-grey-muted">{s.note}</p>
                 </div>

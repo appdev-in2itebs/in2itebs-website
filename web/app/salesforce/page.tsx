@@ -1,8 +1,8 @@
-import {pageMetadata} from "@/lib/metadata";
-import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
+import { pageMetadata } from "@/lib/metadata";
+import { BreadcrumbJsonLd } from "@/components/seo/json-ld";
 import { Container, Section } from "@/components/ui/container";
 import { Accent, SectionHeading } from "@/components/ui/typography";
-import { Reveal, Stagger, StaggerItem} from "@/components/motion/reveal";
+import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
 import { PageHero } from "@/components/sections/page-hero";
 import { FeatureGrid } from "@/components/sections/feature-grid";
 import { CtaSection } from "@/components/sections/cta-section";

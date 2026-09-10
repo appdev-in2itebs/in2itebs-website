@@ -1,12 +1,12 @@
-import {pageMetadata} from "@/lib/metadata";
-import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
+import { pageMetadata } from "@/lib/metadata";
+import { BreadcrumbJsonLd } from "@/components/seo/json-ld";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Container, Section } from "@/components/ui/container";
 import { Eyebrow, Accent, SectionHeading, Lead } from "@/components/ui/typography";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Reveal, Stagger, StaggerItem} from "@/components/motion/reveal";
+import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
 import { PageHero } from "@/components/sections/page-hero";
 import { FeatureGrid } from "@/components/sections/feature-grid";
 import { CtaSection } from "@/components/sections/cta-section";
@@ -311,10 +311,7 @@ export default function SapEnterpriseSolutionsPage() {
             features={[
               {
                 title: "Path",
-                bullets: [
-                  "Greenfield (new build)",
-                  "Brownfield (convert in place from ECC)",
-                ],
+                bullets: ["Greenfield (new build)", "Brownfield (convert in place from ECC)"],
               },
               {
                 title: "Rollout",
@@ -479,8 +476,9 @@ export default function SapEnterpriseSolutionsPage() {
               </p>
               <p className="mt-5 text-sm font-medium text-navy">
                 30–40% reduction in customisation debt <span className="text-sand">·</span> 25% lift in monthly active
-                users <span className="text-sand">·</span> 2× faster Joule activation <span className="text-sand">·</span>{" "}
-                4–6-week engagement. Built on our proprietary Health Check 360 framework.
+                users <span className="text-sand">·</span> 2× faster Joule activation{" "}
+                <span className="text-sand">·</span> 4–6-week engagement. Built on our proprietary Health Check 360
+                framework.
               </p>
             </Card>
           </Reveal>

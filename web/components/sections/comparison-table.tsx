@@ -9,21 +9,21 @@ interface Column {
 
 /** Two-column decision table (e.g. RISE vs GROW). Clean, high-contrast,
  *  rounded, on white — one row per aspect with left/right values. */
-export function ComparisonTable({
-  aspects,
-  left,
-  right,
-}: {
-  aspects: string[];
-  left: Column;
-  right: Column;
-}) {
+export function ComparisonTable({ aspects, left, right }: { aspects: string[]; left: Column; right: Column }) {
   return (
-    <div role="region" aria-label={`${left.title} and ${right.title} comparison, scroll horizontally if needed`} tabIndex={0} className="overflow-x-auto rounded-surface bg-surface shadow-soft ring-1 ring-border-subtle">
+    <div
+      role="region"
+      aria-label={`${left.title} and ${right.title} comparison, scroll horizontally if needed`}
+      tabIndex={0}
+      className="overflow-x-auto rounded-surface bg-surface shadow-soft ring-1 ring-border-subtle"
+    >
       <table className="min-w-[38rem] w-full border-collapse text-left">
         <thead>
           <tr className="theme-on-brand bg-brand text-on-brand">
-            <th scope="col" className="px-5 py-4 font-sans text-[0.72rem] font-semibold uppercase tracking-label text-blue-light md:px-6">
+            <th
+              scope="col"
+              className="px-5 py-4 font-sans text-[0.72rem] font-semibold uppercase tracking-label text-blue-light md:px-6"
+            >
               <span className="sr-only">Aspect</span>
             </th>
             <ColumnHeader column={left} />

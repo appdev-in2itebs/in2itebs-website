@@ -1,6 +1,21 @@
 import {
-  Boxes, Cloud, Users, Code2, Car, ShoppingBasket, HeartPulse, Shirt, Mountain,
-  FlaskConical, HardHat, Building2, Banknote, Landmark, Briefcase, Zap, RadioTower,
+  Boxes,
+  Cloud,
+  Users,
+  Code2,
+  Car,
+  ShoppingBasket,
+  HeartPulse,
+  Shirt,
+  Mountain,
+  FlaskConical,
+  HardHat,
+  Building2,
+  Banknote,
+  Landmark,
+  Briefcase,
+  Zap,
+  RadioTower,
   type LucideIcon,
 } from "lucide-react";
 
@@ -54,7 +69,10 @@ export function HeroMotif({ icon: Icon }: { icon: LucideIcon }) {
         <div className="absolute inset-0 origin-center rotate-45 border-[36px] border-blue-light" />
       </div>
       {/* glow */}
-      <div aria-hidden className="absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,rgba(63,117,163,0.45),transparent_60%)]" />
+      <div
+        aria-hidden
+        className="absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,rgba(63,117,163,0.45),transparent_60%)]"
+      />
       <div className="relative flex h-full w-full items-center justify-center">
         <Icon size={104} strokeWidth={1} className="text-blue-light" aria-hidden />
       </div>

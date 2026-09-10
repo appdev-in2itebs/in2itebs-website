@@ -23,15 +23,23 @@ export function OrganizationJsonLd() {
         description: site.description,
         sameAs: [social.linkedin, social.x, social.youtube, social.instagram],
         telephone: headOffice?.phone,
-        address: offices.filter((o) => o.address).map((o) => ({
-          "@type": "PostalAddress",
-          streetAddress: o.address,
-          addressLocality: o.city,
-          addressCountry: o.country,
-        })),
+        address: offices
+          .filter((o) => o.address)
+          .map((o) => ({
+            "@type": "PostalAddress",
+            streetAddress: o.address,
+            addressLocality: o.city,
+            addressCountry: o.country,
+          })),
         contactPoint: { "@type": "ContactPoint", email: site.primaryEmail, contactType: "customer support" },
       },
-      { "@type": "WebSite", "@id": `${SITE_URL}/#website`, name: site.name, url: SITE_URL, publisher: { "@id": `${SITE_URL}/#organization` } },
+      {
+        "@type": "WebSite",
+        "@id": `${SITE_URL}/#website`,
+        name: site.name,
+        url: SITE_URL,
+        publisher: { "@id": `${SITE_URL}/#organization` },
+      },
     ],
   };
   return <Script data={data} />;
@@ -43,13 +51,30 @@ export function BreadcrumbJsonLd({ path, name }: { path: string; name?: string }
   const data = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    itemListElement: items.map((item, position) => ({ "@type": "ListItem", position: position + 1, name: item.name, item: item.item })),
+    itemListElement: items.map((item, position) => ({
+      "@type": "ListItem",
+      position: position + 1,
+      name: item.name,
+      item: item.item,
+    })),
   };
   return <Script data={data} />;
 }
 
 /** Article schema for an insight. */
-export function ArticleJsonLd({ slug, title, date, excerpt, author }: { slug: string; title: string; date: string; excerpt: string; author?: string }) {
+export function ArticleJsonLd({
+  slug,
+  title,
+  date,
+  excerpt,
+  author,
+}: {
+  slug: string;
+  title: string;
+  date: string;
+  excerpt: string;
+  author?: string;
+}) {
   const data = {
     "@context": "https://schema.org",
     "@type": "Article",

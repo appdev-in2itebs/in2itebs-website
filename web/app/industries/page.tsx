@@ -1,12 +1,12 @@
-import {pageMetadata} from "@/lib/metadata";
-import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
+import { pageMetadata } from "@/lib/metadata";
+import { BreadcrumbJsonLd } from "@/components/seo/json-ld";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Container, Section } from "@/components/ui/container";
 import { Eyebrow, Accent, SectionHeading } from "@/components/ui/typography";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Reveal, Stagger, StaggerItem} from "@/components/motion/reveal";
+import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
 import { PageHero } from "@/components/sections/page-hero";
 import { LogoMarquee } from "@/components/sections/logo-marquee";
 import { CtaSection } from "@/components/sections/cta-section";

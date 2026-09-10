@@ -1,5 +1,5 @@
-import {pageMetadata} from "@/lib/metadata";
-import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
+import { pageMetadata } from "@/lib/metadata";
+import { BreadcrumbJsonLd } from "@/components/seo/json-ld";
 import { Container, Section } from "@/components/ui/container";
 import { Accent, SectionHeading } from "@/components/ui/typography";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
@@ -48,12 +48,7 @@ const estate = [
   {
     title: "Bespoke Applications",
     body: "Tailor-made builds across web, mobile and analytics.",
-    bullets: [
-      "Java/J2EE, ASP.NET, PHP, Python",
-      "SharePoint, Power Apps",
-      "Android, iOS & Hybrid",
-      "BI, MEAN & CMS",
-    ],
+    bullets: ["Java/J2EE, ASP.NET, PHP, Python", "SharePoint, Power Apps", "Android, iOS & Hybrid", "BI, MEAN & CMS"],
   },
   {
     title: "Legacy Applications",

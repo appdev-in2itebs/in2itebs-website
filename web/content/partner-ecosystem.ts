@@ -60,7 +60,19 @@ export const partnerCategories: PartnerCategory[] = [
 ];
 
 /** Names shown in the homepage "Our partners & technology ecosystem" grid, in the order of the preserved partner pages. */
-export const homeEcosystemNames = ["SAP", "Microsoft", "Oracle", "Salesforce", "Workday", "IBM", "HP", "OpenText", "Newgen", "SAP Concur", "Qualtrics"] as const;
+export const homeEcosystemNames = [
+  "SAP",
+  "Microsoft",
+  "Oracle",
+  "Salesforce",
+  "Workday",
+  "IBM",
+  "HP",
+  "OpenText",
+  "Newgen",
+  "SAP Concur",
+  "Qualtrics",
+] as const;
 
 const allPartners = partnerCategories.flatMap((category) => category.partners);
 

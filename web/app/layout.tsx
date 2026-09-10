@@ -35,18 +35,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="grain">
         <script id="theme-init" dangerouslySetInnerHTML={{ __html: THEME_INIT }} />
         <RegionProvider>
-        <MeasurementSignals />
-        <OrganizationJsonLd />
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-control focus:bg-action focus:px-4 focus:py-3 focus:text-sm focus:font-semibold focus:text-on-action"
-        >
-          Skip to content
-        </a>
-        <Header />
-        <main id="main">{children}</main>
-        <Footer />
-        <QuickContact />
+          <MeasurementSignals />
+          <OrganizationJsonLd />
+          <a
+            href="#main"
+            className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-control focus:bg-action focus:px-4 focus:py-3 focus:text-sm focus:font-semibold focus:text-on-action"
+          >
+            Skip to content
+          </a>
+          <Header />
+          <main id="main">{children}</main>
+          <Footer />
+          <QuickContact />
         </RegionProvider>
       </body>
     </html>

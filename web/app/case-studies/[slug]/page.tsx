@@ -1,5 +1,5 @@
-import {pageMetadata} from "@/lib/metadata";
-import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
+import { pageMetadata } from "@/lib/metadata";
+import { BreadcrumbJsonLd } from "@/components/seo/json-ld";
 import { notFound } from "next/navigation";
 import { Container, Section } from "@/components/ui/container";
 import { Eyebrow, Accent, SectionHeading } from "@/components/ui/typography";
@@ -16,7 +16,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
-  const {slug} = await params;
+  const { slug } = await params;
   const study = getCaseStudy(slug);
   if (!study) return pageMetadata(`/case-studies/${slug}/`, { title: "Case study" });
   return pageMetadata(`/case-studies/${slug}/`, {
@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 }
 
 export default async function CaseStudyPage({ params }: { params: Promise<{ slug: string }> }) {
-  const {slug} = await params;
+  const { slug } = await params;
   const study = getCaseStudy(slug);
   if (!study || !study.named) notFound();
 

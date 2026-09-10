@@ -1,5 +1,5 @@
-import {pageMetadata} from "@/lib/metadata";
-import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
+import { pageMetadata } from "@/lib/metadata";
+import { BreadcrumbJsonLd } from "@/components/seo/json-ld";
 import { Container, Section } from "@/components/ui/container";
 import { Eyebrow, Accent, SectionHeading } from "@/components/ui/typography";
 import { Card } from "@/components/ui/card";
@@ -50,15 +50,7 @@ const pillars = [
 ];
 
 /** Coverage across the business — Blueprint §8.10. */
-const coverage = [
-  "Finance",
-  "Sales",
-  "Operations",
-  "HR",
-  "Supply Chain",
-  "Procurement",
-  "Executive reporting",
-];
+const coverage = ["Finance", "Sales", "Operations", "HR", "Supply Chain", "Procurement", "Executive reporting"];
 
 export default function AnalyticsCloudPage() {
   return (

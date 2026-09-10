@@ -1,5 +1,5 @@
-import {pageMetadata} from "@/lib/metadata";
-import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
+import { pageMetadata } from "@/lib/metadata";
+import { BreadcrumbJsonLd } from "@/components/seo/json-ld";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container, Section } from "@/components/ui/container";
@@ -19,7 +19,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
-  const {slug} = await params;
+  const { slug } = await params;
   const ind = getIndustry(slug);
   if (!ind) return pageMetadata(`/industries/${slug}/`, { title: "Industry" });
   return pageMetadata(`/industries/${slug}/`, {
@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 }
 
 export default async function IndustryPage({ params }: { params: Promise<{ slug: string }> }) {
-  const {slug} = await params;
+  const { slug } = await params;
   const ind = getIndustry(slug);
   if (!ind) notFound();
 

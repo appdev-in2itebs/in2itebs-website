@@ -1,5 +1,5 @@
-import {pageMetadata} from "@/lib/metadata";
-import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
+import { pageMetadata } from "@/lib/metadata";
+import { BreadcrumbJsonLd } from "@/components/seo/json-ld";
 import { Container, Section } from "@/components/ui/container";
 import { Eyebrow, Accent, SectionHeading } from "@/components/ui/typography";
 import { Button } from "@/components/ui/button";
@@ -97,8 +97,8 @@ export default function CareersPage() {
           <Reveal delay={0.1} className="max-w-3xl">
             <Card tone="light" bezel>
               <p className="text-[0.95rem] leading-relaxed text-grey-muted">
-                Vacancies and applications are not managed through this website yet. Visit our official LinkedIn
-                page for company updates. Do not send CVs or sensitive personal documents through the business enquiry form.
+                Vacancies and applications are not managed through this website yet. Visit our official LinkedIn page
+                for company updates. Do not send CVs or sensitive personal documents through the business enquiry form.
               </p>
               <div className="mt-6">
                 <Button href={social.linkedin} variant="primary" withArrow>

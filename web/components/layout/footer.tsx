@@ -40,7 +40,8 @@ export function Footer() {
               Enterprise transformation for organisations that cannot afford operational ambiguity.
             </p>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-on-brand/[0.58]">
-              SAP Gold Partner with delivery across 30+ countries and adjacent strength in advisory, data, AI and digital engineering.
+              SAP Gold Partner with delivery across 30+ countries and adjacent strength in advisory, data, AI and
+              digital engineering.
             </p>
           </div>
 
@@ -77,10 +78,19 @@ export function Footer() {
         </div>
 
         <div className="flex flex-col justify-between gap-5 pt-7 text-xs text-on-brand/[0.52] md:flex-row md:items-center">
-          <p>© {site.copyrightYear} {site.legalName}. All rights reserved.</p>
-          <Link href="/contact/" className="group inline-flex min-h-11 items-center gap-3 text-sm font-semibold text-on-brand">
+          <p>
+            © {site.copyrightYear} {site.legalName}. All rights reserved.
+          </p>
+          <Link
+            href="/contact/"
+            className="group inline-flex min-h-11 items-center gap-3 text-sm font-semibold text-on-brand"
+          >
             {officeCities.join(" · ")}
-            <ArrowUpRight aria-hidden size={15} className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            <ArrowUpRight
+              aria-hidden
+              size={15}
+              className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+            />
           </Link>
         </div>
       </div>

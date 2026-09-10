@@ -39,7 +39,13 @@ export const caseStudies: CaseStudy[] = [
       "Single unified stack across Lead-to-Cash, Hire-to-Retire and Record-to-Report",
       "Scalable platform supporting expansion into new markets",
     ],
-    solution: ["S/4HANA Cloud", "Finance", "Source-to-Procure", "Sales / C4C", "SuccessFactors — Employee Central, Recruitment, Onboarding, LMS, Compensation"],
+    solution: [
+      "S/4HANA Cloud",
+      "Finance",
+      "Source-to-Procure",
+      "Sales / C4C",
+      "SuccessFactors — Employee Central, Recruitment, Onboarding, LMS, Compensation",
+    ],
     differentiator:
       "In2IT EBS recommended a package that uses data across the company and processes it centrally — accelerating IFRS-aligned financial close and consolidated project reporting across regions.",
   },
@@ -60,7 +66,8 @@ export const caseStudies: CaseStudy[] = [
       "Unified stack: Procure-to-Pay, Order-to-Cash, Hire-to-Retire, Record-to-Report",
     ],
     solution: ["Finance", "Source-to-Procure", "Sales", "IFRS & US GAAP Close", "Consolidated Reporting"],
-    differentiator: "In2IT EBS recommended a centralised package — enabling IFRS and US GAAP financial close, consolidated reporting and operational consistency across regions.",
+    differentiator:
+      "In2IT EBS recommended a centralised package — enabling IFRS and US GAAP financial close, consolidated reporting and operational consistency across regions.",
   },
   {
     slug: "tgnpdcl",
@@ -81,8 +88,15 @@ export const caseStudies: CaseStudy[] = [
       "Reduced overhead through automation and better service tracking",
       "Scalable architecture supporting future modules and growth",
     ],
-    solution: ["SAP Integration Suite (SAP & non-SAP)", "Custom Fiori apps", "OpenText document management", "SAC analytics", "Agile, validation-gated migration"],
-    differentiator: "Expertise, end-to-end support and consistent on-time delivery — a modern, integrated SAP landscape aligned to specific business needs.",
+    solution: [
+      "SAP Integration Suite (SAP & non-SAP)",
+      "Custom Fiori apps",
+      "OpenText document management",
+      "SAC analytics",
+      "Agile, validation-gated migration",
+    ],
+    differentiator:
+      "Expertise, end-to-end support and consistent on-time delivery — a modern, integrated SAP landscape aligned to specific business needs.",
   },
   {
     slug: "wipro-infrastructure-engineering",
@@ -103,8 +117,15 @@ export const caseStudies: CaseStudy[] = [
       "Improved demand forecasting and supply chain planning",
       "Higher quality control — reduced rejections and cost of quality",
     ],
-    solution: ["S/4HANA 2022", "RISE Private Cloud (Azure)", "Brownfield conversion", "Quality, Production, MM, SD", "5-month delivery"],
-    differentiator: "Precise landscape design, sizing and technical migration tailored to global manufacturing — a seamless transition with minimal disruption across 4 continents.",
+    solution: [
+      "S/4HANA 2022",
+      "RISE Private Cloud (Azure)",
+      "Brownfield conversion",
+      "Quality, Production, MM, SD",
+      "5-month delivery",
+    ],
+    differentiator:
+      "Precise landscape design, sizing and technical migration tailored to global manufacturing — a seamless transition with minimal disruption across 4 continents.",
   },
   {
     slug: "waycool-foods",
@@ -125,8 +146,15 @@ export const caseStudies: CaseStudy[] = [
       "Integrated platform across manufacturing, supply chain and finance",
       "Streamlined sales across both B2B and B2C",
     ],
-    solution: ["RISE with SAP S/4HANA PCE", "Sourcing & Procurement", "Manufacturing", "FIFO stock delivery", "Technical & functional support"],
-    differentiator: "An 8-week end-to-end lift-and-shift to Azure Cloud — mapping WayCool's complex agri-commerce processes to a digital platform.",
+    solution: [
+      "RISE with SAP S/4HANA PCE",
+      "Sourcing & Procurement",
+      "Manufacturing",
+      "FIFO stock delivery",
+      "Technical & functional support",
+    ],
+    differentiator:
+      "An 8-week end-to-end lift-and-shift to Azure Cloud — mapping WayCool's complex agri-commerce processes to a digital platform.",
   },
   {
     slug: "vahdam-india",
@@ -147,8 +175,15 @@ export const caseStudies: CaseStudy[] = [
       "Seamless integration with GSP, Amazon and Shopify",
       "Automated e-invoicing, e-way billing and banking processes",
     ],
-    solution: ["GROW with SAP S/4HANA", "Sourcing & Procurement", "Sales", "Manufacturing", "FICO · SD · MM · ABAP · CPI · BASIS"],
-    differentiator: "A tailored GROW with SAP rollout enabling a positive customer experience across 130 countries and an 18% manpower cost reduction over a 12-month implementation.",
+    solution: [
+      "GROW with SAP S/4HANA",
+      "Sourcing & Procurement",
+      "Sales",
+      "Manufacturing",
+      "FICO · SD · MM · ABAP · CPI · BASIS",
+    ],
+    differentiator:
+      "A tailored GROW with SAP rollout enabling a positive customer experience across 130 countries and an 18% manpower cost reduction over a 12-month implementation.",
   },
   {
     slug: "edtech-unicorn",
@@ -168,7 +203,8 @@ export const caseStudies: CaseStudy[] = [
       "Custom upload programmes eliminating repetitive manual entry",
     ],
     solution: ["Finance · Consolidation", "Sourcing & Procurement", "Sales", "Unified reporting · IRN & E-Way Bill"],
-    differentiator: "A centralised package delivering consolidated financial close, unified compliance dashboards and scalable cloud infrastructure for continued hyper-growth.",
+    differentiator:
+      "A centralised package delivering consolidated financial close, unified compliance dashboards and scalable cloud infrastructure for continued hyper-growth.",
   },
   {
     slug: "triveni-turbines",
@@ -189,8 +225,15 @@ export const caseStudies: CaseStudy[] = [
       "Accurate demand forecasting and supply chain planning",
       "Real-time equipment health visibility for production planning",
     ],
-    solution: ["S/4HANA 2022", "RISE Private Cloud (Azure)", "Brownfield conversion", "Quality, Production, PP, MM, SD", "10 global offices"],
-    differentiator: "Deep RISE migration expertise and manufacturing-centric landscape understanding across UK, South Africa, Dubai, India, Bangkok and Indonesia.",
+    solution: [
+      "S/4HANA 2022",
+      "RISE Private Cloud (Azure)",
+      "Brownfield conversion",
+      "Quality, Production, PP, MM, SD",
+      "10 global offices",
+    ],
+    differentiator:
+      "Deep RISE migration expertise and manufacturing-centric landscape understanding across UK, South Africa, Dubai, India, Bangkok and Indonesia.",
   },
   {
     slug: "kenya-railways",
@@ -211,8 +254,15 @@ export const caseStudies: CaseStudy[] = [
       "SAP workflows enabling transparency in a controlled environment",
       "Improved inventory visibility, procurement and distribution",
     ],
-    solution: ["SAP ECC 6.3", "Greenfield from legacy", "FI, MM, SD, PP, HR", "10-month delivery", "Government stakeholder reporting"],
-    differentiator: "Landscape design, sizing and meticulous technical migration tailored to a national rail operator — streamlining operations and stakeholder reporting.",
+    solution: [
+      "SAP ECC 6.3",
+      "Greenfield from legacy",
+      "FI, MM, SD, PP, HR",
+      "10-month delivery",
+      "Government stakeholder reporting",
+    ],
+    differentiator:
+      "Landscape design, sizing and meticulous technical migration tailored to a national rail operator — streamlining operations and stakeholder reporting.",
   },
   {
     slug: "aptransco",
@@ -234,7 +284,8 @@ export const caseStudies: CaseStudy[] = [
       "SAP BW/BOBJ integration for real-time decision-making insight",
     ],
     solution: ["ECC → S/4HANA migration", "24×7 AMS", "SAP Fiori / SAPUI5", "Event monitoring", "BW/BOBJ analytics"],
-    differentiator: "Over three years, the AMS engagement maintained uninterrupted operations, optimised performance and aligned ERP with organisational objectives.",
+    differentiator:
+      "Over three years, the AMS engagement maintained uninterrupted operations, optimised performance and aligned ERP with organisational objectives.",
   },
   {
     slug: "delhi-transco",
@@ -255,8 +306,15 @@ export const caseStudies: CaseStudy[] = [
       "Reduced operational costs through fewer manual errors",
       "User adoption improved by 40% via extensive training",
     ],
-    solution: ["SAP AMS (multi-module)", "Workflow automation", "Fiori enhancements", "Regulatory compliance", "Training & adoption"],
-    differentiator: "AMS services enabled uninterrupted operations, cost efficiencies and ERP aligned to organisational goals — improving service delivery and stakeholder satisfaction.",
+    solution: [
+      "SAP AMS (multi-module)",
+      "Workflow automation",
+      "Fiori enhancements",
+      "Regulatory compliance",
+      "Training & adoption",
+    ],
+    differentiator:
+      "AMS services enabled uninterrupted operations, cost efficiencies and ERP aligned to organisational goals — improving service delivery and stakeholder satisfaction.",
   },
 ];
 

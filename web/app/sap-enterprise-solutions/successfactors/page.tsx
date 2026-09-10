@@ -1,5 +1,5 @@
-import {pageMetadata} from "@/lib/metadata";
-import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
+import { pageMetadata } from "@/lib/metadata";
+import { BreadcrumbJsonLd } from "@/components/seo/json-ld";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Container, Section } from "@/components/ui/container";
@@ -22,12 +22,7 @@ const capabilities = [
   {
     title: "Core HR & Talent",
     body: "Employee Central as the single system of record, with the talent suite built on top.",
-    bullets: [
-      "Employee Central core HR",
-      "Recruiting & onboarding",
-      "Performance & goals",
-      "Succession & development",
-    ],
+    bullets: ["Employee Central core HR", "Recruiting & onboarding", "Performance & goals", "Succession & development"],
   },
   {
     title: "Cloud Payroll & Compensation",

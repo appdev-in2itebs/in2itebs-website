@@ -1,5 +1,5 @@
-import {pageMetadata} from "@/lib/metadata";
-import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
+import { pageMetadata } from "@/lib/metadata";
+import { BreadcrumbJsonLd } from "@/components/seo/json-ld";
 import { Container, Section } from "@/components/ui/container";
 import { SectionHeading, Accent, Lead } from "@/components/ui/typography";
 import { Reveal } from "@/components/motion/reveal";
@@ -10,7 +10,8 @@ import { HeroMotif, practiceIcon } from "@/components/sections/hero-motif";
 
 export const metadata = pageMetadata("/workday/", {
   title: "Workday",
-  description: "Full-lifecycle Workday transformation — advisory, implementation, integration, analytics and managed services for HR and finance.",
+  description:
+    "Full-lifecycle Workday transformation — advisory, implementation, integration, analytics and managed services for HR and finance.",
 });
 
 const capabilities = [
@@ -120,8 +121,8 @@ export default function WorkdayPage() {
               Certified consultants, multi-region <Accent>experience</Accent>.
             </SectionHeading>
             <Lead className="mt-6">
-              Workday-certified consultants with multi-region experience and integration patterns into SAP,
-              Salesforce and legacy HR systems.
+              Workday-certified consultants with multi-region experience and integration patterns into SAP, Salesforce
+              and legacy HR systems.
             </Lead>
           </Reveal>
         </Container>

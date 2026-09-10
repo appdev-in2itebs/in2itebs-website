@@ -1,5 +1,5 @@
 import { Card } from "@/components/ui/card";
-import { Stagger, StaggerItem} from "@/components/motion/reveal";
+import { Stagger, StaggerItem } from "@/components/motion/reveal";
 import { cn } from "@/lib/utils";
 
 export interface Feature {

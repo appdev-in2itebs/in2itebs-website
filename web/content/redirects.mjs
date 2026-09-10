@@ -140,9 +140,18 @@ export const redirects = [
   p("/event-2024", "/insights/"),
 
   // --- Legacy blog posts with exact new equivalents (audit H4, 2026-09-08) ---
-  p("/how-rise-with-sap-s-4hana-cloud-can-transform-your-business", "/insights/rise-with-sap-s4hana-cloud-transform-business/"),
-  p("/revolutionizing-hr-with-sap-successfactors-a-strategic-approach-to-modern-hcm-solutions", "/insights/revolutionizing-hr-with-sap-successfactors/"),
-  p("/igniting-organizational-potential-sap-successfactors-ai-innovations-revealed-at-sap-successconnect-las-vegas", "/insights/successfactors-ai-innovations-successconnect/"),
+  p(
+    "/how-rise-with-sap-s-4hana-cloud-can-transform-your-business",
+    "/insights/rise-with-sap-s4hana-cloud-transform-business/",
+  ),
+  p(
+    "/revolutionizing-hr-with-sap-successfactors-a-strategic-approach-to-modern-hcm-solutions",
+    "/insights/revolutionizing-hr-with-sap-successfactors/",
+  ),
+  p(
+    "/igniting-organizational-potential-sap-successfactors-ai-innovations-revealed-at-sap-successconnect-las-vegas",
+    "/insights/successfactors-ai-innovations-successconnect/",
+  ),
   p("/grow-with-sap", "/sap-enterprise-solutions/rise-vs-grow/"),
   p("/grow-with-sap-leadership-forum-event", "/sap-enterprise-solutions/rise-vs-grow/"),
   // --- SuccessFactors local landing pages and campaigns ---

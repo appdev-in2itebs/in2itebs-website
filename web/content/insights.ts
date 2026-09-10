@@ -1,5 +1,5 @@
 import type { Insight } from "./types";
-import {insightBodies} from './insight-bodies';
+import { insightBodies } from "./insight-bodies";
 
 /** Additive — ported from old /news/ (titles real; dates to refresh from live data at launch). */
 const archivedEntries: Insight[] = [
@@ -8,7 +8,8 @@ const archivedEntries: Insight[] = [
     title: "How RISE with SAP S/4HANA Cloud can transform your business",
     date: "",
     category: "SAP",
-    excerpt: "A business-process-led path to the Intelligent Enterprise — and how to choose between RISE, GROW and PCE.",
+    excerpt:
+      "A business-process-led path to the Intelligent Enterprise — and how to choose between RISE, GROW and PCE.",
   },
   {
     slug: "revolutionizing-hr-with-sap-successfactors",
@@ -48,6 +49,9 @@ const archivedEntries: Insight[] = [
 ];
 
 // Only source-backed articles are discoverable. Unknown publication years are omitted.
-export const insights = archivedEntries.filter(entry => insightBodies[entry.slug]).map(entry => ({
-  ...entry, date: insightBodies[entry.slug].date,
-}));
+export const insights = archivedEntries
+  .filter((entry) => insightBodies[entry.slug])
+  .map((entry) => ({
+    ...entry,
+    date: insightBodies[entry.slug].date,
+  }));

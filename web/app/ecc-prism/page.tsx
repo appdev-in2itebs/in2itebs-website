@@ -1,5 +1,5 @@
-import {pageMetadata} from "@/lib/metadata";
-import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
+import { pageMetadata } from "@/lib/metadata";
+import { BreadcrumbJsonLd } from "@/components/seo/json-ld";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Container, Section } from "@/components/ui/container";
@@ -11,8 +11,7 @@ import { CtaSection } from "@/components/sections/cta-section";
 
 export const metadata = pageMetadata("/ecc-prism/", {
   title: "ECC Prism™",
-  description:
-    "ECC Prism™ is our assessment for organisations planning the move from SAP ECC to S/4HANA.",
+  description: "ECC Prism™ is our assessment for organisations planning the move from SAP ECC to S/4HANA.",
 });
 
 const pathways = [

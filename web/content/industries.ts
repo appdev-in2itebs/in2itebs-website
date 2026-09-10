@@ -16,7 +16,8 @@ export const industries: IndustryMeta[] = [
     name: "FMCG / Food & Beverages",
     headline: "Consumer goods, reinvented for the",
     accentWord: "digital era",
-    subhead: "Grow sustainably and profitably — using IoT and AI across product, manufacturing and consumer experience.",
+    subhead:
+      "Grow sustainably and profitably — using IoT and AI across product, manufacturing and consumer experience.",
     deckSectors: ["Food & Beverages"],
   },
   {
@@ -104,7 +105,8 @@ export const industries: IndustryMeta[] = [
     name: "Media & Telecommunications",
     headline: "Next-generation solutions for media and",
     accentWord: "telecom",
-    subhead: "Large-scale engagements with flexible consulting, systems integration and rollout across sourcing models.",
+    subhead:
+      "Large-scale engagements with flexible consulting, systems integration and rollout across sourcing models.",
     deckSectors: [],
   },
 ];

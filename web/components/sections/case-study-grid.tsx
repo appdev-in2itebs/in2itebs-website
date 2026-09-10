@@ -14,10 +14,7 @@ export function CaseStudyGrid({ studies }: { studies: CaseStudy[] }) {
   const [industry, setIndustry] = useState<string>(ALL);
   const [sapPath, setSapPath] = useState<SapPath | typeof ALL>(ALL);
 
-  const industries = useMemo(
-    () => [ALL, ...Array.from(new Set(studies.map((s) => s.industry)))],
-    [studies],
-  );
+  const industries = useMemo(() => [ALL, ...Array.from(new Set(studies.map((s) => s.industry)))], [studies]);
 
   const filtered = studies.filter(
     (s) => (industry === ALL || s.industry === industry) && (sapPath === ALL || s.sapPath === sapPath),
@@ -47,8 +44,21 @@ export function CaseStudyGrid({ studies }: { studies: CaseStudy[] }) {
       </div>
 
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <p role="status" aria-live="polite" aria-atomic="true" className="text-sm text-foreground-muted">{filtered.length} case {filtered.length === 1 ? "study" : "studies"} found.</p>
-        {(industry !== ALL || sapPath !== ALL) && <button type="button" onClick={() => {setIndustry(ALL); setSapPath(ALL);}} className="min-h-11 rounded-control px-3 text-sm font-semibold text-action underline">Clear filters</button>}
+        <p role="status" aria-live="polite" aria-atomic="true" className="text-sm text-foreground-muted">
+          {filtered.length} case {filtered.length === 1 ? "study" : "studies"} found.
+        </p>
+        {(industry !== ALL || sapPath !== ALL) && (
+          <button
+            type="button"
+            onClick={() => {
+              setIndustry(ALL);
+              setSapPath(ALL);
+            }}
+            className="min-h-11 rounded-control px-3 text-sm font-semibold text-action underline"
+          >
+            Clear filters
+          </button>
+        )}
       </div>
       {filtered.length ? (
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
@@ -57,9 +67,7 @@ export function CaseStudyGrid({ studies }: { studies: CaseStudy[] }) {
           ))}
         </div>
       ) : (
-        <p className="text-[0.95rem] leading-relaxed text-grey-muted">
-          No case studies match these filters yet.
-        </p>
+        <p className="text-[0.95rem] leading-relaxed text-grey-muted">No case studies match these filters yet.</p>
       )}
     </div>
   );

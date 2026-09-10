@@ -20,7 +20,10 @@ export function CtaSection({
   return (
     <section className="relative overflow-hidden border-t border-border-subtle bg-surface py-24 text-foreground md:py-32">
       <div aria-hidden className="absolute inset-0 section-tint-b" />
-      <div aria-hidden className="ambient-orb ambient-orb-c absolute -right-24 top-10 h-80 w-80 rounded-full bg-action/[0.10] blur-[100px]" />
+      <div
+        aria-hidden
+        className="ambient-orb ambient-orb-c absolute -right-24 top-10 h-80 w-80 rounded-full bg-action/[0.10] blur-[100px]"
+      />
       <Container className="relative">
         <Reveal className="grid gap-12 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-8">
@@ -38,7 +41,10 @@ export function CtaSection({
               </Button>
               <p className="text-sm text-foreground-muted">
                 Prefer email?{" "}
-                <a href={`mailto:${site.primaryEmail}`} className="font-semibold text-foreground underline decoration-action/35 underline-offset-4 hover:text-action hover:decoration-action">
+                <a
+                  href={`mailto:${site.primaryEmail}`}
+                  className="font-semibold text-foreground underline decoration-action/35 underline-offset-4 hover:text-action hover:decoration-action"
+                >
                   {site.primaryEmail}
                 </a>
               </p>

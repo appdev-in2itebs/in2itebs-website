@@ -1,5 +1,5 @@
-import {pageMetadata} from "@/lib/metadata";
-import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
+import { pageMetadata } from "@/lib/metadata";
+import { BreadcrumbJsonLd } from "@/components/seo/json-ld";
 import { Container, Section } from "@/components/ui/container";
 import { Eyebrow, Accent, SectionHeading } from "@/components/ui/typography";
 import { Card } from "@/components/ui/card";
@@ -17,7 +17,10 @@ export const metadata = pageMetadata("/sap-enterprise-solutions/ariba/", {
 
 /** Source-to-Pay flow — Blueprint §8.6. */
 const flow = [
-  { title: "Source", body: "Spend analysis, supplier discovery, auctions and RFx to find the right supplier at the right price." },
+  {
+    title: "Source",
+    body: "Spend analysis, supplier discovery, auctions and RFx to find the right supplier at the right price.",
+  },
   { title: "Contract", body: "Authoring, workflow, compliance and a managed clause library — agreements that hold." },
   { title: "Procure", body: "Guided buying, catalogues, punchout and mobile approvals that keep buying on-contract." },
   { title: "Invoice", body: "Touchless invoice capture and matching, flowing straight into accounts payable." },

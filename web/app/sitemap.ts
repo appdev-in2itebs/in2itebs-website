@@ -9,7 +9,6 @@ import { SITE_URL } from "@/lib/utils";
 
 /** Canonical route inventory — three-pillar IA. All paths use trailing slashes. */
 export default function sitemap(): MetadataRoute.Sitemap {
-
   const staticPaths = [
     "/",
     // What We Do — pillars

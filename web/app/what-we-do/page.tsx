@@ -1,5 +1,5 @@
-import {pageMetadata} from "@/lib/metadata";
-import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
+import { pageMetadata } from "@/lib/metadata";
+import { BreadcrumbJsonLd } from "@/components/seo/json-ld";
 import { PlatformPracticeLinks } from "@/components/sections/platform-practice-links";
 import { Container, Section } from "@/components/ui/container";
 import { Accent, SectionHeading } from "@/components/ui/typography";
@@ -90,7 +90,9 @@ export default function WhatWeDoPage() {
       {/* THREE ENGAGEMENT TIERS */}
       <section aria-labelledby="practice-finder-title" className="bg-surface py-10">
         <Container>
-          <h2 id="practice-finder-title" className="mb-5 text-h3 font-semibold text-foreground">Choose your platform practice</h2>
+          <h2 id="practice-finder-title" className="mb-5 text-h3 font-semibold text-foreground">
+            Choose your platform practice
+          </h2>
           <PlatformPracticeLinks />
         </Container>
       </section>

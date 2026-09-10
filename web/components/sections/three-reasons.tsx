@@ -1,4 +1,4 @@
-import { Stagger, StaggerItem} from "@/components/motion/reveal";
+import { Stagger, StaggerItem } from "@/components/motion/reveal";
 
 /** SOT-44 — three differentiated capabilities, each backed by evidence. */
 const reasons = [

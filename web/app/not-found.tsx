@@ -1,4 +1,4 @@
-import {pageMetadata} from "@/lib/metadata";
+import { pageMetadata } from "@/lib/metadata";
 import { Container } from "@/components/ui/container";
 import { Eyebrow, Accent, Headline, Lead } from "@/components/ui/typography";
 import { Button } from "@/components/ui/button";
@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 export const metadata = pageMetadata("/404/", {
   title: "Page not found",
   description: "The page you were looking for could not be found. It may have moved, or the link may be out of date.",
-  robots: {index: false, follow: true},
+  robots: { index: false, follow: true },
 });
 
 export default function NotFound() {
@@ -23,8 +23,8 @@ export default function NotFound() {
             This page has <Accent>moved on</Accent>.
           </Headline>
           <Lead onDark>
-            The page you were looking for could not be found. It may have been
-            relocated, or the link may be out of date.
+            The page you were looking for could not be found. It may have been relocated, or the link may be out of
+            date.
           </Lead>
           <div className="mt-2 flex flex-wrap gap-4">
             <Button href="/" variant="on-dark" withArrow>

@@ -111,8 +111,9 @@ function evaluate(answers: Record<string, string>): Result {
   }
 
   const driverFor = (weight: Weight) =>
-    QUESTIONS.map((q) => q.options.find((o) => o.id === answers[q.id]))
-      .filter((o): o is Option => Boolean(o) && o!.weight === weight);
+    QUESTIONS.map((q) => q.options.find((o) => o.id === answers[q.id])).filter(
+      (o): o is Option => Boolean(o) && o!.weight === weight,
+    );
 
   if (rise - grow >= 2) {
     const drivers = driverFor("rise");
@@ -125,9 +126,7 @@ function evaluate(answers: Record<string, string>): Result {
         `${rise} of your answers pointing to enterprise scale — ` +
         "notably complexity, regulatory rigour and a core to migrate — RISE gives you a dedicated, " +
         "governed move to S/4HANA without forcing you to flatten the processes that differentiate you. " +
-        (drivers.length
-          ? "The dominant drivers here are " + summarise(drivers) + "."
-          : ""),
+        (drivers.length ? "The dominant drivers here are " + summarise(drivers) + "." : ""),
       rise,
       grow,
     };
@@ -143,9 +142,7 @@ function evaluate(answers: Record<string, string>): Result {
         "Speed and total cost of ownership are on your side. With " +
         `${grow} of your answers favouring a lean, standardised path, ` +
         "GROW gets you live on cloud S/4HANA quickly on best-practice processes and a subscription model. " +
-        (drivers.length
-          ? "The dominant drivers here are " + summarise(drivers) + "."
-          : ""),
+        (drivers.length ? "The dominant drivers here are " + summarise(drivers) + "." : ""),
       rise,
       grow,
     };
@@ -200,20 +197,20 @@ export function RiseGrowChooser() {
       return;
     }
     setDirection(1);
-    focusPending.current=true;
+    focusPending.current = true;
     setStep((s) => s + 1);
   }
 
   function goBack() {
     if (step === 0) return;
     setDirection(-1);
-    focusPending.current=true;
+    focusPending.current = true;
     setStep((s) => s - 1);
   }
 
   function reset() {
     setAnswers({});
-    focusPending.current=true;
+    focusPending.current = true;
     setStep(0);
     setDone(false);
     setDirection(1);
@@ -233,11 +230,9 @@ export function RiseGrowChooser() {
   }
 
   const slideVariants = {
-    enter: (dir: 1 | -1) =>
-      reduce ? { opacity: 0 } : { opacity: 0, x: dir * 24 },
+    enter: (dir: 1 | -1) => (reduce ? { opacity: 0 } : { opacity: 0, x: dir * 24 }),
     center: reduce ? { opacity: 1 } : { opacity: 1, x: 0 },
-    exit: (dir: 1 | -1) =>
-      reduce ? { opacity: 0 } : { opacity: 0, x: dir * -24 },
+    exit: (dir: 1 | -1) => (reduce ? { opacity: 0 } : { opacity: 0, x: dir * -24 }),
   };
 
   return (
@@ -262,7 +257,7 @@ export function RiseGrowChooser() {
             <motion.div
               className="h-full rounded-full bg-blue-accent"
               initial={false}
-              style={{transformOrigin:'left'}}
+              style={{ transformOrigin: "left" }}
               animate={{ scaleX: progress }}
               transition={reduce ? { duration: 0 } : { duration: 0.4, ease: EASE_MOVE }}
             />
@@ -277,21 +272,22 @@ export function RiseGrowChooser() {
             ) : (
               <motion.fieldset
                 ref={fieldset}
-                onAnimationComplete={()=>{if(focusPending.current){fieldset.current?.querySelector<HTMLElement>('[role="radio"]')?.focus();focusPending.current=false;}}}
+                onAnimationComplete={() => {
+                  if (focusPending.current) {
+                    fieldset.current?.querySelector<HTMLElement>('[role="radio"]')?.focus();
+                    focusPending.current = false;
+                  }
+                }}
                 key={current.id}
                 custom={direction}
                 variants={slideVariants}
                 initial="enter"
                 animate="center"
                 exit="exit"
-                transition={
-                  reduce ? { duration: 0.18 } : { duration: 0.28, ease: EASE_MOVE }
-                }
+                transition={reduce ? { duration: 0.18 } : { duration: 0.28, ease: EASE_MOVE }}
                 className="border-0 p-0"
               >
-                <legend className="font-serif text-h3 font-bold leading-tight text-navy">
-                  {current.legend}
-                </legend>
+                <legend className="font-serif text-h3 font-bold leading-tight text-navy">{current.legend}</legend>
                 <div role="radiogroup" aria-label={current.legend} className="mt-6 flex flex-col gap-3">
                   {current.options.map((opt, i) => {
                     const checked = selected === opt.id;
@@ -316,9 +312,7 @@ export function RiseGrowChooser() {
                         className={cn(
                           "group flex w-full items-start gap-4 rounded-xl2 px-5 py-4 text-left transition-[transform,background-color,box-shadow] duration-200 ease-out active:scale-[0.97]",
                           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-accent focus-visible:ring-offset-2 focus-visible:ring-offset-white",
-                          checked
-                            ? "bg-off-white ring-2 ring-navy/15"
-                            : "ring-1 ring-navy/10 hover:bg-off-white",
+                          checked ? "bg-off-white ring-2 ring-navy/15" : "ring-1 ring-navy/10 hover:bg-off-white",
                         )}
                       >
                         <span
@@ -333,12 +327,8 @@ export function RiseGrowChooser() {
                           <Check size={12} strokeWidth={2.5} />
                         </span>
                         <span className="flex flex-col gap-0.5">
-                          <span className="text-sm font-semibold leading-snug text-navy">
-                            {opt.label}
-                          </span>
-                          {opt.hint ? (
-                            <span className="text-xs text-grey-muted">{opt.hint}</span>
-                          ) : null}
+                          <span className="text-sm font-semibold leading-snug text-navy">{opt.label}</span>
+                          {opt.hint ? <span className="text-xs text-grey-muted">{opt.hint}</span> : null}
                         </span>
                       </button>
                     );
@@ -361,9 +351,7 @@ export function RiseGrowChooser() {
                 className={cn(
                   "rounded-lg px-4 py-2.5 text-sm font-semibold transition-[transform,color] duration-200 ease-out active:scale-[0.97]",
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-accent",
-                  step === 0
-                    ? "cursor-not-allowed text-navy/30"
-                    : "text-navy hover:text-blue-accent",
+                  step === 0 ? "cursor-not-allowed text-navy/30" : "text-navy hover:text-blue-accent",
                 )}
               >
                 Back
@@ -401,8 +389,7 @@ function ResultPanel({
   reduce: boolean | null;
 }) {
   const result = evaluate(answers);
-  const accentWord =
-    result.verdict === "RISE" ? "RISE" : result.verdict === "GROW" ? "GROW" : "Hybrid";
+  const accentWord = result.verdict === "RISE" ? "RISE" : result.verdict === "GROW" ? "GROW" : "Hybrid";
 
   return (
     <motion.div
@@ -434,9 +421,7 @@ function ResultPanel({
         <ScorePill label="RISE" value={result.rise} active={result.verdict === "RISE"} />
       </div>
 
-      <p className="mt-6 max-w-measure text-base leading-relaxed text-grey-muted">
-        {result.rationale}
-      </p>
+      <p className="mt-6 max-w-measure text-base leading-relaxed text-grey-muted">{result.rationale}</p>
 
       <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
         <Button href={`/contact/?offer=pathway&assessment=${result.verdict}&interest=SAP`} withArrow>

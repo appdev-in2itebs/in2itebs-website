@@ -1,5 +1,5 @@
-import {pageMetadata} from "@/lib/metadata";
-import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
+import { pageMetadata } from "@/lib/metadata";
+import { BreadcrumbJsonLd } from "@/components/seo/json-ld";
 import { Container, Section } from "@/components/ui/container";
 import { Reveal } from "@/components/motion/reveal";
 import { PageHero } from "@/components/sections/page-hero";
@@ -53,9 +53,10 @@ export default function PrivacyPolicyPage() {
           <Reveal>
             <div className="prose prose-neutral max-w-measure">
               <p>
-                Protecting individual privacy on the internet is crucial to the future of internet-based business and the
-                move toward a true internet economy. This privacy statement demonstrates In2IT EBS&rsquo;s commitment to
-                data protection and privacy rights, and outlines how the organisation handles Personal Data.
+                Protecting individual privacy on the internet is crucial to the future of internet-based business and
+                the move toward a true internet economy. This privacy statement demonstrates In2IT EBS&rsquo;s
+                commitment to data protection and privacy rights, and outlines how the organisation handles Personal
+                Data.
               </p>
 
               <h2 id="general-information">General information</h2>
@@ -93,15 +94,16 @@ export default function PrivacyPolicyPage() {
                 <li>Comply with statutory obligations, including checks required by applicable export laws</li>
               </ul>
               <p>
-                Providing Personal Data is voluntary, though In2IT EBS may not be able to perform or satisfy your request
-                without it. You can order goods or services without consenting to In2IT EBS&rsquo;s further marketing
-                operations.
+                Providing Personal Data is voluntary, though In2IT EBS may not be able to perform or satisfy your
+                request without it. You can order goods or services without consenting to In2IT EBS&rsquo;s further
+                marketing operations.
               </p>
 
               <h3>From what types of third parties does In2IT EBS obtain Personal Data?</h3>
               <p>
                 In most cases, In2IT EBS collects Personal Data directly from you. The organisation might also obtain
-                Personal Data from third parties where applicable national law allows. These third-party sources include:
+                Personal Data from third parties where applicable national law allows. These third-party sources
+                include:
               </p>
               <ul>
                 <li>In2IT EBS and/or the In2IT EBS Group&rsquo;s business dealings with your employer</li>
@@ -146,9 +148,9 @@ export default function PrivacyPolicyPage() {
               </ul>
               <p>
                 However, In2IT EBS can or will delete your Personal Data only if there is no statutory obligation or
-                prevailing right of In2IT EBS to retain it. If you request that In2IT EBS deletes your Personal Data, you
-                will not be able to continue to use any In2IT EBS service that requires the organisation&rsquo;s use of
-                your Personal Data.
+                prevailing right of In2IT EBS to retain it. If you request that In2IT EBS deletes your Personal Data,
+                you will not be able to continue to use any In2IT EBS service that requires the organisation&rsquo;s use
+                of your Personal Data.
               </p>
               <p>
                 If In2IT EBS uses your Personal Data based on your consent or to perform a contract with you, you can
@@ -215,15 +217,15 @@ export default function PrivacyPolicyPage() {
               <p>
                 If you take the view that In2IT EBS is not processing your Personal Data in accordance with this privacy
                 statement or under applicable EEA data protection laws, you can at any time lodge a complaint with the
-                data protection authority of the EEA country where you live, or with the data protection authority of the
-                country or state where In2IT EBS has its registered seat.
+                data protection authority of the EEA country where you live, or with the data protection authority of
+                the country or state where In2IT EBS has its registered seat.
               </p>
 
               <h3>Can I use In2IT EBS&rsquo;s goods and services if I am a minor or child?</h3>
               <p>
                 In2IT EBS websites and online services are not directed to users below the age of 16 years, or the
-                equivalent minimum age in the relevant jurisdiction. If you are younger than 16, you cannot register with
-                and use these websites or online services.
+                equivalent minimum age in the relevant jurisdiction. If you are younger than 16, you cannot register
+                with and use these websites or online services.
               </p>
               <p>
                 In2IT EBS does not knowingly collect the Personal Data of children under the age of 13. If you are a
@@ -242,10 +244,10 @@ export default function PrivacyPolicyPage() {
                 <li>Send you invoices for ordered goods or services</li>
               </ul>
               <p>
-                In2IT EBS processes Personal Data to fulfil contractual obligations pursuant to Article 6(1) lit. b GDPR,
-                or under the equivalent article under other national laws where applicable. This includes responding to
-                your inquiries, processing your feedback, providing support, and handling conversation data you may
-                initiate or enable through chat functionalities, contact forms, emails or by telephone.
+                In2IT EBS processes Personal Data to fulfil contractual obligations pursuant to Article 6(1) lit. b
+                GDPR, or under the equivalent article under other national laws where applicable. This includes
+                responding to your inquiries, processing your feedback, providing support, and handling conversation
+                data you may initiate or enable through chat functionalities, contact forms, emails or by telephone.
               </p>
               <p>
                 In this privacy statement, &ldquo;goods and services&rdquo; includes access to In2IT EBS&rsquo;s web
@@ -258,24 +260,25 @@ export default function PrivacyPolicyPage() {
               </p>
               <p>
                 For marketing-related communications such as emails and phone calls, In2IT EBS will only provide such
-                information after you have opted in (where legally required), and will provide you the opportunity to opt
-                out of further marketing communications at any time by updating that preference.
+                information after you have opted in (where legally required), and will provide you the opportunity to
+                opt out of further marketing communications at any time by updating that preference.
               </p>
 
               <h3>Processing to ensure compliance</h3>
               <p>
                 In2IT EBS and its products, technologies and services are subject to the export laws of various
                 countries, including those of the European Union and its member states, and of the United States of
-                America. Pursuant to applicable export laws, trade sanctions and embargoes, In2IT EBS is required to take
-                measures to prevent entities, organisations and parties listed on government-issued sanctioned-party
-                lists from accessing certain products, technologies and services. This could include automated checks of
-                user registration data against applicable sanctioned-party lists, regular repetition of such checks,
-                blocking of access in case of a potential match, and contacting a user to confirm their identity.
+                America. Pursuant to applicable export laws, trade sanctions and embargoes, In2IT EBS is required to
+                take measures to prevent entities, organisations and parties listed on government-issued
+                sanctioned-party lists from accessing certain products, technologies and services. This could include
+                automated checks of user registration data against applicable sanctioned-party lists, regular repetition
+                of such checks, blocking of access in case of a potential match, and contacting a user to confirm their
+                identity.
               </p>
               <p>
-                Any such use of your Personal Data is based on the permission to process Personal Data in order to comply
-                with statutory obligations (Article 6(1) lit. c GDPR) and In2IT EBS&rsquo;s legitimate interest (Article
-                6(1) lit. f GDPR), or under the equivalent articles under other national laws where applicable.
+                Any such use of your Personal Data is based on the permission to process Personal Data in order to
+                comply with statutory obligations (Article 6(1) lit. c GDPR) and In2IT EBS&rsquo;s legitimate interest
+                (Article 6(1) lit. f GDPR), or under the equivalent articles under other national laws where applicable.
               </p>
 
               <h3>Processing based on In2IT EBS&rsquo;s legitimate interest</h3>
@@ -285,8 +288,8 @@ export default function PrivacyPolicyPage() {
                 prosecuting fraud and asserting or defending against legal claims; questionnaires and surveys to improve
                 its products and services; contract performance where you are a customer contact; the creation of
                 anonymised data sets; delivering personalised content where you have opted in to marketing
-                communications; recording telephone calls or chat sessions for quality improvement (after informing you);
-                and keeping you up to date or requesting feedback within an existing business relationship.
+                communications; recording telephone calls or chat sessions for quality improvement (after informing
+                you); and keeping you up to date or requesting feedback within an existing business relationship.
               </p>
               <p>
                 You can object to In2IT EBS&rsquo;s use of your Personal Data as set out in this section at any time by
@@ -298,12 +301,12 @@ export default function PrivacyPolicyPage() {
 
               <h2 id="consent">Processing based on consent</h2>
               <p>
-                In the following cases, In2IT EBS will process your Personal Data where you have granted prior consent to
-                the specific proposed processing (Article 6(1) lit. a GDPR), or the equivalent article under other
-                national laws where applicable: to keep you up to date on news about its products and services; to create
-                user profiles within its web offerings; to process special categories of Personal Data such as health
-                information for events and seminars; for event profiling; to forward your Personal Data to other entities
-                in the In2IT EBS Group for the same purposes and under the same conditions; and to forward your
+                In the following cases, In2IT EBS will process your Personal Data where you have granted prior consent
+                to the specific proposed processing (Article 6(1) lit. a GDPR), or the equivalent article under other
+                national laws where applicable: to keep you up to date on news about its products and services; to
+                create user profiles within its web offerings; to process special categories of Personal Data such as
+                health information for events and seminars; for event profiling; to forward your Personal Data to other
+                entities in the In2IT EBS Group for the same purposes and under the same conditions; and to forward your
                 registration data to other third parties at your request.
               </p>
               <p>
@@ -345,8 +348,8 @@ export default function PrivacyPolicyPage() {
                 sites do not honour &ldquo;Do not track&rdquo; requests. However, you may elect not to accept cookies by
                 changing the designated settings on your web browser. Cookies are small text files placed on your
                 computer while visiting certain sites on the internet and used to identify your computer. If you do not
-                accept cookies, you may not be able to use certain functions and features of our site. This site does not
-                allow third parties to gather information about you over time and across sites.
+                accept cookies, you may not be able to use certain functions and features of our site. This site does
+                not allow third parties to gather information about you over time and across sites.
               </p>
 
               <p>

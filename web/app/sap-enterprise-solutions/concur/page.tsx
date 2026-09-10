@@ -1,5 +1,5 @@
-import {pageMetadata} from "@/lib/metadata";
-import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
+import { pageMetadata } from "@/lib/metadata";
+import { BreadcrumbJsonLd } from "@/components/seo/json-ld";
 import { Container, Section } from "@/components/ui/container";
 import { Eyebrow, Accent, SectionHeading } from "@/components/ui/typography";
 import { Card } from "@/components/ui/card";
@@ -40,12 +40,7 @@ const pillars = [
   {
     title: "Invoice",
     body: "Accounts payable, automated.",
-    bullets: [
-      "Supplier invoice capture",
-      "Three-way match",
-      "Payment processing",
-      "End-to-end AP automation",
-    ],
+    bullets: ["Supplier invoice capture", "Three-way match", "Payment processing", "End-to-end AP automation"],
   },
 ];
 

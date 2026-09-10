@@ -1,5 +1,5 @@
-import {pageMetadata} from "@/lib/metadata";
-import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
+import { pageMetadata } from "@/lib/metadata";
+import { BreadcrumbJsonLd } from "@/components/seo/json-ld";
 import { Container, Section } from "@/components/ui/container";
 import { Reveal } from "@/components/motion/reveal";
 import { PageHero } from "@/components/sections/page-hero";
@@ -30,9 +30,10 @@ export default function DisclaimerPage() {
               <p>
                 This disclaimer governs the use of our website. By accessing this website, you agree to the terms and
                 conditions outlined in the terms of use and this disclaimer. If you disagree, please do not access this
-                website. We reserve the right to modify the terms of use and/or this disclaimer from time to time without
-                notice and at our sole discretion by posting amended terms on this website. By using this website after
-                changes have been posted, you agree to accept those changes, whether or not you have reviewed them.
+                website. We reserve the right to modify the terms of use and/or this disclaimer from time to time
+                without notice and at our sole discretion by posting amended terms on this website. By using this
+                website after changes have been posted, you agree to accept those changes, whether or not you have
+                reviewed them.
               </p>
 
               <h2>Copyright</h2>
@@ -44,8 +45,8 @@ export default function DisclaimerPage() {
 
               <h2>Trademarks</h2>
               <p>
-                In2IT EBS, and other In2IT EBS graphics, logos and service names including &ldquo;in2itebs.com&rdquo; are
-                trademarks of In2IT EBS. Except as specifically permitted herein, these trademarks may not be used
+                In2IT EBS, and other In2IT EBS graphics, logos and service names including &ldquo;in2itebs.com&rdquo;
+                are trademarks of In2IT EBS. Except as specifically permitted herein, these trademarks may not be used
                 without the prior written permission of In2IT EBS. All other trademarks not owned by In2IT EBS that
                 appear on this website are the property of their respective owners, who may or may not be affiliated
                 with, connected to, or sponsored by In2IT EBS.
@@ -56,8 +57,8 @@ export default function DisclaimerPage() {
                 Subject to the terms and conditions set forth in the terms of use and this disclaimer, In2IT EBS grants
                 you a non-transferable, non-exclusive, restricted and limited right to access, use and display this
                 website along with its contents. You agree that you will not interrupt or attempt to interrupt the
-                functioning of this website in any manner whatsoever, and shall use and access this website in accordance
-                with the terms and conditions stated in the terms of use and this disclaimer.
+                functioning of this website in any manner whatsoever, and shall use and access this website in
+                accordance with the terms and conditions stated in the terms of use and this disclaimer.
               </p>
               <p>
                 Except as otherwise indicated elsewhere on this website, you may view, copy, print and download the
@@ -92,8 +93,8 @@ export default function DisclaimerPage() {
               <h2>Links to third-party websites</h2>
               <p>
                 This website may contain links to third-party websites, which are not under the control of In2IT EBS.
-                In2IT EBS has no responsibility or liability for, and makes no representations whatsoever about, any other
-                website that you may access through this website. These linked sites are provided only for your
+                In2IT EBS has no responsibility or liability for, and makes no representations whatsoever about, any
+                other website that you may access through this website. These linked sites are provided only for your
                 convenience, and you access them at your own risk. The inclusion of such links does not imply that In2IT
                 EBS endorses or accepts any responsibility for the content or uses of such websites.
               </p>
@@ -110,12 +111,13 @@ export default function DisclaimerPage() {
 
               <h2>Warranties and disclaimers</h2>
               <p>
-                In2IT EBS does not warrant the information on this website, which is provided &ldquo;as is&rdquo; without
-                warranty of any kind, including, without limitation, any warranty of design, merchantability or fitness
-                for a particular purpose, and without warranty as to non-infringement or the performance or results you
-                may obtain by using the information. The entire risk as to the results and performance obtained from
-                using the information on this website is assumed by you. In2IT EBS does not assume responsibility for any
-                errors or omissions in the information or documents referenced by or linked to this website.
+                In2IT EBS does not warrant the information on this website, which is provided &ldquo;as is&rdquo;
+                without warranty of any kind, including, without limitation, any warranty of design, merchantability or
+                fitness for a particular purpose, and without warranty as to non-infringement or the performance or
+                results you may obtain by using the information. The entire risk as to the results and performance
+                obtained from using the information on this website is assumed by you. In2IT EBS does not assume
+                responsibility for any errors or omissions in the information or documents referenced by or linked to
+                this website.
               </p>
               <p>In2IT EBS makes no warranty that:</p>
               <ul>

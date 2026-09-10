@@ -41,8 +41,7 @@ export const offices: Office[] = [
     name: "Delhi NCR — Noida",
     legalEntity: "In2IT Enterprise Business Services Pvt Ltd",
     kind: ["india-office", "delivery-centre"],
-    address:
-      "26th Floor, Unit No. 2615A & 2616, Astralis Tower, Sector-94, Noida – 201301",
+    address: "26th Floor, Unit No. 2615A & 2616, Astralis Tower, Sector-94, Noida – 201301",
     city: "Noida",
     country: "India",
     email: "info@in2itebs.com",
@@ -102,14 +101,33 @@ export const offices: Office[] = [
 
 /** 10+ delivery centres named in the deck footprint (SOT-03). */
 export const deliveryCities = [
-  "Bengaluru", "Mumbai", "Delhi", "Bhubaneswar", "Hyderabad",
-  "Chennai", "Singapore", "Dubai", "Nairobi", "Johannesburg",
+  "Bengaluru",
+  "Mumbai",
+  "Delhi",
+  "Bhubaneswar",
+  "Hyderabad",
+  "Chennai",
+  "Singapore",
+  "Dubai",
+  "Nairobi",
+  "Johannesburg",
 ];
 
 /** Projects delivered across 30+ countries (SOT-03). */
 export const countries = [
-  "India", "UK", "US", "Canada", "Singapore", "UAE", "Thailand",
-  "KSA", "Kenya", "Australia", "South Africa", "Belgium", "Sri Lanka",
+  "India",
+  "UK",
+  "US",
+  "Canada",
+  "Singapore",
+  "UAE",
+  "Thailand",
+  "KSA",
+  "Kenya",
+  "Australia",
+  "South Africa",
+  "Belgium",
+  "Sri Lanka",
 ];
 
 /** One entry per distinct mailbox; the shared info@in2itebs.com is labelled Global. */

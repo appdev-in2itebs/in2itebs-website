@@ -1,9 +1,9 @@
-import {pageMetadata} from "@/lib/metadata";
-import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
+import { pageMetadata } from "@/lib/metadata";
+import { BreadcrumbJsonLd } from "@/components/seo/json-ld";
 import { Container, Section } from "@/components/ui/container";
 import { SectionHeading, Accent, Eyebrow } from "@/components/ui/typography";
 import { Card } from "@/components/ui/card";
-import { Reveal, Stagger, StaggerItem} from "@/components/motion/reveal";
+import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
 import { PageHero } from "@/components/sections/page-hero";
 import { FeatureGrid } from "@/components/sections/feature-grid";
 import { CtaSection } from "@/components/sections/cta-section";
@@ -145,10 +145,7 @@ export default function DeliveryExcellencePage() {
                     </div>
                     <ul className="mt-4 flex flex-wrap gap-x-6 gap-y-2">
                       {phase.activities.map((activity) => (
-                        <li
-                          key={activity}
-                          className="flex gap-2.5 text-[0.9rem] leading-relaxed text-grey-muted"
-                        >
+                        <li key={activity} className="flex gap-2.5 text-[0.9rem] leading-relaxed text-grey-muted">
                           <span aria-hidden className="mt-2 h-1 w-1 shrink-0 rounded-full bg-blue-accent" />
                           <span>{activity}</span>
                         </li>
@@ -182,9 +179,9 @@ export default function DeliveryExcellencePage() {
           />
           <Reveal delay={0.1} className="mt-8">
             <p className="max-w-measure text-[0.95rem] leading-relaxed text-grey-muted">
-              Business demand flows through prioritised projects into assembly-line development —
-              Analyse &amp; Design, Build, Test, UAT, Deploy, Release — governed by the In2IT EBS
-              development methodology and Apps Development Factory.
+              Business demand flows through prioritised projects into assembly-line development — Analyse &amp; Design,
+              Build, Test, UAT, Deploy, Release — governed by the In2IT EBS development methodology and Apps Development
+              Factory.
             </p>
           </Reveal>
         </Container>

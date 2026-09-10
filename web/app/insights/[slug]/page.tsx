@@ -1,10 +1,10 @@
-import {pageMetadata} from "@/lib/metadata";
-import {ArticleJsonLd, BreadcrumbJsonLd} from "@/components/seo/json-ld";
+import { pageMetadata } from "@/lib/metadata";
+import { ArticleJsonLd, BreadcrumbJsonLd } from "@/components/seo/json-ld";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container, Section } from "@/components/ui/container";
 import { Eyebrow, Accent, Headline, Lead } from "@/components/ui/typography";
-import { Reveal, Stagger, StaggerItem} from "@/components/motion/reveal";
+import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
 import { CtaSection } from "@/components/sections/cta-section";
 import { insights } from "@/content/insights";
 import { insightBodies } from "@/content/insight-bodies";
@@ -14,7 +14,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
-  const {slug} = await params;
+  const { slug } = await params;
   const article = insights.find((i) => i.slug === slug);
   if (!article) return pageMetadata(`/insights/${slug}/`, { title: "Insight" });
   return pageMetadata(`/insights/${slug}/`, {
@@ -35,7 +35,7 @@ function formatDate(iso: string) {
 }
 
 export default async function InsightPage({ params }: { params: Promise<{ slug: string }> }) {
-  const {slug} = await params;
+  const { slug } = await params;
   const article = insights.find((i) => i.slug === slug);
   if (!article) notFound();
 
@@ -44,7 +44,13 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
   return (
     <>
       <BreadcrumbJsonLd path={`/insights/${article.slug}/`} name={article.title} />
-      <ArticleJsonLd slug={article.slug} title={article.title} date={article.date} excerpt={article.excerpt} author={insightBodies[article.slug].author} />
+      <ArticleJsonLd
+        slug={article.slug}
+        title={article.title}
+        date={article.date}
+        excerpt={article.excerpt}
+        author={insightBodies[article.slug].author}
+      />
       {/* ARTICLE HEADER */}
       <section className="relative overflow-hidden bg-off-white pt-36 pb-16 md:pt-44 md:pb-20">
         <div aria-hidden className="pointer-events-none absolute right-0 top-20 h-[26rem] w-[26rem] opacity-[0.05]">
@@ -54,7 +60,11 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
           <Reveal className="flex max-w-3xl flex-col gap-6">
             <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
               <Eyebrow>{article.category}</Eyebrow>
-              {article.date && <time dateTime={article.date} className="text-sm font-medium text-grey-muted">{formatDate(article.date)}</time>}
+              {article.date && (
+                <time dateTime={article.date} className="text-sm font-medium text-grey-muted">
+                  {formatDate(article.date)}
+                </time>
+              )}
             </div>
             <Headline level={1} className="text-navy">
               {article.title}
@@ -69,21 +79,22 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
         <Container>
           <Reveal className="max-w-measure">
             <div className="flex flex-col gap-6 text-lg leading-relaxed text-grey-muted">
-              {insightBodies[article.slug].author && <p className="text-sm">Original perspective by {insightBodies[article.slug].author}</p>}
-              {insightBodies[article.slug].sections.map(section => <section key={section.heading}>
-                <h2 className="mb-3 text-h3 font-semibold text-foreground">{section.heading}</h2>
-                <p>{section.text}</p>
-              </section>)}
+              {insightBodies[article.slug].author && (
+                <p className="text-sm">Original perspective by {insightBodies[article.slug].author}</p>
+              )}
+              {insightBodies[article.slug].sections.map((section) => (
+                <section key={section.heading}>
+                  <h2 className="mb-3 text-h3 font-semibold text-foreground">{section.heading}</h2>
+                  <p>{section.text}</p>
+                </section>
+              ))}
             </div>
             <p className="mt-8 rounded-xl2 border border-sand/40 bg-off-white px-6 py-4 text-sm leading-relaxed text-grey-muted">
               Adapted summary from the In2IT EBS article archive. Product references reflect the original perspective;
               confirm current capabilities and licensing when planning a programme.
             </p>
             <div className="mt-10">
-              <Link
-                href="/insights/"
-                className="inline-flex items-center gap-2 text-sm font-semibold text-blue-accent"
-              >
+              <Link href="/insights/" className="inline-flex items-center gap-2 text-sm font-semibold text-blue-accent">
                 ← All insights
               </Link>
             </div>

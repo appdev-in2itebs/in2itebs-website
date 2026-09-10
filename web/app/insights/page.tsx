@@ -1,16 +1,17 @@
-import {pageMetadata} from "@/lib/metadata";
-import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
+import { pageMetadata } from "@/lib/metadata";
+import { BreadcrumbJsonLd } from "@/components/seo/json-ld";
 import Link from "next/link";
 import { Container, Section } from "@/components/ui/container";
 import { Accent, SectionHeading } from "@/components/ui/typography";
-import { Reveal, Stagger, StaggerItem} from "@/components/motion/reveal";
+import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
 import { PageHero } from "@/components/sections/page-hero";
 import { CtaSection } from "@/components/sections/cta-section";
 import { insights } from "@/content/insights";
 
 export const metadata = pageMetadata("/insights/", {
   title: "Insights",
-  description: "Perspectives on enterprise transformation — SAP, SuccessFactors, AI and the technologies reshaping the enterprise.",
+  description:
+    "Perspectives on enterprise transformation — SAP, SuccessFactors, AI and the technologies reshaping the enterprise.",
 });
 
 export default function InsightsPage() {

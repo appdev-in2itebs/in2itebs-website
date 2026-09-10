@@ -1,5 +1,5 @@
-import {pageMetadata} from "@/lib/metadata";
-import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
+import { pageMetadata } from "@/lib/metadata";
+import { BreadcrumbJsonLd } from "@/components/seo/json-ld";
 import { Container, Section } from "@/components/ui/container";
 import { Accent, SectionHeading } from "@/components/ui/typography";
 import { Reveal } from "@/components/motion/reveal";
@@ -72,12 +72,8 @@ export default function CaseStudiesPage() {
               Discretion, by <Accent>default</Accent>.
             </SectionHeading>
             <p className="mt-6 text-[0.95rem] leading-relaxed text-grey-muted">
-              To request a named reference or the full version of an anonymised
-              study, get in touch via our{" "}
-              <a
-                href="/contact/"
-                className="font-semibold text-blue-accent underline-offset-4 hover:underline"
-              >
+              To request a named reference or the full version of an anonymised study, get in touch via our{" "}
+              <a href="/contact/" className="font-semibold text-blue-accent underline-offset-4 hover:underline">
                 contact page
               </a>
               .

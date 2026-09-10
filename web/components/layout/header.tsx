@@ -18,8 +18,16 @@ export function Header() {
   const drawer = useRef<HTMLDialogElement>(null);
   const opener = useRef<HTMLButtonElement>(null);
   const triggers = useRef<Record<string, HTMLButtonElement | null>>({});
-  const close = () => { setExpanded(null); drawer.current?.close(); setMobileOpen(false); };
-  useEffect(() => { setExpanded(null); drawer.current?.close(); setMobileOpen(false); }, [pathname]);
+  const close = () => {
+    setExpanded(null);
+    drawer.current?.close();
+    setMobileOpen(false);
+  };
+  useEffect(() => {
+    setExpanded(null);
+    drawer.current?.close();
+    setMobileOpen(false);
+  }, [pathname]);
   useEffect(() => {
     const outside = (event: PointerEvent) => {
       if (!header.current?.contains(event.target as Node)) setExpanded(null);
@@ -33,20 +41,47 @@ export function Header() {
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     const mq = window.matchMedia("(min-width: 1280px)");
-    const resize = () => { if (mq.matches) { drawer.current?.close(); setMobileOpen(false); } };
+    const resize = () => {
+      if (mq.matches) {
+        drawer.current?.close();
+        setMobileOpen(false);
+      }
+    };
     mq.addEventListener("change", resize);
-    return () => { document.body.style.overflow = previousOverflow; mq.removeEventListener("change", resize); };
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      mq.removeEventListener("change", resize);
+    };
   }, [mobileOpen]);
   return (
-    <header ref={header} className="fixed inset-x-0 top-0 z-40 border-b border-border-subtle bg-surface text-foreground"
+    <header
+      ref={header}
+      className="fixed inset-x-0 top-0 z-40 border-b border-border-subtle bg-surface text-foreground"
       onKeyDown={(event) => {
-        if (event.key === "Escape" && expanded) { event.preventDefault(); triggers.current[expanded]?.focus(); setExpanded(null); }
+        if (event.key === "Escape" && expanded) {
+          event.preventDefault();
+          triggers.current[expanded]?.focus();
+          setExpanded(null);
+        }
       }}
-      onBlur={(event) => { if (!event.currentTarget.contains(event.relatedTarget as Node)) setExpanded(null); }}>
+      onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget as Node)) setExpanded(null);
+      }}
+    >
       <div className="border-b border-border-subtle bg-surface-subtle">
         <div className="container flex min-h-11 items-center justify-between gap-3 text-xs sm:text-sm">
-          <a href="mailto:info@in2itebs.com" className="inline-flex min-h-11 items-center font-medium text-action hover:underline">info@in2itebs.com</a>
-          <Link href="/contact/" className="inline-flex min-h-11 items-center gap-2 px-2 font-semibold text-action hover:underline">Talk to us <span aria-hidden>↗</span></Link>
+          <a
+            href="mailto:info@in2itebs.com"
+            className="inline-flex min-h-11 items-center font-medium text-action hover:underline"
+          >
+            info@in2itebs.com
+          </a>
+          <Link
+            href="/contact/"
+            className="inline-flex min-h-11 items-center gap-2 px-2 font-semibold text-action hover:underline"
+          >
+            Talk to us <span aria-hidden>↗</span>
+          </Link>
         </div>
       </div>
       <div className="container relative flex h-20 items-center justify-between gap-3 md:h-24">
@@ -58,67 +93,179 @@ export function Header() {
           {primaryNav.map((item, index) => {
             const id = `desktop-nav-${index}`;
             const active = pathname === item.href || pathname.startsWith(item.href);
-            return <div key={item.href} className="flex items-center">
-              <Link href={item.href} aria-current={active ? "page" : undefined}
-                className={cn("inline-flex min-h-11 items-center px-2 text-sm font-semibold hover:text-action", active && "text-action")}>{item.label}</Link>
-              {item.children && <>
-                <button ref={el => { triggers.current[item.href] = el; }} type="button"
-                  aria-label={`${expanded === item.href ? "Close" : "Open"} ${item.label} navigation`}
-                  aria-expanded={expanded === item.href} aria-controls={id}
-                  onClick={() => setExpanded(expanded === item.href ? null : item.href)}
-                  className="inline-flex h-11 w-8 items-center justify-center rounded-control hover:bg-surface-subtle">
-                  <ChevronDown aria-hidden size={15} className={expanded === item.href ? "rotate-180" : ""} />
-                </button>
-                <div id={id} hidden={expanded !== item.href}
-                  className="absolute inset-x-0 top-full max-h-[calc(100dvh-10rem)] overflow-y-auto rounded-b-feature border border-border-subtle bg-surface p-7 shadow-[var(--shadow-navigation)]">
-                  <div className={item.label === "What We Do" ? "grid grid-cols-4 gap-7" : "flex flex-wrap gap-5"}>
-                    {item.children.map(child => <div key={child.href}>
-                      <Link onClick={close} href={child.href} className="inline-flex min-h-11 items-center text-base font-semibold text-action hover:underline">{child.label}</Link>
-                      {child.children && <ul className="mt-2 space-y-1">{child.children.map(practice =>
-                        <li key={practice.href}><Link onClick={close} href={practice.href} className="inline-flex min-h-10 items-center text-sm text-foreground-muted hover:text-action hover:underline">{practice.label}</Link></li>
-                      )}</ul>}
-                    </div>)}
-                  </div>
-                </div>
-              </>}
-            </div>;
+            return (
+              <div key={item.href} className="flex items-center">
+                <Link
+                  href={item.href}
+                  aria-current={active ? "page" : undefined}
+                  className={cn(
+                    "inline-flex min-h-11 items-center px-2 text-sm font-semibold hover:text-action",
+                    active && "text-action",
+                  )}
+                >
+                  {item.label}
+                </Link>
+                {item.children && (
+                  <>
+                    <button
+                      ref={(el) => {
+                        triggers.current[item.href] = el;
+                      }}
+                      type="button"
+                      aria-label={`${expanded === item.href ? "Close" : "Open"} ${item.label} navigation`}
+                      aria-expanded={expanded === item.href}
+                      aria-controls={id}
+                      onClick={() => setExpanded(expanded === item.href ? null : item.href)}
+                      className="inline-flex h-11 w-8 items-center justify-center rounded-control hover:bg-surface-subtle"
+                    >
+                      <ChevronDown aria-hidden size={15} className={expanded === item.href ? "rotate-180" : ""} />
+                    </button>
+                    <div
+                      id={id}
+                      hidden={expanded !== item.href}
+                      className="absolute inset-x-0 top-full max-h-[calc(100dvh-10rem)] overflow-y-auto rounded-b-feature border border-border-subtle bg-surface p-7 shadow-[var(--shadow-navigation)]"
+                    >
+                      <div className={item.label === "What We Do" ? "grid grid-cols-4 gap-7" : "flex flex-wrap gap-5"}>
+                        {item.children.map((child) => (
+                          <div key={child.href}>
+                            <Link
+                              onClick={close}
+                              href={child.href}
+                              className="inline-flex min-h-11 items-center text-base font-semibold text-action hover:underline"
+                            >
+                              {child.label}
+                            </Link>
+                            {child.children && (
+                              <ul className="mt-2 space-y-1">
+                                {child.children.map((practice) => (
+                                  <li key={practice.href}>
+                                    <Link
+                                      onClick={close}
+                                      href={practice.href}
+                                      className="inline-flex min-h-10 items-center text-sm text-foreground-muted hover:text-action hover:underline"
+                                    >
+                                      {practice.label}
+                                    </Link>
+                                  </li>
+                                ))}
+                              </ul>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </>
+                )}
+              </div>
+            );
           })}
         </nav>
         <div className="flex shrink-0 items-center gap-2">
-          <div className="hidden xl:block"><RegionSwitcher /></div>
-          <div className="hidden sm:block"><ThemeToggle /></div>
-          <button ref={opener} type="button" aria-label="Open menu" aria-haspopup="dialog" aria-expanded={mobileOpen} aria-controls="mobile-navigation"
-            onClick={() => setMobileOpen(true)} className="inline-flex h-11 w-11 items-center justify-center rounded-control hover:bg-surface-subtle xl:hidden"><Menu size={24} aria-hidden /></button>
+          <div className="hidden xl:block">
+            <RegionSwitcher />
+          </div>
+          <div className="hidden sm:block">
+            <ThemeToggle />
+          </div>
+          <button
+            ref={opener}
+            type="button"
+            aria-label="Open menu"
+            aria-haspopup="dialog"
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-navigation"
+            onClick={() => setMobileOpen(true)}
+            className="inline-flex h-11 w-11 items-center justify-center rounded-control hover:bg-surface-subtle xl:hidden"
+          >
+            <Menu size={24} aria-hidden />
+          </button>
         </div>
       </div>
-      <dialog ref={drawer} id="mobile-navigation" aria-labelledby="mobile-menu-title"
-        onKeyDown={event => {
-          if(event.key !== 'Tab') return;
-          const items=Array.from(event.currentTarget.querySelectorAll<HTMLElement>('a[href],button:not([disabled]),select:not([disabled]),input:not([disabled]),summary,[tabindex="0"]')).filter(el=>el.getClientRects().length>0);
-          const first=items[0], last=items[items.length-1];
-          if(event.shiftKey && document.activeElement===first) {event.preventDefault();last?.focus();}
-          else if(!event.shiftKey && document.activeElement===last) {event.preventDefault();first?.focus();}
+      <dialog
+        ref={drawer}
+        id="mobile-navigation"
+        aria-labelledby="mobile-menu-title"
+        onKeyDown={(event) => {
+          if (event.key !== "Tab") return;
+          const items = Array.from(
+            event.currentTarget.querySelectorAll<HTMLElement>(
+              'a[href],button:not([disabled]),select:not([disabled]),input:not([disabled]),summary,[tabindex="0"]',
+            ),
+          ).filter((el) => el.getClientRects().length > 0);
+          const first = items[0],
+            last = items[items.length - 1];
+          if (event.shiftKey && document.activeElement === first) {
+            event.preventDefault();
+            last?.focus();
+          } else if (!event.shiftKey && document.activeElement === last) {
+            event.preventDefault();
+            first?.focus();
+          }
         }}
-        onClose={() => { setMobileOpen(false); if (opener.current?.getClientRects().length) opener.current.focus(); }}
-        className="fixed inset-0 m-0 h-dvh max-h-dvh w-screen max-w-none overflow-y-auto bg-surface p-5 text-foreground backdrop:bg-brand/60">
+        onClose={() => {
+          setMobileOpen(false);
+          if (opener.current?.getClientRects().length) opener.current.focus();
+        }}
+        className="fixed inset-0 m-0 h-dvh max-h-dvh w-screen max-w-none overflow-y-auto bg-surface p-5 text-foreground backdrop:bg-brand/60"
+      >
         <div className="mb-5 flex items-center justify-between border-b border-border-subtle pb-4">
-          <h2 id="mobile-menu-title" className="text-xl font-semibold">Explore In2IT EBS</h2>
-          <button autoFocus type="button" onClick={close} aria-label="Close menu" className="inline-flex h-11 w-11 items-center justify-center rounded-control hover:bg-surface-subtle"><X size={24} aria-hidden /></button>
+          <h2 id="mobile-menu-title" className="text-xl font-semibold">
+            Explore In2IT EBS
+          </h2>
+          <button
+            autoFocus
+            type="button"
+            onClick={close}
+            aria-label="Close menu"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-control hover:bg-surface-subtle"
+          >
+            <X size={24} aria-hidden />
+          </button>
         </div>
-        <nav aria-label="Mobile"><MobileLinks items={primaryNav} onNavigate={close} /></nav>
-        <div className="mt-6 flex flex-wrap items-center gap-4 border-t border-border-subtle pt-5"><RegionSwitcher /><ThemeToggle /><Link href="/contact/" onClick={close} className="inline-flex min-h-11 items-center text-action underline">Start a conversation</Link></div>
+        <nav aria-label="Mobile">
+          <MobileLinks items={primaryNav} onNavigate={close} />
+        </nav>
+        <div className="mt-6 flex flex-wrap items-center gap-4 border-t border-border-subtle pt-5">
+          <RegionSwitcher />
+          <ThemeToggle />
+          <Link href="/contact/" onClick={close} className="inline-flex min-h-11 items-center text-action underline">
+            Start a conversation
+          </Link>
+        </div>
       </dialog>
     </header>
   );
 }
-function MobileLinks({items, onNavigate}: {items: NavItem[]; onNavigate: () => void}) {
-  return <ul className="space-y-1">{items.map(item => <li key={item.href}>
-    {item.children ? <details className="border-b border-border-subtle py-1">
-      <summary className="min-h-12 cursor-pointer py-3 text-base font-semibold">{item.label}</summary>
-      <div className="pb-3 pl-4">
-        <Link href={item.href} onClick={onNavigate} className="inline-flex min-h-11 items-center text-sm font-semibold text-action">View {item.label}</Link>
-        <MobileLinks items={item.children} onNavigate={onNavigate} />
-      </div>
-    </details> : <Link href={item.href} onClick={onNavigate} className="inline-flex min-h-11 items-center text-sm font-medium hover:text-action">{item.label}</Link>}
-  </li>)}</ul>;
+function MobileLinks({ items, onNavigate }: { items: NavItem[]; onNavigate: () => void }) {
+  return (
+    <ul className="space-y-1">
+      {items.map((item) => (
+        <li key={item.href}>
+          {item.children ? (
+            <details className="border-b border-border-subtle py-1">
+              <summary className="min-h-12 cursor-pointer py-3 text-base font-semibold">{item.label}</summary>
+              <div className="pb-3 pl-4">
+                <Link
+                  href={item.href}
+                  onClick={onNavigate}
+                  className="inline-flex min-h-11 items-center text-sm font-semibold text-action"
+                >
+                  View {item.label}
+                </Link>
+                <MobileLinks items={item.children} onNavigate={onNavigate} />
+              </div>
+            </details>
+          ) : (
+            <Link
+              href={item.href}
+              onClick={onNavigate}
+              className="inline-flex min-h-11 items-center text-sm font-medium hover:text-action"
+            >
+              {item.label}
+            </Link>
+          )}
+        </li>
+      ))}
+    </ul>
+  );
 }

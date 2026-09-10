@@ -35,7 +35,8 @@ export const pillars: PracticeSummary[] = [
   {
     slug: "digital-data-ai",
     name: "Digital, Data & AI",
-    tagline: "Engineering-led transformation — application engineering, AI & automation, data & analytics, integration & cloud.",
+    tagline:
+      "Engineering-led transformation — application engineering, AI & automation, data & analytics, integration & cloud.",
     href: "/digital-data-ai/",
   },
   {
@@ -48,12 +49,42 @@ export const pillars: PracticeSummary[] = [
 
 // Practice cards used on the Platform Services hub.
 export const platformPractices: PracticeSummary[] = [
-  { slug: "sap", name: "SAP Enterprise Solutions", tagline: "SAP Gold Partner. 300+ consultants. 1,000+ combined years of SAP experience.", href: "/sap-enterprise-solutions/" },
-  { slug: "salesforce", name: "Salesforce", tagline: "Customer experience across Sales, Service, Marketing, Commerce and Industry Clouds.", href: "/salesforce/" },
-  { slug: "workday", name: "Workday", tagline: "HR and finance transformation on a single cloud platform.", href: "/workday/" },
-  { slug: "successfactors", name: "SAP SuccessFactors", tagline: "HR transformation across core HR, talent and workforce experience.", href: "/sap-enterprise-solutions/successfactors/" },
-  { slug: "oracle", name: "Oracle", tagline: "Enterprise applications, Oracle Cloud ERP, JD Edwards and database services.", href: "/oracle/" },
-  { slug: "microsoft", name: "Microsoft", tagline: "Dynamics 365, Microsoft 365, SharePoint and Azure services.", href: "/microsoft/" },
+  {
+    slug: "sap",
+    name: "SAP Enterprise Solutions",
+    tagline: "SAP Gold Partner. 300+ consultants. 1,000+ combined years of SAP experience.",
+    href: "/sap-enterprise-solutions/",
+  },
+  {
+    slug: "salesforce",
+    name: "Salesforce",
+    tagline: "Customer experience across Sales, Service, Marketing, Commerce and Industry Clouds.",
+    href: "/salesforce/",
+  },
+  {
+    slug: "workday",
+    name: "Workday",
+    tagline: "HR and finance transformation on a single cloud platform.",
+    href: "/workday/",
+  },
+  {
+    slug: "successfactors",
+    name: "SAP SuccessFactors",
+    tagline: "HR transformation across core HR, talent and workforce experience.",
+    href: "/sap-enterprise-solutions/successfactors/",
+  },
+  {
+    slug: "oracle",
+    name: "Oracle",
+    tagline: "Enterprise applications, Oracle Cloud ERP, JD Edwards and database services.",
+    href: "/oracle/",
+  },
+  {
+    slug: "microsoft",
+    name: "Microsoft",
+    tagline: "Dynamics 365, Microsoft 365, SharePoint and Azure services.",
+    href: "/microsoft/",
+  },
 ];
 
 /** The "What We Do" mega-menu — pillar-grouped with nested sub-items. */

@@ -4,7 +4,13 @@ export const tiers = [
   {
     n: 1,
     name: "Business Consulting & Advisory",
-    items: ["Transformation strategy", "Business case", "Process re-engineering", "Change management", "Digital roadmap"],
+    items: [
+      "Transformation strategy",
+      "Business case",
+      "Process re-engineering",
+      "Change management",
+      "Digital roadmap",
+    ],
   },
   {
     n: 2,
@@ -18,19 +24,16 @@ export const tiers = [
   },
 ];
 
-export const engagementModels = [
-  "Resource-Based", "Turnkey", "Managed Services", "Fixed Bid", "Partner Co-sourcing",
-];
+export const engagementModels = ["Resource-Based", "Turnkey", "Managed Services", "Fixed Bid", "Partner Co-sourcing"];
 
-export const deliveryFootprints = [
-  "Onsite (client)", "Near-shore centre", "Offshore Development Centre (India)",
-];
+export const deliveryFootprints = ["Onsite (client)", "Near-shore centre", "Offshore Development Centre (India)"];
 
 export const fastForwardLayers = [
   {
     n: 1,
     name: "Pre-Built Assets",
-    detail: "RDS accelerators, RICEFW templates, country localisations, integration patterns and pre-configured S/4HANA.",
+    detail:
+      "RDS accelerators, RICEFW templates, country localisations, integration patterns and pre-configured S/4HANA.",
   },
   {
     n: 2,
@@ -50,11 +53,31 @@ export const fastForwardLayers = [
 ];
 
 export const amsPhases = [
-  { name: "Pre-Transition Planning", weeks: "Wks -4–0", activities: ["Governance setup", "Confirm transition plan", "Network connectivity", "Service-desk bonding"] },
-  { name: "Planning", weeks: "Wks 1–2", activities: ["Team onboarding", "Detailed KT plan", "Access provisioning", "Phase completion criteria"] },
-  { name: "Knowledge Acquisition", weeks: "Wks 3–7", activities: ["KT sessions", "Documentation drafts", "Application understanding doc", "Process & procedure doc"] },
-  { name: "Shadow", weeks: "Wks 8–12", activities: ["Shadow live tickets", "Update documentation", "Operational readiness review"] },
-  { name: "Reverse Shadow", weeks: "Wks 13–16", activities: ["Lead on ticket resolution", "Final documentation", "Service commencement"] },
+  {
+    name: "Pre-Transition Planning",
+    weeks: "Wks -4–0",
+    activities: ["Governance setup", "Confirm transition plan", "Network connectivity", "Service-desk bonding"],
+  },
+  {
+    name: "Planning",
+    weeks: "Wks 1–2",
+    activities: ["Team onboarding", "Detailed KT plan", "Access provisioning", "Phase completion criteria"],
+  },
+  {
+    name: "Knowledge Acquisition",
+    weeks: "Wks 3–7",
+    activities: ["KT sessions", "Documentation drafts", "Application understanding doc", "Process & procedure doc"],
+  },
+  {
+    name: "Shadow",
+    weeks: "Wks 8–12",
+    activities: ["Shadow live tickets", "Update documentation", "Operational readiness review"],
+  },
+  {
+    name: "Reverse Shadow",
+    weeks: "Wks 13–16",
+    activities: ["Lead on ticket resolution", "Final documentation", "Service commencement"],
+  },
 ];
 
 export const factorySteps = [

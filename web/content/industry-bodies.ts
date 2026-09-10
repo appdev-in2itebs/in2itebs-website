@@ -167,19 +167,11 @@ export const industryBodies: Record<
       },
       {
         title: "Quality Management",
-        bullets: [
-          "Material inward quality check",
-          "In-process quality check",
-          "Finished-goods quality check",
-        ],
+        bullets: ["Material inward quality check", "In-process quality check", "Finished-goods quality check"],
       },
       {
         title: "Inventory Management",
-        bullets: [
-          "Inventory planning",
-          "Warehouse management",
-          "Bin management",
-        ],
+        bullets: ["Inventory planning", "Warehouse management", "Bin management"],
       },
       {
         title: "CRM, Finance & Purchase",

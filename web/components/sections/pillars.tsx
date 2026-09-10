@@ -2,8 +2,8 @@ import { Layers, Compass, Code2 } from "lucide-react";
 import { Container, Section } from "@/components/ui/container";
 import { Accent, SectionHeading } from "@/components/ui/typography";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
-import Link from 'next/link';
-import {platformPractices} from '@/content/nav';
+import Link from "next/link";
+import { platformPractices } from "@/content/nav";
 
 const pillars = [
   {
@@ -45,7 +45,20 @@ export function PillarsSection({ tone = "white" as "white" | "light" }) {
                 </span>
                 <h3 className="font-serif text-h3 font-bold text-navy">{name}</h3>
                 <p className="text-[0.95rem] leading-relaxed text-grey-muted">{body}</p>
-                {name==='Platforms' && <ul className="flex flex-wrap gap-x-4 gap-y-1">{platformPractices.map(practice=><li key={practice.slug}><Link href={practice.href} className="inline-flex min-h-11 items-center text-sm font-semibold text-action underline">{practice.name}</Link></li>)}</ul>}
+                {name === "Platforms" && (
+                  <ul className="flex flex-wrap gap-x-4 gap-y-1">
+                    {platformPractices.map((practice) => (
+                      <li key={practice.slug}>
+                        <Link
+                          href={practice.href}
+                          className="inline-flex min-h-11 items-center text-sm font-semibold text-action underline"
+                        >
+                          {practice.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
             </StaggerItem>
           ))}

@@ -1,9 +1,9 @@
-import {pageMetadata} from "@/lib/metadata";
-import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
+import { pageMetadata } from "@/lib/metadata";
+import { BreadcrumbJsonLd } from "@/components/seo/json-ld";
 import { Container, Section } from "@/components/ui/container";
 import { Eyebrow, Accent, SectionHeading } from "@/components/ui/typography";
 import { Card } from "@/components/ui/card";
-import { Reveal, Stagger, StaggerItem} from "@/components/motion/reveal";
+import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
 import { PageHero } from "@/components/sections/page-hero";
 import { DemoForm } from "@/components/forms/demo-form";
 import { offices, regionalContacts } from "@/content/offices";
@@ -18,11 +18,7 @@ export const metadata = pageMetadata("/contact/", {
 const indiaOffices = offices.filter((o) => o.kind.includes("india-office"));
 const globalEntities = offices.filter((o) => o.kind.includes("global-entity") || !o.kind.includes("india-office"));
 
-function OfficeCard({
-  office,
-}: {
-  office: (typeof offices)[number];
-}) {
+function OfficeCard({ office }: { office: (typeof offices)[number] }) {
   return (
     <Card tone="white" className="flex h-full flex-col gap-3">
       <div className="flex flex-col gap-1">
@@ -122,10 +118,7 @@ export default function ContactPage() {
                   {regionalContacts.map((r) => (
                     <div key={r.region} className="flex flex-col gap-1">
                       <span className="label-caps text-grey-muted">{r.region}</span>
-                      <a
-                        href={`mailto:${r.email}`}
-                        className="text-sm font-medium text-blue-accent hover:underline"
-                      >
+                      <a href={`mailto:${r.email}`} className="text-sm font-medium text-blue-accent hover:underline">
                         {r.email}
                       </a>
                     </div>

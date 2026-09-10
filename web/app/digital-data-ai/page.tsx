@@ -1,5 +1,5 @@
-import {pageMetadata} from "@/lib/metadata";
-import {BreadcrumbJsonLd} from "@/components/seo/json-ld";
+import { pageMetadata } from "@/lib/metadata";
+import { BreadcrumbJsonLd } from "@/components/seo/json-ld";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Container, Section } from "@/components/ui/container";
@@ -93,15 +93,7 @@ const integrationCloud = [
 ];
 
 /** Light-blue accent edge for the Digital, Data & AI pillar (Design Plan). */
-function SubPracticeCard({
-  title,
-  summary,
-  href,
-}: {
-  title: string;
-  summary: string;
-  href: string;
-}) {
+function SubPracticeCard({ title, summary, href }: { title: string; summary: string; href: string }) {
   const isInternalPage = href.startsWith("/");
   const content = (
     <>
