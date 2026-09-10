@@ -37,11 +37,11 @@ export default function InsightsPage() {
               <StaggerItem key={a.slug} className="h-full">
                 <Link
                   href={`/insights/${a.slug}/`}
-                  className="group flex h-full flex-col gap-4 rounded-xl2 border border-navy/5 bg-white p-7 transition-colors duration-300 hover:bg-off-white hover:shadow-soft"
+                  className="group glass-card flex h-full flex-col gap-4 rounded-surface p-7"
                 >
-                  <span className="label-caps text-blue-accent">{a.category}</span>
-                  <h2 className="font-serif text-xl font-bold leading-snug text-navy">{a.title}</h2>
-                  <p className="text-sm leading-relaxed text-grey-muted">{a.excerpt}</p>
+                  <span className="label-caps text-gold">{a.category}</span>
+                  <h2 className="text-xl font-bold leading-snug">{a.title}</h2>
+                  <p className="text-sm leading-relaxed text-foreground-muted">{a.excerpt}</p>
                 </Link>
               </StaggerItem>
             ))}

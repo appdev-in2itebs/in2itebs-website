@@ -77,7 +77,13 @@ export function SectionHeading({
   return (
     <div className={cn("flex flex-col gap-5", className)}>
       {eyebrow ? <Eyebrow onDark={onDark}>{eyebrow}</Eyebrow> : null}
-      <Headline level={level} plain={plain} className={onDark ? "text-on-brand" : "text-foreground"}>
+      {/* h1/h2 take no colour: the site-wide `main h1, main h2` gradient paints them, and
+          `.theme-on-brand` swaps in the on-brand gradient. Only h3 carries a colour role. */}
+      <Headline
+        level={level}
+        plain={plain}
+        className={level === 3 ? (onDark ? "text-on-brand" : "text-foreground") : undefined}
+      >
         {children}
       </Headline>
       {lead ? <Lead onDark={onDark}>{lead}</Lead> : null}

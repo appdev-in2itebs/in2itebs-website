@@ -80,12 +80,12 @@ export default function PartnersPage() {
       {/* PROOF BAND */}
       <Section tone="navy" className="relative overflow-hidden">
         <div aria-hidden className="pointer-events-none absolute inset-0 opacity-[0.07]">
-          <div className="absolute -right-24 top-10 h-[30rem] w-[30rem] origin-center rotate-45 border-[64px] border-blue-light" />
+          <div className="absolute -right-24 top-10 h-[30rem] w-[30rem] origin-center rotate-45 border-[64px] border-gold-on-brand" />
         </div>
         <Container>
           <Reveal className="mb-10 max-w-2xl">
             <Eyebrow onDark>Proof</Eyebrow>
-            <h2 className="mt-5 font-serif text-h2 font-bold text-white">
+            <h2 className="mt-5 text-h2 font-bold">
               Backed by the right <Accent>names</Accent>.
             </h2>
           </Reveal>
@@ -96,9 +96,9 @@ export default function PartnersPage() {
               { value: "Multi-cloud", label: "Delivery" },
             ].map((s) => (
               <StaggerItem key={s.label} className="h-full">
-                <Card tone="navy" bezel={false} className="h-full ring-1 ring-white/10">
-                  <div className="font-serif text-[2.5rem] font-bold leading-none text-white">{s.value}</div>
-                  <p className="mt-3 text-[0.95rem] leading-relaxed text-blue-light">{s.label}</p>
+                <Card tone="navy" bezel={false} className="h-full">
+                  <div className="text-[2.5rem] font-bold leading-none text-on-brand">{s.value}</div>
+                  <p className="mt-3 text-[0.95rem] leading-relaxed text-gold-on-brand">{s.label}</p>
                 </Card>
               </StaggerItem>
             ))}

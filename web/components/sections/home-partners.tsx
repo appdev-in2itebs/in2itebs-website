@@ -14,7 +14,7 @@ export function HomePartners() {
         <div className="mb-8 flex flex-wrap items-end justify-between gap-6">
           <div>
             <p className="text-sm font-semibold text-gold">Our ecosystem</p>
-            <h2 id="home-partners-title" className="mt-3 max-w-2xl text-h2 font-semibold text-foreground">
+            <h2 id="home-partners-title" className="mt-3 max-w-2xl text-h2 font-semibold">
               Our partners &amp; technology ecosystem.
             </h2>
             <p className="mt-4 max-w-2xl text-base leading-relaxed text-foreground-muted">

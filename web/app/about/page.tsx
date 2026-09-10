@@ -66,7 +66,7 @@ export default function AboutPage() {
         headline="Three pillars."
         accentWord="One converged enterprise."
         media={
-          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl3 shadow-soft ring-1 ring-navy/10">
+          <div className="relative h-full w-full overflow-hidden rounded-[calc(var(--radius-feature)-0.5rem)]">
             <Image
               src="/stock/about-office.jpg"
               alt="Inside In2IT EBS"
@@ -127,10 +127,7 @@ export default function AboutPage() {
                 <Eyebrow>Delivery centres</Eyebrow>
                 <ul className="mt-5 flex flex-wrap gap-x-2.5 gap-y-3">
                   {deliveryCentres.map((city) => (
-                    <li
-                      key={city}
-                      className="rounded-full border border-navy/10 bg-off-white px-4 py-1.5 text-sm font-medium text-navy"
-                    >
+                    <li key={city} className="glass-pill px-4 py-1.5 text-sm font-medium text-foreground">
                       {city}
                     </li>
                   ))}
@@ -142,10 +139,7 @@ export default function AboutPage() {
                 <Eyebrow>Sales offices</Eyebrow>
                 <ul className="mt-5 flex flex-wrap gap-x-2.5 gap-y-3">
                   {salesOffices.map((city) => (
-                    <li
-                      key={city}
-                      className="rounded-full border border-navy/10 bg-off-white px-4 py-1.5 text-sm font-medium text-navy"
-                    >
+                    <li key={city} className="glass-pill px-4 py-1.5 text-sm font-medium text-foreground">
                       {city}
                     </li>
                   ))}
@@ -170,7 +164,7 @@ export default function AboutPage() {
           <Stagger className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
             {footerCertifications.map((cert) => (
               <StaggerItem key={cert}>
-                <div className="flex h-full items-center justify-center rounded-xl2 border border-navy/10 bg-white px-4 py-6 text-center text-sm font-semibold text-navy">
+                <div className="glass flex h-full items-center justify-center rounded-surface px-4 py-6 text-center text-sm font-semibold text-foreground">
                   {cert}
                 </div>
               </StaggerItem>
@@ -198,14 +192,14 @@ export default function AboutPage() {
                   <img
                     src={leader.photo}
                     alt={leader.name}
-                    className="h-28 w-28 shrink-0 rounded-xl2 object-cover object-top ring-1 ring-navy/10"
+                    className="h-28 w-28 shrink-0 rounded-surface object-cover object-top ring-1 ring-border-subtle"
                   />
                   <div className="flex flex-col gap-2.5">
                     <div>
-                      <h3 className="font-serif text-h3 font-bold leading-tight text-navy">{leader.name}</h3>
-                      <span className="label-caps text-blue-accent">{leader.title}</span>
+                      <h3 className="text-h3 font-bold leading-tight text-foreground">{leader.name}</h3>
+                      <span className="label-caps text-gold">{leader.title}</span>
                     </div>
-                    <p className="text-[0.92rem] leading-relaxed text-grey-muted">{leader.bio}</p>
+                    <p className="text-[0.92rem] leading-relaxed text-foreground-muted">{leader.bio}</p>
                   </div>
                 </Card>
               </StaggerItem>

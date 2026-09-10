@@ -13,8 +13,8 @@ export default function NotFound() {
   return (
     <section className="relative overflow-hidden theme-on-brand bg-brand py-40 text-on-brand md:py-52">
       <div aria-hidden className="pointer-events-none absolute inset-0 opacity-[0.08]">
-        <div className="absolute -right-20 top-10 h-[34rem] w-[34rem] origin-center rotate-45 border-[72px] border-blue-light" />
-        <div className="absolute -left-40 bottom-0 h-[24rem] w-[24rem] origin-center rotate-45 border-[48px] border-blue-light" />
+        <div className="absolute -right-20 top-10 h-[34rem] w-[34rem] origin-center rotate-45 border-[72px] border-gold-on-brand" />
+        <div className="absolute -left-40 bottom-0 h-[24rem] w-[24rem] origin-center rotate-45 border-[48px] border-gold-on-brand" />
       </div>
       <Container>
         <div className="flex max-w-3xl flex-col gap-7">
@@ -30,7 +30,7 @@ export default function NotFound() {
             <Button href="/" variant="on-dark" withArrow>
               Back to home
             </Button>
-            <Button href="/contact/" variant="ghost" className="text-white hover:text-blue-light">
+            <Button href="/contact/" variant="ghost" className="text-on-brand hover:text-gold-on-brand">
               Contact us
             </Button>
           </div>

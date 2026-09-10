@@ -396,3 +396,21 @@ test("every component and content module is imported somewhere", () => {
   }
   assert.deepEqual(unused, []);
 });
+
+test("legacy palette classes are no longer used in markup", () => {
+  // The premium restyle moved every page onto semantic roles; the legacy aliases stay in tailwind.config.ts only as migration adapters.
+  const legacy =
+    /\b(?:text-navy|bg-white|text-grey-muted|bg-off-white|(?:text|bg|border|ring)-blue-(?:accent|light|pale)|shadow-soft|shadow-lift|rounded-xl2|rounded-xl3|border-navy|bg-navy|ring-navy|(?:text|bg|border|rule)-sand|font-serif)(?:\/[\w.[\]]+)?\b/g;
+  const offenders: string[] = [];
+  const walk = (dir: string) => {
+    for (const entry of readdirSync(dir)) {
+      const full = path.join(dir, entry);
+      if (statSync(full).isDirectory()) walk(full);
+      else if (/\.tsx$/.test(entry))
+        for (const m of readFileSync(full, "utf8").matchAll(legacy))
+          offenders.push(`${path.relative(process.cwd(), full)}: ${m[0]}`);
+    }
+  };
+  for (const root of ["app", "components"]) walk(path.join(process.cwd(), root));
+  assert.deepEqual(offenders, []);
+});

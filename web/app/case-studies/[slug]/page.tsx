@@ -66,8 +66,8 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             {facts.map((f) => (
               <StaggerItem key={f.label} className="h-full">
                 <Card className="h-full">
-                  <p className="label-caps text-blue-accent">{f.label}</p>
-                  <p className="mt-3 font-serif text-h3 font-bold leading-tight text-navy">{f.value}</p>
+                  <p className="label-caps text-gold">{f.label}</p>
+                  <p className="mt-3 text-h3 font-bold leading-tight text-foreground">{f.value}</p>
                 </Card>
               </StaggerItem>
             ))}
@@ -82,7 +82,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             <SectionHeading eyebrow="The challenge">
               Where they <Accent>started</Accent>.
             </SectionHeading>
-            <p className="mt-6 text-lg leading-relaxed text-grey-muted md:text-xl">{study.scenario}</p>
+            <p className="mt-6 text-lg leading-relaxed text-foreground-muted md:text-xl">{study.scenario}</p>
           </Reveal>
         </Container>
       </Section>
@@ -100,13 +100,10 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           </Reveal>
           <FeatureGrid features={study.benefits.map((b) => ({ title: b }))} columns={2} />
           <Reveal className="mt-10">
-            <p className="label-caps text-blue-accent">Solution components</p>
+            <p className="label-caps text-gold">Solution components</p>
             <div className="mt-4 flex flex-wrap gap-2">
               {study.solution.map((s) => (
-                <span
-                  key={s}
-                  className="rounded-full bg-white px-4 py-2 text-sm font-medium text-navy shadow-soft ring-1 ring-navy/5"
-                >
+                <span key={s} className="glass-pill px-4 py-2 text-sm font-medium text-foreground">
                   {s}
                 </span>
               ))}
@@ -118,27 +115,27 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
       {/* PROOF BAND — differentiator + outcome */}
       <Section tone="navy" className="relative overflow-hidden">
         <div aria-hidden className="pointer-events-none absolute inset-0 opacity-[0.07]">
-          <div className="absolute -right-24 top-10 h-[30rem] w-[30rem] origin-center rotate-45 border-[64px] border-blue-light" />
+          <div className="absolute -right-24 top-10 h-[30rem] w-[30rem] origin-center rotate-45 border-[64px] border-gold-on-brand" />
         </div>
         <Container>
           <Reveal className="mb-10 max-w-2xl">
             <Eyebrow onDark>The difference</Eyebrow>
-            <h2 className="mt-5 font-serif text-h2 font-bold text-white">
+            <h2 className="mt-5 text-h2 font-bold">
               Why it <Accent>mattered</Accent>.
             </h2>
           </Reveal>
           <Stagger className="grid gap-5 md:grid-cols-2">
             <StaggerItem className="h-full">
-              <Card tone="navy" bezel={false} className="h-full ring-1 ring-white/10">
-                <p className="label-caps text-blue-light">Our differentiator</p>
-                <p className="mt-4 text-[1.05rem] leading-relaxed text-white">{study.differentiator}</p>
+              <Card tone="navy" bezel={false} className="h-full">
+                <p className="label-caps text-gold-on-brand">Our differentiator</p>
+                <p className="mt-4 text-[1.05rem] leading-relaxed text-on-brand">{study.differentiator}</p>
               </Card>
             </StaggerItem>
             {study.outcome ? (
               <StaggerItem className="h-full">
-                <Card tone="navy" bezel={false} className="h-full ring-1 ring-white/10">
-                  <p className="label-caps text-blue-light">The outcome</p>
-                  <p className="mt-4 text-[1.05rem] leading-relaxed text-white">{study.outcome}</p>
+                <Card tone="navy" bezel={false} className="h-full">
+                  <p className="label-caps text-gold-on-brand">The outcome</p>
+                  <p className="mt-4 text-[1.05rem] leading-relaxed text-on-brand">{study.outcome}</p>
                 </Card>
               </StaggerItem>
             ) : null}

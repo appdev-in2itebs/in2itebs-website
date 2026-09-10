@@ -45,7 +45,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
         accentWord={ind.accentWord}
         subhead={ind.subhead}
         media={
-          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl3 shadow-soft ring-1 ring-navy/10">
+          <div className="relative h-full w-full overflow-hidden rounded-[calc(var(--radius-feature)-0.5rem)]">
             <Image
               src={`/stock/${ind.slug}.jpg`}
               alt={ind.name}
@@ -83,9 +83,9 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
             <ClientWall clients={clients} />
           ) : (
             <Reveal>
-              <p className="max-w-measure text-lg leading-relaxed text-grey-muted">
+              <p className="max-w-measure text-lg leading-relaxed text-foreground-muted">
                 Public enterprises in this sector appear under{" "}
-                <Link href="/industries/government-psu/" className="font-semibold text-blue-accent">
+                <Link href="/industries/government-psu/" className="font-semibold text-action">
                   Government &amp; PSUs
                 </Link>
                 .

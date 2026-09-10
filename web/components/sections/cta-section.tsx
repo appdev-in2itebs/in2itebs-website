@@ -29,7 +29,7 @@ export function CtaSection({
           <Reveal className="grid gap-12 lg:grid-cols-12 lg:items-end">
             <div className="lg:col-span-8">
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-gold">{eyebrow}</p>
-              <h2 className="mt-6 max-w-[17ch] text-[clamp(2.65rem,4.8vw,4.9rem)] font-semibold leading-[0.98] tracking-[-0.05em] text-foreground">
+              <h2 className="mt-6 max-w-[17ch] text-[clamp(2.65rem,4.8vw,4.9rem)] font-semibold leading-[0.98] tracking-[-0.05em]">
                 {heading ?? <>Your transformation starts with a conversation.</>}
               </h2>
             </div>

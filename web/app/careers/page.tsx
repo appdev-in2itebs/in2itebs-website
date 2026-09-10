@@ -43,7 +43,7 @@ export default function CareersPage() {
         subhead="Are you ready to thrive in a welcoming, diverse and open environment where you can keep learning, growing and making a lasting impact? You've found your destination."
         cta={false}
         media={
-          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl3 shadow-soft ring-1 ring-navy/10">
+          <div className="relative h-full w-full overflow-hidden rounded-[calc(var(--radius-feature)-0.5rem)]">
             <Image
               src="/stock/careers-team.jpg"
               alt="The In2IT EBS team"
@@ -70,8 +70,8 @@ export default function CareersPage() {
 
           <Reveal delay={0.1} className="mb-12 max-w-3xl">
             <Card tone="white" bezel>
-              <h3 className="font-serif text-h3 font-bold text-navy">Diversely united</h3>
-              <p className="mt-3 text-[0.95rem] leading-relaxed text-grey-muted">
+              <h3 className="text-h3 font-bold text-foreground">Diversely united</h3>
+              <p className="mt-3 text-[0.95rem] leading-relaxed text-foreground-muted">
                 Our team comes from many walks of life. In2IT EBS is committed to equality of opportunity, fairness,
                 mutual respect and dignity at work for all — valuing differences across disability, sexual orientation,
                 race, ethnicity, age, thinking styles, gender and religion.
@@ -96,7 +96,7 @@ export default function CareersPage() {
           </Reveal>
           <Reveal delay={0.1} className="max-w-3xl">
             <Card tone="light" bezel>
-              <p className="text-[0.95rem] leading-relaxed text-grey-muted">
+              <p className="text-[0.95rem] leading-relaxed text-foreground-muted">
                 Vacancies and applications are not managed through this website yet. Visit our official LinkedIn page
                 for company updates. Do not send CVs or sensitive personal documents through the business enquiry form.
               </p>

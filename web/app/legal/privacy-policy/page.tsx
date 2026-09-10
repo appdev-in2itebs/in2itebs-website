@@ -35,13 +35,13 @@ export default function PrivacyPolicyPage() {
       <Section tone="white">
         <Container>
           <Reveal className="mb-12 max-w-measure">
-            <p className="label-caps text-blue-accent">On this page</p>
+            <p className="label-caps text-gold">On this page</p>
             <ul className="mt-4 space-y-2">
               {toc.map((item) => (
                 <li key={item.href}>
                   <a
                     href={item.href}
-                    className="text-base font-medium text-navy underline-offset-4 transition-colors hover:text-blue-accent hover:underline"
+                    className="text-base font-medium text-foreground underline-offset-4 transition-colors hover:text-action hover:underline"
                   >
                     {item.label}
                   </a>

@@ -71,9 +71,9 @@ export default function CaseStudiesPage() {
             >
               Discretion, by <Accent>default</Accent>.
             </SectionHeading>
-            <p className="mt-6 text-[0.95rem] leading-relaxed text-grey-muted">
+            <p className="mt-6 text-[0.95rem] leading-relaxed text-foreground-muted">
               To request a named reference or the full version of an anonymised study, get in touch via our{" "}
-              <a href="/contact/" className="font-semibold text-blue-accent underline-offset-4 hover:underline">
+              <a href="/contact/" className="font-semibold text-action underline-offset-4 hover:underline">
                 contact page
               </a>
               .

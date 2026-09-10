@@ -22,15 +22,15 @@ function OfficeCard({ office }: { office: (typeof offices)[number] }) {
   return (
     <Card tone="white" className="flex h-full flex-col gap-3">
       <div className="flex flex-col gap-1">
-        <h3 className="font-serif text-xl font-bold leading-snug text-navy">{office.name}</h3>
-        <p className="text-xs font-semibold text-grey-muted">{office.legalEntity}</p>
+        <h3 className="text-xl font-bold leading-snug text-foreground">{office.name}</h3>
+        <p className="text-xs font-semibold text-foreground-muted">{office.legalEntity}</p>
       </div>
-      <p className="text-sm leading-relaxed text-grey-muted">{office.address}</p>
+      <p className="text-sm leading-relaxed text-foreground-muted">{office.address}</p>
       <div className="mt-auto flex flex-col gap-1 pt-2 text-sm">
-        <a href={`mailto:${office.email}`} className="font-medium text-blue-accent hover:underline">
+        <a href={`mailto:${office.email}`} className="font-medium text-action hover:underline">
           {office.email}
         </a>
-        {office.phone ? <span className="text-grey-muted">{office.phone}</span> : null}
+        {office.phone ? <span className="text-foreground-muted">{office.phone}</span> : null}
       </div>
     </Card>
   );
@@ -117,8 +117,8 @@ export default function ContactPage() {
                 <div className="flex flex-wrap gap-x-10 gap-y-4">
                   {regionalContacts.map((r) => (
                     <div key={r.region} className="flex flex-col gap-1">
-                      <span className="label-caps text-grey-muted">{r.region}</span>
-                      <a href={`mailto:${r.email}`} className="text-sm font-medium text-blue-accent hover:underline">
+                      <span className="label-caps text-foreground-muted">{r.region}</span>
+                      <a href={`mailto:${r.email}`} className="text-sm font-medium text-action hover:underline">
                         {r.email}
                       </a>
                     </div>
@@ -127,10 +127,10 @@ export default function ContactPage() {
               </div>
             </Reveal>
 
-            <div className="border-t border-sand/40 pt-10">
+            <div className="border-t border-gold-soft/40 pt-10">
               <Reveal className="flex flex-col gap-5">
                 <Eyebrow>Credentials</Eyebrow>
-                <div className="flex flex-wrap gap-x-6 gap-y-2 text-xs font-medium uppercase tracking-wider text-grey-muted">
+                <div className="flex flex-wrap gap-x-6 gap-y-2 text-xs font-medium uppercase tracking-wider text-foreground-muted">
                   {footerCertifications.map((c) => (
                     <span key={c}>{c}</span>
                   ))}

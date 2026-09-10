@@ -64,10 +64,10 @@ export default function IndustriesPage() {
               <StaggerItem key={ind.slug} className="h-full">
                 <Link
                   href={`/industries/${ind.slug}/`}
-                  className="group flex h-full flex-col justify-between gap-6 rounded-xl2 border border-navy/5 bg-white p-7 transition-colors duration-300 hover:shadow-soft"
+                  className="group glass-card flex h-full flex-col justify-between gap-6 rounded-surface p-7"
                 >
-                  <h3 className="font-serif text-h3 font-bold leading-snug text-navy">{ind.name}</h3>
-                  <span className="inline-flex items-center gap-2 text-sm font-semibold text-blue-accent">
+                  <h3 className="text-h3 font-bold leading-snug text-foreground">{ind.name}</h3>
+                  <span className="inline-flex items-center gap-2 text-sm font-semibold text-gold">
                     See clients in this sector
                     <ArrowUpRight
                       size={16}
@@ -98,9 +98,9 @@ export default function IndustriesPage() {
             {howEachPageWorks.map((item, i) => (
               <StaggerItem key={item.title} className="h-full">
                 <Card className="flex h-full flex-col">
-                  <span className="label-caps text-blue-accent">{String(i + 1).padStart(2, "0")}</span>
-                  <h3 className="mt-3 font-serif text-h3 font-bold text-navy">{item.title}</h3>
-                  <p className="mt-3 text-[0.95rem] leading-relaxed text-grey-muted">{item.body}</p>
+                  <span className="label-caps text-gold">{String(i + 1).padStart(2, "0")}</span>
+                  <h3 className="mt-3 text-h3 font-bold text-foreground">{item.title}</h3>
+                  <p className="mt-3 text-[0.95rem] leading-relaxed text-foreground-muted">{item.body}</p>
                 </Card>
               </StaggerItem>
             ))}
@@ -115,10 +115,10 @@ export default function IndustriesPage() {
             <Card tone="navy" className="flex flex-col gap-7 md:flex-row md:items-center md:justify-between md:gap-10">
               <div className="max-w-xl">
                 <Eyebrow onDark>Case studies</Eyebrow>
-                <h2 className="mt-4 font-serif text-h2 font-bold leading-tight text-white">
+                <h2 className="mt-4 text-h2 font-bold leading-tight">
                   Detailed case studies, on <Accent>request</Accent>.
                 </h2>
-                <p className="mt-4 text-[0.95rem] leading-relaxed text-blue-light">
+                <p className="mt-4 text-[0.95rem] leading-relaxed text-brand-muted">
                   Our detailed transformation case studies are available on request, under NDA.
                 </p>
               </div>
