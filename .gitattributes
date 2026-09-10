@@ -1,7 +1,12 @@
 * text=auto eol=lf
 *.png binary
 *.jpg binary
+*.jpeg binary
+*.ico binary
+*.wmf binary
+*.wdp binary
 *.pdf binary
 *.pptx binary
 *.docx binary
+*.xlsx binary
 *.zip binary
