@@ -107,7 +107,7 @@ export default function ContactPage() {
         </Container>
       </Section>
 
-      {/* REGIONAL EMAILS + CERTIFICATIONS */}
+      {/* REGIONAL CONTACTS + CERTIFICATIONS */}
       <Section tone="white" className="py-20 md:py-24">
         <Container>
           <div className="flex flex-col gap-12">
