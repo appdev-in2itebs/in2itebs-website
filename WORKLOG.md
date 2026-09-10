@@ -1,5 +1,13 @@
 # In2IT EBS — Project Worklog
 
+## 10–11 September 2026 — Premium glass restyle
+
+Restyled the presentation of the whole site on branch `restyle/2026-09-10-premium-glass` (24 commits, `a2ba46d`..`5f1b372`, on top of the 7 September remediation work) against `docs/superpowers/specs/2026-09-10-premium-glass-restyle-design.md`, delivered as a 15-task plan and executed task by task with a review after each.
+
+Added premium glassmorphism throughout: frosted `.glass`/`.glass-elevated`/`.glass-card`/`.glass-pill`/`.glass-gold` panels; new gold foreground tokens (`gold`, `gold-display`, `gold-on-brand`, `gold-soft`) and `glass`/`glass-line` surface tokens in both themes; navy-to-gold gradient headings on every `main h1`/`main h2` (`.heading-plain` opts a heading out); softer control/surface/feature radii (0.75rem/1rem/1.5rem, up from 0.3rem/0.45rem/0.65rem) with fully rounded buttons and pills; a noir dark theme re-based on the reference prototype with champagne-gold accents; visible-first scroll reveals (`Reveal`/`Stagger`, `.reveal`, `MotionObserver`) replacing the earlier hidden-until-animated approach; a hover vocabulary (glass-card lift with gold glow, gold nav underline, primary-button shimmer, gold icon-tile ring); and a gated, idle-loaded WebGL hero sculpture (three.js) on the homepage that only mounts at ≥1024px with motion allowed, no data-saver, WebGL present and the page visible, and pauses on the page's own pause control, reduced motion, a hidden tab or scrolling offscreen. Every hub, practice and inner page was swept from the legacy navy/serif palette onto the new semantic glass and gold classes; `web/tests/foundations.test.ts` gained a regression test that now fails the unit suite if a legacy palette class (`text-navy`, `bg-white`, `font-serif`, the `blue-*`/`sand` aliases, `rounded-xl2`/`rounded-xl3`, `shadow-soft`/`shadow-lift`) reappears under `app/` or `components/`. A new `web/tests/browser/hero.spec.ts` covers the hero's gating and pause states, and `web/scripts/check-build.mjs` gained a postbuild check that the three.js sculpture ships in exactly one lazily loaded chunk, ≤700,000 bytes, never referenced as initial JavaScript.
+
+What this restyle deliberately did not touch: page content and copy, imagery and photography, the information hierarchy and navigation structure, and everything under `web/content/` and `web/public/` (verified empty with `git diff --stat main -- web/content web/public`). Route structure, the enquiry pipeline, and the earlier remediation's accessibility, IA and truthful-content work all carry forward unchanged. Design intent and every token/utility/behaviour are recorded in root `DESIGN.md`; a short summary is in `docs/REMEDIATION_RUNBOOK.md`.
+
 ## 7 September 2026 — Audit remediation continuation
 
 Resumed the owner's request to fix the 31-issue audit and transcript, following docs/WEBSITE_REMEDIATION_PLAN.md. Source snapshot retained at .website-backups/website-before-remediation-20260907.zip. Implemented navigation, themes, accessibility, content/IA, truthful enquiry handling, metadata, dependency and testing changes. Current stack is Next.js 15.5.24 / React 19.2.8; references to Next.js 14 below describe earlier sessions.
@@ -165,4 +173,4 @@ Typed TS data files: `case-studies.ts` (11), `clients.ts`, `partners.ts`, `partn
 
 ---
 
-*Last updated: 2026-06-11. Sources: `.remember/` session logs, `CHANGELOG.md`, `docs/` inventory, `web/` file tree.*
+*Last updated: 2026-09-11. Sources: `.remember/` session logs, `CHANGELOG.md`, `docs/` inventory, `web/` file tree.*
