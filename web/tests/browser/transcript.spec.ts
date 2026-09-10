@@ -33,11 +33,11 @@ for(const width of [320,375,1440]) test(`transcript homepage at ${width}px`,asyn
   await expect(page.locator('header').getByRole('link',{name:'info@in2itebs.com'})).toBeVisible();
   await page.screenshot({path:`test-results/transcript-home-${width}.png`});
 });
-test('the hero mounts only the visible and next slide images',async({page})=>{
+test('the hero mounts only the previous, visible and next slide images',async({page})=>{
   await page.goto('/');
   // The SAP Gold Partner badge in the hero is a plain <img>; the slide backgrounds are the only responsive images.
   const slideImages=page.locator('section[aria-roledescription="carousel"] img[srcset]');
-  await expect(slideImages).toHaveCount(2);
+  await expect(slideImages).toHaveCount(3);
   await page.getByRole('button',{name:'Next service',exact:true}).click();
-  await expect(slideImages).toHaveCount(2);
+  await expect(slideImages).toHaveCount(3);
 });

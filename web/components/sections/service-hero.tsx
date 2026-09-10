@@ -57,7 +57,7 @@ export function ServiceHero() {
         </div>
         <div className="relative min-h-[17rem] overflow-hidden rounded-feature bg-surface-subtle lg:min-h-[31rem]">
           {slides.map((item,index)=>{
-            const mounted=index===active || index===(active+1)%slides.length;
+            const mounted=index===active || index===(active+1)%slides.length || index===(active-1+slides.length)%slides.length;
             return mounted ? <Image key={item.image} src={item.image} alt="" fill priority={index===0} sizes="(min-width:1024px) 45vw, 100vw" className={`object-cover transition-opacity duration-700 motion-reduce:transition-none ${active===index?'opacity-100':'opacity-0'}`} /> : null;
           })}
           <div className="absolute bottom-5 left-5 right-5 flex items-center justify-between gap-4 border border-border-subtle bg-surface px-5 py-4 text-sm text-foreground">
