@@ -370,6 +370,15 @@ html:not([data-motion-ready]) .client-ribbon {
     border-color: oklch(var(--color-gold-soft) / 0.7);
     box-shadow: var(--shadow-glass-hover), var(--glow-gold);
   }
+  /* Selected state for glass cards (option cards, filters): wins over hover and focus-within. */
+  .glass-card-selected,
+  .glass-card-selected:hover,
+  .glass-card-selected:focus-within {
+    border-color: oklch(var(--color-gold));
+    box-shadow:
+      var(--shadow-glass),
+      0 0 0 1px oklch(var(--color-gold));
+  }
   @media (hover: hover) and (pointer: fine) {
     .glass-card:hover {
       transform: translateY(-3px);
@@ -378,6 +387,18 @@ html:not([data-motion-ready]) .client-ribbon {
     }
     .theme-dark .glass-card:hover {
       border-color: oklch(var(--color-gold) / 0.45);
+    }
+    .glass-card-selected,
+    .glass-card-selected:hover,
+    .glass-card-selected:focus-within {
+      border-color: oklch(var(--color-gold));
+      box-shadow:
+        var(--shadow-glass),
+        0 0 0 1px oklch(var(--color-gold));
+    }
+    /* `.theme-dark .glass-card:hover` is (0,2,1); match it so selection still wins in dark. */
+    .theme-dark .glass-card-selected:hover {
+      border-color: oklch(var(--color-gold));
     }
   }
   .glass-pill {

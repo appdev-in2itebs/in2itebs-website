@@ -312,7 +312,7 @@ export function RiseGrowChooser() {
                         className={cn(
                           "glass-card group flex w-full items-start gap-4 rounded-surface px-5 py-4 text-left text-foreground active:scale-[0.97]",
                           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-surface",
-                          checked && "border-gold ring-1 ring-gold",
+                          checked && "glass-card-selected",
                         )}
                       >
                         <span
