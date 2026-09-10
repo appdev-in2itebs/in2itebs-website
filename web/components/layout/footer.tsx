@@ -73,7 +73,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
-                className="glass-pill min-h-11 bg-on-brand/10 px-3.5 text-sm text-on-brand/80 transition-colors hover:border-gold-on-brand/60 hover:text-gold-on-brand"
+                className="glass-pill min-h-11 px-3.5 text-sm text-on-brand/80 transition-colors hover:border-gold-on-brand/60 hover:text-gold-on-brand"
               >
                 {label}
               </a>

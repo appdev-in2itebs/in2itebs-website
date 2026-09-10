@@ -98,7 +98,7 @@ const transformationStages: Array<{
     body: "Connect process, platform, data and adoption through one accountable programme.",
     points: ["Design and build", "Migration", "Change and assurance"],
     Icon: Workflow,
-    className: "bg-surface-subtle text-foreground lg:col-span-5",
+    className: "text-foreground lg:col-span-5",
   },
   {
     number: "03",

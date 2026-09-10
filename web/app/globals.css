@@ -309,8 +309,6 @@ html:not([data-motion-ready]) .client-ribbon {
     --color-gold: var(--color-gold-on-brand);
     --color-gold-display: var(--color-gold-on-brand);
     --color-glass: var(--color-bg-brand);
-    --glass-line-alpha: 0.12;
-    --glass-top-alpha: 0.22;
   }
 
   [id] {
@@ -342,6 +340,14 @@ html:not([data-motion-ready]) .client-ribbon {
   .theme-dark .glass-pill {
     --glass-line-alpha: 0.07;
     --glass-top-alpha: 0.14;
+  }
+  /* Glass inside an on-brand scope tints to the brand ground; placed after the dark rule so it wins in both themes. */
+  .theme-on-brand .glass,
+  .theme-on-brand .glass-elevated,
+  .theme-on-brand .glass-card,
+  .theme-on-brand .glass-pill {
+    --glass-line-alpha: 0.12;
+    --glass-top-alpha: 0.22;
   }
   .glass-elevated {
     background: oklch(var(--color-glass) / var(--glass-alpha-elevated));
