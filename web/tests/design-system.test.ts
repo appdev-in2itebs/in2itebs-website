@@ -115,3 +115,26 @@ test("reveals hide content only after hydration and never while paused or reduce
   const reduced = block(source, "@media (prefers-reduced-motion: reduce)");
   assert.match(reduced, /\.reveal\s*\{[^}]*opacity:\s*1 !important/);
 });
+
+test("Reveal, Stagger and StaggerItem render the reveal hooks", () => {
+  const source = read("components/motion/reveal.tsx");
+  assert.match(source, /"reveal"/);
+  assert.match(source, /"stagger"/);
+  assert.match(source, /--reveal-delay/);
+  assert.match(source, /Math\.min\(index, 8\) \* 70/);
+});
+
+test("MotionObserver is mounted before main and MotionControls declares ownership", () => {
+  const layout = read("app/layout.tsx");
+  assert.ok(
+    layout.indexOf("<MotionObserver />") < layout.indexOf('<main id="main">'),
+    "MotionObserver must precede main",
+  );
+  const controls = read("components/sections/motion-controls.tsx");
+  assert.match(controls, /dataset\.motionOwner = "controls"/);
+  assert.match(controls, /delete document\.documentElement\.dataset\.motionOwner/);
+  const observer = read("components/motion/motion-observer.tsx");
+  assert.match(observer, /IntersectionObserver/);
+  assert.match(observer, /dataset\.reveal = "in"/);
+  assert.match(observer, /motionOwner/);
+});

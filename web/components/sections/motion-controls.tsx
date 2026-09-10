@@ -17,9 +17,11 @@ export function MotionControls() {
   }, []);
   useEffect(() => {
     const reduced = matchMedia("(prefers-reduced-motion: reduce)");
+    const root = document.documentElement;
+    root.dataset.motionOwner = "controls";
     const update = () => {
-      document.documentElement.dataset.motionReady = "true";
-      document.documentElement.dataset.motionPaused = String(paused || reduced.matches || document.hidden);
+      root.dataset.motionReady = "true";
+      root.dataset.motionPaused = String(paused || reduced.matches || document.hidden);
     };
     update();
     reduced.addEventListener("change", update);
@@ -27,6 +29,7 @@ export function MotionControls() {
     return () => {
       reduced.removeEventListener("change", update);
       document.removeEventListener("visibilitychange", update);
+      delete document.documentElement.dataset.motionOwner;
       delete document.documentElement.dataset.motionReady;
       delete document.documentElement.dataset.motionPaused;
     };

@@ -8,6 +8,7 @@ import { SITE_URL } from "@/lib/utils";
 import { RegionProvider } from "@/components/layout/region-preference";
 import { MeasurementSignals } from "@/components/layout/measurement-signals";
 import { QuickContact } from "@/components/layout/quick-contact";
+import { MotionObserver } from "@/components/motion/motion-observer";
 
 const plex = IBM_Plex_Sans({
   subsets: ["latin"],
@@ -35,6 +36,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="grain">
         <script id="theme-init" dangerouslySetInnerHTML={{ __html: THEME_INIT }} />
         <RegionProvider>
+          <MotionObserver />
           <MeasurementSignals />
           <OrganizationJsonLd />
           <a

@@ -1,5 +1,9 @@
-import type { ElementType, ReactNode } from "react";
-/** Visible-first rendering: essential text never depends on hydration or an observer. */
+import { Children, cloneElement, isValidElement, type CSSProperties, type ElementType, type ReactNode } from "react";
+import { cn } from "@/lib/utils";
+
+/** Visible-first rendering: essential text never depends on hydration or an observer.
+ *  The `reveal` hook only hides content after `html[data-motion-ready]` is set and
+ *  never while motion is paused or reduced (see globals.css). */
 export function Reveal({
   children,
   className,
@@ -11,11 +15,28 @@ export function Reveal({
   as?: "div" | "section" | "li" | "span";
 }) {
   const Tag: ElementType = as;
-  return <Tag className={className}>{children}</Tag>;
+  return <Tag className={cn("reveal", className)}>{children}</Tag>;
 }
+
+type StaggerItemProps = { children: ReactNode; className?: string; index?: number };
+
 export function Stagger({ children, className }: { children: ReactNode; className?: string }) {
-  return <div className={className}>{children}</div>;
+  return (
+    <div className={cn("stagger", className)}>
+      {Children.map(children, (child, index) =>
+        isValidElement<StaggerItemProps>(child) && child.type === StaggerItem ? cloneElement(child, { index }) : child,
+      )}
+    </div>
+  );
 }
-export function StaggerItem({ children, className }: { children: ReactNode; className?: string }) {
-  return <div className={className}>{children}</div>;
+
+export function StaggerItem({ children, className, index = 0 }: StaggerItemProps) {
+  return (
+    <div
+      className={cn("reveal", className)}
+      style={{ "--reveal-delay": `${Math.min(index, 8) * 70}ms` } as CSSProperties}
+    >
+      {children}
+    </div>
+  );
 }
