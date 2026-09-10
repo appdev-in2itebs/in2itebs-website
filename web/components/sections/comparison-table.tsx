@@ -15,14 +15,14 @@ export function ComparisonTable({ aspects, left, right }: { aspects: string[]; l
       role="region"
       aria-label={`${left.title} and ${right.title} comparison, scroll horizontally if needed`}
       tabIndex={0}
-      className="overflow-x-auto rounded-surface bg-surface shadow-soft ring-1 ring-border-subtle"
+      className="glass overflow-x-auto rounded-feature"
     >
       <table className="min-w-[38rem] w-full border-collapse text-left">
         <thead>
           <tr className="theme-on-brand bg-brand text-on-brand">
             <th
               scope="col"
-              className="px-5 py-4 font-sans text-[0.72rem] font-semibold uppercase tracking-label text-blue-light md:px-6"
+              className="px-5 py-4 font-sans text-[0.72rem] font-semibold uppercase tracking-label text-gold-on-brand md:px-6"
             >
               <span className="sr-only">Aspect</span>
             </th>
@@ -32,17 +32,17 @@ export function ComparisonTable({ aspects, left, right }: { aspects: string[]; l
         </thead>
         <tbody>
           {aspects.map((aspect, i) => (
-            <tr key={aspect} className={cn("align-top", i % 2 === 1 && "bg-off-white")}>
+            <tr key={aspect} className={cn("align-top", i % 2 === 1 && "bg-surface-subtle/60")}>
               <th
                 scope="row"
-                className="border-t border-navy/10 px-5 py-4 font-sans text-sm font-semibold text-navy md:px-6"
+                className="border-t border-border-subtle px-5 py-4 font-sans text-sm font-semibold text-foreground md:px-6"
               >
                 {aspect}
               </th>
-              <td className="border-t border-navy/10 px-5 py-4 text-[0.9rem] leading-relaxed text-grey-muted md:px-6">
+              <td className="border-t border-border-subtle px-5 py-4 text-[0.9rem] leading-relaxed text-foreground-muted md:px-6">
                 {left.values[i]}
               </td>
-              <td className="border-t border-l border-navy/10 px-5 py-4 text-[0.9rem] leading-relaxed text-grey-muted md:px-6">
+              <td className="border-t border-l border-border-subtle px-5 py-4 text-[0.9rem] leading-relaxed text-foreground-muted md:px-6">
                 {right.values[i]}
               </td>
             </tr>
@@ -55,7 +55,7 @@ export function ComparisonTable({ aspects, left, right }: { aspects: string[]; l
 
 function ColumnHeader({ column }: { column: Column }) {
   return (
-    <th scope="col" className="px-5 py-4 font-serif text-h3 font-bold md:px-6">
+    <th scope="col" className="px-5 py-4 text-h3 font-bold md:px-6">
       <span className="flex flex-wrap items-center gap-2.5">
         {column.title}
         {column.badge ? <Pill>{column.badge}</Pill> : null}
@@ -66,7 +66,7 @@ function ColumnHeader({ column }: { column: Column }) {
 
 function Pill({ children }: { children: ReactNode }) {
   return (
-    <span className="rounded-full bg-white/15 px-2.5 py-0.5 font-sans text-xs font-semibold tracking-normal text-blue-pale">
+    <span className="glass-gold rounded-full px-2.5 py-0.5 font-sans text-xs font-semibold tracking-normal">
       {children}
     </span>
   );

@@ -14,7 +14,7 @@ export function LogoMarquee({ clients, duration = clients.length * 2.6 }: { clie
           aria-expanded={expanded}
           aria-controls="homepage-client-ribbon"
           onClick={() => setExpanded(!expanded)}
-          className="min-h-11 rounded-control border border-border-strong bg-surface px-3 text-sm text-foreground hover:bg-surface-subtle"
+          className="min-h-11 rounded-full border border-border-strong bg-surface px-3 text-sm text-foreground hover:border-gold hover:text-gold"
         >
           {expanded ? "Back to animated ribbon" : `View all ${clients.length} client entries`}
         </button>
@@ -23,7 +23,7 @@ export function LogoMarquee({ clients, duration = clients.length * 2.6 }: { clie
             type="button"
             aria-pressed={paused}
             onClick={() => setPaused(!paused)}
-            className="min-h-11 rounded-control border border-border-strong bg-surface px-3 text-sm text-foreground hover:bg-surface-subtle"
+            className="min-h-11 rounded-full border border-border-strong bg-surface px-3 text-sm text-foreground hover:border-gold hover:text-gold"
           >
             {paused ? "Play client ribbon" : "Pause client ribbon"}
           </button>
@@ -51,7 +51,7 @@ export function LogoMarquee({ clients, duration = clients.length * 2.6 }: { clie
                   key={client.slug}
                   data-client={client.slug}
                   role={copy === 0 ? "listitem" : undefined}
-                  className="group/logo flex h-20 w-44 shrink-0 items-center justify-center border-r border-border-subtle bg-logo-surface px-4"
+                  className="group/logo flex h-20 w-44 shrink-0 items-center justify-center rounded-surface border border-glass-line/40 bg-logo-surface px-4 transition-[box-shadow] duration-300 hover:shadow-[0_0_0_1px_oklch(var(--color-gold-soft)/0.9)]"
                 >
                   <ClientLogo client={client} />
                 </div>

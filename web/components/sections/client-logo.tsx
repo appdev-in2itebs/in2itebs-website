@@ -21,7 +21,7 @@ export function ClientLogo({ client, className }: { client: Client; className?: 
   return (
     <span
       className={cn(
-        "inline-flex items-center font-serif text-base font-semibold text-logo-foreground transition-opacity duration-300",
+        "inline-flex items-center text-base font-semibold text-logo-foreground transition-opacity duration-300",
         className,
       )}
     >

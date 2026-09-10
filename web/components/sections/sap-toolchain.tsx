@@ -29,14 +29,14 @@ export function SapToolchain() {
         {tools.map(({ Icon, name, role }) => (
           <li
             key={name}
-            className="group flex flex-col gap-4 rounded-xl2 border border-navy/10 bg-white p-6 transition duration-200 ease-out hover:-translate-y-1 hover:shadow-lift hover:ring-1 hover:ring-blue-accent/30 focus-within:ring-2 focus-within:ring-blue-accent"
+            className="glass-card group flex flex-col gap-4 rounded-feature p-6 focus-within:ring-2 focus-within:ring-focus"
           >
-            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-pale/30 text-navy transition-colors duration-200 ease-out group-hover:text-blue-accent">
+            <span className="icon-tile h-11 w-11 rounded-surface">
               <Icon size={22} strokeWidth={1.25} aria-hidden />
             </span>
             <div className="flex flex-col gap-1.5">
-              <span className="font-serif font-semibold text-navy">{name}</span>
-              <span className="text-sm leading-snug text-grey-muted">{role}</span>
+              <span className="font-semibold text-foreground transition-colors group-hover:text-gold">{name}</span>
+              <span className="text-sm leading-snug text-foreground-muted">{role}</span>
             </div>
           </li>
         ))}

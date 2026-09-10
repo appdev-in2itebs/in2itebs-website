@@ -10,14 +10,14 @@ export function PartnerEcosystem({ categories }: { categories: PartnerCategory[]
     <Stagger className="grid gap-5 md:grid-cols-2">
       {categories.map((category) => (
         <StaggerItem key={category.title} className="h-full">
-          <div className="flex h-full flex-col rounded-xl2 bg-white p-7 shadow-soft ring-1 ring-navy/5">
-            <h3 className="font-serif text-h3 font-bold text-navy">{category.title}</h3>
-            <p className="mt-2 text-[0.9rem] leading-relaxed text-grey-muted">{category.intro}</p>
+          <div className="glass-card flex h-full flex-col rounded-feature p-7">
+            <h3 className="text-h3 font-bold text-foreground">{category.title}</h3>
+            <p className="mt-2 text-[0.9rem] leading-relaxed text-foreground-muted">{category.intro}</p>
 
             <ul className="mt-5 flex flex-wrap gap-2.5">
               {category.partners.map((partner) => (
                 <li key={partner.name}>
-                  <span className="inline-flex items-center gap-2 rounded-full bg-off-white px-3.5 py-1.5 text-sm font-medium text-navy ring-1 ring-navy/10">
+                  <span className="glass-pill text-foreground">
                     {partner.logo ? (
                       <img
                         src={partner.logo}
@@ -29,9 +29,7 @@ export function PartnerEcosystem({ categories }: { categories: PartnerCategory[]
                       <span>{partner.name}</span>
                     )}
                     {partner.note ? (
-                      <span className="rounded-full bg-blue-pale/40 px-2 py-0.5 text-xs font-semibold text-blue-accent">
-                        {partner.note}
-                      </span>
+                      <span className="glass-gold rounded-full px-2 py-0.5 text-xs font-semibold">{partner.note}</span>
                     ) : null}
                   </span>
                 </li>

@@ -8,8 +8,8 @@ export function StatBand({ stats }: { stats: Stat[] }) {
       {stats.map((s) => (
         <StaggerItem key={s.label}>
           <div className="flex flex-col gap-1.5">
-            <CountUp value={s.value} className="font-serif text-[2.75rem] font-bold leading-none text-foreground" />
-            <span className="text-sm text-foreground-muted">{s.label}</span>
+            <CountUp value={s.value} className="text-gradient-numeral text-[2.75rem] font-bold leading-none" />
+            <span className="text-sm text-gold">{s.label}</span>
           </div>
         </StaggerItem>
       ))}

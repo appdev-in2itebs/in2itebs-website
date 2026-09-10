@@ -13,7 +13,7 @@ export function HomePartners() {
       <Container>
         <div className="mb-8 flex flex-wrap items-end justify-between gap-6">
           <div>
-            <p className="text-sm font-semibold text-action">Our ecosystem</p>
+            <p className="text-sm font-semibold text-gold">Our ecosystem</p>
             <h2 id="home-partners-title" className="mt-3 max-w-2xl text-h2 font-semibold text-foreground">
               Our partners &amp; technology ecosystem.
             </h2>
@@ -23,16 +23,16 @@ export function HomePartners() {
           </div>
           <Link
             href="/partners/"
-            className="inline-flex min-h-11 items-center gap-3 text-sm font-semibold text-action hover:underline"
+            className="inline-flex min-h-11 items-center gap-3 text-sm font-semibold text-gold hover:underline"
           >
             Explore our partners <ArrowUpRight aria-hidden size={18} />
           </Link>
         </div>
-        <ul className="grid grid-cols-2 gap-px overflow-hidden rounded-surface border border-border-subtle bg-border-subtle sm:grid-cols-3 lg:grid-cols-6">
+        <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
           {visibleEcosystem.map((partner) => (
             <li
               key={partner.name}
-              className="flex min-h-28 flex-col items-center justify-center gap-3 bg-logo-surface px-4 py-5 text-logo-foreground"
+              className="glass-card flex min-h-28 flex-col items-center justify-center gap-3 rounded-surface bg-logo-surface px-4 py-5 text-logo-foreground"
             >
               {partner.logo ? (
                 <>
@@ -52,10 +52,10 @@ export function HomePartners() {
               )}
             </li>
           ))}
-          <li className="bg-surface">
+          <li className="glass-card rounded-surface">
             <Link
               href="/partners/"
-              className="flex h-full min-h-28 items-center justify-center gap-2 p-5 text-sm font-semibold text-action hover:bg-surface-subtle"
+              className="flex h-full min-h-28 items-center justify-center gap-2 p-5 text-sm font-semibold text-gold"
             >
               Full ecosystem <ArrowUpRight size={18} aria-hidden />
             </Link>
