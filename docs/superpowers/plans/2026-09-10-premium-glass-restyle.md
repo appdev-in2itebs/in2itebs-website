@@ -145,7 +145,8 @@ test("the on-brand scope remaps gold to the champagne tone", () => {
 test("tailwind exposes the gold and glass roles", () => {
   const config = read("tailwind.config.ts");
   for (const role of ["gold", "gold-display", "gold-on-brand", "gold-soft", "glass", "glass-line"])
-    assert.ok(new RegExp(`"${role}":\\s*"oklch\\(var\\(--color-${role}\\) / <alpha-value>\\)"`).test(config), role);
+    // Prettier leaves `gold` and `glass` unquoted and quotes the hyphenated keys, so the quotes are optional here.
+    assert.ok(new RegExp(`"?${role}"?:\\s*"oklch\\(var\\(--color-${role}\\) / <alpha-value>\\)"`).test(config), role);
   for (const shadow of ["glass:", '"glass-hover":', '"glow-gold":']) assert.ok(config.includes(shadow), shadow);
 });
 
@@ -1216,7 +1217,6 @@ import {
   AmbientLight,
   BufferAttribute,
   BufferGeometry,
-  Clock,
   Color,
   DirectionalLight,
   Group,
@@ -1378,13 +1378,18 @@ export function Hero3D({ onState }: { onState: (state: "active" | "paused") => v
     };
     window.addEventListener("mousemove", onMouseMove, { passive: true });
 
-    const clock = new Clock(false);
+    // Own the elapsed time: three's Clock.start() resets to zero, which would make the sculpture jump on resume.
+    let elapsed = 0;
+    let last = 0;
     let frame = 0;
     let running = false;
     let firstFrame = true;
     const render = () => {
       frame = requestAnimationFrame(render);
-      const t = clock.getElapsedTime();
+      const now = performance.now();
+      elapsed += (now - last) / 1000;
+      last = now;
+      const t = elapsed;
       targetX += (mouseX - targetX) * 0.04;
       targetY += (mouseY - targetY) * 0.04;
       group.rotation.y = t * 0.06 + targetX;
@@ -1407,12 +1412,11 @@ export function Hero3D({ onState }: { onState: (state: "active" | "paused") => v
       const shouldRun = !hidden && !paused && !offscreen;
       if (shouldRun && !running) {
         running = true;
-        clock.start();
+        last = performance.now();
         render();
         report.current("active");
       } else if (!shouldRun && running) {
         running = false;
-        clock.stop();
         cancelAnimationFrame(frame);
         report.current("paused");
       } else if (!shouldRun && !running) {
@@ -1681,7 +1685,7 @@ Change `<Container className="relative">` to `<Container className="relative z-1
 
 Slide label: `text-sm font-semibold text-action` → `text-sm font-semibold text-gold`. The `h2` keeps its classes (the site rule paints the gradient). The "Talk to us" link: `text-action hover:underline` → `text-gold hover:underline`.
 
-Image panel wrapper: change `relative min-h-[17rem] overflow-hidden rounded-feature bg-surface-subtle lg:min-h-[31rem]` to `glass-elevated relative min-h-[17rem] overflow-hidden rounded-feature p-2 lg:min-h-[31rem]`, and give each slide `Image` the extra class `rounded-[calc(var(--radius-feature)-0.5rem)]` and wrap the image set in `<div className="absolute inset-2 overflow-hidden rounded-[calc(var(--radius-feature)-0.5rem)]">…</div>` so the `fill` images stay inside the glass frame (the `img[srcset]` count stays 3). Caption bar: `border border-border-subtle bg-surface` → `glass rounded-surface`, caption counter `text-action` → `text-gold`.
+Image panel wrapper: change `relative min-h-[17rem] overflow-hidden rounded-feature bg-surface-subtle lg:min-h-[31rem]` to `glass-elevated relative min-h-[17rem] overflow-hidden rounded-feature p-2 lg:min-h-[31rem]`, and give each slide `Image` the extra class `rounded-[calc(var(--radius-feature)-0.5rem)]` and wrap the image set in `<div className="absolute inset-2 overflow-hidden rounded-[calc(var(--radius-feature)-0.5rem)]">…</div>` so the `fill` images stay inside the glass frame (the `img[srcset]` count stays 3). Caption bar: `border border-border-subtle bg-surface` → `glass-elevated rounded-surface` (elevated alpha, because it holds normal-size text over a photograph), caption counter `text-action` → `text-gold`.
 
 Tabs/controls bar: `mt-8 flex flex-wrap items-center justify-between gap-5 border-y border-border-subtle py-4` → `glass mt-8 flex flex-wrap items-center justify-between gap-5 rounded-feature px-4 py-3`. Active tab button: `bg-action text-on-action` stays; inactive: `text-foreground-muted hover:bg-surface-subtle` → `text-foreground-muted hover:bg-glass/70 hover:text-gold`; tab buttons `rounded-control` → `rounded-full`. Prev/pause/next buttons: `rounded-control border border-border-strong hover:bg-surface-subtle` → `rounded-full border border-border-strong hover:border-gold hover:text-gold`.
 
@@ -1783,7 +1787,7 @@ Use the Task 9 mapping plus:
 
 | Component | Change |
 |---|---|
-| `home-partners.tsx` | eyebrow `text-action` → `text-gold`; "Explore our partners" link `text-action` → `text-gold`; the `ul` → `grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6` (drop `gap-px overflow-hidden rounded-surface border … bg-border-subtle`); each `li` → `glass-card flex min-h-28 flex-col items-center justify-center gap-3 rounded-surface px-4 py-5 text-logo-foreground` (keep `bg-logo-surface` **out**: the glass replaces it, but keep the image and name markup); the final "Full ecosystem" `li` → `glass-card rounded-surface`, link `text-action hover:bg-surface-subtle` → `text-gold`. |
+| `home-partners.tsx` | eyebrow `text-action` → `text-gold`; "Explore our partners" link `text-action` → `text-gold`; the `ul` → `grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6` (drop `gap-px overflow-hidden rounded-surface border … bg-border-subtle`); each `li` → `glass-card flex min-h-28 flex-col items-center justify-center gap-3 rounded-surface bg-logo-surface px-4 py-5 text-logo-foreground` (keep `bg-logo-surface`: partner marks need a light ground in the dark theme, and the Tailwind utility wins over the glass background while the glass border and hover glow still apply; keep the image and name markup); the final "Full ecosystem" `li` → `glass-card rounded-surface`, link `text-action hover:bg-surface-subtle` → `text-gold`. |
 | `partner-ecosystem.tsx` | card shell → `glass-card rounded-feature p-7`; partner chips → `glass-pill text-foreground` (keep logo/name markup); note chips → `glass-gold rounded-full px-2 py-0.5 text-xs font-semibold`. |
 | `alliance-strip.tsx` | unchanged classes except add `hover:drop-shadow-[0_0_12px_oklch(var(--color-gold-soft)/0.6)]` to the img. |
 | `sap-toolchain.tsx` | `li` → `glass-card group flex flex-col gap-4 rounded-feature p-6 focus-within:ring-2 focus-within:ring-focus` (drop the manual hover/translate/ring classes); icon span → `icon-tile h-11 w-11 rounded-surface`; name `font-serif font-semibold text-navy` → `font-semibold text-foreground group-hover:text-gold transition-colors`; role `text-grey-muted` → `text-foreground-muted`. |
