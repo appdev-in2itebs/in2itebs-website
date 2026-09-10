@@ -128,7 +128,7 @@ html:not([data-motion-ready]) .client-ribbon {
 
     /* Premium restyle (2026-09-10): gold roles and glass surfaces. */
     --color-gold: 51.14% 0.082 83.6;
-    --color-gold-display: 58% 0.085 84;
+    --color-gold-display: 57% 0.085 84;
     --color-gold-on-brand: 72.45% 0.1 82.3;
     --color-gold-soft: 83.98% 0.085 91;
     --color-glass: 99.2% 0.003 255;

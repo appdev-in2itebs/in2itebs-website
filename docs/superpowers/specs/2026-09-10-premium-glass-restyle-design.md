@@ -82,7 +82,7 @@ Light (`:root, .theme-light`) — unchanged existing roles plus:
 | Token | Value (OKLCH channels) | Purpose | Contrast facts |
 |---|---|---|---|
 | `--color-gold` | `51.14% 0.082 83.6` (≈ #7d6229) | Gold for normal text: eyebrows, numerals, links on hover, icon tints | 5.4:1 on canvas, 5.7:1 on surface, ≈ 4.9:1 on subtle |
-| `--color-gold-display` | `58% 0.085 84` | Lightest stop of heading gradients; large text only | ≥ 3.5:1 on canvas, surface and subtle (asserted) |
+| `--color-gold-display` | `57% 0.085 84` | Lightest stop of heading gradients; large text only | ≥ 3.5:1 on canvas, surface and subtle (asserted) |
 | `--color-gold-on-brand` | `72.45% 0.100 82.3` (≈ #c5a059, champagne) | Gold on navy (`bg-brand`) surfaces: footer, on-brand sections | 6.7:1 on brand |
 | `--color-gold-soft` | `83.98% 0.085 91.0` (≈ #dfc98a) | Decorative only: borders, glows, gradient highlights on glass; never text on light |  |
 | `--color-glass` | `99.2% 0.003 255` | Glass panel base (alpha applied in the utility) |  |

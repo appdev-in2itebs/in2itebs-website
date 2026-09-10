@@ -45,7 +45,7 @@ test("gold and glass tokens exist in both theme blocks", () => {
     assert.ok(dark.includes(token), `dark theme lacks ${token}`);
   }
   assert.match(light, /--color-gold:\s*51\.14% 0\.082 83\.6/);
-  assert.match(light, /--color-gold-display:\s*58% 0\.085 84/);
+  assert.match(light, /--color-gold-display:\s*57% 0\.085 84/);
   assert.match(dark, /--color-bg-canvas:\s*12\.87% 0\.008 268\.5/);
   // Prettier normalises the authored `0.100` chroma to `0.1`; the numeric value is unchanged.
   assert.match(dark, /--color-gold:\s*72\.45% 0\.1 82\.3/);
