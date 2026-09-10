@@ -10,8 +10,8 @@ export function SapPartnerBadge({ onDark = false, className }: { onDark?: boolea
       role="img"
       aria-label="SAP Gold Partner"
       className={cn(
-        "inline-flex items-center gap-2.5 rounded-lg border px-2.5 py-1.5",
-        onDark ? "border-on-brand/20 bg-on-brand/[0.06]" : "border-border-subtle bg-surface shadow-soft",
+        "glass-gold inline-flex items-center gap-2.5 rounded-full px-3 py-1.5",
+        onDark ? "border-gold-on-brand/40" : "shadow-glass",
         className,
       )}
     >
@@ -20,11 +20,11 @@ export function SapPartnerBadge({ onDark = false, className }: { onDark?: boolea
         <img src="/logos/partners/sap.svg" alt="" aria-hidden className="h-4 w-auto" />
       </span>
       <span className="flex items-center gap-1.5">
-        <span aria-hidden className="h-3.5 w-[3px] rounded-full bg-sand" />
+        <span aria-hidden className="h-3.5 w-[3px] rounded-full bg-gold" />
         <span
           className={cn(
             "text-[0.68rem] font-semibold uppercase leading-tight tracking-[0.12em]",
-            onDark ? "text-on-brand" : "text-foreground",
+            onDark ? "text-gold-on-brand" : "text-gold",
           )}
         >
           Gold Partner

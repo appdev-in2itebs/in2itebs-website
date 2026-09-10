@@ -12,7 +12,7 @@ export function Eyebrow({
   onDark?: boolean;
 }) {
   return (
-    <span className={cn("label-caps inline-block", onDark ? "text-brand-muted" : "text-action", className)}>
+    <span className={cn("label-caps inline-block", onDark ? "text-gold-on-brand" : "text-gold", className)}>
       {children}
     </span>
   );
@@ -28,14 +28,18 @@ export function Headline({
   children,
   level = 2,
   className,
+  plain = false,
 }: {
   children: ReactNode;
   level?: 1 | 2 | 3;
   className?: string;
+  plain?: boolean;
 }) {
   const sizes = { 1: "text-display", 2: "text-h2", 3: "text-h3" } as const;
   const Tag = `h${level}` as unknown as "h1";
-  return <Tag className={cn("font-serif font-bold", sizes[level], className)}>{children}</Tag>;
+  return (
+    <Tag className={cn("font-display font-bold", sizes[level], plain && "heading-plain", className)}>{children}</Tag>
+  );
 }
 
 export function Lead({ children, className, onDark }: { children: ReactNode; className?: string; onDark?: boolean }) {
@@ -60,6 +64,7 @@ export function SectionHeading({
   className,
   onDark,
   level = 2,
+  plain,
 }: {
   eyebrow?: string;
   children: ReactNode;
@@ -67,11 +72,12 @@ export function SectionHeading({
   className?: string;
   onDark?: boolean;
   level?: 1 | 2 | 3;
+  plain?: boolean;
 }) {
   return (
     <div className={cn("flex flex-col gap-5", className)}>
       {eyebrow ? <Eyebrow onDark={onDark}>{eyebrow}</Eyebrow> : null}
-      <Headline level={level} className={onDark ? "text-on-brand" : "text-foreground"}>
+      <Headline level={level} plain={plain} className={onDark ? "text-on-brand" : "text-foreground"}>
         {children}
       </Headline>
       {lead ? <Lead onDark={onDark}>{lead}</Lead> : null}

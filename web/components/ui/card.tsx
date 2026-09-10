@@ -1,8 +1,8 @@
 import { cn } from "@/lib/utils";
 import type { ReactNode } from "react";
 
-/** Double-bezel card: an outer shell holding an inner core with concentric radii
- *  and an inset top highlight — feels like a machined plate, not a flat div. */
+/** Glass card: frosted surface, hairline top highlight, gold glow on hover.
+ *  `bezel` adds an inner gold ring; `tone="navy"` keeps the inverse brand surface. */
 export function Card({
   children,
   className,
@@ -14,20 +14,27 @@ export function Card({
   bezel?: boolean;
   tone?: "light" | "white" | "navy";
 }) {
-  const core =
-    tone === "navy"
-      ? "theme-on-brand bg-brand text-on-brand"
-      : tone === "white"
-        ? "bg-white text-navy"
-        : "bg-off-white text-navy";
-  if (!bezel) {
-    return <div className={cn("rounded-xl2 p-7 shadow-soft", core, className)}>{children}</div>;
-  }
-  return (
-    <div className="rounded-xl3 bg-navy/[0.04] p-1.5 ring-1 ring-navy/5">
-      <div className={cn("h-full rounded-xl2 p-7 shadow-[inset_0_1px_1px_rgba(255,255,255,0.7)]", core, className)}>
+  if (tone === "navy") {
+    return (
+      <div
+        className={cn(
+          "theme-on-brand rounded-feature border border-gold-on-brand/20 bg-brand p-7 text-on-brand shadow-glass",
+          className,
+        )}
+      >
         {children}
       </div>
+    );
+  }
+  return (
+    <div
+      className={cn(
+        "glass-card rounded-feature p-7 text-foreground",
+        bezel && "ring-1 ring-inset ring-gold-soft/40",
+        className,
+      )}
+    >
+      {children}
     </div>
   );
 }
