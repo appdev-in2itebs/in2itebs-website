@@ -97,7 +97,7 @@ export default function AribaPage() {
         <Container>
           <Reveal className="mb-10 max-w-2xl">
             <Eyebrow onDark>Proof</Eyebrow>
-            <h2 className="mt-5 text-h2 font-bold text-on-brand">
+            <h2 className="mt-5 text-h2 font-bold">
               Procurement that <Accent>pays back</Accent>.
             </h2>
           </Reveal>

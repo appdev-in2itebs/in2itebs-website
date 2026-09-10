@@ -92,7 +92,7 @@ const integrationCloud = [
   },
 ];
 
-/** Light-blue accent edge for the Digital, Data & AI pillar (Design Plan). */
+/** Gold accent edge for the Digital, Data & AI pillar — matches the premium glass pillar cards. */
 function SubPracticeCard({ title, summary, href }: { title: string; summary: string; href: string }) {
   const isInternalPage = href.startsWith("/");
   const content = (

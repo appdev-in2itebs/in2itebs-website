@@ -125,7 +125,7 @@ export default function DeliveryExcellencePage() {
               <StaggerItem key={phase.name}>
                 <div className="relative grid gap-5 md:grid-cols-[3rem_1fr] md:gap-7">
                   <div className="hidden md:block">
-                    <span className="theme-on-brand relative z-10 flex h-12 w-12 items-center justify-center rounded-full bg-brand text-lg font-bold text-on-brand shadow-glass ring-4 ring-surface-subtle">
+                    <span className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full bg-brand text-lg font-bold text-on-brand shadow-glass ring-4 ring-surface-subtle">
                       {i + 1}
                     </span>
                   </div>

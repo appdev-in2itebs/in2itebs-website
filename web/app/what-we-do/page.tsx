@@ -90,7 +90,7 @@ export default function WhatWeDoPage() {
       {/* THREE ENGAGEMENT TIERS */}
       <section aria-labelledby="practice-finder-title" className="bg-surface py-10">
         <Container>
-          <h2 id="practice-finder-title" className="mb-5 text-h3 font-semibold text-foreground">
+          <h2 id="practice-finder-title" className="mb-5 text-h3 font-semibold">
             Choose your platform practice
           </h2>
           <PlatformPracticeLinks />

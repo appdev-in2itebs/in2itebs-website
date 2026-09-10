@@ -110,7 +110,7 @@ export default function ConcurPage() {
         <Container>
           <Reveal className="mb-10 max-w-2xl">
             <Eyebrow onDark>Proof</Eyebrow>
-            <h2 className="mt-5 text-h2 font-bold text-on-brand">
+            <h2 className="mt-5 text-h2 font-bold">
               Delivered, <Accent>repeatedly</Accent>.
             </h2>
           </Reveal>
