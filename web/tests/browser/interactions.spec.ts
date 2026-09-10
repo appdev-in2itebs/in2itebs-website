@@ -54,3 +54,12 @@ test('heading scale and client hover treatment are intact',async({page})=>{
   const logo=page.locator('.client-ribbon-list img').first();await logo.hover();
   await expect(logo).toHaveCSS('filter','grayscale(0) saturate(1)');
 });
+test('the quick-contact button hides while the footer is in view',async({page})=>{
+  await page.goto('/about/');
+  const button=page.getByRole('button',{name:'Contact',exact:true});
+  await expect(button).toBeVisible();
+  await page.locator('footer').scrollIntoViewIfNeeded();
+  await expect(button).toBeHidden();
+  await page.evaluate(()=>scrollTo(0,0));
+  await expect(button).toBeVisible();
+});
