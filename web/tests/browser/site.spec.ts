@@ -8,6 +8,7 @@ for(const width of [320,375,768,1024,1100,1280,1440]) {
     await expect(page.locator('header').getByRole('link',{name:'Talk to us'})).toBeVisible();
     expect(await page.evaluate(()=>document.documentElement.scrollWidth <= innerWidth)).toBeTruthy();
     if(width>=1280) {
+      await expect(page.locator('header').getByRole('combobox',{name:'Preferred contact region'})).toBeVisible();
       await page.getByRole('button',{name:'Open What We Do navigation'}).click();
       const box=await page.locator('#desktop-nav-0').boundingBox();
       expect(box!.x).toBeGreaterThanOrEqual(0);expect(box!.x+box!.width).toBeLessThanOrEqual(width);

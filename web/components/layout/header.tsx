@@ -85,7 +85,7 @@ export function Header() {
           })}
         </nav>
         <div className="flex shrink-0 items-center gap-2">
-          <div className="hidden 2xl:block"><RegionSwitcher /></div>
+          <div className="hidden xl:block"><RegionSwitcher /></div>
           <div className="hidden sm:block"><ThemeToggle /></div>
           <button ref={opener} type="button" aria-label="Open menu" aria-haspopup="dialog" aria-expanded={mobileOpen} aria-controls="mobile-navigation"
             onClick={() => setMobileOpen(true)} className="inline-flex h-11 w-11 items-center justify-center rounded-control hover:bg-surface-subtle xl:hidden"><Menu size={24} aria-hidden /></button>
