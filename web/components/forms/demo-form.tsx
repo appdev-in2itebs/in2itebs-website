@@ -7,7 +7,7 @@ import { regions } from "@/content/site";
 import { useRegion } from "@/components/layout/region-preference";
 import { signalMeasurement } from "@/lib/measurement";
 const field =
-  "min-h-11 w-full rounded-control border border-border-strong bg-surface px-4 py-3 text-base text-foreground focus-visible:outline-2 focus-visible:outline-offset-2";
+  "glass min-h-11 w-full rounded-control px-4 py-3 text-base text-foreground transition-colors hover:border-gold-soft focus-visible:outline-2 focus-visible:outline-offset-2";
 export function DemoForm() {
   const router = useRouter();
   const [deliveryEnabled, setDeliveryEnabled] = useState<boolean | null>(null);
@@ -76,10 +76,7 @@ export function DemoForm() {
         </p>
       )}
       {deliveryEnabled === false && (
-        <p
-          role="status"
-          className="rounded-control border border-border-strong bg-surface-subtle p-4 text-sm text-foreground"
-        >
+        <p role="status" className="glass rounded-control p-4 text-sm text-foreground">
           Online enquiries are not enabled in this preview. Please{" "}
           <a className="font-semibold text-action underline" href="mailto:info@in2itebs.com">
             email info@in2itebs.com
@@ -171,7 +168,7 @@ export function DemoForm() {
       <button
         disabled={busy || deliveryEnabled !== true}
         aria-busy={busy}
-        className="min-h-12 rounded-control bg-action px-5 py-3 font-semibold text-on-action hover:bg-action-hover disabled:cursor-not-allowed disabled:opacity-70"
+        className="btn-shimmer min-h-12 rounded-full bg-action px-6 py-3 font-semibold text-on-action shadow-glass hover:bg-action-hover disabled:cursor-not-allowed disabled:opacity-70"
       >
         {busy ? "Sending request…" : "Send enquiry"}
       </button>

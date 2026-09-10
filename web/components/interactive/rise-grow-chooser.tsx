@@ -236,18 +236,18 @@ export function RiseGrowChooser() {
   };
 
   return (
-    <div className="mx-auto w-full max-w-2xl rounded-xl3 bg-navy/[0.04] p-1.5 ring-1 ring-navy/5">
-      <div className="overflow-hidden rounded-xl2 bg-white p-7 text-navy shadow-[inset_0_1px_1px_rgba(255,255,255,0.7)] md:p-9">
+    <div className="mx-auto w-full max-w-2xl">
+      <div className="glass-elevated overflow-hidden rounded-feature p-7 text-foreground md:p-9">
         {/* Progress */}
         <div className="mb-7">
           <div className="mb-3 flex items-baseline justify-between">
             <Eyebrow>RISE vs GROW</Eyebrow>
-            <span className="text-xs font-semibold text-grey-muted" role="status" aria-live="polite">
+            <span className="text-xs font-semibold text-foreground-muted" role="status" aria-live="polite">
               {done ? "Complete" : `Question ${step + 1} of ${total}`}
             </span>
           </div>
           <div
-            className="h-1.5 w-full overflow-hidden rounded-full bg-navy/10"
+            className="h-1.5 w-full overflow-hidden rounded-full bg-border-subtle"
             role="progressbar"
             aria-valuemin={0}
             aria-valuemax={total}
@@ -255,7 +255,7 @@ export function RiseGrowChooser() {
             aria-label="Assessment progress"
           >
             <motion.div
-              className="h-full rounded-full bg-blue-accent"
+              className="h-full rounded-full bg-gold"
               initial={false}
               style={{ transformOrigin: "left" }}
               animate={{ scaleX: progress }}
@@ -287,7 +287,7 @@ export function RiseGrowChooser() {
                 transition={reduce ? { duration: 0.18 } : { duration: 0.28, ease: EASE_MOVE }}
                 className="border-0 p-0"
               >
-                <legend className="font-serif text-h3 font-bold leading-tight text-navy">{current.legend}</legend>
+                <legend className="text-h3 font-bold leading-tight text-foreground">{current.legend}</legend>
                 <div role="radiogroup" aria-label={current.legend} className="mt-6 flex flex-col gap-3">
                   {current.options.map((opt, i) => {
                     const checked = selected === opt.id;
@@ -310,9 +310,9 @@ export function RiseGrowChooser() {
                           }
                         }}
                         className={cn(
-                          "group flex w-full items-start gap-4 rounded-xl2 px-5 py-4 text-left transition-[transform,background-color,box-shadow] duration-200 ease-out active:scale-[0.97]",
-                          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-accent focus-visible:ring-offset-2 focus-visible:ring-offset-white",
-                          checked ? "bg-off-white ring-2 ring-navy/15" : "ring-1 ring-navy/10 hover:bg-off-white",
+                          "glass-card group flex w-full items-start gap-4 rounded-surface px-5 py-4 text-left text-foreground active:scale-[0.97]",
+                          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-surface",
+                          checked && "border-gold ring-1 ring-gold",
                         )}
                       >
                         <span
@@ -321,14 +321,14 @@ export function RiseGrowChooser() {
                             "mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border transition-colors duration-200",
                             checked
                               ? "border-action bg-action text-on-action"
-                              : "border-navy/25 bg-white text-transparent group-hover:border-navy/40",
+                              : "border-border-strong bg-surface text-transparent group-hover:border-gold-soft",
                           )}
                         >
                           <Check size={12} strokeWidth={2.5} />
                         </span>
                         <span className="flex flex-col gap-0.5">
-                          <span className="text-sm font-semibold leading-snug text-navy">{opt.label}</span>
-                          {opt.hint ? <span className="text-xs text-grey-muted">{opt.hint}</span> : null}
+                          <span className="text-sm font-semibold leading-snug text-foreground">{opt.label}</span>
+                          {opt.hint ? <span className="text-xs text-foreground-muted">{opt.hint}</span> : null}
                         </span>
                       </button>
                     );
@@ -342,7 +342,7 @@ export function RiseGrowChooser() {
         {/* Controls */}
         {!done ? (
           <>
-            <div className="mt-8 h-px w-full bg-sand/60" aria-hidden />
+            <div className="mt-8 h-px w-full bg-border-subtle" aria-hidden />
             <div className="mt-6 flex items-center justify-between">
               <button
                 type="button"
@@ -350,8 +350,8 @@ export function RiseGrowChooser() {
                 disabled={step === 0}
                 className={cn(
                   "rounded-lg px-4 py-2.5 text-sm font-semibold transition-[transform,color] duration-200 ease-out active:scale-[0.97]",
-                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-accent",
-                  step === 0 ? "cursor-not-allowed text-navy/30" : "text-navy hover:text-blue-accent",
+                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus",
+                  step === 0 ? "cursor-not-allowed text-foreground/30" : "text-foreground hover:text-gold",
                 )}
               >
                 Back
@@ -363,10 +363,10 @@ export function RiseGrowChooser() {
                 aria-disabled={!selected}
                 className={cn(
                   "inline-flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold transition-[transform,background-color] duration-200 ease-out active:scale-[0.97]",
-                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-accent focus-visible:ring-offset-2 focus-visible:ring-offset-white",
+                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-surface",
                   selected
                     ? "bg-action text-on-action hover:bg-action-hover"
-                    : "cursor-not-allowed bg-navy/10 text-navy/40",
+                    : "cursor-not-allowed bg-border-subtle text-foreground/40",
                 )}
               >
                 {isLast ? "See my recommendation" : "Next"}
@@ -397,13 +397,13 @@ function ResultPanel({
       initial={reduce ? { opacity: 0 } : { opacity: 0, y: 12, scale: 0.98 }}
       animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 }}
       transition={{ duration: reduce ? 0.18 : 0.6, ease: EASE_OUT }}
-      className="rounded-xl3 bg-white p-6 ring-1 ring-navy/10 md:p-8"
+      className="glass-elevated rounded-feature p-6 md:p-8"
       role="region"
       aria-live="polite"
       aria-label="Your recommendation"
     >
       <Eyebrow>{result.eyebrow}</Eyebrow>
-      <h3 className="mt-4 font-serif text-h2 font-bold leading-[1.05] text-navy">
+      <h3 className="mt-4 text-h2 font-bold leading-[1.05] text-foreground">
         {result.verdict === "Hybrid" ? (
           <>
             A <Accent>Hybrid</Accent> path
@@ -414,14 +414,14 @@ function ResultPanel({
           </>
         )}
       </h3>
-      <p className="mt-2 text-sm font-semibold text-grey-muted">{result.title}</p>
+      <p className="mt-2 text-sm font-semibold text-foreground-muted">{result.title}</p>
 
       <div className="mt-5 flex items-center gap-3" aria-hidden>
         <ScorePill label="GROW" value={result.grow} active={result.verdict === "GROW"} />
         <ScorePill label="RISE" value={result.rise} active={result.verdict === "RISE"} />
       </div>
 
-      <p className="mt-6 max-w-measure text-base leading-relaxed text-grey-muted">{result.rationale}</p>
+      <p className="mt-6 max-w-measure text-base leading-relaxed text-foreground-muted">{result.rationale}</p>
 
       <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
         <Button href={`/contact/?offer=pathway&assessment=${result.verdict}&interest=SAP`} withArrow>
@@ -430,7 +430,7 @@ function ResultPanel({
         <button
           type="button"
           onClick={onReset}
-          className="inline-flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-navy transition-[transform,color] duration-200 ease-out hover:text-blue-accent active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-accent"
+          className="inline-flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-foreground transition-[transform,color] duration-200 ease-out hover:text-gold active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus"
         >
           <RotateCcw size={15} strokeWidth={1.75} aria-hidden />
           Start over
@@ -445,11 +445,11 @@ function ScorePill({ label, value, active }: { label: string; value: number; act
     <span
       className={cn(
         "inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-semibold",
-        active ? "bg-action text-on-action" : "bg-off-white text-grey-muted ring-1 ring-navy/10",
+        active ? "bg-action text-on-action" : "glass-pill text-foreground-muted",
       )}
     >
       <span className="label-caps">{label}</span>
-      <span className={cn("tabular-nums", active ? "text-on-action" : "text-navy")}>{value}</span>
+      <span className={cn("tabular-nums", active ? "text-on-action" : "text-foreground")}>{value}</span>
     </span>
   );
 }
