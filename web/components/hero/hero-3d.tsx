@@ -63,7 +63,7 @@ const currentTheme = () => (document.documentElement.classList.contains("theme-d
 
 /** The reference prototype's sculpture (torus knot, two gold orbit rings, sparse specks),
  *  re-lit per theme, paused whenever the page says decorative motion should stop. */
-export function Hero3D({ onState }: { onState: (state: "active" | "paused") => void }) {
+export function Hero3D({ onState }: { onState: (state: "active" | "paused" | "unavailable") => void }) {
   const mount = useRef<HTMLDivElement>(null);
   const report = useRef(onState);
   report.current = onState;
@@ -75,6 +75,8 @@ export function Hero3D({ onState }: { onState: (state: "active" | "paused") => v
     try {
       renderer = new WebGLRenderer({ antialias: true, alpha: true, powerPreference: "high-performance" });
     } catch {
+      // No context to be had after all: tell the loader so it can take the scene back down.
+      report.current("unavailable");
       return;
     }
     const width = host.clientWidth || window.innerWidth;
@@ -196,21 +198,22 @@ export function Hero3D({ onState }: { onState: (state: "active" | "paused") => v
 
     let hidden = document.hidden;
     let paused = document.documentElement.dataset.motionPaused === "true";
-    let offscreen = false;
+    // Assume offscreen until the IntersectionObserver's first observation says otherwise, so a hero
+    // that starts below the fold never renders a frame just to freeze on it.
+    let offscreen = true;
     const sync = () => {
       const shouldRun = !hidden && !paused && !offscreen;
       if (shouldRun && !running) {
         running = true;
         last = performance.now();
         render();
-        report.current("active");
       } else if (!shouldRun && running) {
         running = false;
         cancelAnimationFrame(frame);
-        report.current("paused");
-      } else if (!shouldRun && !running) {
-        report.current("paused");
       }
+      // Reported on every pass, not only on transitions: the attribute then self-heals if a render
+      // ever leaves it disagreeing with what the scene is actually doing.
+      report.current(shouldRun ? "active" : "paused");
     };
     const onVisibility = () => {
       hidden = document.hidden;
@@ -236,7 +239,6 @@ export function Hero3D({ onState }: { onState: (state: "active" | "paused") => v
       renderer.setSize(w, h);
     });
     resize.observe(host);
-    sync();
 
     return () => {
       running = false;
@@ -254,6 +256,8 @@ export function Hero3D({ onState }: { onState: (state: "active" | "paused") => v
       knotMaterial.dispose();
       ringMaterial.dispose();
       speckMaterial.dispose();
+      // Hand the GPU context back now rather than waiting for the canvas to be collected.
+      renderer.forceContextLoss();
       renderer.dispose();
       renderer.domElement.remove();
     };

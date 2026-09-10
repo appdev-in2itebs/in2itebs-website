@@ -18,6 +18,13 @@ test("desktop: the 3D hero activates or reports a WebGL-free environment, never 
   } else {
     expect(["active", "paused"]).toContain(state);
     await expect(page.locator(`${loader} canvas`)).toHaveCount(1);
+    if (state === "active") {
+      // A desktop resize re-evaluates the gates; a running scene must stay reported as running
+      // rather than being stranded back at "pending" by the re-probe.
+      await page.setViewportSize({ width: 1380, height: 900 });
+      await page.waitForTimeout(500);
+      await expect(page.locator(loader)).toHaveAttribute("data-hero-3d", "active");
+    }
   }
   await expect(page.locator(`${carousel} .hero-ambient`)).toHaveCount(1);
   // The sculpture is not an image: the slide window is still the only responsive images in the carousel.

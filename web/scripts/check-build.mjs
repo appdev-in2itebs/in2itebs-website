@@ -35,8 +35,14 @@ if (prerenderedPages.length < 60)
     `only ${prerenderedPages.length} pages are prerendered; expected at least 60 (is cookies()/headers() used in a layout?)`,
   );
 // Premium restyle: three.js must stay in one lazily loaded chunk.
+// Recursive: a static `import "three"` lands in .next/static/chunks/app/<route>/page-<hash>.js, which a
+// top-level-only scan would miss entirely — the budget would pass while three.js shipped as initial JS.
 const chunkDir = ".next/static/chunks";
-const chunkFiles = existsSync(chunkDir) ? readdirSync(chunkDir).filter((f) => f.endsWith(".js")) : [];
+const chunkFiles = existsSync(chunkDir)
+  ? readdirSync(chunkDir, { recursive: true })
+      .map((f) => f.replaceAll("\\", "/"))
+      .filter((f) => f.endsWith(".js"))
+  : [];
 const withThree = chunkFiles.filter((f) => readFileSync(`${chunkDir}/${f}`, "utf8").includes("TorusKnotGeometry"));
 if (withThree.length !== 1) {
   failures.push(`expected exactly one chunk containing three.js, found ${withThree.length}: ${withThree.join(", ")}`);
