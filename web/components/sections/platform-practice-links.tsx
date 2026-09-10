@@ -15,7 +15,7 @@ export function PlatformPracticeLinks() {
         <Link
           key={name}
           href={href}
-          className="glass-card group flex min-h-20 items-center justify-between gap-3 rounded-surface px-5 py-4 text-base font-semibold text-foreground transition-colors hover:text-gold"
+          className="glass-card group flex min-h-20 min-w-0 items-center justify-between gap-3 rounded-surface px-5 py-4 text-base font-semibold text-foreground transition-colors [overflow-wrap:anywhere] hover:text-gold"
         >
           {name}
           <ArrowUpRight aria-hidden size={16} className="shrink-0 text-gold" />

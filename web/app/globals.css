@@ -308,6 +308,9 @@ html:not([data-motion-ready]) .client-ribbon {
     --color-legacy-blue-pale: var(--color-fg-brand-muted);
     --color-gold: var(--color-gold-on-brand);
     --color-gold-display: var(--color-gold-on-brand);
+    --color-glass: var(--color-bg-brand);
+    --glass-line-alpha: 0.12;
+    --glass-top-alpha: 0.22;
   }
 
   [id] {
@@ -608,6 +611,7 @@ html:not([data-motion-ready]) .client-ribbon {
 
   .section-tint-a {
     background:
+      radial-gradient(circle at 88% 12%, oklch(var(--color-gold-soft) / 0.16), transparent 28rem),
       radial-gradient(ellipse at 10% 15%, oklch(var(--color-action) / 0.07), transparent 37rem),
       linear-gradient(
         180deg,
@@ -619,6 +623,7 @@ html:not([data-motion-ready]) .client-ribbon {
 
   .section-tint-b {
     background:
+      radial-gradient(circle at 88% 12%, oklch(var(--color-gold-soft) / 0.16), transparent 28rem),
       radial-gradient(ellipse at 82% 32%, oklch(var(--color-fg-brand-muted) / 0.13), transparent 34rem),
       radial-gradient(ellipse at 15% 80%, oklch(var(--color-action) / 0.055), transparent 30rem),
       linear-gradient(
@@ -631,6 +636,7 @@ html:not([data-motion-ready]) .client-ribbon {
 
   .section-tint-c {
     background:
+      radial-gradient(circle at 88% 12%, oklch(var(--color-gold-soft) / 0.16), transparent 28rem),
       radial-gradient(circle at 50% 44%, oklch(var(--color-action) / 0.075), transparent 32rem),
       linear-gradient(
         180deg,

@@ -143,21 +143,18 @@ export default function HomePage() {
       <ServiceHero />
       <section aria-labelledby="platform-practices-title" className="bg-surface py-10">
         <Container>
-          <h2 id="platform-practices-title" className="mb-5 text-lg font-semibold text-foreground">
+          <h2 id="platform-practices-title" className="mb-5 text-lg font-semibold">
             Find your platform practice
           </h2>
           <PlatformPracticeLinks />
           <div className="mt-10">
-            <dl className="grid border-t border-border-subtle sm:grid-cols-2 lg:grid-cols-4">
+            <dl className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
               {stats.slice(0, 4).map((stat) => (
-                <div
-                  key={stat.label}
-                  className="metric-item relative border-b border-border-subtle py-7 sm:border-r sm:px-6 sm:first:pl-0 lg:border-b-0 lg:last:border-r-0 lg:last:pr-0"
-                >
-                  <dd className="text-3xl font-semibold tabular-nums tracking-[-0.04em] text-foreground md:text-4xl">
+                <div key={stat.label} className="metric-item glass-card relative rounded-surface px-6 py-7">
+                  <dd className="text-gradient-numeral text-3xl font-semibold tabular-nums tracking-[-0.04em] md:text-4xl">
                     {stat.value}
                   </dd>
-                  <dt className="mt-2 text-xs font-medium uppercase tracking-[0.12em] text-action">{stat.label}</dt>
+                  <dt className="mt-2 text-xs font-medium uppercase tracking-[0.12em] text-gold">{stat.label}</dt>
                 </div>
               ))}
             </dl>
@@ -170,7 +167,7 @@ export default function HomePage() {
         className="relative border-b border-border-subtle bg-surface py-8 md:py-10"
       >
         <Container>
-          <p className="mb-6 text-xs font-semibold uppercase tracking-[0.16em] text-foreground-muted">
+          <p className="mb-6 text-xs font-semibold uppercase tracking-[0.16em] text-gold">
             Trusted in complex operating environments
           </p>
           <LogoMarquee clients={clients} />
@@ -178,7 +175,7 @@ export default function HomePage() {
             <MotionControls />
             <Link
               href="/partners/"
-              className="inline-flex min-h-11 items-center text-sm font-semibold text-action underline"
+              className="inline-flex min-h-11 items-center text-sm font-semibold text-gold underline decoration-gold/40 underline-offset-4"
             >
               Partners &amp; technology ecosystem
             </Link>
@@ -196,10 +193,10 @@ export default function HomePage() {
         <Container className="relative">
           <Reveal className="grid gap-8 border-b border-border-strong pb-12 lg:grid-cols-12 lg:items-end">
             <div className="lg:col-span-8">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-action">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-gold">
                 One connected delivery model
               </p>
-              <h2 className="mt-5 max-w-[15ch] text-[clamp(2.65rem,5vw,5.25rem)] font-semibold leading-[0.96] tracking-[-0.05em] text-foreground">
+              <h2 className="mt-5 max-w-[15ch] text-[clamp(2.65rem,5vw,5.25rem)] font-semibold leading-[0.96] tracking-[-0.05em]">
                 Built for the whole transformation lifecycle.
               </h2>
             </div>
@@ -218,13 +215,13 @@ export default function HomePage() {
                 <StaggerItem key={pillar.slug}>
                   <Link
                     href={pillar.href}
-                    className="capability-row group grid gap-5 border-t border-border-subtle py-8 transition-[background-color,color] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-focus md:grid-cols-12 md:items-center md:px-4 md:py-10"
+                    className="capability-row group grid gap-5 rounded-surface border-t border-border-subtle py-8 transition-[background-color,color] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-focus md:grid-cols-12 md:items-center md:px-4 md:py-10"
                   >
-                    <span className="flex h-11 w-11 items-center justify-center border border-border-subtle bg-surface text-action transition-[transform,background-color,color,border-color] duration-200 group-hover:border-action group-hover:bg-action group-hover:text-on-action md:col-span-1">
+                    <span className="icon-tile h-11 w-11 rounded-surface md:col-span-1">
                       <Icon aria-hidden size={19} strokeWidth={1.55} />
                     </span>
-                    <span className="text-2xl font-semibold tracking-[-0.025em] text-foreground transition-colors group-hover:text-action md:col-span-4 md:text-3xl">
-                      <span className="mr-4 align-middle text-[0.62rem] font-semibold tabular-nums tracking-[0.14em] text-foreground-muted">
+                    <span className="text-2xl font-semibold tracking-[-0.025em] text-foreground transition-colors group-hover:text-gold md:col-span-4 md:text-3xl">
+                      <span className="mr-4 align-middle text-[0.62rem] font-semibold tabular-nums tracking-[0.14em] text-gold">
                         0{index + 1}
                       </span>
                       {pillar.name}
@@ -232,7 +229,7 @@ export default function HomePage() {
                     <span className="max-w-[55ch] text-sm leading-relaxed text-foreground-muted md:col-span-5">
                       {pillar.tagline}
                     </span>
-                    <span className="flex items-center justify-between gap-3 text-xs font-semibold uppercase tracking-[0.12em] text-foreground group-hover:text-action md:col-span-2 md:justify-end">
+                    <span className="flex items-center justify-between gap-3 text-xs font-semibold uppercase tracking-[0.12em] text-foreground group-hover:text-gold md:col-span-2 md:justify-end">
                       Explore{" "}
                       <ArrowUpRight
                         aria-hidden
@@ -256,10 +253,8 @@ export default function HomePage() {
         <Container className="relative">
           <div className="grid gap-10 lg:grid-cols-12">
             <Reveal className="lg:col-span-5">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-action">
-                In2IT delivery intelligence
-              </p>
-              <h2 className="mt-5 max-w-[12ch] text-[clamp(2.5rem,4.6vw,4.75rem)] font-semibold leading-[0.96] tracking-[-0.05em] text-foreground">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-gold">In2IT delivery intelligence</p>
+              <h2 className="mt-5 max-w-[12ch] text-[clamp(2.5rem,4.6vw,4.75rem)] font-semibold leading-[0.96] tracking-[-0.05em]">
                 Methods that make delivery observable.
               </h2>
               <p className="mt-7 max-w-[45ch] text-base leading-relaxed text-foreground-muted">
@@ -275,10 +270,10 @@ export default function HomePage() {
                     href={item.href}
                     className="method-row group grid gap-4 border-b border-border-subtle py-7 transition-colors duration-200 sm:grid-cols-[3rem_3rem_1fr_auto] sm:items-start"
                   >
-                    <span className="pt-3 text-[0.65rem] font-semibold tabular-nums tracking-[0.14em] text-action">
+                    <span className="pt-3 text-[0.65rem] font-semibold tabular-nums tracking-[0.14em] text-gold">
                       {item.code}
                     </span>
-                    <span className="flex h-11 w-11 items-center justify-center border border-border-subtle bg-surface text-action shadow-soft transition-[transform,background-color,color,border-color] duration-200 group-hover:border-action group-hover:bg-action group-hover:text-on-action">
+                    <span className="icon-tile h-11 w-11 rounded-surface">
                       <item.Icon aria-hidden size={18} strokeWidth={1.55} />
                     </span>
                     <span>
@@ -292,7 +287,7 @@ export default function HomePage() {
                     <ArrowUpRight
                       aria-hidden
                       size={19}
-                      className="mt-3 text-action transition-transform duration-200 group-hover:-translate-y-1 group-hover:translate-x-1"
+                      className="mt-3 text-gold transition-transform duration-200 group-hover:-translate-y-1 group-hover:translate-x-1"
                     />
                   </Link>
                 </StaggerItem>
@@ -310,10 +305,8 @@ export default function HomePage() {
         <Container className="relative">
           <Reveal className="grid gap-8 lg:grid-cols-12 lg:items-end">
             <div className="lg:col-span-8">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-action">
-                From decision to operation
-              </p>
-              <h2 className="mt-5 max-w-[14ch] text-[clamp(2.65rem,5vw,5.25rem)] font-semibold leading-[0.96] tracking-[-0.05em] text-foreground">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-gold">From decision to operation</p>
+              <h2 className="mt-5 max-w-[14ch] text-[clamp(2.65rem,5vw,5.25rem)] font-semibold leading-[0.96] tracking-[-0.05em]">
                 One continuous line of accountability.
               </h2>
             </div>
@@ -330,7 +323,7 @@ export default function HomePage() {
             {transformationStages.map((stage) => (
               <StaggerItem key={stage.title} className={stage.className}>
                 <article
-                  className={`stage-card relative min-h-[24rem] overflow-hidden border p-7 text-foreground md:p-9 ${stage.number === "02" ? "stage-card-featured border-action/25 bg-surface shadow-[0_24px_70px_rgba(36,94,145,.13)]" : "border-border-subtle bg-surface/85"}`}
+                  className={`stage-card relative min-h-[24rem] overflow-hidden border p-7 text-foreground md:p-9 ${stage.number === "02" ? "stage-card-featured glass-elevated rounded-feature border-gold-soft/70" : "glass-card rounded-feature"}`}
                 >
                   <div
                     aria-hidden
@@ -338,12 +331,10 @@ export default function HomePage() {
                   />
                   <div className="relative flex h-full flex-col">
                     <div className="flex items-center justify-between">
-                      <span className="text-[0.65rem] font-semibold tabular-nums tracking-[0.16em] text-action">
+                      <span className="text-[0.65rem] font-semibold tabular-nums tracking-[0.16em] text-gold">
                         {stage.number}
                       </span>
-                      <span
-                        className={`flex h-12 w-12 items-center justify-center border text-action ${stage.number === "02" ? "border-action/25 bg-action/[0.09]" : "border-border-subtle bg-surface"}`}
-                      >
+                      <span className="icon-tile h-12 w-12 rounded-surface">
                         <stage.Icon aria-hidden size={21} strokeWidth={1.5} />
                       </span>
                     </div>
@@ -355,7 +346,7 @@ export default function HomePage() {
                           key={point}
                           className="flex items-center gap-3 py-1.5 text-xs font-semibold uppercase tracking-[0.1em]"
                         >
-                          <span className="h-1 w-1 bg-action" />
+                          <span className="h-1 w-1 bg-gold" />
                           {point}
                         </li>
                       ))}
@@ -376,8 +367,8 @@ export default function HomePage() {
         <Container className="relative">
           <Reveal className="grid gap-8 lg:grid-cols-12">
             <div className="lg:col-span-5">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-action">Operating context</p>
-              <h2 className="mt-5 max-w-[12ch] text-[clamp(2.65rem,5vw,5rem)] font-semibold leading-[0.97] tracking-[-0.05em] text-foreground">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-gold">Operating context</p>
+              <h2 className="mt-5 max-w-[12ch] text-[clamp(2.65rem,5vw,5rem)] font-semibold leading-[0.97] tracking-[-0.05em]">
                 Enterprise experience, grounded in the real world.
               </h2>
             </div>
@@ -394,7 +385,7 @@ export default function HomePage() {
               <StaggerItem key={industry.name} className={industry.className}>
                 <Link
                   href={industry.href}
-                  className="industry-tile group relative block h-full overflow-hidden bg-brand"
+                  className="industry-tile group relative block h-full overflow-hidden rounded-feature bg-brand"
                 >
                   <Image
                     src={industry.image}
@@ -409,7 +400,7 @@ export default function HomePage() {
                   />
                   <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-6 p-6 text-on-brand md:p-8">
                     <div>
-                      <industry.Icon aria-hidden size={18} strokeWidth={1.5} className="mb-4 text-brand-muted" />
+                      <industry.Icon aria-hidden size={18} strokeWidth={1.5} className="mb-4 text-gold-on-brand" />
                       <h3 className="text-2xl font-semibold tracking-[-0.03em] md:text-3xl">{industry.name}</h3>
                       <p className="mt-2 max-w-[38ch] text-sm leading-relaxed text-on-brand/70">{industry.detail}</p>
                     </div>
@@ -424,18 +415,18 @@ export default function HomePage() {
             ))}
           </Stagger>
 
-          <div className="mt-3 grid border-t border-border-strong sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {industries.slice(2, 6).map((industry) => (
               <Link
                 key={industry.slug}
                 href={`/industries/${industry.slug}/`}
-                className="group flex min-h-24 items-center justify-between gap-4 border-b border-border-subtle py-5 sm:px-5 sm:odd:border-r lg:border-r lg:last:border-r-0"
+                className="glass-card group flex min-h-24 items-center justify-between gap-4 rounded-surface px-5 py-5"
               >
-                <span className="text-sm font-semibold text-foreground group-hover:text-action">{industry.name}</span>
+                <span className="text-sm font-semibold text-foreground group-hover:text-gold">{industry.name}</span>
                 <ArrowRight
                   aria-hidden
                   size={16}
-                  className="shrink-0 text-foreground-muted transition-transform group-hover:translate-x-1 group-hover:text-action"
+                  className="shrink-0 text-foreground-muted transition-transform group-hover:translate-x-1 group-hover:text-gold"
                 />
               </Link>
             ))}
@@ -449,13 +440,13 @@ export default function HomePage() {
         </Container>
       </section>
 
-      <section className="border-y border-border-subtle bg-surface py-8">
+      <section className="glass border-x-0 py-8">
         <Container>
           <div className="grid gap-5 md:grid-cols-3">
             {["SAP Gold Partner", "300+ SAP consultants", "1,000+ combined years of SAP experience"].map(
               (item, index) => (
                 <p key={item} className="flex items-center gap-4 text-sm font-semibold text-foreground">
-                  <span className="text-[0.65rem] tabular-nums tracking-[0.14em] text-action">0{index + 1}</span>
+                  <span className="text-[0.65rem] tabular-nums tracking-[0.14em] text-gold">0{index + 1}</span>
                   {item}
                 </p>
               ),
