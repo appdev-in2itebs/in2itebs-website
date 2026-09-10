@@ -122,14 +122,15 @@ test("Reveal, Stagger and StaggerItem render the reveal hooks", () => {
   assert.match(source, /"stagger"/);
   assert.match(source, /--reveal-delay/);
   assert.match(source, /Math\.min\(index, 8\) \* 70/);
+  // `Reveal` honours its own `delay` prop (seconds at the call sites) through the same custom property.
+  assert.match(source, /Math\.round\(delay \* 1000\)/);
 });
 
 test("MotionObserver is mounted before main and MotionControls declares ownership", () => {
   const layout = read("app/layout.tsx");
-  assert.ok(
-    layout.indexOf("<MotionObserver />") < layout.indexOf('<main id="main">'),
-    "MotionObserver must precede main",
-  );
+  const observerAt = layout.indexOf("<MotionObserver />");
+  assert.ok(observerAt >= 0, "MotionObserver is not mounted in the root layout");
+  assert.ok(observerAt < layout.indexOf('<main id="main">'), "MotionObserver must precede main");
   const controls = read("components/sections/motion-controls.tsx");
   assert.match(controls, /dataset\.motionOwner = "controls"/);
   assert.match(controls, /delete document\.documentElement\.dataset\.motionOwner/);

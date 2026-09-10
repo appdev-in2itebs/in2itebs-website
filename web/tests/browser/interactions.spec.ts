@@ -96,3 +96,19 @@ test("the quick-contact button keeps keyboard focus near the footer", async ({ p
   await page.keyboard.press("Tab");
   await expect(button).toBeHidden();
 });
+test("below-the-fold reveals become visible on scroll on an observer-owned page", async ({ page }) => {
+  // Premium restyle: /about/ has no MotionControls, so MotionObserver owns the motion flags and drives the reveals.
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await page.goto("/about/");
+  await expect(page.locator("html")).toHaveAttribute("data-motion-ready", "true");
+  // Pin the first still-hidden reveal by index: a `:not([data-reveal="in"])` locator would
+  // re-resolve to a different element the moment this one flips.
+  const reveals = page.locator(".reveal");
+  const index = await reveals.evaluateAll((els) => els.findIndex((el) => el.dataset.reveal !== "in"));
+  expect(index).toBeGreaterThan(-1);
+  const pending = reveals.nth(index);
+  await expect(pending).toHaveCSS("opacity", "0");
+  await pending.scrollIntoViewIfNeeded();
+  await expect(pending).toHaveAttribute("data-reveal", "in");
+  await expect(pending).toHaveCSS("opacity", "1");
+});

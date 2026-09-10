@@ -7,15 +7,24 @@ import { cn } from "@/lib/utils";
 export function Reveal({
   children,
   className,
+  delay,
   as = "div",
 }: {
   children: ReactNode;
+  /** Seconds, matching the call sites; becomes the `--reveal-delay` transition delay. */
   delay?: number;
   className?: string;
   as?: "div" | "section" | "li" | "span";
 }) {
   const Tag: ElementType = as;
-  return <Tag className={cn("reveal", className)}>{children}</Tag>;
+  return (
+    <Tag
+      className={cn("reveal", className)}
+      style={delay ? ({ "--reveal-delay": `${Math.round(delay * 1000)}ms` } as CSSProperties) : undefined}
+    >
+      {children}
+    </Tag>
+  );
 }
 
 type StaggerItemProps = { children: ReactNode; className?: string; index?: number };
