@@ -302,11 +302,34 @@ test("class names used in markup are either Tailwind utilities or defined in glo
     new RegExp(`\\.stage-card-featured\\b`).test(css),
     'the "defined" branch must be able to match a class globals.css really defines',
   );
-  for (const hook of ["content-reveal", "cta-light", "flow-line", "metric-grid"]) {
+  for (const hook of [
+    "content-reveal",
+    "cta-light",
+    "flow-line",
+    "metric-grid",
+    // Premium restyle utilities must exist in globals.css wherever a component uses them.
+    "glass",
+    "glass-card",
+    "glass-elevated",
+    "glass-pill",
+    "glass-gold",
+    "hero-ambient",
+    "reveal",
+    "text-gradient-numeral",
+    "nav-link",
+    "btn-shimmer",
+    "icon-tile",
+  ]) {
     const defined = new RegExp(`\\.${hook}\\b`).test(css);
-    const used = ["components/motion/reveal.tsx", "components/sections/cta-section.tsx", "app/page.tsx"].some((f) =>
-      readFileSync(path.join(process.cwd(), f), "utf8").includes(hook),
-    );
+    const used = [
+      "components/motion/reveal.tsx",
+      "components/sections/cta-section.tsx",
+      "app/page.tsx",
+      "components/ui/button.tsx",
+      "components/ui/card.tsx",
+      "components/layout/header.tsx",
+      "components/sections/service-hero.tsx",
+    ].some((f) => readFileSync(path.join(process.cwd(), f), "utf8").includes(hook));
     assert.ok(defined || !used, `${hook} is used but never defined`);
   }
 });

@@ -29,7 +29,8 @@ html[data-motion-paused="true"] *::after {
   animation-play-state: paused !important;
 }
 /* Pausing decorative loops must never freeze essential entrance content. */
-html[data-motion-paused="true"] .hero-enter {
+html[data-motion-paused="true"] .hero-enter,
+html[data-motion-paused="true"] .reveal {
   opacity: 1 !important;
   transform: none !important;
   animation: none !important;
@@ -96,6 +97,11 @@ html:not([data-motion-ready]) .client-ribbon {
     opacity: 1 !important;
     transform: none !important;
     animation: none !important;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
 }
 
@@ -317,6 +323,211 @@ html:not([data-motion-ready]) .client-ribbon {
   .rule-sand {
     @apply h-px w-full bg-sand/60;
   }
+
+  /* ---- Premium restyle: glass surfaces ---- */
+  .glass {
+    background: oklch(var(--color-glass) / var(--glass-alpha));
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(140%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(140%);
+    border: 1px solid oklch(var(--color-glass-line) / var(--glass-line-alpha, 0.55));
+    border-top-color: oklch(var(--color-glass-line) / var(--glass-top-alpha, 0.9));
+    box-shadow: var(--shadow-glass);
+  }
+  .theme-dark .glass,
+  .theme-dark .glass-elevated,
+  .theme-dark .glass-card,
+  .theme-dark .glass-pill {
+    --glass-line-alpha: 0.07;
+    --glass-top-alpha: 0.14;
+  }
+  .glass-elevated {
+    background: oklch(var(--color-glass) / var(--glass-alpha-elevated));
+    -webkit-backdrop-filter: blur(24px) saturate(150%);
+    backdrop-filter: blur(24px) saturate(150%);
+    border: 1px solid oklch(var(--color-glass-line) / var(--glass-line-alpha, 0.55));
+    border-top-color: oklch(var(--color-glass-line) / var(--glass-top-alpha, 0.9));
+    box-shadow:
+      var(--shadow-glass),
+      inset 0 1px 0 0 oklch(var(--color-glass-line) / var(--glass-inset-alpha, 0.6));
+  }
+  .theme-dark .glass-elevated {
+    --glass-inset-alpha: 0.12;
+  }
+  .glass-card {
+    background: oklch(var(--color-glass) / var(--glass-alpha));
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(140%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(140%);
+    border: 1px solid oklch(var(--color-glass-line) / var(--glass-line-alpha, 0.55));
+    border-top-color: oklch(var(--color-glass-line) / var(--glass-top-alpha, 0.9));
+    box-shadow: var(--shadow-glass);
+    transition:
+      transform 350ms cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 350ms cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 350ms cubic-bezier(0.16, 1, 0.3, 1),
+      background-color 350ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .glass-card:focus-within {
+    border-color: oklch(var(--color-gold-soft) / 0.7);
+    box-shadow: var(--shadow-glass-hover), var(--glow-gold);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .glass-card:hover {
+      transform: translateY(-3px);
+      border-color: oklch(var(--color-gold-soft) / 0.7);
+      box-shadow: var(--shadow-glass-hover), var(--glow-gold);
+    }
+    .theme-dark .glass-card:hover {
+      border-color: oklch(var(--color-gold) / 0.45);
+    }
+  }
+  .glass-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: oklch(var(--color-glass) / var(--glass-alpha-elevated));
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+    border: 1px solid oklch(var(--color-glass-line) / var(--glass-line-alpha, 0.55));
+    border-top-color: oklch(var(--color-glass-line) / var(--glass-top-alpha, 0.9));
+    border-radius: 9999px;
+    padding: 0.375rem 0.875rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .glass-gold {
+    background: linear-gradient(
+      135deg,
+      oklch(var(--color-gold-soft) / 0.28) 0%,
+      oklch(var(--color-gold-soft) / 0.08) 100%
+    );
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+    border: 1px solid oklch(var(--color-gold) / 0.35);
+    border-top-color: oklch(var(--color-gold) / 0.55);
+    color: oklch(var(--color-gold));
+  }
+  .rule-gold {
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      oklch(var(--color-gold-soft) / 0.9) 20%,
+      oklch(var(--color-gold) / 0.9) 50%,
+      oklch(var(--color-gold-soft) / 0.9) 80%,
+      transparent
+    );
+  }
+  @supports not (backdrop-filter: blur(1px)) {
+    .glass,
+    .glass-card,
+    .glass-elevated,
+    .glass-pill {
+      --glass-alpha: 0.94;
+      --glass-alpha-elevated: 0.96;
+    }
+  }
+
+  /* ---- Premium restyle: text ---- */
+  .text-gold {
+    color: oklch(var(--color-gold));
+  }
+  .text-gradient-heading,
+  main h1,
+  main h2 {
+    background-image: var(--gradient-heading);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+  main .theme-on-brand h1,
+  main .theme-on-brand h2 {
+    background-image: var(--gradient-heading-on-brand);
+  }
+  .text-gradient-numeral {
+    background-image: var(--gradient-numeral);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+  .heading-plain {
+    background-image: none;
+    color: inherit;
+    -webkit-text-fill-color: currentColor;
+  }
+
+  /* ---- Premium restyle: interaction ---- */
+  .nav-link {
+    position: relative;
+  }
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0.5rem;
+    right: 0.5rem;
+    bottom: 0.35rem;
+    height: 2px;
+    border-radius: 9999px;
+    background: oklch(var(--color-gold));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .nav-link[aria-current="page"]::after {
+    transform: scaleX(1);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .nav-link:hover::after,
+    .nav-link:focus-visible::after {
+      transform: scaleX(1);
+    }
+  }
+  .btn-shimmer {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .btn-shimmer::after {
+    content: "";
+    position: absolute;
+    inset: -40% -60%;
+    z-index: -1;
+    background: linear-gradient(115deg, transparent 35%, oklch(var(--color-gold-soft) / 0.55) 50%, transparent 65%);
+    transform: translateX(-120%);
+    opacity: 0;
+    pointer-events: none;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .btn-shimmer:hover::after {
+      opacity: 0.35;
+      animation: btn-shimmer 650ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+  }
+  .icon-tile {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid oklch(var(--color-border-subtle));
+    background: oklch(var(--color-glass) / var(--glass-alpha-elevated));
+    color: oklch(var(--color-gold));
+    transition:
+      background-color 200ms ease-out,
+      color 200ms ease-out,
+      border-color 200ms ease-out,
+      box-shadow 200ms ease-out;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .group:hover .icon-tile,
+    a:hover > .icon-tile {
+      background: oklch(var(--color-action));
+      color: oklch(var(--color-fg-on-action));
+      border-color: oklch(var(--color-action));
+      box-shadow: 0 0 0 1px oklch(var(--color-gold-soft) / 0.8);
+    }
+  }
 }
 
 @layer utilities {
@@ -535,6 +746,38 @@ html:not([data-motion-ready]) .client-ribbon {
   }
   .hero-enter-4 {
     animation-delay: 220ms;
+  }
+
+  /* ---- Premium restyle: scroll-in reveals (visible-first; hidden only after hydration) ---- */
+  .reveal {
+    transition:
+      opacity 600ms ease-out,
+      transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  html[data-motion-ready]:not([data-motion-paused="true"]) .reveal:not([data-reveal="in"]) {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  .stagger {
+    --stagger-step: 70ms;
+  }
+  .hero-ambient {
+    background-image:
+      radial-gradient(circle at 15% 20%, oklch(var(--color-action) / 0.1), transparent 40%),
+      radial-gradient(circle at 82% 30%, oklch(var(--color-gold-soft) / 0.22), transparent 38%),
+      radial-gradient(circle at 50% 100%, oklch(var(--color-fg-brand-muted) / 0.12), transparent 45%);
+  }
+  .theme-dark .hero-ambient {
+    background-image:
+      radial-gradient(circle at 50% 0%, rgb(255 255 255 / 0.04) 0%, transparent 60%),
+      radial-gradient(circle at 10% 30%, oklch(var(--color-gold) / 0.06) 0%, transparent 50%),
+      radial-gradient(circle at 90% 40%, rgb(255 255 255 / 0.02) 0%, transparent 50%);
+  }
+  @keyframes btn-shimmer {
+    to {
+      transform: translateX(120%);
+    }
   }
 
   .ambient-orb {

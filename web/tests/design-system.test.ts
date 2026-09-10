@@ -70,3 +70,48 @@ test("three.js is pinned exactly", () => {
   assert.equal(pkg.dependencies.three, "0.186.0");
   assert.equal(pkg.devDependencies["@types/three"], "0.185.4");
 });
+
+test("every glass, gradient and motion utility the components use is defined", () => {
+  const source = css();
+  for (const hook of [
+    "glass",
+    "glass-elevated",
+    "glass-card",
+    "glass-pill",
+    "glass-gold",
+    "rule-gold",
+    "hero-ambient",
+    "reveal",
+    "stagger",
+    "text-gradient-heading",
+    "text-gradient-numeral",
+    "text-gold",
+    "heading-plain",
+    "nav-link",
+    "btn-shimmer",
+    "icon-tile",
+  ])
+    assert.ok(new RegExp(`\\.${hook}(?![\\w-])`).test(source), `.${hook} is not defined in globals.css`);
+});
+
+test("headings inside main carry the gradient and can opt out", () => {
+  const source = css();
+  assert.match(source, /main h1,\s*main h2\s*\{[^}]*background-image:\s*var\(--gradient-heading\)/);
+  assert.match(
+    source,
+    /main \.theme-on-brand h1,\s*main \.theme-on-brand h2\s*\{[^}]*var\(--gradient-heading-on-brand\)/,
+  );
+  assert.match(source, /\.heading-plain\s*\{[^}]*background-image:\s*none/);
+});
+
+test("reveals hide content only after hydration and never while paused or reduced", () => {
+  const source = css();
+  const hidden = source.match(/([^\n{}]*)\{\s*opacity:\s*0;\s*transform:\s*translateY\(18px\);\s*\}/);
+  assert.ok(hidden, "no reveal hiding rule");
+  assert.equal(
+    hidden![1].trim(),
+    'html[data-motion-ready]:not([data-motion-paused="true"]) .reveal:not([data-reveal="in"])',
+  );
+  const reduced = block(source, "@media (prefers-reduced-motion: reduce)");
+  assert.match(reduced, /\.reveal\s*\{[^}]*opacity:\s*1 !important/);
+});
