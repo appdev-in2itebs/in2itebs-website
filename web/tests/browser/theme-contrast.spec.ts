@@ -28,6 +28,14 @@ for (const theme of ["light", "dark"])
         ["fg-on-action", "action", 4.5],
         ["fg-on-action", "action-hover", 4.5],
         ["fg-logo", "bg-logo", 4.5],
+        // Premium restyle: gold text roles must clear the same floor as every other text role.
+        ["gold", "bg-canvas", 4.5],
+        ["gold", "bg-surface", 4.5],
+        ["gold", "bg-subtle", 4.5],
+        ["gold-display", "bg-canvas", 3.5],
+        ["gold-display", "bg-surface", 3.5],
+        ["gold-display", "bg-subtle", 3.5],
+        ["gold-on-brand", "bg-brand", 4.5],
         ["border-strong", "bg-surface", 3],
       );
       return pairs.map(([fg, bg, minimum]) => {

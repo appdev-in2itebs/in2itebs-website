@@ -126,6 +126,37 @@ html:not([data-motion-ready]) .client-ribbon {
     --color-feedback-success: 39% 0.09 155;
     --color-feedback-error: 46% 0.13 19;
 
+    /* Premium restyle (2026-09-10): gold roles and glass surfaces. */
+    --color-gold: 51.14% 0.082 83.6;
+    --color-gold-display: 58% 0.085 84;
+    --color-gold-on-brand: 72.45% 0.1 82.3;
+    --color-gold-soft: 83.98% 0.085 91;
+    --color-glass: 99.2% 0.003 255;
+    --color-glass-line: 100% 0 0;
+    --shadow-glass: 0 1px 2px rgb(21 33 61 / 0.04), 0 20px 50px -24px rgb(21 33 61 / 0.28);
+    --shadow-glass-hover: 0 2px 4px rgb(21 33 61 / 0.05), 0 30px 60px -24px rgb(21 33 61 / 0.34);
+    --glow-gold: 0 0 36px -8px oklch(var(--color-gold-soft) / 0.55);
+    --glass-alpha: 0.62;
+    --glass-alpha-elevated: 0.78;
+    --glass-blur: 18px;
+    --gradient-heading: linear-gradient(
+      135deg,
+      oklch(var(--color-fg-primary)) 0%,
+      oklch(var(--color-fg-primary)) 48%,
+      oklch(var(--color-gold-display)) 100%
+    );
+    --gradient-heading-on-brand: linear-gradient(
+      135deg,
+      oklch(var(--color-fg-on-brand)) 0%,
+      oklch(var(--color-fg-on-brand)) 45%,
+      oklch(var(--color-gold-on-brand)) 100%
+    );
+    --gradient-numeral: linear-gradient(
+      180deg,
+      oklch(var(--color-fg-primary)) 0%,
+      oklch(var(--color-gold-display)) 100%
+    );
+
     /* Compatibility aliases for routes that have not yet adopted semantic utility names. */
     --color-legacy-navy: var(--color-fg-primary);
     --color-legacy-white: var(--color-bg-surface);
@@ -136,21 +167,21 @@ html:not([data-motion-ready]) .client-ribbon {
     --color-legacy-off-white: var(--color-bg-subtle);
     --color-legacy-sand: 75% 0.04 95;
 
-    --radius-control: 0.3rem;
-    --radius-surface: 0.45rem;
-    --radius-feature: 0.65rem;
+    --radius-control: 0.75rem;
+    --radius-surface: 1rem;
+    --radius-feature: 1.5rem;
     --shadow-navigation: 0 14px 40px rgb(21 33 61 / 0.12);
     --shadow-interactive: 0 18px 48px rgb(21 33 61 / 0.14);
   }
 
   .theme-dark {
     color-scheme: dark;
-    --color-bg-canvas: 18% 0.032 258;
-    --color-bg-surface: 22.5% 0.038 258;
-    --color-bg-subtle: 27.5% 0.042 258;
-    --color-bg-brand: 21% 0.05 265;
-    --color-fg-primary: 95% 0.012 258;
-    --color-fg-secondary: 80.5% 0.028 258;
+    --color-bg-canvas: 12.87% 0.008 268.5;
+    --color-bg-surface: 15.51% 0.013 270.4;
+    --color-bg-subtle: 21.09% 0.025 270;
+    --color-bg-brand: 15.51% 0.013 270.4;
+    --color-fg-primary: 96.83% 0.007 247.9;
+    --color-fg-secondary: 86.9% 0.02 252.9;
     --color-fg-on-brand: 98.2% 0.006 258.32;
     --color-fg-brand-muted: 83.6% 0.055 239;
     --color-bg-logo: 98.2% 0.006 258.32;
@@ -158,11 +189,37 @@ html:not([data-motion-ready]) .client-ribbon {
     --color-action: 78% 0.078 239;
     --color-action-hover: 86% 0.052 239;
     --color-fg-on-action: 20% 0.045 255;
-    --color-border-subtle: 42% 0.045 260;
+    --color-border-subtle: 31.26% 0.043 269.1;
     --color-border-strong: 62% 0.052 258;
     --color-focus: 82% 0.075 239;
     --color-feedback-success: 82% 0.1 160;
     --color-feedback-error: 80% 0.115 13;
+
+    --color-gold: 72.45% 0.1 82.3;
+    --color-gold-display: 83.98% 0.085 91;
+    --color-gold-on-brand: 72.45% 0.1 82.3;
+    --color-gold-soft: 83.98% 0.085 91;
+    --color-glass: 17.9% 0.019 270.1;
+    --color-glass-line: 100% 0 0;
+    --shadow-glass: 0 20px 50px -15px rgb(0 0 0 / 0.7);
+    --shadow-glass-hover: 0 30px 60px -15px rgb(0 0 0 / 0.9);
+    --glow-gold: 0 0 35px -5px oklch(var(--color-gold) / 0.25);
+    --glass-alpha: 0.65;
+    --glass-alpha-elevated: 0.78;
+    --glass-blur: 24px;
+    --gradient-heading: linear-gradient(
+      135deg,
+      #ffffff 0%,
+      oklch(var(--color-fg-secondary)) 55%,
+      oklch(var(--color-gold-display)) 100%
+    );
+    --gradient-heading-on-brand: linear-gradient(
+      135deg,
+      #ffffff 0%,
+      oklch(var(--color-fg-secondary)) 55%,
+      oklch(var(--color-gold-display)) 100%
+    );
+    --gradient-numeral: linear-gradient(180deg, #ffffff 0%, oklch(var(--color-gold)) 100%);
 
     --color-legacy-navy: var(--color-fg-primary);
     --color-legacy-white: var(--color-bg-surface);
@@ -173,8 +230,8 @@ html:not([data-motion-ready]) .client-ribbon {
     --color-legacy-off-white: var(--color-bg-subtle);
     --color-legacy-sand: 70% 0.045 95;
 
-    --shadow-navigation: 0 18px 48px rgb(0 0 0 / 0.32);
-    --shadow-interactive: 0 22px 56px rgb(0 0 0 / 0.36);
+    --shadow-navigation: 0 18px 48px rgb(0 0 0 / 0.55);
+    --shadow-interactive: 0 22px 56px rgb(0 0 0 / 0.6);
   }
 
   html {
@@ -243,6 +300,8 @@ html:not([data-motion-ready]) .client-ribbon {
     --color-legacy-white: var(--color-fg-on-brand);
     --color-legacy-blue-light: var(--color-fg-brand-muted);
     --color-legacy-blue-pale: var(--color-fg-brand-muted);
+    --color-gold: var(--color-gold-on-brand);
+    --color-gold-display: var(--color-gold-on-brand);
   }
 
   [id] {
