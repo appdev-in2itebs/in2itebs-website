@@ -57,7 +57,7 @@ export default function WhyIn2ITEBSPage() {
           <Reveal delay={0.1}>
             <AllianceStrip />
           </Reveal>
-          <div className="mt-12 flex flex-wrap gap-x-6 gap-y-2 border-t border-sand/40 pt-8 text-xs font-medium uppercase tracking-wider text-grey-muted">
+          <div className="mt-12 flex flex-wrap gap-x-6 gap-y-2 border-t border-gold-soft/40 pt-8 text-xs font-medium uppercase tracking-wider text-gold">
             {footerCertifications.map((c) => (
               <span key={c}>{c}</span>
             ))}
@@ -76,12 +76,12 @@ export default function WhyIn2ITEBSPage() {
           <Reveal delay={0.1}>
             <Card tone="navy" className="md:p-12">
               <div className="flex flex-col gap-7">
-                <span className="label-caps text-blue-light">Our point of view</span>
-                <p className="max-w-measure text-lg leading-relaxed text-blue-light md:text-xl">
+                <span className="label-caps text-gold-on-brand">Our point of view</span>
+                <p className="max-w-measure text-lg leading-relaxed text-brand-muted md:text-xl">
                   Bring SuccessFactors, Joule, BTP AI and extensions into one operating model — composable, intelligent,
                   continuous.
                 </p>
-                <blockquote className="max-w-3xl font-serif text-2xl font-bold leading-snug text-white md:text-3xl">
+                <blockquote className="max-w-3xl text-2xl font-bold leading-snug text-on-brand md:text-3xl">
                   &ldquo;Convergence is where SAP investments turn into measurable business
                   <Accent> outcomes</Accent>.&rdquo;
                 </blockquote>

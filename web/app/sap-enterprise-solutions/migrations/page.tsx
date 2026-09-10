@@ -107,13 +107,13 @@ export default function MigrationsPage() {
           </Reveal>
           <FeatureGrid features={deRisk} columns={3} />
           <Reveal delay={0.1} className="mt-8 max-w-2xl">
-            <p className="text-[0.95rem] leading-relaxed text-grey-muted">
+            <p className="text-[0.95rem] leading-relaxed text-foreground-muted">
               Migration accuracy is a data-management discipline, not an afterthought. Where the data is complex, we
               bring in Syniti to profile, cleanse and reconcile it ahead of every load.
             </p>
             <Link
               href="/sap-enterprise-solutions/syniti/"
-              className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-blue-accent hover:text-navy"
+              className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-action hover:text-foreground"
             >
               Explore Syniti data management <ArrowUpRight size={16} strokeWidth={1.5} />
             </Link>
@@ -124,12 +124,12 @@ export default function MigrationsPage() {
       {/* PROOF BAND */}
       <Section tone="navy" className="relative overflow-hidden">
         <div aria-hidden className="pointer-events-none absolute inset-0 opacity-[0.07]">
-          <div className="absolute -right-24 top-10 h-[30rem] w-[30rem] origin-center rotate-45 border-[64px] border-blue-light" />
+          <div className="absolute -right-24 top-10 h-[30rem] w-[30rem] origin-center rotate-45 border-[64px] border-gold-on-brand" />
         </div>
         <Container>
           <Reveal className="mb-10 max-w-2xl">
             <Eyebrow onDark>Proof</Eyebrow>
-            <h2 className="mt-5 font-serif text-h2 font-bold text-white">
+            <h2 className="mt-5 text-h2 font-bold text-on-brand">
               Moved without <Accent>surprises</Accent>.
             </h2>
           </Reveal>
@@ -140,9 +140,9 @@ export default function MigrationsPage() {
               { value: "100%", label: "Successful cutover rate" },
             ].map((s) => (
               <StaggerItem key={s.label} className="h-full">
-                <Card tone="navy" bezel={false} className="h-full ring-1 ring-white/10">
-                  <div className="font-serif text-[2.5rem] font-bold leading-none text-white">{s.value}</div>
-                  <p className="mt-3 text-[0.95rem] leading-relaxed text-blue-light">{s.label}</p>
+                <Card tone="navy" bezel={false} className="h-full">
+                  <div className="text-[2.5rem] font-bold leading-none text-gold-on-brand">{s.value}</div>
+                  <p className="mt-3 text-[0.95rem] leading-relaxed text-brand-muted">{s.label}</p>
                 </Card>
               </StaggerItem>
             ))}

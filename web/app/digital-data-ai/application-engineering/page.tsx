@@ -103,9 +103,9 @@ export default function ApplicationEngineeringPage() {
           <Stagger className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {lifecycle.map((l) => (
               <StaggerItem key={l.stage} className="h-full">
-                <div className="flex h-full flex-col gap-2 rounded-xl2 border border-navy/5 bg-off-white p-6">
-                  <span className="label-caps text-blue-accent">{l.stage}</span>
-                  <p className="text-[0.9rem] leading-relaxed text-grey-muted">{l.note}</p>
+                <div className="glass-card flex h-full flex-col gap-2 rounded-surface p-6">
+                  <span className="label-caps text-gold">{l.stage}</span>
+                  <p className="text-[0.9rem] leading-relaxed text-foreground-muted">{l.note}</p>
                 </div>
               </StaggerItem>
             ))}

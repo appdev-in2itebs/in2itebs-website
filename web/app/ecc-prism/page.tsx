@@ -62,7 +62,7 @@ export default function EccPrismPage() {
           <Reveal delay={0.1} className="mt-8">
             <Link
               href="/sap-enterprise-solutions/"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-blue-accent"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-action"
             >
               Explore SAP Enterprise Solutions
               <ArrowUpRight size={16} strokeWidth={1.5} />

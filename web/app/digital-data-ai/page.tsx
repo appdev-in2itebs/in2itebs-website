@@ -97,9 +97,9 @@ function SubPracticeCard({ title, summary, href }: { title: string; summary: str
   const isInternalPage = href.startsWith("/");
   const content = (
     <>
-      <h3 className="font-serif text-h3 font-bold text-navy">{title}</h3>
-      <p className="mt-3 flex-1 text-[0.95rem] leading-relaxed text-grey-muted">{summary}</p>
-      <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-blue-accent">
+      <h3 className="text-h3 font-bold text-foreground">{title}</h3>
+      <p className="mt-3 flex-1 text-[0.95rem] leading-relaxed text-foreground-muted">{summary}</p>
+      <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-gold">
         {isInternalPage ? "Explore" : "Jump to section"}
         <ArrowRight
           size={15}
@@ -110,7 +110,7 @@ function SubPracticeCard({ title, summary, href }: { title: string; summary: str
     </>
   );
   const classes = cn(
-    "group flex h-full flex-col rounded-xl2 border-l-4 border-blue-light bg-white p-7 shadow-soft transition-[transform,box-shadow] duration-200 ease-out hover:-translate-y-0.5 hover:shadow-lift focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-accent/50",
+    "group glass-card flex h-full flex-col rounded-surface border-l-4 border-l-gold p-7 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus",
   );
   if (isInternalPage) {
     return (

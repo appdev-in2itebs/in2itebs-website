@@ -43,17 +43,14 @@ export default function SapEnterpriseSolutionsPage() {
       />
 
       {/* CREDENTIAL STRIP */}
-      <div className="border-b border-sand/30 bg-off-white">
+      <div className="border-b border-gold-soft/30 bg-surface-subtle">
         <Container>
           <ul className="flex flex-wrap items-center gap-x-2.5 gap-y-2 py-4">
             <li className="mr-1">
               <SapPartnerBadge />
             </li>
             {["RISE with SAP", "PCE Partner", "Co-Innovation Partner"].map((c) => (
-              <li
-                key={c}
-                className="rounded-full border border-navy/10 bg-white px-3.5 py-1.5 text-xs font-semibold text-navy"
-              >
+              <li key={c} className="glass-pill text-foreground">
                 {c}
               </li>
             ))}
@@ -62,10 +59,10 @@ export default function SapEnterpriseSolutionsPage() {
       </div>
 
       {/* SAP SUITE LOGOS (deck-native) */}
-      <div className="bg-white">
+      <div className="bg-canvas">
         <Container>
-          <div className="flex flex-wrap items-center gap-x-10 gap-y-4 border-b border-navy/5 py-5">
-            <span className="label-caps text-grey-muted">Delivered across the SAP suite</span>
+          <div className="flex flex-wrap items-center gap-x-10 gap-y-4 border-b border-border-subtle py-5">
+            <span className="label-caps text-gold">Delivered across the SAP suite</span>
             {[
               { src: "/logos/sap/sap-s4hana.png", alt: "SAP S/4HANA" },
               { src: "/logos/sap/sap-ariba.png", alt: "SAP Ariba" },
@@ -81,7 +78,7 @@ export default function SapEnterpriseSolutionsPage() {
       {/* STICKY ANCHOR NAV */}
       <nav
         aria-label="SAP practice clusters"
-        className="sticky top-0 z-40 border-y border-sand/30 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/70"
+        className="sticky top-0 z-40 border-y border-gold-soft/30 bg-canvas/90 backdrop-blur supports-[backdrop-filter]:bg-canvas/70"
       >
         <Container>
           <ul className="-mx-1 flex items-center gap-x-1 gap-y-1 overflow-x-auto py-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
@@ -89,7 +86,7 @@ export default function SapEnterpriseSolutionsPage() {
               <li key={c.id} className="shrink-0">
                 <a
                   href={`#${c.id}`}
-                  className="inline-block whitespace-nowrap rounded-lg px-3 py-2 text-[0.82rem] font-semibold text-grey-muted transition-colors duration-200 hover:bg-off-white hover:text-navy"
+                  className="inline-block whitespace-nowrap rounded-lg px-3 py-2 text-[0.82rem] font-semibold text-foreground-muted transition-colors duration-200 hover:bg-surface-subtle hover:text-foreground"
                 >
                   {c.label}
                 </a>
@@ -198,7 +195,7 @@ export default function SapEnterpriseSolutionsPage() {
           <Reveal delay={0.1} className="mt-8">
             <Link
               href="/industries/"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-blue-accent hover:text-navy"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-action hover:text-foreground"
             >
               See Industries &amp; Clients <ArrowUpRight size={16} strokeWidth={1.5} />
             </Link>
@@ -235,9 +232,9 @@ export default function SapEnterpriseSolutionsPage() {
             ]}
           />
           <Reveal delay={0.1} className="mt-8">
-            <p className="text-sm font-medium text-grey-muted">
-              30% faster go-live vs benchmark <span className="text-sand">·</span> 25+ S/4HANA programmes delivered{" "}
-              <span className="text-sand">·</span> 100% go-live success rate.
+            <p className="text-sm font-medium text-foreground-muted">
+              30% faster go-live vs benchmark <span className="text-gold">·</span> 25+ S/4HANA programmes delivered{" "}
+              <span className="text-gold">·</span> 100% go-live success rate.
             </p>
           </Reveal>
 
@@ -246,10 +243,10 @@ export default function SapEnterpriseSolutionsPage() {
               <div className="grid gap-8 lg:grid-cols-[1fr_1fr] lg:items-center">
                 <div className="flex flex-col gap-5">
                   <Eyebrow onDark>Packaged S/4HANA</Eyebrow>
-                  <h3 className="font-serif text-h2 font-bold text-white">
+                  <h3 className="text-h2 font-bold text-on-brand">
                     Business-ready, GST-compliant S/4HANA — <Accent>out of the box</Accent>.
                   </h3>
-                  <p className="max-w-measure text-blue-light">
+                  <p className="max-w-measure text-brand-muted">
                     Pre-configured industry processes, embedded analytics and Fiori UX, live in 16 weeks instead of
                     12–18 months.
                   </p>
@@ -262,8 +259,8 @@ export default function SapEnterpriseSolutionsPage() {
                     "Fiori UX (desktop + mobile)",
                     "Day-2 AMS bench",
                   ].map((item) => (
-                    <li key={item} className="flex gap-2.5 text-[0.92rem] leading-relaxed text-blue-light">
-                      <span aria-hidden className="mt-2 h-1 w-1 shrink-0 rounded-full bg-blue-pale" />
+                    <li key={item} className="flex gap-2.5 text-[0.92rem] leading-relaxed text-brand-muted">
+                      <span aria-hidden className="mt-2 h-1 w-1 shrink-0 rounded-full bg-gold-on-brand" />
                       <span>{item}</span>
                     </li>
                   ))}
@@ -350,7 +347,7 @@ export default function SapEnterpriseSolutionsPage() {
           <div id="successfactors-hxm" className="scroll-mt-24">
             <Reveal>
               <Eyebrow>SuccessFactors / Human Experience Management</Eyebrow>
-              <h3 className="mt-5 max-w-3xl font-serif text-h2 font-bold text-navy">
+              <h3 className="mt-5 max-w-3xl text-h2 font-bold text-foreground">
                 Full-suite SAP SuccessFactors, delivered at <Accent>scale</Accent>.
               </h3>
               <Lead className="mt-5">
@@ -391,20 +388,20 @@ export default function SapEnterpriseSolutionsPage() {
             ]}
           />
           <Reveal delay={0.1} className="mt-8">
-            <p className="text-sm font-medium text-grey-muted">
-              Largest certified SAP HXM consultant pool in region <span className="text-sand">·</span> proprietary iTAM
-              accelerator <span className="text-sand">·</span> EBSx rapid-deployment kit{" "}
-              <span className="text-sand">·</span> Joule-for-HR playbook <span className="text-sand">·</span> 100%
+            <p className="text-sm font-medium text-foreground-muted">
+              Largest certified SAP HXM consultant pool in region <span className="text-gold">·</span> proprietary iTAM
+              accelerator <span className="text-gold">·</span> EBSx rapid-deployment kit{" "}
+              <span className="text-gold">·</span> Joule-for-HR playbook <span className="text-gold">·</span> 100%
               success rate on HR transformation projects.
             </p>
           </Reveal>
 
           {/* Concur — SOT-15, SOT-16 */}
-          <div className="my-14 rule-sand" />
+          <div className="my-14 rule-gold" />
           <div id="concur" className="scroll-mt-24">
             <Reveal>
               <Eyebrow>Concur</Eyebrow>
-              <h3 className="mt-5 max-w-3xl font-serif text-h2 font-bold text-navy">
+              <h3 className="mt-5 max-w-3xl text-h2 font-bold text-foreground">
                 End-to-end Concur, with the <Accent>integrations</Accent> to match.
               </h3>
               <Lead className="mt-5">
@@ -415,23 +412,23 @@ export default function SapEnterpriseSolutionsPage() {
           </div>
           <Reveal delay={0.05} className="mt-8">
             <Card tone="light" bezel={false}>
-              <p className="text-[0.95rem] leading-relaxed text-grey-muted">
+              <p className="text-[0.95rem] leading-relaxed text-foreground-muted">
                 Integrated with SAP S/4HANA, Salesforce, NetSuite, QuickBooks, Microsoft Dynamics, Workday, Intacct,
                 Oracle EBS and Oracle HCM; corporate card feeds, TMC and receipt OCR.
               </p>
-              <p className="mt-5 text-sm font-medium text-navy">
-                25+ Concur implementations <span className="text-sand">·</span> 12-week average go-live{" "}
-                <span className="text-sand">·</span> 4 country tax configs.
+              <p className="mt-5 text-sm font-medium text-foreground">
+                25+ Concur implementations <span className="text-gold">·</span> 12-week average go-live{" "}
+                <span className="text-gold">·</span> 4 country tax configs.
               </p>
             </Card>
           </Reveal>
 
           {/* Ariba — SOT-17 */}
-          <div className="my-14 rule-sand" />
+          <div className="my-14 rule-gold" />
           <div id="ariba" className="scroll-mt-24">
             <Reveal>
               <Eyebrow>Ariba</Eyebrow>
-              <h3 className="mt-5 max-w-3xl font-serif text-h2 font-bold text-navy">
+              <h3 className="mt-5 max-w-3xl text-h2 font-bold text-foreground">
                 Source-to-Pay, automated <Accent>end-to-end</Accent>.
               </h3>
               <Lead className="mt-5">
@@ -442,9 +439,9 @@ export default function SapEnterpriseSolutionsPage() {
           </div>
           <Reveal delay={0.05} className="mt-8">
             <Card tone="light" bezel={false}>
-              <p className="text-sm font-medium text-navy">
-                15+ Ariba programmes delivered <span className="text-sand">·</span> 40% average P2P cycle-time cut{" "}
-                <span className="text-sand">·</span> S/4 native integration.
+              <p className="text-sm font-medium text-foreground">
+                15+ Ariba programmes delivered <span className="text-gold">·</span> 40% average P2P cycle-time cut{" "}
+                <span className="text-gold">·</span> S/4 native integration.
               </p>
             </Card>
           </Reveal>
@@ -466,18 +463,18 @@ export default function SapEnterpriseSolutionsPage() {
           <Reveal>
             <Card tone="white" bezel={false} className="mb-6">
               <Eyebrow>AI-powered HR Health Check</Eyebrow>
-              <h3 className="mt-5 max-w-3xl font-serif text-h3 font-bold text-navy">
+              <h3 className="mt-5 max-w-3xl text-h3 font-bold text-foreground">
                 ML on your tenant, not opinions on a <Accent>spreadsheet</Accent>.
               </h3>
-              <p className="mt-4 max-w-measure text-[0.95rem] leading-relaxed text-grey-muted">
+              <p className="mt-4 max-w-measure text-[0.95rem] leading-relaxed text-foreground-muted">
                 An AI-powered, industry-benchmarked diagnostic that unlocks measurable HR value: an ML audit of
                 configuration, RBP and business rules; anomaly detection across usage and audit logs; and Joule &amp;
                 Talent Intelligence readiness scoring, benchmarked against 200+ peers across 12 industries.
               </p>
-              <p className="mt-5 text-sm font-medium text-navy">
-                30–40% reduction in customisation debt <span className="text-sand">·</span> 25% lift in monthly active
-                users <span className="text-sand">·</span> 2× faster Joule activation{" "}
-                <span className="text-sand">·</span> 4–6-week engagement. Built on our proprietary Health Check 360
+              <p className="mt-5 text-sm font-medium text-foreground">
+                30–40% reduction in customisation debt <span className="text-gold">·</span> 25% lift in monthly active
+                users <span className="text-gold">·</span> 2× faster Joule activation{" "}
+                <span className="text-gold">·</span> 4–6-week engagement. Built on our proprietary Health Check 360
                 framework.
               </p>
             </Card>
@@ -527,17 +524,17 @@ export default function SapEnterpriseSolutionsPage() {
           <Reveal>
             <Card tone="light" bezel={false} className="mb-6">
               <Eyebrow>Syniti Data Management</Eyebrow>
-              <h3 className="mt-5 max-w-3xl font-serif text-h3 font-bold text-navy">
+              <h3 className="mt-5 max-w-3xl text-h3 font-bold text-foreground">
                 Data migration is the real <Accent>risk</Accent> in S/4HANA.
               </h3>
-              <p className="mt-4 max-w-measure text-[0.95rem] leading-relaxed text-grey-muted">
+              <p className="mt-4 max-w-measure text-[0.95rem] leading-relaxed text-foreground-muted">
                 70% of SAP transformations slip because of data, not technology. Our Syniti practice combines SAP
                 Advanced Data Migration (by Syniti) credentials with a proven five-stage approach — Profile, Cleanse,
                 Construct, Migrate, Govern — plus Master Data Governance and ongoing stewardship.
               </p>
-              <p className="mt-5 text-sm font-medium text-navy">
-                20+ ECC→S/4 migrations <span className="text-sand">·</span> 99.5% data integrity at cutover{" "}
-                <span className="text-sand">·</span> 3× faster than manual ETL.
+              <p className="mt-5 text-sm font-medium text-foreground">
+                20+ ECC→S/4 migrations <span className="text-gold">·</span> 99.5% data integrity at cutover{" "}
+                <span className="text-gold">·</span> 3× faster than manual ETL.
               </p>
             </Card>
           </Reveal>
@@ -545,10 +542,10 @@ export default function SapEnterpriseSolutionsPage() {
           <Reveal delay={0.05}>
             <Card tone="light" bezel={false}>
               <Eyebrow>SAP Analytics Cloud & the modern stack</Eyebrow>
-              <h3 className="mt-5 max-w-3xl font-serif text-h3 font-bold text-navy">
+              <h3 className="mt-5 max-w-3xl text-h3 font-bold text-foreground">
                 Analytics, planning and prediction on one <Accent>platform</Accent>.
               </h3>
-              <p className="mt-4 max-w-measure text-[0.95rem] leading-relaxed text-grey-muted">
+              <p className="mt-4 max-w-measure text-[0.95rem] leading-relaxed text-foreground-muted">
                 We implement SAP Analytics Cloud as the front door to enterprise data — BI, planning and predictive in
                 one experience — with pre-built dashboard accelerators and live connections to S/4HANA, BW/4HANA and
                 Datasphere. Average first dashboard in 3 weeks. Across the portfolio: SAC, BPC / Group Reporting,
@@ -599,7 +596,7 @@ export default function SapEnterpriseSolutionsPage() {
       {/* POINT OF VIEW — THE CONVERGED INTELLIGENCE STACK — SOT-27 */}
       <Section tone="navy" className="relative overflow-hidden">
         <div aria-hidden className="pointer-events-none absolute inset-0 opacity-[0.07]">
-          <div className="absolute -right-24 top-10 h-[30rem] w-[30rem] origin-center rotate-45 border-[64px] border-blue-light" />
+          <div className="absolute -right-24 top-10 h-[30rem] w-[30rem] origin-center rotate-45 border-[64px] border-gold-on-brand" />
         </div>
         <Container>
           <Reveal className="mb-12 max-w-3xl">
@@ -628,16 +625,16 @@ export default function SapEnterpriseSolutionsPage() {
               },
             ].map((p) => (
               <StaggerItem key={p.title} className="h-full">
-                <Card tone="navy" bezel={false} className="h-full ring-1 ring-white/10">
-                  <h3 className="font-serif text-h3 font-bold text-white">{p.title}</h3>
-                  <p className="mt-3 text-[0.95rem] leading-relaxed text-blue-light">{p.body}</p>
+                <Card tone="navy" bezel={false} className="h-full">
+                  <h3 className="text-h3 font-bold text-on-brand">{p.title}</h3>
+                  <p className="mt-3 text-[0.95rem] leading-relaxed text-brand-muted">{p.body}</p>
                 </Card>
               </StaggerItem>
             ))}
           </Stagger>
 
           <Reveal delay={0.1} className="mt-14 max-w-3xl">
-            <blockquote className="border-l-2 border-sand/60 pl-6 font-serif text-h3 font-medium italic leading-snug text-white">
+            <blockquote className="border-l-2 border-l-gold-on-brand/60 pl-6 text-h3 font-medium italic leading-snug text-on-brand">
               &ldquo;Convergence is where SAP investments turn into measurable business outcomes.&rdquo;
             </blockquote>
           </Reveal>
@@ -652,10 +649,10 @@ export default function SapEnterpriseSolutionsPage() {
               <div className="grid gap-8 lg:grid-cols-[1.4fr_auto] lg:items-center">
                 <div className="flex flex-col gap-4">
                   <Eyebrow>ECC Prism™</Eyebrow>
-                  <h3 className="max-w-2xl font-serif text-h2 font-bold text-navy">
+                  <h3 className="max-w-2xl text-h2 font-bold text-foreground">
                     Start with a clear-eyed <Accent>assessment</Accent>.
                   </h3>
-                  <p className="max-w-measure text-[0.95rem] leading-relaxed text-grey-muted">
+                  <p className="max-w-measure text-[0.95rem] leading-relaxed text-foreground-muted">
                     ECC Prism™ — our ECC-to-S/4HANA assessment — gives you a fact-based view of your readiness before
                     you commit to the transformation.
                   </p>

@@ -128,10 +128,10 @@ export default function AiAutomationPage() {
           <Stagger className="grid gap-4 sm:grid-cols-3">
             {phases.map((p, i) => (
               <StaggerItem key={p.stage} className="h-full">
-                <div className="flex h-full flex-col gap-2 rounded-xl2 border border-navy/5 bg-off-white p-6">
-                  <span className="font-serif text-h3 font-bold text-blue-light">{String(i + 1).padStart(2, "0")}</span>
-                  <span className="label-caps text-blue-accent">{p.stage}</span>
-                  <p className="text-[0.9rem] leading-relaxed text-grey-muted">{p.note}</p>
+                <div className="glass-card flex h-full flex-col gap-2 rounded-surface p-6">
+                  <span className="text-h3 font-bold text-gold">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="label-caps text-gold">{p.stage}</span>
+                  <p className="text-[0.9rem] leading-relaxed text-foreground-muted">{p.note}</p>
                 </div>
               </StaggerItem>
             ))}

@@ -80,10 +80,7 @@ export default function DeliveryExcellencePage() {
                 <Eyebrow>Engagement models</Eyebrow>
                 <div className="mt-5 flex flex-wrap gap-2.5">
                   {engagementModels.map((model) => (
-                    <span
-                      key={model}
-                      className="rounded-full bg-white px-4 py-2 text-sm font-medium text-navy shadow-soft ring-1 ring-navy/5"
-                    >
+                    <span key={model} className="glass-pill px-4 py-2 text-sm font-medium text-foreground">
                       {model}
                     </span>
                   ))}
@@ -95,10 +92,7 @@ export default function DeliveryExcellencePage() {
                 <Eyebrow>Delivery footprints</Eyebrow>
                 <div className="mt-5 flex flex-wrap gap-2.5">
                   {deliveryFootprints.map((footprint) => (
-                    <span
-                      key={footprint}
-                      className="rounded-full bg-white px-4 py-2 text-sm font-medium text-navy shadow-soft ring-1 ring-navy/5"
-                    >
+                    <span key={footprint} className="glass-pill px-4 py-2 text-sm font-medium text-foreground">
                       {footprint}
                     </span>
                   ))}
@@ -125,28 +119,28 @@ export default function DeliveryExcellencePage() {
             {/* vertical spine */}
             <div
               aria-hidden
-              className="pointer-events-none absolute left-[1.4375rem] top-3 bottom-3 hidden w-px bg-navy/10 md:block"
+              className="pointer-events-none absolute left-[1.4375rem] top-3 bottom-3 hidden w-px bg-border-subtle md:block"
             />
             {amsPhases.map((phase, i) => (
               <StaggerItem key={phase.name}>
                 <div className="relative grid gap-5 md:grid-cols-[3rem_1fr] md:gap-7">
                   <div className="hidden md:block">
-                    <span className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full bg-navy font-serif text-lg font-bold text-white shadow-soft ring-4 ring-off-white">
+                    <span className="theme-on-brand relative z-10 flex h-12 w-12 items-center justify-center rounded-full bg-brand text-lg font-bold text-on-brand shadow-glass ring-4 ring-surface-subtle">
                       {i + 1}
                     </span>
                   </div>
-                  <Card tone="white" bezel={false} className="border border-navy/5">
+                  <Card tone="white" bezel={false}>
                     <div className="flex flex-col gap-1.5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
-                      <h3 className="font-serif text-h3 font-bold text-navy">
-                        <span className="mr-3 text-blue-accent md:hidden">{i + 1}.</span>
+                      <h3 className="text-h3 font-bold text-foreground">
+                        <span className="mr-3 text-gold md:hidden">{i + 1}.</span>
                         {phase.name}
                       </h3>
-                      <span className="label-caps shrink-0 text-grey-muted">{phase.weeks}</span>
+                      <span className="label-caps shrink-0 text-gold">{phase.weeks}</span>
                     </div>
                     <ul className="mt-4 flex flex-wrap gap-x-6 gap-y-2">
                       {phase.activities.map((activity) => (
-                        <li key={activity} className="flex gap-2.5 text-[0.9rem] leading-relaxed text-grey-muted">
-                          <span aria-hidden className="mt-2 h-1 w-1 shrink-0 rounded-full bg-blue-accent" />
+                        <li key={activity} className="flex gap-2.5 text-[0.9rem] leading-relaxed text-foreground-muted">
+                          <span aria-hidden className="mt-2 h-1 w-1 shrink-0 rounded-full bg-action" />
                           <span>{activity}</span>
                         </li>
                       ))}
@@ -178,7 +172,7 @@ export default function DeliveryExcellencePage() {
             columns={3}
           />
           <Reveal delay={0.1} className="mt-8">
-            <p className="max-w-measure text-[0.95rem] leading-relaxed text-grey-muted">
+            <p className="max-w-measure text-[0.95rem] leading-relaxed text-foreground-muted">
               Business demand flows through prioritised projects into assembly-line development — Analyse &amp; Design,
               Build, Test, UAT, Deploy, Release — governed by the In2IT EBS development methodology and Apps Development
               Factory.

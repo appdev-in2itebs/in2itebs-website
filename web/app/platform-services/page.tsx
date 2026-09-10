@@ -107,10 +107,7 @@ export default function PlatformServicesPage() {
             <Card tone="white">
               <ul className="flex flex-wrap gap-x-2.5 gap-y-3">
                 {lifecycle.map((stage) => (
-                  <li
-                    key={stage}
-                    className="rounded-full border border-navy/10 bg-off-white px-4 py-1.5 text-sm font-medium text-navy"
-                  >
+                  <li key={stage} className="glass-pill px-4 py-1.5 text-sm font-medium text-foreground">
                     {stage}
                   </li>
                 ))}
@@ -119,12 +116,12 @@ export default function PlatformServicesPage() {
           </Reveal>
 
           <Reveal delay={0.1} className="mt-8">
-            <p className="max-w-measure border-l-2 border-sand pl-5 text-[0.95rem] leading-relaxed text-grey-muted">
+            <p className="max-w-measure border-l-2 border-l-gold pl-5 text-[0.95rem] leading-relaxed text-foreground-muted">
               One delivery engine — FastForward methodology, development factory, global AMS bench and account-level
               governance — runs beneath every stage.{" "}
               <Link
                 href="/delivery-excellence/"
-                className="font-semibold text-blue-accent underline-offset-4 hover:underline"
+                className="font-semibold text-action underline-offset-4 hover:underline"
               >
                 See Delivery Excellence
               </Link>
@@ -153,12 +150,12 @@ export default function PlatformServicesPage() {
                 <StaggerItem key={practice.slug} className="h-full">
                   <Card className="flex h-full flex-col">
                     <Eyebrow>{copy.eyebrow}</Eyebrow>
-                    <h3 className="mt-3 font-serif text-h3 font-bold text-navy">{practice.name}</h3>
-                    <p className="mt-3 text-[0.95rem] leading-relaxed text-grey-muted">{practice.tagline}</p>
+                    <h3 className="mt-3 text-h3 font-bold text-foreground">{practice.name}</h3>
+                    <p className="mt-3 text-[0.95rem] leading-relaxed text-foreground-muted">{practice.tagline}</p>
                     <ul className="mt-5 space-y-2">
                       {copy.bullets.map((b) => (
-                        <li key={b} className="flex gap-2.5 text-[0.9rem] leading-relaxed text-grey-muted">
-                          <span aria-hidden className="mt-2 h-1 w-1 shrink-0 rounded-full bg-blue-accent" />
+                        <li key={b} className="flex gap-2.5 text-[0.9rem] leading-relaxed text-foreground-muted">
+                          <span aria-hidden className="mt-2 h-1 w-1 shrink-0 rounded-full bg-action" />
                           <span>{b}</span>
                         </li>
                       ))}
@@ -166,7 +163,7 @@ export default function PlatformServicesPage() {
                     <div className="mt-auto pt-6">
                       <Link
                         href={practice.href}
-                        className="inline-flex items-center gap-2 text-sm font-semibold text-blue-accent transition-colors duration-200 hover:text-navy"
+                        className="inline-flex items-center gap-2 text-sm font-semibold text-action transition-colors duration-200 hover:text-foreground"
                       >
                         {copy.cta}
                         <ArrowUpRight size={16} strokeWidth={1.5} />
@@ -186,16 +183,13 @@ export default function PlatformServicesPage() {
           <Reveal>
             <Card tone="white">
               <Eyebrow>Future platform expansion</Eyebrow>
-              <p className="mt-4 max-w-measure text-[0.95rem] leading-relaxed text-grey-muted">
+              <p className="mt-4 max-w-measure text-[0.95rem] leading-relaxed text-foreground-muted">
                 ServiceNow and Adobe remain areas of planned expansion. Our current practice routes cover SAP,
                 SuccessFactors, Salesforce, Workday, Oracle and Microsoft.
               </p>
               <ul className="mt-6 flex flex-wrap gap-x-2.5 gap-y-3">
                 {futurePlatforms.map((platform) => (
-                  <li
-                    key={platform}
-                    className="rounded-full border border-navy/10 bg-off-white px-4 py-1.5 text-sm font-medium text-grey-muted"
-                  >
+                  <li key={platform} className="glass-pill px-4 py-1.5 text-sm font-medium text-foreground-muted">
                     {platform}
                   </li>
                 ))}

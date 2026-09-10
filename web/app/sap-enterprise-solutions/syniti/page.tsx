@@ -99,10 +99,10 @@ export default function SynitiPage() {
           <Stagger className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
             {stages.map((s, i) => (
               <StaggerItem key={s.stage} className="h-full">
-                <div className="flex h-full flex-col gap-2 rounded-xl2 border border-navy/5 bg-off-white p-6">
-                  <span className="font-serif text-h3 font-bold text-blue-light">{String(i + 1).padStart(2, "0")}</span>
-                  <span className="label-caps text-blue-accent">{s.stage}</span>
-                  <p className="text-[0.9rem] leading-relaxed text-grey-muted">{s.note}</p>
+                <div className="glass-card flex h-full flex-col gap-2 rounded-surface p-6">
+                  <span className="text-h3 font-bold text-gold">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="label-caps text-gold">{s.stage}</span>
+                  <p className="text-[0.9rem] leading-relaxed text-foreground-muted">{s.note}</p>
                 </div>
               </StaggerItem>
             ))}
@@ -128,12 +128,12 @@ export default function SynitiPage() {
       {/* PROOF BAND */}
       <Section tone="navy" className="relative overflow-hidden">
         <div aria-hidden className="pointer-events-none absolute inset-0 opacity-[0.07]">
-          <div className="absolute -right-24 top-10 h-[30rem] w-[30rem] origin-center rotate-45 border-[64px] border-blue-light" />
+          <div className="absolute -right-24 top-10 h-[30rem] w-[30rem] origin-center rotate-45 border-[64px] border-gold-on-brand" />
         </div>
         <Container>
           <Reveal className="mb-10 max-w-2xl">
             <Eyebrow onDark>Proof</Eyebrow>
-            <h2 className="mt-5 font-serif text-h2 font-bold text-white">
+            <h2 className="mt-5 text-h2 font-bold text-on-brand">
               Data that <Accent>holds</Accent>.
             </h2>
           </Reveal>
@@ -144,9 +144,9 @@ export default function SynitiPage() {
               { value: "3x", label: "Faster than manual ETL" },
             ].map((s) => (
               <StaggerItem key={s.label} className="h-full">
-                <Card tone="navy" bezel={false} className="h-full ring-1 ring-white/10">
-                  <div className="font-serif text-[2.5rem] font-bold leading-none text-white">{s.value}</div>
-                  <p className="mt-3 text-[0.95rem] leading-relaxed text-blue-light">{s.label}</p>
+                <Card tone="navy" bezel={false} className="h-full">
+                  <div className="text-[2.5rem] font-bold leading-none text-gold-on-brand">{s.value}</div>
+                  <p className="mt-3 text-[0.95rem] leading-relaxed text-brand-muted">{s.label}</p>
                 </Card>
               </StaggerItem>
             ))}
