@@ -41,12 +41,13 @@ export function ServiceHero() {
     className="relative overflow-hidden bg-surface pt-36 text-foreground md:pt-40">
     <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_15%_20%,oklch(var(--color-action)/0.08),transparent_65%)]"/>
     <Container className="relative">
+      <h1 className="sr-only">In2IT EBS: enterprise transformation, delivered globally</h1>
       <div className="grid gap-8 pt-8 lg:grid-cols-2 lg:items-stretch lg:gap-16 lg:pt-12">
         <div className="flex min-h-[27rem] flex-col pb-3 md:min-h-[30rem]">
           <div className="mb-7"><SapPartnerBadge /></div>
           <div aria-live={playing?'off':'polite'} aria-atomic="true" className="flex flex-1 flex-col">
             <p className="text-sm font-semibold text-action">{slide.label}</p>
-            <h1 className="mt-4 max-w-[18ch] text-[clamp(2.25rem,3.8vw,3.75rem)] font-semibold leading-[1.06] tracking-[-0.04em]">{slide.heading}</h1>
+            <h2 className="mt-4 max-w-[18ch] text-[clamp(2.25rem,3.8vw,3.75rem)] font-semibold leading-[1.06] tracking-[-0.04em]">{slide.heading}</h2>
             <p className="mt-6 max-w-[54ch] text-lg leading-relaxed text-foreground-muted">{slide.body}</p>
             <div className="mt-auto flex flex-wrap items-center gap-x-6 gap-y-2 pt-8">
               <Button href={slide.href} withArrow>{slide.cta}</Button>
@@ -55,7 +56,10 @@ export function ServiceHero() {
           </div>
         </div>
         <div className="relative min-h-[17rem] overflow-hidden rounded-feature bg-surface-subtle lg:min-h-[31rem]">
-          {slides.map((item,index)=><Image key={item.image} src={item.image} alt="" fill priority={index===0} sizes="(min-width:1024px) 45vw, 100vw" className={`object-cover transition-opacity duration-700 motion-reduce:transition-none ${active===index?'opacity-100':'opacity-0'}`} />)}
+          {slides.map((item,index)=>{
+            const mounted=index===active || index===(active+1)%slides.length;
+            return mounted ? <Image key={item.image} src={item.image} alt="" fill priority={index===0} sizes="(min-width:1024px) 45vw, 100vw" className={`object-cover transition-opacity duration-700 motion-reduce:transition-none ${active===index?'opacity-100':'opacity-0'}`} /> : null;
+          })}
           <div className="absolute bottom-5 left-5 right-5 flex items-center justify-between gap-4 border border-border-subtle bg-surface px-5 py-4 text-sm text-foreground">
             <span>Enterprise transformation, delivered globally</span><span className="shrink-0 tabular-nums text-action">0{active+1} / 04</span>
           </div>

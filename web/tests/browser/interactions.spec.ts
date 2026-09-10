@@ -39,7 +39,7 @@ test('comparison remains scrollable at 320px',async({page})=>{
 });
 test('pause never hides the hero and reduced motion exposes all client marks',async({page})=>{
   await page.goto('/');await page.getByRole('button',{name:'Pause page animation',exact:true}).click();
-  await expect(page.getByRole('heading',{level:1})).toHaveCSS('opacity','1');
+  await expect(page.getByRole('heading',{level:2}).first()).toHaveCSS('opacity','1');
   await page.emulateMedia({reducedMotion:'reduce'});
   await expect(page.locator('.client-ribbon-copy')).toBeHidden();
   await expect(page.locator('.client-ribbon-list')).toHaveCSS('flex-wrap','wrap');
@@ -49,7 +49,7 @@ test('unconfirmed direct visits never claim lead delivery',async({page})=>{
 });
 test('heading scale and client hover treatment are intact',async({page})=>{
   await page.goto('/');
-  expect(await page.getByRole('heading',{level:1}).evaluate(el=>parseFloat(getComputedStyle(el).fontSize))).toBeGreaterThan(32);
+  expect(await page.getByRole('heading',{level:2}).first().evaluate(el=>parseFloat(getComputedStyle(el).fontSize))).toBeGreaterThan(32);
   await page.getByRole('button',{name:'Pause client ribbon',exact:true}).click();
   const logo=page.locator('.client-ribbon-list img').first();await logo.hover();
   await expect(logo).toHaveCSS('filter','grayscale(0) saturate(1)');

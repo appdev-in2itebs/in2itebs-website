@@ -43,7 +43,7 @@ test('static content and persisted theme work without JavaScript',async({browser
   const page=await context.newPage();await page.goto('http://127.0.0.1:3107/');
   // Static pages ship the light theme; the cookie is applied by a before-interactive script, so no-JS visitors get light.
   await expect(page.locator('html')).toHaveClass(/theme-light/);
-  await expect(page.getByRole('heading',{level:1})).toBeVisible();
+  await expect(page.getByRole('heading',{level:2}).first()).toBeVisible();
   await expect(page.locator('main')).not.toContainText('being prepared');
   await context.close();
 });
