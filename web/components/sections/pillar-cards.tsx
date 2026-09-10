@@ -7,10 +7,10 @@ import { cn } from "@/lib/utils";
 /** Accent left-border per pillar — gold across all four in the premium glass system.
  *  The map stays so a pillar can take its own accent again without touching the markup. */
 const accentBySlug: Record<string, string> = {
-  "platform-services": "border-gold",
-  "advisory-services": "border-gold",
-  "digital-data-ai": "border-gold",
-  "delivery-excellence": "border-gold",
+  "platform-services": "border-l-gold",
+  "advisory-services": "border-l-gold",
+  "digital-data-ai": "border-l-gold",
+  "delivery-excellence": "border-l-gold",
 };
 
 /** The four pillars rendered as accent-edged cards — the three-pillar
@@ -24,7 +24,7 @@ export function PillarCards() {
             href={pillar.href}
             className={cn(
               "group glass-card flex h-full flex-col rounded-surface border-l-4 p-7 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus",
-              accentBySlug[pillar.slug] ?? "border-gold",
+              accentBySlug[pillar.slug] ?? "border-l-gold",
             )}
           >
             <h3 className="text-h3 font-bold text-foreground transition-colors group-hover:text-gold">{pillar.name}</h3>
