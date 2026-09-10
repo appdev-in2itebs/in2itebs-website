@@ -4,13 +4,13 @@ import { pillars } from "@/content/nav";
 import { Stagger, StaggerItem } from "@/components/motion/reveal";
 import { cn } from "@/lib/utils";
 
-/** Accent left-border per pillar (Design Plan):
- *  Platform=navy, Advisory=accent-blue, Digital/Data/AI=light-blue, Delivery=sand. */
+/** Accent left-border per pillar — gold across all four in the premium glass system.
+ *  The map stays so a pillar can take its own accent again without touching the markup. */
 const accentBySlug: Record<string, string> = {
-  "platform-services": "border-navy",
-  "advisory-services": "border-blue-accent",
-  "digital-data-ai": "border-blue-light",
-  "delivery-excellence": "border-sand",
+  "platform-services": "border-gold",
+  "advisory-services": "border-gold",
+  "digital-data-ai": "border-gold",
+  "delivery-excellence": "border-gold",
 };
 
 /** The four pillars rendered as accent-edged cards — the three-pillar
@@ -23,13 +23,13 @@ export function PillarCards() {
           <Link
             href={pillar.href}
             className={cn(
-              "group flex h-full flex-col rounded-xl2 border-l-4 bg-white p-7 shadow-soft transition-[transform,box-shadow] duration-200 ease-out hover:-translate-y-0.5 hover:shadow-lift focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-accent/50",
-              accentBySlug[pillar.slug] ?? "border-navy",
+              "group glass-card flex h-full flex-col rounded-surface border-l-4 p-7 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus",
+              accentBySlug[pillar.slug] ?? "border-gold",
             )}
           >
-            <h3 className="font-serif text-h3 font-bold text-navy">{pillar.name}</h3>
-            <p className="mt-3 flex-1 text-[0.95rem] leading-relaxed text-grey-muted">{pillar.tagline}</p>
-            <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-blue-accent">
+            <h3 className="text-h3 font-bold text-foreground transition-colors group-hover:text-gold">{pillar.name}</h3>
+            <p className="mt-3 flex-1 text-[0.95rem] leading-relaxed text-foreground-muted">{pillar.tagline}</p>
+            <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-gold">
               Explore
               <ArrowRight
                 size={15}

@@ -36,15 +36,15 @@ export function PillarsSection({ tone = "white" as "white" | "light" }) {
             An <Accent>AI-led</Accent> enterprise transformation company.
           </SectionHeading>
         </Reveal>
-        <Stagger className="grid gap-px overflow-hidden rounded-xl2 border border-navy/5 bg-navy/5 md:grid-cols-3">
+        <Stagger className="grid gap-5 md:grid-cols-3">
           {pillars.map(({ Icon, name, body }) => (
             <StaggerItem key={name} className="h-full">
-              <div className="flex h-full flex-col gap-5 bg-white p-8 md:p-10">
-                <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-pale/40 text-navy">
+              <div className="glass-card flex h-full flex-col gap-5 rounded-feature p-8 md:p-10">
+                <span className="icon-tile h-12 w-12 rounded-surface">
                   <Icon size={22} strokeWidth={1.25} />
                 </span>
-                <h3 className="font-serif text-h3 font-bold text-navy">{name}</h3>
-                <p className="text-[0.95rem] leading-relaxed text-grey-muted">{body}</p>
+                <h3 className="text-h3 font-bold text-foreground">{name}</h3>
+                <p className="text-[0.95rem] leading-relaxed text-foreground-muted">{body}</p>
                 {name === "Platforms" && (
                   <ul className="flex flex-wrap gap-x-4 gap-y-1">
                     {platformPractices.map((practice) => (

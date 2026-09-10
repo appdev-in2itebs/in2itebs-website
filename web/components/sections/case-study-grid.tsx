@@ -67,7 +67,7 @@ export function CaseStudyGrid({ studies }: { studies: CaseStudy[] }) {
           ))}
         </div>
       ) : (
-        <p className="text-[0.95rem] leading-relaxed text-grey-muted">No case studies match these filters yet.</p>
+        <p className="text-[0.95rem] leading-relaxed text-foreground-muted">No case studies match these filters yet.</p>
       )}
     </div>
   );
@@ -76,7 +76,7 @@ export function CaseStudyGrid({ studies }: { studies: CaseStudy[] }) {
 function FilterRow({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-      <span className="label-caps shrink-0 text-grey-muted sm:w-24">{label}</span>
+      <span className="label-caps shrink-0 text-gold sm:w-24">{label}</span>
       <div className="flex flex-wrap gap-2" role="group" aria-label={`Filter by ${label}`}>
         {children}
       </div>
@@ -99,10 +99,8 @@ function FilterButton({
       onClick={onClick}
       aria-pressed={active}
       className={cn(
-        "min-h-11 rounded-control px-4 py-1.5 text-sm font-medium transition-colors duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus",
-        active
-          ? "bg-action text-on-action"
-          : "bg-off-white text-navy/70 ring-1 ring-navy/10 hover:bg-blue-pale/30 hover:text-navy",
+        "min-h-11 rounded-full px-4 py-1.5 text-sm font-medium transition-colors duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus",
+        active ? "bg-action text-on-action" : "glass text-foreground-muted hover:border-gold-soft hover:text-gold",
       )}
     >
       {children}

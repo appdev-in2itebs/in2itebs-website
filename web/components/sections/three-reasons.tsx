@@ -27,12 +27,12 @@ export function ThreeReasons() {
     <Stagger className="grid gap-10 md:grid-cols-3">
       {reasons.map((r) => (
         <StaggerItem key={r.n} className="flex flex-col gap-4">
-          <span className="font-serif text-5xl font-bold text-blue-light">{r.n}</span>
-          <h3 className="font-serif text-h3 font-bold text-navy">{r.title}</h3>
-          <p className="text-[0.95rem] leading-relaxed text-grey-muted">{r.body}</p>
+          <span className="text-gradient-numeral text-5xl font-bold">{r.n}</span>
+          <h3 className="text-h3 font-bold text-foreground">{r.title}</h3>
+          <p className="text-[0.95rem] leading-relaxed text-foreground-muted">{r.body}</p>
           <div className="mt-1 flex flex-wrap gap-2">
             {r.tags.map((t) => (
-              <span key={t} className="rounded-full bg-off-white px-3 py-1 text-xs font-medium text-navy/70">
+              <span key={t} className="glass-pill text-foreground-muted">
                 {t}
               </span>
             ))}
