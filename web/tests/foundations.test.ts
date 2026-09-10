@@ -185,3 +185,18 @@ test('regional contacts and office cities are derived from the office list',()=>
   assert.deepEqual(officeCities,offices.map(o=>o.city));
   for(const region of regions) assert.ok(offices.some(o=>o.email===region.email),`${region.code} email is not an office email`);
 });
+
+test('every component and content module is imported somewhere',()=>{
+  const sources=new Map<string,string>();
+  const walk=(dir:string)=>{for(const entry of readdirSync(dir)){const full=path.join(dir,entry);if(statSync(full).isDirectory())walk(full);else if(/\.(tsx?|mjs)$/.test(entry))sources.set(full,readFileSync(full,'utf8'));}};
+  for(const root of ['app','components','content','lib','tests','scripts']) walk(path.join(process.cwd(),root));
+  sources.set(path.join(process.cwd(),'next.config.mjs'),readFileSync(path.join(process.cwd(),'next.config.mjs'),'utf8'));
+  const unused:string[]=[];
+  for(const file of sources.keys()){
+    if(!/[\\/](components|content)[\\/]/.test(file)||/types\.ts$/.test(file)) continue;
+    const base=path.basename(file).replace(/\.(tsx?|mjs)$/,'');
+    const imported=[...sources.entries()].some(([other,source])=>other!==file&&new RegExp(`[/'"]${base.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}(\\.mjs)?['"]`).test(source));
+    if(!imported) unused.push(path.relative(process.cwd(),file));
+  }
+  assert.deepEqual(unused,[]);
+});
