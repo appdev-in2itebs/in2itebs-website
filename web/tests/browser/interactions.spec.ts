@@ -63,3 +63,12 @@ test('the quick-contact button hides while the footer is in view',async({page})=
   await page.evaluate(()=>scrollTo(0,0));
   await expect(button).toBeVisible();
 });
+test('the quick-contact button keeps keyboard focus near the footer',async({page})=>{
+  await page.goto('/about/');
+  const button=page.getByRole('button',{name:'Contact',exact:true});
+  await button.focus();await expect(button).toBeFocused();
+  await page.locator('footer').scrollIntoViewIfNeeded();
+  await expect(button).toBeVisible();await expect(button).toBeFocused();
+  await page.keyboard.press('Tab');
+  await expect(button).toBeHidden();
+});
