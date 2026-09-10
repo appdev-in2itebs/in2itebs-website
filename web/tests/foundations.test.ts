@@ -191,11 +191,16 @@ test('every component and content module is imported somewhere',()=>{
   const walk=(dir:string)=>{for(const entry of readdirSync(dir)){const full=path.join(dir,entry);if(statSync(full).isDirectory())walk(full);else if(/\.(tsx?|mjs)$/.test(entry))sources.set(full,readFileSync(full,'utf8'));}};
   for(const root of ['app','components','content','lib','tests','scripts']) walk(path.join(process.cwd(),root));
   sources.set(path.join(process.cwd(),'next.config.mjs'),readFileSync(path.join(process.cwd(),'next.config.mjs'),'utf8'));
+  // The match must sit inside an import specifier: a bare data string such as `slug: "converged-intelligence"` is not an import.
+  const specifier=(base:string)=>{const escaped=base.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');return new RegExp(`(?:from\\s*|require\\(\\s*|import\\(\\s*)['"][^'"]*[/]${escaped}(\\.mjs)?['"]`);};
+  assert.ok(!specifier('converged-intelligence').test('const x = { slug: "converged-intelligence" };'),'a data string must not count as an import');
+  assert.ok(specifier('converged-intelligence').test('import { X } from "@/components/sections/converged-intelligence";'),'an import specifier must count as an import');
+  assert.ok(specifier('redirects').test('import {redirects} from "./content/redirects.mjs"'),'an .mjs import specifier must count as an import');
   const unused:string[]=[];
   for(const file of sources.keys()){
     if(!/[\\/](components|content)[\\/]/.test(file)||/types\.ts$/.test(file)) continue;
-    const base=path.basename(file).replace(/\.(tsx?|mjs)$/,'');
-    const imported=[...sources.entries()].some(([other,source])=>other!==file&&new RegExp(`[/'"]${base.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}(\\.mjs)?['"]`).test(source));
+    const pattern=specifier(path.basename(file).replace(/\.(tsx?|mjs)$/,''));
+    const imported=[...sources.entries()].some(([other,source])=>other!==file&&pattern.test(source));
     if(!imported) unused.push(path.relative(process.cwd(),file));
   }
   assert.deepEqual(unused,[]);
