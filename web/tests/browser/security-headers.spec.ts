@@ -19,3 +19,11 @@ test("security headers are present and the CSP breaks nothing", async ({ page, r
   await expect(page.locator("html")).toHaveClass(/theme-dark/);
   expect(violations).toEqual([]);
 });
+test("removed pages return 410 and legacy URLs redirect permanently", async ({ request }) => {
+  const gone = await request.get("/case/anything/", { maxRedirects: 0 });
+  expect(gone.status()).toBe(410);
+  expect(gone.headers()["content-type"]).toContain("text/html");
+  const moved = await request.get("/join-our-team/", { maxRedirects: 0 });
+  expect(moved.status()).toBe(308);
+  expect(moved.headers()["location"]).toMatch(/\/careers\/$/);
+});
