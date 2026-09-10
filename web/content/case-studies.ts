@@ -168,7 +168,7 @@ export const caseStudies: CaseStudy[] = [
     scenario:
       "A homegrown wellness brand bringing handpicked Indian teas and superfoods directly to consumers in 130 countries, pioneering digital-first FMCG. GROW with SAP completed in 12 months, delivering an 18% reduction in manpower cost.",
     summary:
-      "VAHDAM India, a digital-first tea and superfoods brand in 130 countries, went live on GROW with SAP in 12 months with an 18% manpower cost reduction.",
+      "VAHDAM India, a digital-first tea and superfoods brand in 130 countries, went live on GROW with SAP in 12 months and cut manpower cost by 18%.",
     benefits: [
       "Streamlined supply chain through a unified business platform",
       "Improved capacity planning for manpower and machinery",
@@ -276,7 +276,7 @@ export const caseStudies: CaseStudy[] = [
     scenario:
       "Andhra Pradesh Power Transmission Corporation engaged In2IT EBS for a three-year onsite application-management engagement to stabilise a critical ERP backbone.",
     summary:
-      "Andhra Pradesh Power Transmission Corporation ran a three-year onsite AMS engagement that kept a critical ERP backbone stable and uninterrupted.",
+      "Andhra Pradesh Power Transmission Corporation engaged In2IT EBS for a three-year onsite AMS engagement that kept a critical ERP backbone stable.",
     benefits: [
       "Reduced incident resolution time by 40% through robust ticket management",
       "Event-monitoring tools significantly reduced unplanned outages",
