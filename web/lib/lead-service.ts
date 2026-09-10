@@ -78,12 +78,14 @@ export async function handleLead(request: Request, transport?: LeadTransport) {
     return json(403, { ok: false, error: "Invalid origin." });
   const tooMany = () =>
     json(429, { ok: false, error: "Too many requests. Please wait a minute or email us." }, { "Retry-After": "60" });
-  if (limited("process", LIMIT_PROCESS)) return tooMany();
   // Trust forwarding headers only when a configured ingress overwrites them.
   const address =
     process.env.TRUST_PROXY_HEADERS === "1" ? request.headers.get("x-forwarded-for")?.split(",")[0].trim() : undefined;
+  // The per-address tier runs before the process tier so a rejected address does not
+  // spend the process budget; one address then contributes at most its own 10 a minute.
   if (address && limited("ip:" + createHash("sha256").update(address).digest("hex"), LIMIT_PER_ADDRESS))
     return tooMany();
+  if (limited("process", LIMIT_PROCESS)) return tooMany();
   if (Number(request.headers.get("content-length") ?? 0) > MAX_BYTES)
     return json(413, { ok: false, error: "Request is too large." });
   const reader = request.body?.getReader();
