@@ -69,6 +69,9 @@ test("dark theme reaches the same outcome", async ({ page, context }) => {
   await context.addCookies([{ name: "in2it-theme", value: "dark", domain: "127.0.0.1", path: "/" }]);
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/");
+  // The cookie has to have actually put the document in the dark theme, or this test is just the
+  // first one again under a different name.
+  await expect(page.locator("html")).toHaveClass(/theme-dark/);
   const state = await settled(page);
   expect(["active", "paused", "unavailable"]).toContain(state);
   await expect(page.locator(`${carousel} .hero-ambient`)).toHaveCount(1);

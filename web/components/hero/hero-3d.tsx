@@ -94,7 +94,8 @@ export function Hero3D({ onState }: { onState: (state: "active" | "paused" | "un
 
     const scene = new Scene();
     const camera = new PerspectiveCamera(45, width / height, 0.1, 1000);
-    camera.position.set(-3.5, 0, 22);
+    // Far enough left that the knot's edge clears the hero copy at 1440 in the light theme.
+    camera.position.set(-5, 0, 22);
 
     const ambient = new AmbientLight(0x0e121d, 1.8);
     const key = new DirectionalLight(0xf5ead4, 2.8);

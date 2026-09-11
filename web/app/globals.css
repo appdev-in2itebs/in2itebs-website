@@ -70,8 +70,11 @@ html:not([data-motion-ready]) .client-ribbon {
 .client-ribbon-list img {
   max-width: 100%;
 }
+/* Only in the static wall: rounded corners meeting across the 1px gap leave a cross of exposed
+   canvas between four tiles, which reads as a grid pattern on the noir dark ground. */
 .client-ribbon[data-expanded="true"] .client-ribbon-list > div {
   width: min(11rem, calc(50% - 1px));
+  border-radius: 0;
 }
 @media (prefers-reduced-motion: reduce) {
   .client-ribbon {
@@ -89,6 +92,7 @@ html:not([data-motion-ready]) .client-ribbon {
   }
   .client-ribbon-list > div {
     width: min(11rem, 50%);
+    border-radius: 0;
   }
   .client-ribbon-copy {
     display: none;
@@ -219,12 +223,8 @@ html:not([data-motion-ready]) .client-ribbon {
       oklch(var(--color-fg-secondary)) 55%,
       oklch(var(--color-gold-display)) 100%
     );
-    --gradient-heading-on-brand: linear-gradient(
-      135deg,
-      #ffffff 0%,
-      oklch(var(--color-fg-secondary)) 55%,
-      oklch(var(--color-gold-display)) 100%
-    );
+    /* Identical to the light-on-dark ramp above; the light theme is where the two differ. */
+    --gradient-heading-on-brand: var(--gradient-heading);
     --gradient-numeral: linear-gradient(180deg, #ffffff 0%, oklch(var(--color-gold)) 100%);
 
     --color-legacy-navy: var(--color-fg-primary);
@@ -282,6 +282,14 @@ html:not([data-motion-ready]) .client-ribbon {
       transition-duration: 0.001ms !important;
       scroll-behavior: auto !important;
     }
+  }
+
+  /* The scrolled header thickens its glass. This belongs in the base layer, not in a Tailwind
+     arbitrary-property utility on the element: a utility also outranks the
+     `@supports not (backdrop-filter)` block below, which raises the alpha to 0.96 precisely
+     because there is no blur to hide the page behind it. */
+  header[data-scrolled="true"] {
+    --glass-alpha-elevated: 0.9;
   }
 }
 

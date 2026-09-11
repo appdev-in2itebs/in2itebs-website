@@ -7,8 +7,9 @@ interface Column {
   values: string[];
 }
 
-/** Two-column decision table (e.g. RISE vs GROW). Clean, high-contrast,
- *  rounded, on white — one row per aspect with left/right values. */
+/** Two-column decision table (e.g. RISE vs GROW). A rounded glass scroller that keeps its own
+ *  horizontal overflow at narrow widths; the header row is an on-brand navy band and each body row
+ *  carries one aspect with its left/right values. */
 export function ComparisonTable({ aspects, left, right }: { aspects: string[]; left: Column; right: Column }) {
   return (
     <div

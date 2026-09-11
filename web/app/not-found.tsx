@@ -30,7 +30,11 @@ export default function NotFound() {
             <Button href="/" variant="on-dark" withArrow>
               Back to home
             </Button>
-            <Button href="/contact/" variant="ghost" className="text-on-brand hover:text-gold-on-brand">
+            <Button
+              href="/contact/"
+              variant="ghost"
+              className="text-on-brand hover:bg-on-brand/10 hover:text-gold-on-brand"
+            >
               Contact us
             </Button>
           </div>

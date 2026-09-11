@@ -66,7 +66,9 @@ export function Header() {
   return (
     <header
       ref={header}
-      className="glass-elevated fixed inset-x-0 top-0 z-40 border-x-0 border-t-0 border-b border-border-subtle text-foreground transition-[background-color,box-shadow] duration-300 data-[scrolled=true]:[--glass-alpha-elevated:0.9] data-[scrolled=true]:border-gold-soft/60 data-[scrolled=true]:shadow-glass-hover"
+      // The scrolled alpha lives in globals.css, not here: as a utility it would also override the
+      // `@supports not (backdrop-filter)` fallback and lower it from 0.96 to 0.90 while scrolled.
+      className="glass-elevated fixed inset-x-0 top-0 z-40 border-x-0 border-t-0 border-b border-border-subtle text-foreground transition-[background-color,box-shadow,border-color] duration-300 data-[scrolled=true]:border-gold-soft/60 data-[scrolled=true]:shadow-glass-hover"
       onKeyDown={(event) => {
         if (event.key === "Escape" && expanded) {
           event.preventDefault();

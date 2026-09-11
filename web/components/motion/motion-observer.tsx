@@ -18,10 +18,15 @@ export function MotionObserver() {
     };
     const targets = Array.from(document.querySelectorAll<HTMLElement>(".reveal"));
     const viewport = window.innerHeight;
-    for (const el of targets) {
+    // Read every box first, then write: interleaving `getBoundingClientRect` with a `dataset`
+    // write forces a layout per element instead of one for the batch.
+    const onscreen = targets.map((el) => {
       const box = el.getBoundingClientRect();
-      if (box.top < viewport && box.bottom > 0) el.dataset.reveal = "in";
-    }
+      return box.top < viewport && box.bottom > 0;
+    });
+    targets.forEach((el, i) => {
+      if (onscreen[i]) el.dataset.reveal = "in";
+    });
     flags();
     const observer = new IntersectionObserver(
       (entries) => {
@@ -35,10 +40,14 @@ export function MotionObserver() {
     );
     for (const el of targets) if (el.dataset.reveal !== "in") observer.observe(el);
     const safety = window.setTimeout(() => {
-      for (const el of targets) {
+      const height = window.innerHeight;
+      const visible = targets.map((el) => {
         const box = el.getBoundingClientRect();
-        if (box.top < window.innerHeight && box.bottom > 0) el.dataset.reveal = "in";
-      }
+        return box.top < height && box.bottom > 0;
+      });
+      targets.forEach((el, i) => {
+        if (visible[i]) el.dataset.reveal = "in";
+      });
     }, 1000);
     reduced.addEventListener("change", flags);
     document.addEventListener("visibilitychange", flags);

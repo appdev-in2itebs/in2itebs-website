@@ -6,7 +6,7 @@ import { site } from "@/content/site";
 import { cn } from "@/lib/utils";
 import type { ReactNode } from "react";
 
-/** Inner-page hero: eyebrow + large serif headline (with accent word) + subhead + CTA.
+/** Inner-page hero: eyebrow + large display headline (with accent word) + subhead + CTA.
  *  Optional `media` renders a right-hand visual panel (e.g. <HeroMotif/> or a photo). */
 export function PageHero({
   eyebrow,
@@ -29,7 +29,8 @@ export function PageHero({
       <div aria-hidden className="pointer-events-none absolute right-0 top-20 h-[26rem] w-[26rem] opacity-[0.12]">
         <div className="absolute inset-0 origin-center rotate-45 border-[56px] border-gold-soft" />
       </div>
-      <Container className="relative">
+      {/* `z-10` keeps the copy above the `.hero-ambient` layer, as in `service-hero.tsx`. */}
+      <Container className="relative z-10">
         <div className={cn(media && "grid items-center gap-10 lg:grid-cols-2 lg:gap-16")}>
           <Reveal className="flex max-w-4xl flex-col gap-6">
             {eyebrow ? <Eyebrow>{eyebrow}</Eyebrow> : null}
