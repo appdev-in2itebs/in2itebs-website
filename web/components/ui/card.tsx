@@ -2,7 +2,10 @@ import { cn } from "@/lib/utils";
 import type { ReactNode } from "react";
 
 /** Glass card: frosted surface, hairline top highlight, gold glow on hover.
- *  `bezel` adds an inner gold ring; `tone="navy"` keeps the inverse brand surface. */
+ *  `bezel` adds an inner gold hairline through `.glass-card-bezel`, which appends the ring to the
+ *  glass shadow list of every state; a Tailwind `ring-*` utility would replace that shadow instead
+ *  and silence the rest and hover elevation. `bezel` is ignored for `tone="navy"`, which renders
+ *  the inverse brand plate with its own gold border and no glass treatment. */
 export function Card({
   children,
   className,
@@ -27,13 +30,7 @@ export function Card({
     );
   }
   return (
-    <div
-      className={cn(
-        "glass-card rounded-feature p-7 text-foreground",
-        bezel && "ring-1 ring-inset ring-gold-soft/40",
-        className,
-      )}
-    >
+    <div className={cn("glass-card rounded-feature p-7 text-foreground", bezel && "glass-card-bezel", className)}>
       {children}
     </div>
   );

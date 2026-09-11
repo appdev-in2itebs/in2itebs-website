@@ -388,6 +388,22 @@ html:not([data-motion-ready]) .client-ribbon {
       var(--shadow-glass),
       0 0 0 1px oklch(var(--color-gold));
   }
+  /* Default `Card` bezel. A Tailwind `ring-*` utility cannot do this job: rings compile to
+     `box-shadow` in the utilities layer, which replaces this layer's glass shadow outright and
+     silences the hover glow with it. Carry the gold hairline as an inset shadow appended to the
+     glass shadow list of each state instead, and mirror `.glass-card-selected`'s selector set so
+     the rest, hover and focus-within shadows all stay paired with it. */
+  .glass-card-bezel {
+    box-shadow:
+      var(--shadow-glass),
+      inset 0 0 0 1px oklch(var(--color-gold-soft) / 0.4);
+  }
+  .glass-card-bezel:focus-within {
+    box-shadow:
+      var(--shadow-glass-hover),
+      var(--glow-gold),
+      inset 0 0 0 1px oklch(var(--color-gold-soft) / 0.4);
+  }
   @media (hover: hover) and (pointer: fine) {
     .glass-card:hover {
       transform: translateY(-3px);
@@ -408,6 +424,20 @@ html:not([data-motion-ready]) .client-ribbon {
     /* `.theme-dark .glass-card:hover` is (0,2,1); match it so selection still wins in dark. */
     .theme-dark .glass-card-selected:hover {
       border-color: oklch(var(--color-gold));
+    }
+    .glass-card-bezel:hover {
+      box-shadow:
+        var(--shadow-glass-hover),
+        var(--glow-gold),
+        inset 0 0 0 1px oklch(var(--color-gold-soft) / 0.4);
+    }
+    /* Mirrors the selected-state pairing above: `.theme-dark .glass-card:hover` is (0,2,1), so the
+       dark hover state is restated at that specificity rather than left at (0,2,0). */
+    .theme-dark .glass-card-bezel:hover {
+      box-shadow:
+        var(--shadow-glass-hover),
+        var(--glow-gold),
+        inset 0 0 0 1px oklch(var(--color-gold-soft) / 0.4);
     }
   }
   .glass-pill {
