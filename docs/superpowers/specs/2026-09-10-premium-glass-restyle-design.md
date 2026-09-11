@@ -253,7 +253,7 @@ The WebGL hero's motion is specified in §4.
 | `FeatureGrid`, `CaseStudyCard`, `PillarCards`, `PillarsSection`, `ThreeReasons`, `HomePartners`, `PartnerEcosystem`, `AllianceStrip`, `SapToolchain`, `ComparisonTable`, `PlatformPracticeLinks` | cards/tiles → `.glass-card`; chips → `.glass-pill` or `.glass-gold`; numerals → `.text-gradient-numeral`; accent borders → gold. Grid structure, copy and links unchanged. |
 | `StatBand` and homepage stats `dl` | numerals `.text-gradient-numeral`, labels `text-gold`. |
 | `LogoMarquee`, `ClientLogo`, `ClientWall` | tiles keep hooks; add glass tile background and gold hover ring. |
-| `DemoForm`, `RiseGrowChooser` | inputs `.glass` with `rounded-control`, hover border gold-soft, focus ring unchanged; option cards `.glass-card`; framer-motion usage in the chooser stays. |
+| `DemoForm`, `RiseGrowChooser` | inputs `.glass` **plus `border-border-strong`** with `rounded-control`, hover border gold-soft, focus ring unchanged; option cards `.glass-card`; framer-motion usage in the chooser stays. (amended 2026-09-11: the field keeps `border-border-strong`; `.glass`'s white hairline over a white glass panel leaves the boundary at about 1.1:1, well under the 3:1 non-text floor.) |
 | Homepage sections (`app/page.tsx`) | `capability-row`, `method-row`, `stage-card`, industry tiles, trust strip → glass treatments per the table above; section tints gain a faint gold radial. |
 | Inner pages (`app/**/page.tsx`) | legacy palette classes (`text-navy`, `bg-white`, `text-grey-muted`, `bg-off-white`, `text-blue-accent`, `border-navy/*`, `shadow-soft` on static content) are swept to semantic and glass classes so every page picks up the system. |
 

@@ -6,8 +6,11 @@ import { interests, offers } from "@/lib/lead-schema";
 import { regions } from "@/content/site";
 import { useRegion } from "@/components/layout/region-preference";
 import { signalMeasurement } from "@/lib/measurement";
+// `border-border-strong` is not decoration: `.glass`'s white hairline over a 62%-alpha white panel
+// leaves the field boundary at about 1.1:1. The utility overrides the glass border colour on all
+// four sides and keeps every input, select and textarea at the 3:1 non-text floor.
 const field =
-  "glass min-h-11 w-full rounded-control px-4 py-3 text-base text-foreground transition-colors hover:border-gold-soft focus-visible:outline-2 focus-visible:outline-offset-2";
+  "glass min-h-11 w-full rounded-control border-border-strong px-4 py-3 text-base text-foreground transition-colors hover:border-gold-soft focus-visible:outline-2 focus-visible:outline-offset-2";
 export function DemoForm() {
   const router = useRouter();
   const [deliveryEnabled, setDeliveryEnabled] = useState<boolean | null>(null);
