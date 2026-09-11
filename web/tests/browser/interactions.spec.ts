@@ -112,3 +112,25 @@ test("below-the-fold reveals become visible on scroll on an observer-owned page"
   await expect(pending).toHaveAttribute("data-reveal", "in");
   await expect(pending).toHaveCSS("opacity", "1");
 });
+// The desktop mega-menu opens on hover (2026-09-11) and the panel hangs from the bottom of the header row,
+// 26px below the trigger. A pointer travelling down into the panel crosses that band; the menu must survive it.
+for (const label of ["Services", "About"])
+  test("hovering " + label + " keeps its menu open while the pointer travels into it", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/");
+    // The hover handlers exist only after hydration; a single pointer move before that opens nothing.
+    await page.locator("html[data-motion-ready]").waitFor();
+    const trigger = page.locator('nav[aria-label="Primary"]').getByRole("link", { name: label, exact: true });
+    const box = (await trigger.boundingBox())!;
+    await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+    const panel = page.locator("#" + (await trigger.getAttribute("aria-controls")));
+    await expect(panel).toBeVisible();
+    const link = panel.getByRole("link").first();
+    const target = (await link.boundingBox())!;
+    for (let y = box.y + box.height / 2; y < target.y + target.height / 2; y += 4) {
+      await page.mouse.move(box.x + box.width / 2, y);
+    }
+    await page.mouse.move(target.x + 8, target.y + target.height / 2, { steps: 10 });
+    await expect(panel).toBeVisible();
+    await expect(link).toBeVisible();
+  });

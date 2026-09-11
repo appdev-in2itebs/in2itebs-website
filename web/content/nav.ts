@@ -133,7 +133,7 @@ export const whatWeDoMenu: NavItem[] = [
 ];
 
 export const primaryNav: NavItem[] = [
-  { label: "What We Do", href: "/what-we-do/", children: whatWeDoMenu },
+  { label: "Services", href: "/what-we-do/", children: whatWeDoMenu },
   { label: "Industries", href: "/industries/" },
   { label: "Client stories", href: "/case-studies/" },
   { label: "Partners", href: "/partners/" },
@@ -144,9 +144,7 @@ export const primaryNav: NavItem[] = [
     children: [
       { label: "Who We Are", href: "/about/" },
       { label: "Why In2IT EBS", href: "/why-in2it-ebs/" },
-      { label: "Partners", href: "/partners/" },
       { label: "Insights", href: "/insights/" },
-      { label: "Careers", href: "/careers/" },
     ],
   },
 ];

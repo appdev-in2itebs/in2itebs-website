@@ -17,7 +17,27 @@ export function Header() {
   const header = useRef<HTMLElement>(null);
   const drawer = useRef<HTMLDialogElement>(null);
   const opener = useRef<HTMLButtonElement>(null);
-  const triggers = useRef<Record<string, HTMLButtonElement | null>>({});
+  const triggers = useRef<Record<string, HTMLAnchorElement | null>>({});
+  // Hover-open menus: the trigger wrapper is stretched to the header row so the vertical path into
+  // the panel never leaves it, and a diagonal path that does leave it gets a short grace timer;
+  // re-entering the trigger or its panel cancels the close.
+  const closeTimer = useRef<number | null>(null);
+  const cancelClose = () => {
+    if (closeTimer.current !== null) {
+      window.clearTimeout(closeTimer.current);
+      closeTimer.current = null;
+    }
+  };
+  const scheduleClose = () => {
+    cancelClose();
+    closeTimer.current = window.setTimeout(() => setExpanded(null), 160);
+  };
+  useEffect(
+    () => () => {
+      if (closeTimer.current !== null) window.clearTimeout(closeTimer.current);
+    },
+    [],
+  );
   const close = () => {
     setExpanded(null);
     drawer.current?.close();
@@ -101,37 +121,55 @@ export function Header() {
           <Logo priority asLink={false} variant="navy" className="theme-logo-light h-9 w-auto sm:h-11" />
           <Logo priority asLink={false} variant="light-blue" className="theme-logo-dark h-9 w-auto sm:h-11" />
         </Link>
-        <nav aria-label="Primary" className="hidden items-center gap-1 xl:flex">
+        <nav aria-label="Primary" className="hidden items-center gap-1 self-stretch xl:flex">
           {primaryNav.map((item, index) => {
             const id = `desktop-nav-${index}`;
             const active = pathname === item.href || pathname.startsWith(item.href);
             return (
-              <div key={item.href} className="flex items-center">
+              <div
+                key={item.href}
+                // Stretched to the full header row so the wrapper's box touches the panel below it:
+                // a pointer travelling straight down never leaves the wrapper's subtree.
+                className="flex items-center self-stretch"
+                onMouseEnter={() => {
+                  if (!item.children) return;
+                  cancelClose();
+                  setExpanded(item.href);
+                }}
+                onMouseLeave={() => item.children && scheduleClose()}
+              >
                 <Link
+                  ref={(el) => {
+                    if (item.children) triggers.current[item.href] = el;
+                  }}
                   href={item.href}
                   aria-current={active ? "page" : undefined}
+                  aria-haspopup={item.children ? "true" : undefined}
+                  aria-expanded={item.children ? expanded === item.href : undefined}
+                  aria-controls={item.children ? id : undefined}
+                  onFocus={() => setExpanded(item.children ? item.href : null)}
+                  onKeyDown={(event) => {
+                    if (!item.children || event.key !== "ArrowDown") return;
+                    event.preventDefault();
+                    setExpanded(item.href);
+                    requestAnimationFrame(() => document.querySelector<HTMLElement>(`#${id} a[href]`)?.focus());
+                  }}
                   className={cn(
-                    "nav-link inline-flex min-h-11 items-center px-2 text-sm font-semibold transition-colors hover:text-gold",
+                    "nav-link inline-flex min-h-11 items-center gap-1.5 px-2 text-sm font-semibold transition-colors hover:text-gold",
                     active && "text-gold",
                   )}
                 >
                   {item.label}
+                  {item.children ? (
+                    <ChevronDown
+                      aria-hidden
+                      size={15}
+                      className={`transition-transform ${expanded === item.href ? "rotate-180" : ""}`}
+                    />
+                  ) : null}
                 </Link>
                 {item.children && (
                   <>
-                    <button
-                      ref={(el) => {
-                        triggers.current[item.href] = el;
-                      }}
-                      type="button"
-                      aria-label={`${expanded === item.href ? "Close" : "Open"} ${item.label} navigation`}
-                      aria-expanded={expanded === item.href}
-                      aria-controls={id}
-                      onClick={() => setExpanded(expanded === item.href ? null : item.href)}
-                      className="inline-flex h-11 w-8 items-center justify-center rounded-control hover:bg-glass/60"
-                    >
-                      <ChevronDown aria-hidden size={15} className={expanded === item.href ? "rotate-180" : ""} />
-                    </button>
                     <div
                       id={id}
                       hidden={expanded !== item.href}
@@ -141,7 +179,7 @@ export function Header() {
                       // themes (tests/browser/theme-contrast.spec.ts).
                       className="glass-elevated absolute inset-x-0 top-full max-h-[calc(100dvh-10rem)] overflow-y-auto rounded-b-feature border-t-0 p-7 [--glass-alpha-elevated:0.92]"
                     >
-                      <div className={item.label === "What We Do" ? "grid grid-cols-4 gap-7" : "flex flex-wrap gap-5"}>
+                      <div className={item.label === "Services" ? "grid grid-cols-4 gap-7" : "flex flex-wrap gap-5"}>
                         {item.children.map((child) => (
                           <div key={child.href}>
                             <Link

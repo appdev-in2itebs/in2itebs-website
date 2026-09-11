@@ -3,10 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, Pause, Play } from "lucide-react";
-import { Hero3DLoader } from "@/components/hero/hero-3d-loader";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
-import { SapPartnerBadge } from "@/components/ui/sap-partner-badge";
 
 const slides = [
   {
@@ -67,7 +65,7 @@ export function ServiceHero() {
     const timer = setInterval(() => {
       if (!document.hidden && document.documentElement.dataset.motionPaused !== "true")
         setActive((index) => (index + 1) % slides.length);
-    }, 8000);
+    }, 3000);
     return () => clearInterval(timer);
   }, [playing, hovered, suspended]);
   const slide = slides[active];
@@ -77,6 +75,7 @@ export function ServiceHero() {
   }
   return (
     <section
+      id="featured-services"
       ref={root}
       aria-label="Featured services"
       aria-roledescription="carousel"
@@ -85,64 +84,50 @@ export function ServiceHero() {
       onFocusCapture={(event) => {
         if (!event.currentTarget.contains(event.relatedTarget as Node)) setPlaying(false);
       }}
-      className="relative overflow-hidden bg-canvas pt-36 text-foreground md:pt-40"
+      className="theme-on-brand relative flex min-h-[calc(100svh-7.75rem)] scroll-mt-[7.75rem] overflow-hidden bg-brand text-on-brand md:min-h-[calc(100svh-8.75rem)] md:scroll-mt-[8.75rem]"
     >
-      <div aria-hidden className="hero-ambient pointer-events-none absolute inset-0" />
-      <Hero3DLoader />
-      <Container className="relative z-10">
-        <h1 className="sr-only">In2IT EBS: enterprise transformation, delivered globally</h1>
-        <div className="grid gap-8 pt-8 lg:grid-cols-2 lg:items-stretch lg:gap-16 lg:pt-12">
-          <div className="flex min-h-[27rem] flex-col pb-3 md:min-h-[30rem]">
-            <div className="mb-7">
-              <SapPartnerBadge />
-            </div>
-            <div aria-live={playing ? "off" : "polite"} aria-atomic="true" className="flex flex-1 flex-col">
-              <p className="text-sm font-semibold text-gold">{slide.label}</p>
-              <h2 className="mt-4 max-w-[18ch] text-[clamp(2.25rem,3.8vw,3.75rem)] font-semibold leading-[1.06] tracking-[-0.04em]">
-                {slide.heading}
-              </h2>
-              <p className="mt-6 max-w-[54ch] text-lg leading-relaxed text-foreground-muted">{slide.body}</p>
-              <div className="mt-auto flex flex-wrap items-center gap-x-6 gap-y-2 pt-8">
-                <Button href={slide.href} withArrow>
-                  {slide.cta}
-                </Button>
-                <Link
-                  href="/contact/"
-                  className="inline-flex min-h-12 items-center gap-3 text-sm font-semibold text-gold hover:underline"
-                >
-                  Talk to us <ArrowRight size={17} aria-hidden />
-                </Link>
-              </div>
-            </div>
-          </div>
-          <div className="glass-elevated relative min-h-[17rem] overflow-hidden rounded-feature p-2 lg:min-h-[31rem]">
-            <div className="absolute inset-2 overflow-hidden rounded-[calc(var(--radius-feature)-0.5rem)]">
-              {slides.map((item, index) => {
-                const mounted =
-                  index === active ||
-                  index === (active + 1) % slides.length ||
-                  index === (active - 1 + slides.length) % slides.length;
-                return mounted ? (
-                  <Image
-                    key={item.image}
-                    src={item.image}
-                    alt=""
-                    fill
-                    priority={index === 0}
-                    sizes="(min-width:1024px) 45vw, 100vw"
-                    className={`rounded-[calc(var(--radius-feature)-0.5rem)] object-cover transition-opacity duration-700 motion-reduce:transition-none ${active === index ? "opacity-100" : "opacity-0"}`}
-                  />
-                ) : null;
-              })}
-            </div>
-            <div className="glass-elevated absolute bottom-5 left-5 right-5 flex items-center justify-between gap-4 rounded-surface px-5 py-4 text-sm text-foreground">
-              <span>Enterprise transformation, delivered globally</span>
-              <span className="shrink-0 tabular-nums text-gold">0{active + 1} / 04</span>
-            </div>
+      <div className="absolute inset-0">
+        {slides.map((item, index) => {
+          const mounted =
+            index === active ||
+            index === (active + 1) % slides.length ||
+            index === (active - 1 + slides.length) % slides.length;
+          return mounted ? (
+            <Image
+              key={item.image}
+              src={item.image}
+              alt=""
+              fill
+              priority={index === 0}
+              sizes="100vw"
+              className={`object-cover transition-opacity duration-700 ease-out motion-reduce:transition-none ${active === index ? "opacity-100" : "opacity-0"}`}
+            />
+          ) : null;
+        })}
+      </div>
+      <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-brand via-brand/75 to-brand/10" />
+      <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-brand/90 via-transparent to-brand/30" />
+      <Container className="relative z-10 flex min-h-[calc(100svh-7.75rem)] flex-1 flex-col justify-end pb-24 pt-16 md:min-h-[calc(100svh-8.75rem)] md:pt-20">
+        <div aria-live={playing ? "off" : "polite"} aria-atomic="true" className="max-w-3xl pb-10 md:pb-14">
+          <p className="text-sm font-semibold text-gold-on-brand">{slide.label}</p>
+          <h2 className="heading-plain mt-4 max-w-[17ch] text-[clamp(2.5rem,5vw,5rem)] font-semibold leading-[0.98] tracking-[-0.05em] text-on-brand">
+            {slide.heading}
+          </h2>
+          <p className="mt-6 max-w-[58ch] text-base leading-relaxed text-on-brand/80 md:text-xl">{slide.body}</p>
+          <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2">
+            <Button href={slide.href} variant="on-dark" withArrow>
+              {slide.cta}
+            </Button>
+            <Link
+              href="/contact/"
+              className="inline-flex min-h-12 items-center gap-3 text-sm font-semibold text-gold-on-brand hover:underline"
+            >
+              Talk to us <ArrowRight size={17} aria-hidden />
+            </Link>
           </div>
         </div>
-        <div className="glass mt-8 flex flex-wrap items-center justify-between gap-5 rounded-feature px-4 py-3">
-          <div className="flex flex-wrap gap-2" aria-label="Choose a featured service">
+        <div className="flex flex-wrap items-center justify-between gap-5 border-t border-on-brand/30 pt-5">
+          <div className="flex flex-wrap gap-1" aria-label="Choose a featured service">
             {slides.map((item, index) => (
               <button
                 type="button"
@@ -150,7 +135,7 @@ export function ServiceHero() {
                 onClick={() => change(index)}
                 aria-label={`Show ${item.label}`}
                 aria-current={active === index ? "true" : undefined}
-                className={`inline-flex min-h-11 items-center gap-2 rounded-full px-3 text-sm ${active === index ? "bg-action text-on-action" : "text-foreground-muted hover:bg-glass/70 hover:text-gold"}`}
+                className={`inline-flex min-h-11 items-center gap-2 rounded-full px-3 text-sm transition-colors ${active === index ? "bg-on-brand text-brand" : "text-on-brand/75 hover:bg-on-brand/10 hover:text-on-brand"}`}
               >
                 <span className="tabular-nums">0{index + 1}</span>
                 <span className="hidden sm:inline">
@@ -164,7 +149,7 @@ export function ServiceHero() {
               type="button"
               onClick={() => change(active - 1)}
               aria-label="Previous service"
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border-strong hover:border-gold hover:text-gold"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-on-brand/50 text-on-brand hover:border-gold-on-brand hover:text-gold-on-brand"
             >
               <ArrowLeft size={18} aria-hidden />
             </button>
@@ -172,7 +157,7 @@ export function ServiceHero() {
               type="button"
               onClick={() => setPlaying((value) => !value)}
               aria-label={playing ? "Pause service carousel" : "Play service carousel"}
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border-strong hover:border-gold hover:text-gold"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-on-brand/50 text-on-brand hover:border-gold-on-brand hover:text-gold-on-brand"
             >
               {playing ? <Pause size={17} aria-hidden /> : <Play size={17} aria-hidden />}
             </button>
@@ -180,7 +165,7 @@ export function ServiceHero() {
               type="button"
               onClick={() => change(active + 1)}
               aria-label="Next service"
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border-strong hover:border-gold hover:text-gold"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-on-brand/50 text-on-brand hover:border-gold-on-brand hover:text-gold-on-brand"
             >
               <ArrowRight size={18} aria-hidden />
             </button>

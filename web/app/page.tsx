@@ -21,8 +21,8 @@ import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { CtaSection } from "@/components/sections/cta-section";
 import { LogoMarquee } from "@/components/sections/logo-marquee";
-import { MotionControls } from "@/components/sections/motion-controls";
 import { HomePartners } from "@/components/sections/home-partners";
+import { BrandHero } from "@/components/sections/brand-hero";
 import { ServiceHero } from "@/components/sections/service-hero";
 import { PlatformPracticeLinks } from "@/components/sections/platform-practice-links";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
@@ -140,6 +140,7 @@ const featuredIndustries = [
 export default function HomePage() {
   return (
     <>
+      <BrandHero />
       <ServiceHero />
       <section aria-labelledby="platform-practices-title" className="bg-surface py-10">
         <Container>
@@ -172,7 +173,7 @@ export default function HomePage() {
           </p>
           <LogoMarquee clients={clients} />
           <div className="mt-8 flex flex-wrap items-center justify-between gap-4">
-            <MotionControls />
+            <span className="text-sm text-foreground-muted">Pause and full-list controls are available above.</span>
             <Link
               href="/partners/"
               className="inline-flex min-h-11 items-center text-sm font-semibold text-gold underline decoration-gold/40 underline-offset-4"

@@ -24,13 +24,13 @@ export function PageHero({
   media?: ReactNode;
 }) {
   return (
-    <section className="relative overflow-hidden bg-canvas pt-36 pb-20 md:pt-44 md:pb-28">
+    <section className="relative flex min-h-[100svh] items-center overflow-hidden bg-canvas pt-36 pb-20 md:pt-44 md:pb-28">
       <div aria-hidden className="hero-ambient pointer-events-none absolute inset-0" />
       <div aria-hidden className="pointer-events-none absolute right-0 top-20 h-[26rem] w-[26rem] opacity-[0.12]">
         <div className="absolute inset-0 origin-center rotate-45 border-[56px] border-gold-soft" />
       </div>
       {/* `z-10` keeps the copy above the `.hero-ambient` layer, as in `service-hero.tsx`. */}
-      <Container className="relative z-10">
+      <Container className="relative z-10 w-full">
         <div className={cn(media && "grid items-center gap-10 lg:grid-cols-2 lg:gap-16")}>
           <Reveal className="flex max-w-4xl flex-col gap-6">
             {eyebrow ? <Eyebrow>{eyebrow}</Eyebrow> : null}

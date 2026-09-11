@@ -4,6 +4,12 @@ Updated 10 September 2026. This file supersedes the earlier Newsreader/radius sp
 
 ## Direction
 
+### Full-screen narrative update, 11 September 2026
+
+The homepage opens with a dedicated full-viewport brand hero. The WebGL sculpture belongs only to this section and supports the headline “Change with confidence. Run without compromise.” A separate service carousel follows beneath it, using full-bleed photography and a three-second interval while playing. Its usable height accounts for the fixed header so slide copy and controls remain visible together. Inner-page `PageHero` sections also occupy at least one viewport to maintain the same spatial rhythm.
+
+Desktop navigation uses one combined label-and-chevron link for each disclosure. Services replaces “What We Do”; hovering or focusing Services and About reveals their menu, and Arrow Down moves into it. There is no adjacent disclosure button. Partners and Careers remain primary links and are not repeated under About.
+
 Enterprise buyers compare service scope on office laptops in daylight. The primary presentation is a light, cool-white canvas with restrained blue tints, a prominent genuine logo and readable service hierarchy. Dark mode is an explicit preference, not a different content hierarchy. Following the owner's transcript correction, the homepage now uses a controlled service carousel, not the earlier single-hero decision. Retain the homepage client ribbon and no homepage case-study narratives.
 
 The 10 September 2026 premium glass restyle changed the presentation, not the direction above: content, imagery and information hierarchy are unchanged. Light mode is now premium glassmorphism — frosted glass panels over the same white / cool-blue canvas, with deep-gold text accents (eyebrows, numerals, hover states) and navy-to-gold gradient headings. Dark mode is re-based on a noir canvas with champagne-gold accents, matching the reference prototype's look. Every glass panel, gradient and hover treatment is driven by the same semantic tokens described below; no component was given one-off colours.

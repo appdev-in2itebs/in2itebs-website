@@ -1,7 +1,8 @@
 import { test, expect, type Page } from "@playwright/test";
 
 const carousel = 'section[aria-roledescription="carousel"]';
-const loader = `${carousel} [data-hero-3d]`;
+const brandHero = "section[data-brand-hero]";
+const loader = `${brandHero} [data-hero-3d]`;
 
 async function settled(page: Page) {
   await expect(page.locator(loader)).not.toHaveAttribute("data-hero-3d", "pending", { timeout: 15000 });
@@ -26,8 +27,9 @@ test("desktop: the 3D hero activates or reports a WebGL-free environment, never 
       await expect(page.locator(loader)).toHaveAttribute("data-hero-3d", "active");
     }
   }
-  await expect(page.locator(`${carousel} .hero-ambient`)).toHaveCount(1);
-  // The sculpture is not an image: the slide window is still the only responsive images in the carousel.
+  await expect(page.locator(`${brandHero} .hero-ambient`)).toHaveCount(1);
+  await expect(page.locator(`${carousel} [data-hero-3d]`)).toHaveCount(0);
+  // The sculpture is not an image: the full-screen service carousel owns the responsive images.
   await expect(page.locator(`${carousel} img[srcset]`)).toHaveCount(3);
 });
 
@@ -74,5 +76,36 @@ test("dark theme reaches the same outcome", async ({ page, context }) => {
   await expect(page.locator("html")).toHaveClass(/theme-dark/);
   const state = await settled(page);
   expect(["active", "paused", "unavailable"]).toContain(state);
-  await expect(page.locator(`${carousel} .hero-ambient`)).toHaveCount(1);
+  await expect(page.locator(`${brandHero} .hero-ambient`)).toHaveCount(1);
+});
+
+test("the brand hero and service carousel each fill the viewport", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/");
+  await page.screenshot({ path: "test-results/home-brand-hero.png" });
+  const heroBox = await page.locator(brandHero).boundingBox();
+  const carouselBox = await page.locator(carousel).boundingBox();
+  const headerBox = await page.locator("header").boundingBox();
+  expect(heroBox!.height).toBeGreaterThanOrEqual(900);
+  expect(carouselBox!.height).toBeGreaterThanOrEqual(900 - headerBox!.height);
+  await page.locator(carousel).scrollIntoViewIfNeeded();
+  await page.screenshot({ path: "test-results/home-service-carousel.png" });
+});
+
+test("the visible service carousel advances after three seconds", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/");
+  await page.locator(carousel).scrollIntoViewIfNeeded();
+  const heading = page.locator(carousel).getByRole("heading", { level: 2 });
+  const initial = await heading.textContent();
+  await expect(heading).not.toHaveText(initial!, { timeout: 4200 });
+});
+
+test("inner-page heroes retain the full-screen rhythm", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/about/");
+  const box = await page.locator("main > section").first().boundingBox();
+  expect(box!.height).toBeGreaterThanOrEqual(900);
 });

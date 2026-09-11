@@ -6,6 +6,13 @@ Dates use ISO 8601 (YYYY-MM-DD).
 
 ## [Unreleased]
 
+### Full-screen hero, carousel and navigation — 2026-09-11
+
+- Split the homepage WebGL scene into a dedicated full-screen brand hero with a new enterprise tagline and immediate motion control.
+- Rebuilt the service carousel as a separate full-bleed photographic viewport, advancing every three seconds while playing and retaining pause, direct selection, keyboard and reduced-motion behaviour.
+- Made inner-page heroes fill the viewport. Renamed the primary “What We Do” navigation item to “Services”. Services and About now expose their menus from the unified link on hover/focus, without separate arrow buttons.
+- Removed Partners and Careers from the About disclosure because both remain top-level navigation items.
+
 ### Independent client marks and AAI — 2026-09-08
 
 - Split the Mrs Bectors/Cremica/English Oven composite into independent source-derived marks and added Airports Authority of India using official artwork, as requested by the owner.

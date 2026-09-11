@@ -9,13 +9,17 @@ for (const width of [320, 375, 768, 1024, 1100, 1280, 1440]) {
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy();
     if (width >= 1280) {
       await expect(page.locator("header").getByRole("combobox", { name: "Preferred contact region" })).toBeVisible();
-      await page.getByRole("button", { name: "Open What We Do navigation" }).click();
+      const services = page.locator("header").getByRole("link", { name: "Services", exact: true });
+      await services.hover();
       const box = await page.locator("#desktop-nav-0").boundingBox();
       expect(box!.x).toBeGreaterThanOrEqual(0);
       expect(box!.x + box!.width).toBeLessThanOrEqual(width);
       await expect(page.locator("#desktop-nav-0").getByRole("link", { name: "Oracle", exact: true })).toBeVisible();
+      await services.focus();
+      await page.keyboard.press("ArrowDown");
+      await expect(page.locator("#desktop-nav-0").getByRole("link").first()).toBeFocused();
       await page.keyboard.press("Escape");
-      await expect(page.getByRole("button", { name: "Open What We Do navigation" })).toBeFocused();
+      await expect(services).toBeFocused();
     } else {
       await page.getByRole("button", { name: "Open menu", exact: true }).click();
       await expect(page.getByRole("dialog")).toBeVisible();
