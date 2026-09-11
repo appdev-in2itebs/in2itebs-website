@@ -237,6 +237,9 @@ export function Hero3D({ onState }: { onState: (state: "active" | "paused" | "un
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
       renderer.setSize(w, h);
+      // `setSize` clears the drawing buffer. A paused scene has no loop to redraw it, so without
+      // this one frame the sculpture would sit blank until something resumes it.
+      if (!running) renderer.render(scene, camera);
     });
     resize.observe(host);
 

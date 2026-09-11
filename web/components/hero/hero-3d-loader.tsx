@@ -13,7 +13,12 @@ let webglProbe: boolean | undefined;
 function hasWebGL() {
   if (webglProbe === undefined) {
     const probe = document.createElement("canvas");
-    webglProbe = Boolean(probe.getContext("webgl2") ?? probe.getContext("webgl"));
+    const context: WebGL2RenderingContext | WebGLRenderingContext | null =
+      probe.getContext("webgl2") ?? probe.getContext("webgl");
+    webglProbe = Boolean(context);
+    // Hand the probe's context back at once; otherwise this throwaway canvas holds one of the
+    // browser's few WebGL contexts for the life of the document, next to the scene's own.
+    context?.getExtension("WEBGL_lose_context")?.loseContext();
   }
   return webglProbe;
 }
@@ -57,8 +62,11 @@ export function Hero3DLoader() {
       if (typeof window.cancelIdleCallback === "function") window.cancelIdleCallback(idle);
       else window.clearTimeout(idle);
     };
+    // The last verdict, readable from listeners that never re-run with fresh React state.
+    let blockedBy: Reason | null = null;
     const evaluate = () => {
       const blocked = blocker();
+      blockedBy = blocked;
       if (blocked) {
         mountedRef.current = false;
         setMounted(false);
@@ -89,14 +97,23 @@ export function Hero3DLoader() {
         evaluate();
       }, 150);
     };
+    // A load in a background tab is blocked on `document.hidden`, and neither resize nor the
+    // reduced-motion query ever fires to undo it: without this the hero stays permanently
+    // unavailable once the visitor returns to the tab.
+    const onVisible = () => {
+      if (document.hidden || blockedBy !== "hidden") return;
+      onChange();
+    };
     window.addEventListener("resize", onChange);
     reduced.addEventListener("change", onChange);
+    document.addEventListener("visibilitychange", onVisible);
     return () => {
       cancelled = true;
       window.clearTimeout(debounce);
       cancelIdle();
       window.removeEventListener("resize", onChange);
       reduced.removeEventListener("change", onChange);
+      document.removeEventListener("visibilitychange", onVisible);
     };
   }, []);
 
