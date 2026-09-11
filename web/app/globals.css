@@ -299,7 +299,11 @@ html:not([data-motion-ready]) .client-ribbon {
     @apply font-sans text-[0.72rem] font-semibold uppercase tracking-label;
   }
 
-  /* Single restrained emphasis treatment inside legacy headlines. */
+  /* Single restrained emphasis treatment inside legacy headlines.
+     These colours apply only where the heading gradient does not: `.heading-plain` headings and
+     body copy. Inside a gradient h1/h2 the inherited `-webkit-text-fill-color: transparent` wins
+     over any `color` set here, so an `<Accent>` word takes the gradient's gold tail as its accent
+     rather than a second colour of its own. That is the intended reading, not a defect. */
   .accent {
     @apply font-display not-italic text-action;
     font-weight: 650;

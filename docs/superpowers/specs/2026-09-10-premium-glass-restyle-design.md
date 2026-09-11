@@ -191,6 +191,13 @@ Text on glass: any glass panel that holds normal-size body text uses
 `--glass-alpha-elevated` (≥ 0.78). Axe (run on every route in both themes) is
 the arbiter; the implementer raises the alpha if axe reports a contrast
 violation.
+(amended 2026-09-11: axe cannot arbitrate this. It cannot compute contrast
+through a `backdrop-filter` and reports those nodes as "incomplete", neither
+pass nor fail. The arbiter is the arithmetic composite pairs in
+`tests/browser/theme-contrast.spec.ts`, which composite the glass colour at the
+alpha the element really carries over the background it really sits on and
+measure the foreground against that composite. Raise the alpha until the pair
+passes and record the value.)
 
 ### 3.4 Motion
 
