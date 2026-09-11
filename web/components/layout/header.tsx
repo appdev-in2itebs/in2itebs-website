@@ -133,7 +133,11 @@ export function Header() {
                     <div
                       id={id}
                       hidden={expanded !== item.href}
-                      className="glass-elevated absolute inset-x-0 top-full max-h-[calc(100dvh-10rem)] overflow-y-auto rounded-b-feature border-t-0 p-7"
+                      // The panel spans the full viewport width and can sit over busy photography or a
+                      // dark industry tile; 0.78 elevated glass lets that read through in the light
+                      // theme. 0.92 is the lowest alpha whose composite pairs clear 4.5:1 in both
+                      // themes (tests/browser/theme-contrast.spec.ts).
+                      className="glass-elevated absolute inset-x-0 top-full max-h-[calc(100dvh-10rem)] overflow-y-auto rounded-b-feature border-t-0 p-7 [--glass-alpha-elevated:0.92]"
                     >
                       <div className={item.label === "What We Do" ? "grid grid-cols-4 gap-7" : "flex flex-wrap gap-5"}>
                         {item.children.map((child) => (
