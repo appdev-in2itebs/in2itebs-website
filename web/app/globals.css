@@ -440,13 +440,14 @@ html:not([data-motion-ready]) .client-ribbon {
         inset 0 0 0 1px oklch(var(--color-gold-soft) / 0.4);
     }
   }
+  /* No `backdrop-filter` on the chips. Every one of them sits on an opaque section ground or on a
+     surface that is already glass, so at their alpha the blur has nothing of its own to reveal —
+     and each blurred element is a separate compositing layer on routes that carry dozens. */
   .glass-pill {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
     background: oklch(var(--color-glass) / var(--glass-alpha-elevated));
-    -webkit-backdrop-filter: blur(16px);
-    backdrop-filter: blur(16px);
     border: 1px solid oklch(var(--color-glass-line) / var(--glass-line-alpha, 0.55));
     border-top-color: oklch(var(--color-glass-line) / var(--glass-top-alpha, 0.9));
     border-radius: 9999px;
@@ -461,8 +462,6 @@ html:not([data-motion-ready]) .client-ribbon {
       oklch(var(--color-gold-soft) / 0.28) 0%,
       oklch(var(--color-gold-soft) / 0.08) 100%
     );
-    -webkit-backdrop-filter: blur(16px);
-    backdrop-filter: blur(16px);
     border: 1px solid oklch(var(--color-gold) / 0.35);
     border-top-color: oklch(var(--color-gold) / 0.55);
     color: oklch(var(--color-gold));
