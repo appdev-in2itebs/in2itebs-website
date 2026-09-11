@@ -143,7 +143,7 @@ export default function HomePage() {
       <ServiceHero />
       <section aria-labelledby="platform-practices-title" className="bg-surface py-10">
         <Container>
-          <h2 id="platform-practices-title" className="mb-5 text-lg font-semibold">
+          <h2 id="platform-practices-title" className="heading-plain mb-5 text-lg font-semibold text-foreground">
             Find your platform practice
           </h2>
           <PlatformPracticeLinks />

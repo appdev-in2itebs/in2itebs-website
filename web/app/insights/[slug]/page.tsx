@@ -82,7 +82,7 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
               )}
               {insightBodies[article.slug].sections.map((section) => (
                 <section key={section.heading}>
-                  <h2 className="mb-3 text-h3 font-semibold">{section.heading}</h2>
+                  <h2 className="heading-plain mb-3 text-h3 font-semibold text-foreground">{section.heading}</h2>
                   <p>{section.text}</p>
                 </section>
               ))}

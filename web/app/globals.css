@@ -513,7 +513,13 @@ html:not([data-motion-ready]) .client-ribbon {
     color: transparent;
     -webkit-text-fill-color: transparent;
   }
-  .heading-plain {
+  /* The gradient opt-out has to outrank every selector that paints one: bare `.heading-plain` is
+     (0,1,0) and loses to `main .theme-on-brand h1, main .theme-on-brand h2` (0,1,2) on
+     `background-image`. The scoped copies restore the opt-out inside `main` and inside an on-brand
+     section. */
+  .heading-plain,
+  main .heading-plain,
+  main .theme-on-brand .heading-plain {
     background-image: none;
     color: inherit;
     -webkit-text-fill-color: currentColor;
