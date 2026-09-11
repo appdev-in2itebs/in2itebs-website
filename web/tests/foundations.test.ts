@@ -399,8 +399,11 @@ test("every component and content module is imported somewhere", () => {
 
 test("legacy palette classes are no longer used in markup", () => {
   // The premium restyle moved every page onto semantic roles; the legacy aliases stay in tailwind.config.ts only as migration adapters.
+  // `white` is the trap among them and is matched on every prefix, not just `bg-white`: the alias
+  // resolves to `--color-legacy-white`, which is `bg-surface` -- dark in the dark theme -- so a
+  // `text-white` or `border-white` reads as a light value in markup and paints a dark one.
   const legacy =
-    /\b(?:text-navy|bg-white|text-grey-muted|bg-off-white|(?:text|bg|border|ring)-blue-(?:accent|light|pale)|shadow-soft|shadow-lift|rounded-xl2|rounded-xl3|border-navy|bg-navy|ring-navy|(?:text|bg|border|rule)-sand|font-serif)(?:\/[\w.[\]]+)?\b/g;
+    /\b(?:text-navy|(?:text|bg|border|ring)-white|text-grey-muted|bg-off-white|(?:text|bg|border|ring)-blue-(?:accent|light|pale)|shadow-soft|shadow-lift|rounded-xl2|rounded-xl3|border-navy|bg-navy|ring-navy|(?:text|bg|border|rule)-sand|font-serif)(?:\/[\w.[\]]+)?\b/g;
   const offenders: string[] = [];
   const walk = (dir: string) => {
     for (const entry of readdirSync(dir)) {
