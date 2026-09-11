@@ -199,9 +199,14 @@ Entrance reveals:
 - `Reveal` renders `class="reveal"`; `Stagger` renders `class="stagger"` and
   each `StaggerItem` gets `class="reveal"` and `style="--reveal-delay: <index*70>ms"`
   (index passed by `Stagger` via `Children.map`, capped at 8 × 70ms).
-- CSS: `.reveal { transition: opacity 600ms ease-out, transform 700ms cubic-bezier(0.16,1,0.3,1); transition-delay: var(--reveal-delay, 0ms); }`
+- CSS: `.reveal[data-reveal="in"] { transition: opacity 600ms ease-out, transform 700ms cubic-bezier(0.16,1,0.3,1); transition-delay: var(--reveal-delay, 0ms); }`
   `html[data-motion-ready]:not([data-motion-paused="true"]) .reveal:not([data-reveal="in"]) { opacity: 0; transform: translateY(18px); }`
   Reduced motion and `data-motion-paused="true"` therefore show everything.
+  (amended 2026-09-11: the transition sits on `.reveal[data-reveal="in"]`, not on the base
+  `.reveal`. On the base class the transition also runs backwards, so at hydration every
+  below-the-fold reveal fades from opacity 1 to 0; axe multiplies a fractional opacity into the
+  foreground and reports the element as a ~1.3:1 contrast violation. The hide must be
+  instantaneous and only the reveal animates.)
 - `MotionObserver` (client, mounted once in the root layout next to
   `MeasurementSignals`) observes every `.reveal` in the document with an
   `IntersectionObserver` (`rootMargin: "0px 0px -8% 0px"`), sets

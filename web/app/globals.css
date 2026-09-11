@@ -781,8 +781,12 @@ html:not([data-motion-ready]) .client-ribbon {
     animation-delay: 220ms;
   }
 
-  /* ---- Premium restyle: scroll-in reveals (visible-first; hidden only after hydration) ---- */
-  .reveal {
+  /* ---- Premium restyle: scroll-in reveals (visible-first; hidden only after hydration) ----
+     The transition belongs to the revealed state only. On the base class it also runs backwards:
+     at hydration every below-the-fold element would fade 1 -> 0 over 600ms plus its stagger delay,
+     and axe multiplies that fractional opacity into the foreground and reports a ~1.3:1 contrast
+     violation for anything its scan catches mid-fade. Hiding must be instantaneous. */
+  .reveal[data-reveal="in"] {
     transition:
       opacity 600ms ease-out,
       transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
