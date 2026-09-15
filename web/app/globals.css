@@ -128,11 +128,11 @@ html:not([data-motion-ready]) .client-ribbon {
     --glass-alpha-elevated: 0.78;
     --glass-blur: 18px;
     /* Ambient video sections (2026-09-15 15:28): one black veil over each clip, and the copy in the
-       `.on-video` palette below: 20% under the methods section, 30% under the hero carousel
-       (owner, 16:08). Owner ruling: the copy over footage is not contrast-guarded;
+       `.on-video` palette below: 20% under the methods section, 55% under the hero carousel
+       (owner, 16:08, raised to 55% at 16:20 for legibility). Owner ruling: the copy over footage is not contrast-guarded;
        tests/browser/theme-contrast.spec.ts pins the hero veil and the Discover pill. */
     --video-veil-alpha: 0.2;
-    --video-veil-alpha-hero: 0.3;
+    --video-veil-alpha-hero: 0.55;
     --gradient-heading: linear-gradient(
       135deg,
       oklch(var(--color-fg-primary)) 0%,

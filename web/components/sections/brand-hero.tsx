@@ -160,7 +160,9 @@ export function BrandHero() {
       }}
       className="on-video relative flex min-h-[100svh] overflow-hidden bg-canvas pt-36 text-foreground md:pt-40"
     >
-      <div aria-hidden className="absolute inset-0">
+      {/* `isolate` keeps the clip wrappers' z-indexes inside this box, so the veil and the ambient
+          gradient that follow always paint above the footage. */}
+      <div aria-hidden className="absolute inset-0 isolate">
         {mounted.map((index) => {
           const item = slides[index];
           return (

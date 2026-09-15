@@ -26,9 +26,15 @@ async function discoverClearOfQuickContact(page: Page) {
   expect(overlaps, "the Discover cue overlaps the quick-contact button").toBe(false);
 }
 
+/** Keyboard focus inside the hero holds the rotation, which pins the brand slide for slow runs. */
+async function holdOnBrandSlide(page: Page) {
+  await page.locator(`${brandHero} [data-hero-slide="0"]`).getByRole("link", { name: "Start a conversation" }).focus();
+}
+
 test("desktop: the hero is a five-slide carousel on ambient video with no controls", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/");
+  await holdOnBrandSlide(page);
   const hero = page.locator(brandHero);
   await expect(hero).toHaveAttribute("aria-roledescription", "carousel");
   await expect(hero).toHaveClass(/on-video/);
@@ -47,13 +53,18 @@ test("desktop: the hero is a five-slide carousel on ambient video with no contro
   ]);
   await expect(video).toHaveAttribute("poster", /hero-entry-poster\.jpg$/);
   expect(await video.evaluate((v: HTMLVideoElement) => v.currentSrc)).toMatch(/hero-entry-1080\.mp4$/);
-  // One 30% black veil sits between the clips and the copy (owner, 2026-09-15 16:08; the methods
+  // One 55% black veil sits between the clips and the copy (owner, 2026-09-15 16:20; the methods
   // section keeps 20%); none of the earlier layers survive.
   const veil = page.locator(`${brandHero} .video-veil`);
   await expect(veil).toHaveCount(1);
-  expect(await veil.evaluate((el) => getComputedStyle(el).backgroundColor)).toBe("rgba(0, 0, 0, 0.3)");
+  expect(await veil.evaluate((el) => getComputedStyle(el).backgroundColor)).toBe("rgba(0, 0, 0, 0.55)");
   for (const gone of [".video-tint", ".video-wash", ".video-wash-copy", ".video-wash-methods"])
     await expect(page.locator(`${brandHero} ${gone}`)).toHaveCount(0);
+  // The clip wrappers carry z-indexes for the cross-fade. Their container must be its own stacking
+  // context, or those z-indexes escape into the section's and the clips paint above the veil
+  // (which is exactly what happened on 2026-09-15 before this assertion existed).
+  const clips = page.locator(`${brandHero} [data-hero-video]`).first().locator("..");
+  expect(await clips.evaluate((el) => getComputedStyle(el).isolation)).toBe("isolate");
   await expect(page.locator(`${brandHero} .hero-ambient`)).toHaveCount(1);
   // The copy sits bottom-left in the lower half, and nothing in the carousel is a control.
   const heroBox = (await hero.boundingBox())!;
@@ -88,6 +99,7 @@ test("the hero advances on its own every 4.5 seconds and keeps the h1 in the doc
 test("phones get the 720p clip and no Discover cue", async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 812 });
   await page.goto("/");
+  await holdOnBrandSlide(page);
   await expect(page.locator(activeClip)).toHaveAttribute("data-ambient-video", "playing", { timeout: 15000 });
   expect(await page.locator(activeVideo).evaluate((v: HTMLVideoElement) => v.currentSrc)).toMatch(
     /hero-entry-720\.mp4$/,

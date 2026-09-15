@@ -76,7 +76,7 @@ test("the video sections carry one 20% black veil token and the old wash layers 
   const source = css();
   const root = block(source, ":root {");
   assert.ok(root.includes("--video-veil-alpha: 0.2;"), "root lacks --video-veil-alpha: 0.2");
-  assert.ok(root.includes("--video-veil-alpha-hero: 0.3;"), "root lacks --video-veil-alpha-hero: 0.3");
+  assert.ok(root.includes("--video-veil-alpha-hero: 0.55;"), "root lacks --video-veil-alpha-hero: 0.55");
   assert.ok(source.includes(".video-veil {"), ".video-veil is not defined");
   assert.ok(
     source.includes("[data-brand-hero] {\n    --video-veil-alpha: var(--video-veil-alpha-hero);"),
