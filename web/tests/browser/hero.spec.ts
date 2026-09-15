@@ -47,10 +47,11 @@ test("desktop: the hero is a five-slide carousel on ambient video with no contro
   ]);
   await expect(video).toHaveAttribute("poster", /hero-entry-poster\.jpg$/);
   expect(await video.evaluate((v: HTMLVideoElement) => v.currentSrc)).toMatch(/hero-entry-1080\.mp4$/);
-  // One 20% black veil sits between the clip and the copy; none of the earlier layers survive.
+  // One 30% black veil sits between the clips and the copy (owner, 2026-09-15 16:08; the methods
+  // section keeps 20%); none of the earlier layers survive.
   const veil = page.locator(`${brandHero} .video-veil`);
   await expect(veil).toHaveCount(1);
-  expect(await veil.evaluate((el) => getComputedStyle(el).backgroundColor)).toBe("rgba(0, 0, 0, 0.2)");
+  expect(await veil.evaluate((el) => getComputedStyle(el).backgroundColor)).toBe("rgba(0, 0, 0, 0.3)");
   for (const gone of [".video-tint", ".video-wash", ".video-wash-copy", ".video-wash-methods"])
     await expect(page.locator(`${brandHero} ${gone}`)).toHaveCount(0);
   await expect(page.locator(`${brandHero} .hero-ambient`)).toHaveCount(1);
@@ -137,6 +138,9 @@ test("the methods video plays only while its section is on screen, under the sam
   await expect(page.locator(`${methodsVideo} video`)).toHaveAttribute("poster", /methods-office-poster\.jpg$/);
   await expect(page.locator(methods)).toHaveClass(/on-video/);
   await expect(page.locator(`${methods} .video-veil`)).toHaveCount(1);
+  expect(await page.locator(`${methods} .video-veil`).evaluate((el) => getComputedStyle(el).backgroundColor)).toBe(
+    "rgba(0, 0, 0, 0.2)",
+  );
   for (const gone of [".video-tint", ".video-wash", ".video-wash-copy", ".video-wash-methods", ".section-tint-b"])
     await expect(page.locator(`${methods} ${gone}`)).toHaveCount(0);
   await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));

@@ -120,7 +120,8 @@ test("semantic colour contrast", async ({ page }) => {
     }
     return { panelAlpha, cardAlpha, veilAlpha, results };
   });
-  expect(measured.veilAlpha, "on-video --video-veil-alpha").toBe(0.2);
+  // The hero runs a 30% veil (owner, 2026-09-15 16:08); the methods section keeps the 20% default.
+  expect(measured.veilAlpha, "hero --video-veil-alpha").toBe(0.3);
   // A1: the panel carries its own elevated alpha, and the composite pairs above are only valid
   // for the value it actually has.
   expect(measured.panelAlpha, "mega-menu panel --glass-alpha-elevated").toBeGreaterThanOrEqual(0.92);
