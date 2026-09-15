@@ -45,21 +45,9 @@ test("desktop: the brand hero video plays, muted and inline, under the light was
   // block itself (`.video-wash-copy`), and the ambient gradient survives on top.
   await expect(page.locator(`${brandHero} .video-tint`)).toHaveCount(1);
   await expect(page.locator(`${brandHero} .video-wash`)).toHaveCount(1);
-  await expect(page.locator(`${brandHero} .video-wash-copy`)).toHaveCount(1);
+  // No wash behind the copy any more (owner, 2026-09-15 14:54): the copy sits on the veil alone.
+  await expect(page.locator(`${brandHero} .video-wash-copy`)).toHaveCount(0);
   await expect(page.locator(`${brandHero} .hero-ambient`)).toHaveCount(1);
-  // The copy wash is a full-bleed band (2026-09-15 pm): edge to edge of the viewport, fading in above
-  // the copy and out below it, with no rounded corners and no halo, so it merges with the footage.
-  const band = page.locator(`${brandHero} .video-wash-copy`);
-  const bandBox = (await band.boundingBox())!;
-  expect(bandBox.x).toBeLessThanOrEqual(0);
-  expect(bandBox.x + bandBox.width).toBeGreaterThanOrEqual(1440);
-  const bandStyle = await band.evaluate((el) => {
-    const s = getComputedStyle(el);
-    return { image: s.backgroundImage, shadow: s.boxShadow, radius: s.borderRadius };
-  });
-  expect(bandStyle.image).toContain("linear-gradient");
-  expect(bandStyle.shadow).toBe("none");
-  expect(bandStyle.radius).toBe("0px");
   // The copy sits in the lower half of the hero (2026-09-15), so the clip owns the upper half.
   const hero = (await page.locator(brandHero).boundingBox())!;
   const headline = (await page.locator(`${brandHero} h1`).boundingBox())!;

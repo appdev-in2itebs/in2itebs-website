@@ -75,13 +75,16 @@ test("three.js left with the WebGL hero", () => {
 test("video layer tokens exist in both theme blocks", () => {
   const light = block(css(), ".theme-light {");
   const dark = block(css(), ".theme-dark {");
-  for (const token of ["--video-tint-alpha:", "--video-wash-base:", "--video-wash-copy:", "--video-wash-methods:"]) {
+  for (const token of ["--video-tint-alpha:", "--video-wash-base:", "--video-wash-methods:"]) {
     assert.ok(light.includes(token), `light theme lacks ${token}`);
     assert.ok(dark.includes(token), `dark theme lacks ${token}`);
   }
-  // The methods section lost its veil on 2026-09-15 pm, and the looser token with it.
+  // The methods section lost its veil on 2026-09-15 pm, and the looser token with it; the hero lost
+  // the wash behind its copy at 14:54, and that token and class with it.
   assert.ok(!light.includes("--video-wash-base-loose:"), "the loose veil token should be gone");
   assert.ok(!css().includes(".video-wash-loose"), "the loose veil class should be gone");
+  assert.ok(!light.includes("--video-wash-copy:"), "the hero copy wash token should be gone");
+  assert.ok(!css().includes(".video-wash-copy"), "the hero copy wash class should be gone");
 });
 
 test("every glass, gradient and motion utility the components use is defined", () => {

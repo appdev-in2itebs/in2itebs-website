@@ -129,14 +129,13 @@ html:not([data-motion-ready]) .client-ribbon {
     --glass-alpha-elevated: 0.78;
     --glass-blur: 18px;
     /* Ambient video sections (2026-09-15): brand tint over both clips; in the hero a light veil
-       over the tint (base) and a full-bleed blue-to-white band behind the copy block (copy); in
-       the methods section one white-to-blue wash (methods). Owner ruling 2026-09-15 pm: footage
-       shows through both, so body and muted copy hold 4.5:1 and the small gold labels 3:1 over a
-       black frame at these alphas (canvas at 0.8 on black: muted 4.83, gold 3.35);
-       tests/browser/theme-contrast.spec.ts pins them and caps copy at 0.85. */
+       over the tint (base) with the copy sitting straight on it (the wash behind the copy went at
+       14:54 on request, so the hero copy is not contrast-guarded); in the methods section one
+       white-to-blue wash (methods), where body and muted copy hold 4.5:1 and the small gold labels
+       3:1 over a black frame (canvas at 0.8 on black: muted 4.83, gold 3.35);
+       tests/browser/theme-contrast.spec.ts pins that. */
     --video-tint-alpha: 0.2;
     --video-wash-base: 0.3;
-    --video-wash-copy: 0.8;
     --video-wash-methods: 0.82;
     --gradient-heading: linear-gradient(
       135deg,
@@ -210,7 +209,6 @@ html:not([data-motion-ready]) .client-ribbon {
        (canvas at 0.7 over a white frame: muted 6.68, gold 4.04). */
     --video-tint-alpha: 0.2;
     --video-wash-base: 0.2;
-    --video-wash-copy: 0.7;
     --video-wash-methods: 0.7;
     --gradient-heading: linear-gradient(
       135deg,
@@ -841,15 +839,11 @@ html:not([data-motion-ready]) .client-ribbon {
   .stagger {
     --stagger-step: 70ms;
   }
-  /* Ambient video layers. `.video-wash` is a uniform veil over the whole clip. `.video-wash-copy`
-     is the hero's readable floor: a full-bleed band behind the copy block (its wrapper is
-     `relative isolate`; the section's overflow clips the overshoot) that rises from nothing
-     through a brand-navy haze over the 8rem above the block into canvas at `--video-wash-copy`,
-     holds that under the copy and falls back through the haze to nothing over the 5rem below,
-     with no radius and no shadow, so it merges with the footage instead of reading as a box.
-     `.video-wash-methods` is the methods section's single wash: canvas across the copy zone,
-     the same navy haze across the top and bottom padding. The blue only ever sits where there is
-     no text; the contrast spec composites the copy against the canvas stop. */
+  /* Ambient video layers. `.video-wash` is the hero's uniform veil over the whole clip; the copy
+     sits straight on it (the band behind the copy went on 2026-09-15 at 14:54 on request).
+     `.video-wash-methods` is the methods section's single wash: canvas across the copy zone, a
+     brand-navy haze across the top and bottom padding. The blue only ever sits where there is no
+     text; the contrast spec composites the methods copy against the canvas stop. */
   .ambient-video {
     object-fit: cover;
   }
@@ -858,24 +852,6 @@ html:not([data-motion-ready]) .client-ribbon {
   }
   .video-wash {
     background-color: oklch(var(--color-bg-canvas) / var(--video-wash-base));
-  }
-  .video-wash-copy {
-    position: absolute;
-    top: -8rem;
-    bottom: -5rem;
-    left: -100vw;
-    right: -100vw;
-    z-index: -1;
-    background-image: linear-gradient(
-      to bottom,
-      oklch(var(--color-bg-brand) / 0) 0,
-      oklch(var(--color-bg-brand) / 0.3) 3rem,
-      oklch(var(--color-bg-canvas) / var(--video-wash-copy)) 8rem,
-      oklch(var(--color-bg-canvas) / var(--video-wash-copy)) calc(100% - 5rem),
-      oklch(var(--color-bg-brand) / 0.25) calc(100% - 2rem),
-      oklch(var(--color-bg-brand) / 0) 100%
-    );
-    pointer-events: none;
   }
   .video-wash-methods {
     background-image: linear-gradient(

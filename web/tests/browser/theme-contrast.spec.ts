@@ -97,20 +97,17 @@ for (const theme of ["light", "dark"])
       // tint over moving footage. Nothing can measure that live, so pin the worst case: the wash
       // at the alpha each `.video-wash-copy` block carries, over the tint, over a pure black and a
       // pure white frame. The alphas are read from the hero itself so a retune is caught here.
-      // Ruling 2026-09-15 pm: the owner asked for more footage through the band and the methods
-      // wash, so body and muted copy keep the 4.5:1 floor there while the small gold labels (the
-      // eyebrows and the method codes) hold 3:1 against the worst-case frame instead.
+      // Ruling 2026-09-15 pm: the owner asked for footage through the methods wash, so body and
+      // muted copy keep the 4.5:1 floor there while the small gold labels (the eyebrow and the
+      // method codes) hold 3:1 against the worst-case frame instead. The hero copy has no wash of
+      // its own since 14:54 (it sits on the veil alone) and is not guarded here.
       const hero = document.querySelector("section[data-brand-hero]");
       const heroStyles = hero ? getComputedStyle(hero) : styles;
       const methodsSection = document.querySelector("section[data-methods]");
       const methodsStyles = methodsSection ? getComputedStyle(methodsSection) : styles;
       const videoTint = Number(heroStyles.getPropertyValue("--video-tint-alpha"));
-      const videoWash = Number(heroStyles.getPropertyValue("--video-wash-copy"));
       const videoMethods = Number(methodsStyles.getPropertyValue("--video-wash-methods"));
-      for (const [label, alpha] of [
-        ["hero band", videoWash],
-        ["methods wash", videoMethods],
-      ] as [string, number][])
+      for (const [label, alpha] of [["methods wash", videoMethods]] as [string, number][])
         for (const [frame, pixel] of [
           ["black", [0, 0, 0]],
           ["white", [255, 255, 255]],
@@ -144,12 +141,9 @@ for (const theme of ["light", "dark"])
           ratio: contrast(luminance("fg-secondary"), relative(composite(paint(glass), veiled, pillAlpha))),
         });
       }
-      return { panelAlpha, cardAlpha, videoTint, videoWash, videoBase, videoMethods, results };
+      return { panelAlpha, cardAlpha, videoTint, videoBase, videoMethods, results };
     });
     expect(measured.videoTint, "hero --video-tint-alpha").toBeGreaterThan(0);
-    expect(measured.videoWash, "hero --video-wash-copy").toBeGreaterThan(0);
-    // The band is meant to show footage through it (owner, 2026-09-15 pm): keep it translucent.
-    expect(measured.videoWash, "hero --video-wash-copy").toBeLessThanOrEqual(0.85);
     expect(measured.videoBase, "hero --video-wash-base").toBeGreaterThan(0);
     expect(measured.videoMethods, "methods --video-wash-methods").toBeGreaterThan(0);
     // A1: the panel carries its own elevated alpha, and the composite pairs above are only valid

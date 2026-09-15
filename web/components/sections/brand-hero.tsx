@@ -7,12 +7,11 @@ import { SapPartnerBadge } from "@/components/ui/sap-partner-badge";
 
 /**
  * Full-screen brand hero on ambient footage (2026-09-15). Layers, bottom to top: the clip, a brand
- * tint, a light veil, the ambient gradient, then the copy block sitting bottom-left on a full-bleed
- * canvas band (`.video-wash-copy`) that fades in above the copy, carries the readable floor under it
- * and fades out below, so it merges with the footage. The alphas are the `--video-*` tokens in
- * globals.css; the contrast spec pins the copy against the worst-case frame. There is no visible
- * pause control (removed 2026-09-15 pm): MotionObserver pauses the clip under reduced motion and
- * hidden tabs.
+ * tint, a light veil, the ambient gradient, then the copy block sitting bottom-left directly on
+ * the veil (the owner removed the wash behind the copy at 14:54; the veil alpha `--video-wash-base`
+ * is the only readability knob left, and the copy is not contrast-guarded against a dark frame).
+ * There is no visible pause control (removed 2026-09-15 pm): MotionObserver pauses the clip under
+ * reduced motion and hidden tabs.
  */
 export function BrandHero() {
   return (
@@ -30,8 +29,7 @@ export function BrandHero() {
       <div aria-hidden className="video-wash pointer-events-none absolute inset-0" />
       <div aria-hidden className="hero-ambient pointer-events-none absolute inset-0" />
       <Container className="relative z-10 flex flex-1 flex-col justify-end gap-10 py-8 md:py-10">
-        <div className="relative isolate max-w-[52rem]">
-          <div aria-hidden className="video-wash-copy" />
+        <div className="max-w-[52rem]">
           <SapPartnerBadge />
           <p className="mt-8 text-sm font-semibold text-gold">Enterprise transformation, under control</p>
           <h1
