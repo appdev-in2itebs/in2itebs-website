@@ -32,51 +32,46 @@ for (const width of [320, 375, 768, 1024, 1100, 1280, 1440]) {
     }
   });
 }
-for (const theme of ["light", "dark"]) {
-  for (const route of [
-    "/",
-    "/contact/",
-    "/what-we-do/",
-    "/partners/",
-    "/oracle/",
-    "/microsoft/",
-    "/sap-enterprise-solutions/rise-vs-grow/",
-  ]) {
-    test(`${theme} accessibility ${route}`, async ({ page, context }) => {
-      await context.addCookies([{ name: "in2it-theme", value: theme, domain: "127.0.0.1", path: "/" }]);
-      await page.emulateMedia({ reducedMotion: "reduce" });
-      await page.goto(route);
-      await expect(page.locator("html")).toHaveClass(new RegExp(`theme-${theme}`));
-      const results = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"]).analyze();
-      expect(
-        results.violations.map((v) => ({
-          id: v.id,
-          nodes: v.nodes.map((n) => ({ target: n.target, summary: n.failureSummary })),
-        })),
-      ).toEqual([]);
-    });
-  }
+// One theme only since 2026-09-15 15:28 (dark mode removed on request): no cookie, no root class.
+for (const route of [
+  "/",
+  "/contact/",
+  "/what-we-do/",
+  "/partners/",
+  "/oracle/",
+  "/microsoft/",
+  "/sap-enterprise-solutions/rise-vs-grow/",
+]) {
+  test(`accessibility ${route}`, async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.goto(route);
+    await expect(page.locator("html")).not.toHaveClass(/theme-(light|dark)/);
+    const results = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"]).analyze();
+    expect(
+      results.violations.map((v) => ({
+        id: v.id,
+        nodes: v.nodes.map((n) => ({ target: n.target, summary: n.failureSummary })),
+      })),
+    ).toEqual([]);
+  });
 }
-test("static content and persisted theme work without JavaScript", async ({ browser }) => {
+test("static content works without JavaScript", async ({ browser }) => {
   const context = await browser.newContext({ javaScriptEnabled: false });
-  await context.addCookies([{ name: "in2it-theme", value: "dark", domain: "127.0.0.1", path: "/" }]);
   const page = await context.newPage();
   await page.goto("http://127.0.0.1:3107/");
-  // Static pages ship the light theme; the cookie is applied by a before-interactive script, so no-JS visitors get light.
-  await expect(page.locator("html")).toHaveClass(/theme-light/);
+  await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
   await expect(page.getByRole("heading", { level: 2 }).first()).toBeVisible();
   await expect(page.locator("main")).not.toContainText("being prepared");
   await context.close();
 });
-test("the theme cookie is applied before hydration on a static page", async ({ page, context }) => {
-  await context.addCookies([{ name: "in2it-theme", value: "dark", domain: "127.0.0.1", path: "/" }]);
+test("static pages stay cacheable and ship no theme script", async ({ page }) => {
   await page.goto("/about/", { waitUntil: "domcontentloaded" });
-  await expect(page.locator("html")).toHaveClass(/theme-dark/);
+  await expect(page.locator("html")).not.toHaveClass(/theme-(light|dark)/);
   const response = await page.request.get("/about/");
   const cacheControl = response.headers()["cache-control"] ?? "";
   expect(cacheControl).not.toContain("no-store");
   const html = await response.text();
-  expect(html.indexOf('<script id="theme-init">')).toBeGreaterThan(-1);
+  expect(html.indexOf("theme-init")).toBe(-1);
   expect(html.indexOf("<header")).toBeGreaterThan(-1);
   expect(html.indexOf('<script id="theme-init">')).toBeLessThan(html.indexOf("<header"));
 });

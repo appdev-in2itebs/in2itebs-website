@@ -20,10 +20,10 @@ function block(source: string, selector: string): string {
   throw new Error(`unterminated block for ${selector}`);
 }
 
-test("gold and glass tokens exist in both theme blocks", () => {
+test("gold and glass tokens exist in the root block and the on-video scope", () => {
   const source = css();
-  const light = block(source, ".theme-light {");
-  const dark = block(source, ".theme-dark {");
+  const light = block(source, ":root {");
+  const dark = block(source, ".on-video {");
   for (const token of [
     "--color-gold:",
     "--color-gold-display:",
@@ -72,19 +72,35 @@ test("three.js left with the WebGL hero", () => {
   assert.equal(pkg.devDependencies["@types/three"], undefined);
 });
 
-test("video layer tokens exist in both theme blocks", () => {
-  const light = block(css(), ".theme-light {");
-  const dark = block(css(), ".theme-dark {");
-  for (const token of ["--video-tint-alpha:", "--video-wash-base:", "--video-wash-methods:"]) {
-    assert.ok(light.includes(token), `light theme lacks ${token}`);
-    assert.ok(dark.includes(token), `dark theme lacks ${token}`);
-  }
-  // The methods section lost its veil on 2026-09-15 pm, and the looser token with it; the hero lost
-  // the wash behind its copy at 14:54, and that token and class with it.
-  assert.ok(!light.includes("--video-wash-base-loose:"), "the loose veil token should be gone");
-  assert.ok(!css().includes(".video-wash-loose"), "the loose veil class should be gone");
-  assert.ok(!light.includes("--video-wash-copy:"), "the hero copy wash token should be gone");
-  assert.ok(!css().includes(".video-wash-copy"), "the hero copy wash class should be gone");
+test("the video sections carry one 20% black veil token and the old wash layers are gone", () => {
+  const source = css();
+  const root = block(source, ":root {");
+  assert.ok(root.includes("--video-veil-alpha: 0.2;"), "root lacks --video-veil-alpha: 0.2");
+  assert.ok(source.includes(".video-veil {"), ".video-veil is not defined");
+  for (const gone of [
+    "--video-tint-alpha:",
+    "--video-wash-base:",
+    "--video-wash-base-loose:",
+    "--video-wash-copy:",
+    "--video-wash-methods:",
+    ".video-tint",
+    ".video-wash",
+  ])
+    assert.ok(!source.includes(gone), `${gone} should be gone`);
+});
+
+test("dark mode is gone: no theme classes, toggle, cookie script or service carousel", () => {
+  const source = css();
+  assert.ok(!source.includes(".theme-dark"), "the .theme-dark scope should be gone");
+  assert.ok(!source.includes(".theme-light"), "the .theme-light scope should be gone");
+  assert.ok(!existsSync(path.join(process.cwd(), "components/layout/theme-toggle.tsx")), "theme-toggle.tsx");
+  assert.ok(!existsSync(path.join(process.cwd(), "components/sections/service-hero.tsx")), "service-hero.tsx");
+  const layout = read("app/layout.tsx");
+  assert.ok(!layout.includes("in2it-theme"), "layout still reads the theme cookie");
+  assert.ok(!layout.includes("theme-init"), "layout still ships the theme script");
+  const header = read("components/layout/header.tsx");
+  assert.ok(!header.includes("ThemeToggle"), "header still mounts the toggle");
+  assert.ok(!header.includes("theme-logo-"), "header still swaps logos per theme");
 });
 
 test("every glass, gradient and motion utility the components use is defined", () => {

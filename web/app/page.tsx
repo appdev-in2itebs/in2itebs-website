@@ -24,7 +24,6 @@ import { LogoMarquee } from "@/components/sections/logo-marquee";
 import { HomePartners } from "@/components/sections/home-partners";
 import { BrandHero } from "@/components/sections/brand-hero";
 import { AmbientVideo } from "@/components/media/ambient-video";
-import { ServiceHero } from "@/components/sections/service-hero";
 import { PlatformPracticeLinks } from "@/components/sections/platform-practice-links";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
 import { pillars } from "@/content/nav";
@@ -142,7 +141,6 @@ export default function HomePage() {
   return (
     <>
       <BrandHero />
-      <ServiceHero />
       <section aria-labelledby="platform-practices-title" className="bg-surface py-10">
         <Container>
           <h2 id="platform-practices-title" className="heading-plain mb-5 text-lg font-semibold text-foreground">
@@ -249,14 +247,12 @@ export default function HomePage() {
 
       <section
         data-methods
-        className="seamless-section relative overflow-hidden bg-surface py-24 text-foreground md:py-32"
+        className="on-video seamless-section relative overflow-hidden bg-surface py-24 text-foreground md:py-32"
       >
-        {/* Ambient footage under the brand tint and one translucent white-to-blue wash
-            (`.video-wash-methods`, 2026-09-15 pm): white where the copy is, a navy haze across the
-            top and bottom padding, and no panels around the text. */}
+        {/* Ambient footage under a 20% black veil, with the copy in the `.on-video` palette
+            (2026-09-15 15:28): no tint, no wash, no panels around the text. */}
         <AmbientVideo src="/video/methods-office-720.mp4" poster="/video/methods-office-poster.jpg" />
-        <div aria-hidden className="video-tint pointer-events-none absolute inset-0" />
-        <div aria-hidden className="video-wash-methods pointer-events-none absolute inset-0" />
+        <div aria-hidden className="video-veil pointer-events-none absolute inset-0" />
         <div aria-hidden className="motion-rail absolute left-0 right-0 top-0 h-px bg-border-subtle">
           <span />
         </div>

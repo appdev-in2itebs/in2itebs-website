@@ -7,7 +7,6 @@ import { primaryNav } from "@/content/nav";
 import type { NavItem } from "@/content/types";
 import { Logo } from "@/components/ui/logo";
 import { RegionSwitcher } from "./region-switcher";
-import { ThemeToggle } from "./theme-toggle";
 import { cn } from "@/lib/utils";
 
 export function Header() {
@@ -118,8 +117,7 @@ export function Header() {
       </div>
       <div className="container relative flex h-20 items-center justify-between gap-3 md:h-24">
         <Link href="/" aria-label="In2IT EBS home" className="shrink-0">
-          <Logo priority asLink={false} variant="navy" className="theme-logo-light h-9 w-auto sm:h-11" />
-          <Logo priority asLink={false} variant="light-blue" className="theme-logo-dark h-9 w-auto sm:h-11" />
+          <Logo priority asLink={false} variant="navy" className="h-9 w-auto sm:h-11" />
         </Link>
         <nav aria-label="Primary" className="hidden items-center gap-1 self-stretch xl:flex">
           {primaryNav.map((item, index) => {
@@ -218,9 +216,6 @@ export function Header() {
           <div className="hidden xl:block">
             <RegionSwitcher />
           </div>
-          <div className="hidden sm:block">
-            <ThemeToggle />
-          </div>
           <button
             ref={opener}
             type="button"
@@ -281,7 +276,6 @@ export function Header() {
         </nav>
         <div className="mt-6 flex flex-wrap items-center gap-4 border-t border-border-subtle pt-5">
           <RegionSwitcher />
-          <ThemeToggle />
           <Link href="/contact/" onClick={close} className="inline-flex min-h-11 items-center text-action underline">
             Start a conversation
           </Link>

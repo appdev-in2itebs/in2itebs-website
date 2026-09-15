@@ -319,6 +319,9 @@ test("class names used in markup are either Tailwind utilities or defined in glo
     "nav-link",
     "btn-shimmer",
     "icon-tile",
+    // Ambient video sections (2026-09-15): the palette scope and the veil.
+    "on-video",
+    "video-veil",
   ]) {
     const defined = new RegExp(`\\.${hook}\\b`).test(css);
     const used = [
@@ -328,7 +331,7 @@ test("class names used in markup are either Tailwind utilities or defined in glo
       "components/ui/button.tsx",
       "components/ui/card.tsx",
       "components/layout/header.tsx",
-      "components/sections/service-hero.tsx",
+      "components/sections/brand-hero.tsx",
     ].some((f) => readFileSync(path.join(process.cwd(), f), "utf8").includes(hook));
     assert.ok(defined || !used, `${hook} is used but never defined`);
   }

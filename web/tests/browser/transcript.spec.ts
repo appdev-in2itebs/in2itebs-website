@@ -8,15 +8,15 @@ test("homepage implements the transcript visibly", async ({ page }) => {
   );
   await expect(page.locator("header").getByRole("link", { name: "info@in2itebs.com" })).toBeVisible();
   await expect(page.locator("header").getByRole("link", { name: "Talk to us" })).toBeVisible();
-  await expect(page.getByRole("heading", { level: 2 }).first()).toHaveText("Transform your enterprise with SAP.");
-  await page.getByRole("button", { name: "Next service", exact: true }).click();
-  await expect(page.getByRole("heading", { level: 2 }).first()).toHaveText("Applications built around your business.");
-  await expect(page.getByRole("link", { name: "Explore application services" })).toHaveAttribute(
-    "href",
-    "/digital-data-ai/application-engineering/",
+  // The service slides live inside the hero carousel (2026-09-15 15:28). Under reduced motion it
+  // holds the brand slide, so the service copy is in the document but hidden, with no controls.
+  const hero = page.locator("section[data-brand-hero]");
+  await expect(hero.locator('[data-hero-slide="1"] h2')).toHaveText("Transform your enterprise with SAP.");
+  await expect(hero.locator('[data-hero-slide="2"] h2')).toHaveText("Applications built around your business.");
+  await expect(hero.locator('[data-hero-slide="2"] a[href="/digital-data-ai/application-engineering/"]')).toHaveCount(
+    1,
   );
-  await page.getByRole("button", { name: "Previous service", exact: true }).click();
-  await expect(page.getByRole("heading", { level: 2 }).first()).toHaveText("Transform your enterprise with SAP.");
+  await expect(page.getByRole("button", { name: /Next service|Previous service/ })).toHaveCount(0);
   for (const name of ["SAP", "SuccessFactors", "Workday", "Salesforce", "Oracle", "Microsoft"])
     await expect(
       page.getByRole("navigation", { name: "Platform practices" }).getByRole("link", { name, exact: true }),
@@ -63,13 +63,16 @@ for (const width of [320, 375, 1440])
     await expect(page.locator("header").getByRole("link", { name: "info@in2itebs.com" })).toBeVisible();
     await page.screenshot({ path: `test-results/transcript-home-${width}.png` });
   });
-test("the hero mounts only the previous, visible and next slide images", async ({ page }) => {
+test("the hero carousel mounts only the active and the next clip", async ({ page }) => {
   await page.goto("/");
-  // The SAP Gold Partner badge in the hero is a plain <img>; the slide backgrounds are the only responsive images.
-  const slideImages = page.locator('section[aria-roledescription="carousel"] img[srcset]');
-  await expect(slideImages).toHaveCount(3);
-  await page.getByRole("button", { name: "Next service", exact: true }).click();
-  await expect(slideImages).toHaveCount(3);
+  // Five video slides since 2026-09-15 15:28; the slide backgrounds are clips, not responsive images.
+  const hero = page.locator("section[data-brand-hero]");
+  await expect(hero.locator("img[srcset]")).toHaveCount(0);
+  await expect(hero.locator("[data-ambient-video]")).toHaveCount(2);
+  await expect(hero.locator('[data-hero-slide][data-active="true"]')).toHaveAttribute("data-hero-slide", "1", {
+    timeout: 7000,
+  });
+  await expect(hero.locator("[data-ambient-video]")).toHaveCount(2, { timeout: 3000 });
 });
 
 test("desktop navigation uses unified hover and focus disclosures", async ({ page }) => {

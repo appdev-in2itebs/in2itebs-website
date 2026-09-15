@@ -10,17 +10,14 @@ test("drawer contains keyboard focus and returns it", async ({ page }) => {
   await page.keyboard.press("Escape");
   await expect(page.getByRole("button", { name: "Open menu", exact: true })).toBeFocused();
 });
-test("theme persists across reload and duplicate controls", async ({ page }) => {
+test("there is no theme switch anywhere in the header or the mobile menu", async ({ page }) => {
+  // Dark mode was removed on 2026-09-15 15:28 at the owner's request.
   await page.goto("/");
-  await page.getByRole("button", { name: "Switch to dark theme" }).click();
-  await page.reload();
-  await expect(page.locator("html")).toHaveClass(/theme-dark/);
+  await expect(page.getByRole("button", { name: /Switch to (dark|light) theme/ })).toHaveCount(0);
   await page.setViewportSize({ width: 375, height: 812 });
   await page.getByRole("button", { name: "Open menu", exact: true }).click();
-  await page.getByRole("dialog").getByRole("button", { name: "Switch to light theme" }).click();
+  await expect(page.getByRole("dialog").getByRole("button", { name: /theme/ })).toHaveCount(0);
   await page.keyboard.press("Escape");
-  await page.setViewportSize({ width: 1440, height: 900 });
-  await expect(page.getByRole("button", { name: "Switch to dark theme" })).toBeVisible();
 });
 test("filter changes announce results and reset", async ({ page }) => {
   await page.goto("/case-studies/");
@@ -68,11 +65,10 @@ test("heading scale and client hover treatment are intact", async ({ page }) => 
   // Reduced motion holds the ribbon still for the hover; there is no pause button to press any more.
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");
+  // The service slides now live inside the hero carousel (2026-09-15 15:28), so the first exposed
+  // h2 is the small platform-practice strip; the methods heading is the display-scale one.
   expect(
-    await page
-      .getByRole("heading", { level: 2 })
-      .first()
-      .evaluate((el) => parseFloat(getComputedStyle(el).fontSize)),
+    await page.locator("section[data-methods] h2").evaluate((el) => parseFloat(getComputedStyle(el).fontSize)),
   ).toBeGreaterThan(32);
   await expect(page.getByRole("button", { name: /client ribbon|client entries/ })).toHaveCount(0);
   const logo = page.locator(".client-ribbon-list img").first();

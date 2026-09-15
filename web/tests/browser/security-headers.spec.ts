@@ -15,8 +15,6 @@ test("security headers are present and the CSP breaks nothing", async ({ page, r
     await page.waitForLoadState("networkidle");
     await expect(page.locator("img").first()).toBeVisible();
   }
-  await page.getByRole("button", { name: "Switch to dark theme" }).click();
-  await expect(page.locator("html")).toHaveClass(/theme-dark/);
   expect(violations).toEqual([]);
 });
 test("removed pages return 410 and legacy URLs redirect permanently", async ({ request }) => {

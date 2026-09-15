@@ -17,9 +17,6 @@ const plex = IBM_Plex_Sans({
   display: "swap",
 });
 
-/** Applies the persisted theme before first paint; pages are prerendered light. */
-const THEME_INIT = `(function(){try{var m=document.cookie.match(/(?:^|; )in2it-theme=(dark|light)(?:;|$)/);if(m&&m[1]==="dark"){var c=document.documentElement.classList;c.remove("theme-light");c.add("theme-dark");}}catch(e){}})();`;
-
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
@@ -30,11 +27,11 @@ export const metadata: Metadata = {
     "10+ years of enterprise transformation, delivered globally. SAP Gold Partner with adjacent strength across Salesforce, Workday, Oracle, Microsoft, cloud and application services.",
 };
 
+/** One theme since 2026-09-15 (dark mode and its cookie script were removed at the owner's request). */
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`theme-light ${plex.variable}`} suppressHydrationWarning>
+    <html lang="en" className={plex.variable}>
       <body className="grain">
-        <script id="theme-init" dangerouslySetInnerHTML={{ __html: THEME_INIT }} />
         <RegionProvider>
           <MotionObserver />
           <MeasurementSignals />

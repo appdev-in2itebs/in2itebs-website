@@ -1,9 +1,9 @@
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
-for (const theme of ["light", "dark"])
-  test(`all published routes: ${theme}`, async ({ page, context, request }) => {
+// One theme only since 2026-09-15 15:28 (dark mode removed on request).
+for (const theme of ["light"])
+  test(`all published routes: ${theme}`, async ({ page, request }) => {
     test.setTimeout(600000);
-    await context.addCookies([{ name: "in2it-theme", value: theme, domain: "127.0.0.1", path: "/" }]);
     await page.emulateMedia({ reducedMotion: "reduce" });
     const xml = await (await request.get("/sitemap.xml")).text();
     const paths = [...xml.matchAll(/<loc>(.*?)<\/loc>/g)].map((match) => new URL(match[1]).pathname);
