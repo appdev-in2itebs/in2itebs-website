@@ -1,5 +1,9 @@
 # In2IT EBS — Project Worklog
 
+## 15 September 2026 — Ambient video hero
+
+Replaced the WebGL sculpture in the homepage brand hero with muted, looping office footage under a brand tint and a light canvas wash (layer alphas as `--video-*` tokens per theme), and put a second clip under the “Methods that make delivery observable” section with the same treatment kept even across the width. New `components/media/ambient-video.tsx` gates playback on reduced motion, data saver, the page pause control, tab visibility and offscreen state, and fetches each clip only when first needed. Removed `components/hero/`, the three.js dependency and the chunk-budget build check; rewrote `hero.spec.ts` around the video and added worst-case composite pairs for text over the wash to `theme-contrast.spec.ts`. Clips encoded into `web/public/video/`; provenance and licence recorded as pending in `docs/BRAND_ASSETS.md`.
+
 ## 10–11 September 2026 — Premium glass restyle
 
 Restyled the presentation of the whole site on branch `restyle/2026-09-10-premium-glass` (36 commits, `main..restyle/2026-09-10-premium-glass`, on top of the 7 September remediation work) against `docs/superpowers/specs/2026-09-10-premium-glass-restyle-design.md`, delivered as a 15-task plan and executed task by task with a review after each.

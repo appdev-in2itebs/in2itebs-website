@@ -149,6 +149,12 @@ html:not([data-motion-ready]) .client-ribbon {
     --glass-alpha: 0.62;
     --glass-alpha-elevated: 0.78;
     --glass-blur: 18px;
+    /* Ambient video sections (2026-09-15): brand tint over the clip, canvas wash over the tint.
+       edge = left edge, copy = under the copy column, clear = right edge where the clip shows. */
+    --video-tint-alpha: 0.28;
+    --video-wash-edge: 0.94;
+    --video-wash-copy: 0.94;
+    --video-wash-clear: 0.3;
     --gradient-heading: linear-gradient(
       135deg,
       oklch(var(--color-fg-primary)) 0%,
@@ -217,6 +223,11 @@ html:not([data-motion-ready]) .client-ribbon {
     --glass-alpha: 0.65;
     --glass-alpha-elevated: 0.78;
     --glass-blur: 24px;
+    /* The champagne gold eyebrow needs more cover than the deep gold does in light. */
+    --video-tint-alpha: 0.28;
+    --video-wash-edge: 0.97;
+    --video-wash-copy: 0.96;
+    --video-wash-clear: 0.4;
     --gradient-heading: linear-gradient(
       135deg,
       #ffffff 0%,
@@ -845,6 +856,33 @@ html:not([data-motion-ready]) .client-ribbon {
   }
   .stagger {
     --stagger-step: 70ms;
+  }
+  /* Ambient video layers. `.video-wash` clears towards the right only where the copy column has
+     ended (lg and up); narrower layouts run the copy full width, so they keep the even wash. */
+  .ambient-video {
+    object-fit: cover;
+  }
+  .video-tint {
+    background-color: oklch(var(--color-bg-brand) / var(--video-tint-alpha));
+  }
+  .video-wash,
+  .video-wash-even {
+    background-image: linear-gradient(
+      to right,
+      oklch(var(--color-bg-canvas) / var(--video-wash-edge)) 0%,
+      oklch(var(--color-bg-canvas) / var(--video-wash-copy)) 100%
+    );
+  }
+  @media (min-width: 1024px) {
+    .video-wash {
+      background-image: linear-gradient(
+        to right,
+        oklch(var(--color-bg-canvas) / var(--video-wash-edge)) 0%,
+        oklch(var(--color-bg-canvas) / var(--video-wash-edge)) 36%,
+        oklch(var(--color-bg-canvas) / var(--video-wash-copy)) 62%,
+        oklch(var(--color-bg-canvas) / var(--video-wash-clear)) 100%
+      );
+    }
   }
   .hero-ambient {
     background-image:

@@ -6,6 +6,12 @@ Dates use ISO 8601 (YYYY-MM-DD).
 
 ## [Unreleased]
 
+### Ambient video hero — 2026-09-15
+
+- Replaced the WebGL sculpture in the brand hero with muted, looping office footage under a brand tint and a light canvas wash that stays near-opaque under the copy and clears towards the right. The same tint and wash, kept even across the width, sit under the “Methods that make delivery observable” section on its own clip.
+- Clips never play under reduced motion or data saver (poster only), pause with the page control, a hidden tab or when offscreen, and are fetched only when first needed; phones get a 720p source. Encoded into `web/public/video/` without audio.
+- Removed the three.js dependency, the hero-3d components and the chunk-budget build check; the hero and contrast browser specs now cover the video and its wash alphas.
+
 ### Full-screen hero, carousel and navigation — 2026-09-11
 
 - Split the homepage WebGL scene into a dedicated full-screen brand hero with a new enterprise tagline and immediate motion control.

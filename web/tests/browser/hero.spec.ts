@@ -1,81 +1,104 @@
 import { test, expect, type Page } from "@playwright/test";
 
+// The brand hero and the "Methods that make delivery observable" section each sit on a muted,
+// looping ambient video (2026-09-15, replacing the WebGL sculpture). `AmbientVideo` reports what it
+// is doing on `data-ambient-video`: "playing", "paused" (page pause control, hidden tab or offscreen)
+// or "poster" (reduced motion or data saver: the clip is never fetched or played).
 const carousel = 'section[aria-roledescription="carousel"]';
 const brandHero = "section[data-brand-hero]";
-const loader = `${brandHero} [data-hero-3d]`;
+const methods = "section[data-methods]";
+const heroVideo = `${brandHero} [data-ambient-video]`;
+const methodsVideo = `${methods} [data-ambient-video]`;
 
-async function settled(page: Page) {
-  await expect(page.locator(loader)).not.toHaveAttribute("data-hero-3d", "pending", { timeout: 15000 });
-  return page.locator(loader).getAttribute("data-hero-3d");
+async function state(page: Page, selector: string) {
+  await expect(page.locator(selector)).not.toHaveAttribute("data-ambient-video", "pending", { timeout: 15000 });
+  return page.locator(selector).getAttribute("data-ambient-video");
 }
 
-test("desktop: the 3D hero activates or reports a WebGL-free environment, never both", async ({ page }) => {
+test("desktop: the brand hero video plays, muted and inline, under the light wash", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/");
-  const state = await settled(page);
-  if (state === "unavailable") {
-    await expect(page.locator(loader)).toHaveAttribute("data-hero-3d-reason", "no-webgl");
-    await expect(page.locator(`${loader} canvas`)).toHaveCount(0);
-  } else {
-    expect(["active", "paused"]).toContain(state);
-    await expect(page.locator(`${loader} canvas`)).toHaveCount(1);
-    if (state === "active") {
-      // A desktop resize re-evaluates the gates; a running scene must stay reported as running
-      // rather than being stranded back at "pending" by the re-probe.
-      await page.setViewportSize({ width: 1380, height: 900 });
-      await page.waitForTimeout(500);
-      await expect(page.locator(loader)).toHaveAttribute("data-hero-3d", "active");
-    }
-  }
+  await expect(page.locator(heroVideo)).toHaveAttribute("data-ambient-video", "playing", { timeout: 15000 });
+  const video = page.locator(`${heroVideo} video`);
+  await expect(video).toHaveCount(1);
+  expect(await video.evaluate((v: HTMLVideoElement) => [v.muted, v.loop, v.playsInline, v.paused])).toEqual([
+    true,
+    true,
+    true,
+    false,
+  ]);
+  await expect(video).toHaveAttribute("poster", /hero-team-poster\.jpg$/);
+  expect(await video.evaluate((v: HTMLVideoElement) => v.currentSrc)).toMatch(/hero-team-1080\.mp4$/);
+  // Tint and wash sit between the clip and the copy, and the ambient gradient survives on top.
+  await expect(page.locator(`${brandHero} .video-tint`)).toHaveCount(1);
+  await expect(page.locator(`${brandHero} .video-wash`)).toHaveCount(1);
   await expect(page.locator(`${brandHero} .hero-ambient`)).toHaveCount(1);
-  await expect(page.locator(`${carousel} [data-hero-3d]`)).toHaveCount(0);
-  // The sculpture is not an image: the full-screen service carousel owns the responsive images.
+  // The sculpture is gone for good.
+  await expect(page.locator("[data-hero-3d]")).toHaveCount(0);
   await expect(page.locator(`${carousel} img[srcset]`)).toHaveCount(3);
 });
 
-test("narrow viewports never mount the scene", async ({ page }) => {
+test("phones get the 720p hero source", async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 812 });
   await page.goto("/");
-  await expect(page.locator(loader)).toHaveAttribute("data-hero-3d", "unavailable");
-  await expect(page.locator(loader)).toHaveAttribute("data-hero-3d-reason", "viewport");
-  await expect(page.locator(`${loader} canvas`)).toHaveCount(0);
+  await expect(page.locator(heroVideo)).toHaveAttribute("data-ambient-video", "playing", { timeout: 15000 });
+  expect(await page.locator(`${heroVideo} video`).evaluate((v: HTMLVideoElement) => v.currentSrc)).toMatch(
+    /hero-team-720\.mp4$/,
+  );
 });
 
-test("reduced motion never mounts the scene", async ({ page }) => {
+test("reduced motion shows the poster and never plays the clip", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/");
-  await expect(page.locator(loader)).toHaveAttribute("data-hero-3d", "unavailable");
-  await expect(page.locator(loader)).toHaveAttribute("data-hero-3d-reason", "reduced-motion");
+  await expect(page.locator(heroVideo)).toHaveAttribute("data-ambient-video", "poster");
+  const video = page.locator(`${heroVideo} video`);
+  expect(await video.evaluate((v: HTMLVideoElement) => [v.paused, v.preload, v.autoplay])).toEqual([
+    true,
+    "none",
+    false,
+  ]);
+  await expect(page.locator(methodsVideo)).toHaveAttribute("data-ambient-video", "poster");
 });
 
-test("the page pause control pauses and resumes the scene", async ({ page }) => {
+test("the page pause control pauses and resumes the hero video", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/");
-  const state = await settled(page);
-  test.skip(state === "unavailable", "no WebGL in this browser environment");
-  await expect(page.locator(loader)).toHaveAttribute("data-hero-3d", "active");
-  // The control sits well below the fold, so clicking it scrolls the hero out of view — and the scene
-  // pauses offscreen too. Returning to the top isolates the pause flag as the only thing still gating it.
+  await expect(page.locator(heroVideo)).toHaveAttribute("data-ambient-video", "playing", { timeout: 15000 });
+  // The control sits at the bottom of the hero; clicking scrolls it into view. Returning to the top
+  // isolates the pause flag as the only thing gating playback.
   const press = async (name: string) => {
     await page.getByRole("button", { name, exact: true }).click();
     await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
   };
   await press("Pause page animation");
-  await expect(page.locator(loader)).toHaveAttribute("data-hero-3d", "paused");
+  await expect(page.locator(heroVideo)).toHaveAttribute("data-ambient-video", "paused");
+  expect(await page.locator(`${heroVideo} video`).evaluate((v: HTMLVideoElement) => v.paused)).toBe(true);
   await press("Resume page animation");
-  await expect(page.locator(loader)).toHaveAttribute("data-hero-3d", "active");
+  await expect(page.locator(heroVideo)).toHaveAttribute("data-ambient-video", "playing");
+});
+
+test("the methods video plays only while its section is on screen", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/");
+  await expect(page.locator(heroVideo)).toHaveAttribute("data-ambient-video", "playing", { timeout: 15000 });
+  // Far below the fold at load: not fetched into playback until it is needed.
+  await expect(page.locator(methodsVideo)).toHaveAttribute("data-ambient-video", "paused");
+  await page.locator(methods).scrollIntoViewIfNeeded();
+  await expect(page.locator(methodsVideo)).toHaveAttribute("data-ambient-video", "playing", { timeout: 15000 });
+  await expect(page.locator(`${methodsVideo} video`)).toHaveAttribute("poster", /methods-office-poster\.jpg$/);
+  await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
+  await expect(page.locator(methodsVideo)).toHaveAttribute("data-ambient-video", "paused");
+  await expect(page.locator(heroVideo)).toHaveAttribute("data-ambient-video", "playing");
 });
 
 test("dark theme reaches the same outcome", async ({ page, context }) => {
   await context.addCookies([{ name: "in2it-theme", value: "dark", domain: "127.0.0.1", path: "/" }]);
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/");
-  // The cookie has to have actually put the document in the dark theme, or this test is just the
-  // first one again under a different name.
   await expect(page.locator("html")).toHaveClass(/theme-dark/);
-  const state = await settled(page);
-  expect(["active", "paused", "unavailable"]).toContain(state);
+  expect(["playing", "paused", "poster"]).toContain(await state(page, heroVideo));
+  await expect(page.locator(`${brandHero} .video-wash`)).toHaveCount(1);
   await expect(page.locator(`${brandHero} .hero-ambient`)).toHaveCount(1);
 });
 

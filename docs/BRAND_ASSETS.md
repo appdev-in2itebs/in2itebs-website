@@ -51,6 +51,7 @@ Deck client wall (SOT-42/43) + partner/alliance/cert marks render as **logo imag
 
 ## 4. Imagery direction
 - **Pending owner.** Default until confirmed: restrained, editorial photography (enterprise/people/abstract-tech), navy-dominant treatment, with sufficient overlay for the white logo and white text. No stocky clichés. Record licensing per asset.
+- **Ambient video (2026-09-15).** Two stock clips, supplied by the owner as `70345-534725150_medium.mp4` (2560×1440, 10 s, office team scene) and `156-135737598_medium.mp4` (1280×720, 12.4 s, defocused open-plan office); the filenames carry Pixabay asset IDs 70345 and 156 — **source and licence to be confirmed by the owner** and recorded here. Encoded into `web/public/video/` with ffmpeg (H.264, no audio, `+faststart`): `hero-team-1080.mp4` (2.1 MB), `hero-team-720.mp4` (0.9 MB, phones), `methods-office-720.mp4` (0.25 MB), plus poster JPEGs from the first second. The originals stay at the repository root, ignored by git.
 
 ## 5. Iconography
 - One line-icon set (Lucide or Phosphor — see `DESIGN_SYSTEM.md` §7), Navy/Accent Blue, on Pale Blue backgrounds where used as feature bullets. Replaces the old site's 5 icon libraries.

@@ -93,8 +93,32 @@ for (const theme of ["light", "dark"])
           minimum,
           ratio: contrast(luminance(fg), relative(composite(paint(glassValue), paint(token(bg)), alpha))),
         });
-      return { panelAlpha, cardAlpha, results };
+      // Ambient video sections (2026-09-15). The copy sits on a canvas-coloured wash over a brand
+      // tint over moving footage. Nothing can measure that live, so pin the worst case: the wash
+      // at the alpha it keeps under the copy column, over the tint, over a pure black and a pure
+      // white frame. The two alphas are read from the hero itself so a retune is caught here.
+      const hero = document.querySelector("section[data-brand-hero]");
+      const heroStyles = hero ? getComputedStyle(hero) : styles;
+      const videoTint = Number(heroStyles.getPropertyValue("--video-tint-alpha"));
+      const videoWash = Number(heroStyles.getPropertyValue("--video-wash-copy"));
+      for (const [frame, pixel] of [
+        ["black", [0, 0, 0]],
+        ["white", [255, 255, 255]],
+      ] as [string, number[]][]) {
+        const tinted = composite(paint(token("bg-brand")), pixel, videoTint);
+        const washed = composite(paint(token("bg-canvas")), tinted, videoWash);
+        for (const fg of ["fg-primary", "fg-secondary", "gold"])
+          results.push({
+            fg,
+            bg: `video wash ${videoWash} over tint ${videoTint} over ${frame} frame`,
+            minimum: 4.5,
+            ratio: contrast(luminance(fg), relative(washed)),
+          });
+      }
+      return { panelAlpha, cardAlpha, videoTint, videoWash, results };
     });
+    expect(measured.videoTint, "hero --video-tint-alpha").toBeGreaterThan(0);
+    expect(measured.videoWash, "hero --video-wash-copy").toBeGreaterThan(0);
     // A1: the panel carries its own elevated alpha, and the composite pairs above are only valid
     // for the value it actually has.
     expect(measured.panelAlpha, "mega-menu panel --glass-alpha-elevated").toBeGreaterThanOrEqual(0.92);
@@ -103,7 +127,7 @@ for (const theme of ["light", "dark"])
       JSON.stringify({ panelAlpha: measured.panelAlpha, cardAlpha: measured.cardAlpha }),
       JSON.stringify(
         measured.results
-          .filter((r) => r.bg.startsWith("glass "))
+          .filter((r) => r.bg.startsWith("glass ") || r.bg.startsWith("video "))
           .map((r) => `${r.fg} on ${r.bg}: ${r.ratio.toFixed(2)}`),
       ),
     );

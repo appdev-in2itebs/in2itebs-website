@@ -23,6 +23,7 @@ import { CtaSection } from "@/components/sections/cta-section";
 import { LogoMarquee } from "@/components/sections/logo-marquee";
 import { HomePartners } from "@/components/sections/home-partners";
 import { BrandHero } from "@/components/sections/brand-hero";
+import { AmbientVideo } from "@/components/media/ambient-video";
 import { ServiceHero } from "@/components/sections/service-hero";
 import { PlatformPracticeLinks } from "@/components/sections/platform-practice-links";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
@@ -246,7 +247,15 @@ export default function HomePage() {
         </Container>
       </section>
 
-      <section className="seamless-section relative overflow-hidden bg-surface py-24 text-foreground md:py-32">
+      <section
+        data-methods
+        className="seamless-section relative overflow-hidden bg-surface py-24 text-foreground md:py-32"
+      >
+        {/* Ambient footage under the same tint and wash as the brand hero. The method list runs across
+            the right half in dark text, so the wash keeps its copy-column alpha edge to edge here. */}
+        <AmbientVideo src="/video/methods-office-720.mp4" poster="/video/methods-office-poster.jpg" />
+        <div aria-hidden className="video-tint pointer-events-none absolute inset-0" />
+        <div aria-hidden className="video-wash-even pointer-events-none absolute inset-0" />
         <div aria-hidden className="absolute inset-0 section-tint-b" />
         <div aria-hidden className="motion-rail absolute left-0 right-0 top-0 h-px bg-border-subtle">
           <span />

@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 
 const read = (file: string) => readFileSync(path.join(process.cwd(), file), "utf8");
@@ -65,10 +65,20 @@ test("tailwind exposes the gold and glass roles", () => {
   for (const shadow of ["glass:", '"glass-hover":', '"glow-gold":']) assert.ok(config.includes(shadow), shadow);
 });
 
-test("three.js is pinned exactly", () => {
+test("three.js left with the WebGL hero", () => {
+  // 2026-09-15: the sculpture was replaced by an ambient video; nothing may pull three back in.
   const pkg = JSON.parse(read("package.json"));
-  assert.equal(pkg.dependencies.three, "0.186.0");
-  assert.equal(pkg.devDependencies["@types/three"], "0.185.4");
+  assert.equal(pkg.dependencies.three, undefined);
+  assert.equal(pkg.devDependencies["@types/three"], undefined);
+});
+
+test("video layer tokens exist in both theme blocks", () => {
+  const light = block(css(), ".theme-light {");
+  const dark = block(css(), ".theme-dark {");
+  for (const token of ["--video-tint-alpha:", "--video-wash-edge:", "--video-wash-copy:", "--video-wash-clear:"]) {
+    assert.ok(light.includes(token), `light theme lacks ${token}`);
+    assert.ok(dark.includes(token), `dark theme lacks ${token}`);
+  }
 });
 
 test("every glass, gradient and motion utility the components use is defined", () => {
@@ -142,21 +152,18 @@ test("MotionObserver is mounted before main and MotionControls declares ownershi
   assert.match(observer, /motionOwner/);
 });
 
-test("the hero scene imports three by named specifiers and the loader defers it", () => {
-  const scene = read("components/hero/hero-3d.tsx");
-  assert.ok(!/import \* as/.test(scene), "namespace import defeats tree-shaking");
-  assert.match(scene, /from "three"/);
-  assert.match(scene, /TorusKnotGeometry/);
-  const loader = read("components/hero/hero-3d-loader.tsx");
-  assert.match(loader, /import\("\.\/hero-3d"\)/);
-  assert.match(loader, /ssr: false/);
-  for (const reason of ["viewport", "reduced-motion", "save-data", "no-webgl", "hidden"])
-    assert.ok(loader.includes(`"${reason}"`), `loader lacks reason ${reason}`);
+test("the ambient video gates on motion state and never autoplays under reduced motion or data saver", () => {
+  const source = read("components/media/ambient-video.tsx");
+  assert.match(source, /"use client"/);
+  for (const hook of ["data-motion-paused", "prefers-reduced-motion", "saveData", "IntersectionObserver"])
+    assert.ok(source.includes(hook), `ambient video ignores ${hook}`);
+  for (const attr of ["muted", "loop", "playsInline", "poster"])
+    assert.ok(source.includes(attr), `video lacks ${attr}`);
+  assert.ok(!existsSync(path.join(process.cwd(), "components/hero")), "the WebGL hero directory should be gone");
 });
 
-test("check-build enforces the three.js chunk budget", () => {
+test("check-build no longer looks for a three.js chunk", () => {
   const script = read("scripts/check-build.mjs");
-  assert.match(script, /TorusKnotGeometry/);
-  assert.match(script, /app-build-manifest\.json/);
-  assert.match(script, /700000|700_000/);
+  assert.ok(!script.includes("TorusKnotGeometry"));
+  assert.ok(!script.includes("700_000"));
 });

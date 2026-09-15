@@ -1,11 +1,17 @@
 import Link from "next/link";
 import { ArrowDown, ArrowRight } from "lucide-react";
-import { Hero3DLoader } from "@/components/hero/hero-3d-loader";
+import { AmbientVideo } from "@/components/media/ambient-video";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { MotionControls } from "@/components/sections/motion-controls";
 import { SapPartnerBadge } from "@/components/ui/sap-partner-badge";
 
+/**
+ * Full-screen brand hero on ambient footage (2026-09-15). Layers, bottom to top: the clip, a brand
+ * tint, a canvas-coloured wash that stays near-opaque under the copy column and clears towards the
+ * right, the ambient gradient, then the copy. The four alphas are the `--video-*` tokens in
+ * globals.css; the contrast spec pins the copy column against the worst-case frame.
+ */
 export function BrandHero() {
   return (
     <section
@@ -13,8 +19,14 @@ export function BrandHero() {
       aria-labelledby="home-hero-title"
       className="relative flex min-h-[100svh] overflow-hidden bg-canvas pt-36 text-foreground md:pt-40"
     >
+      <AmbientVideo
+        src="/video/hero-team-1080.mp4"
+        narrowSrc="/video/hero-team-720.mp4"
+        poster="/video/hero-team-poster.jpg"
+      />
+      <div aria-hidden className="video-tint pointer-events-none absolute inset-0" />
+      <div aria-hidden className="video-wash pointer-events-none absolute inset-0" />
       <div aria-hidden className="hero-ambient pointer-events-none absolute inset-0" />
-      <Hero3DLoader />
       <Container className="relative z-10 flex flex-1 flex-col justify-center py-8 md:py-10">
         <div className="max-w-[52rem]">
           <SapPartnerBadge />

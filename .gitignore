@@ -9,3 +9,6 @@ web/test-results/
 .website-runtime/
 web/.impeccable/
 .remember/tmp/
+
+# Source clips dropped at the repo root before encoding into web/public/video/
+/*.mp4
