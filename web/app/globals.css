@@ -849,6 +849,15 @@ html:not([data-motion-ready]) .client-ribbon {
   .stagger {
     --stagger-step: 70ms;
   }
+  /* The YouTube ribbon's scroll-snap track (2026-09-15 17:08): native scrolling with the scrollbar
+     hidden, since the arrows and the snap points are the visible affordance. */
+  .video-ribbon-track {
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .video-ribbon-track::-webkit-scrollbar {
+    display: none;
+  }
   /* Ambient video layers (2026-09-15 15:28): one 20% black veil over each clip, nothing else; the
      copy above it uses the `.on-video` palette. */
   .ambient-video {

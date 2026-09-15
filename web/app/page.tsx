@@ -22,6 +22,7 @@ import { Button } from "@/components/ui/button";
 import { CtaSection } from "@/components/sections/cta-section";
 import { LogoMarquee } from "@/components/sections/logo-marquee";
 import { HomePartners } from "@/components/sections/home-partners";
+import { YoutubeRibbon } from "@/components/sections/youtube-ribbon";
 import { BrandHero } from "@/components/sections/brand-hero";
 import { AmbientVideo } from "@/components/media/ambient-video";
 import { PlatformPracticeLinks } from "@/components/sections/platform-practice-links";
@@ -467,6 +468,8 @@ export default function HomePage() {
         body="We will bring the right platform, architecture and delivery specialists—and map the decisions that matter before the next commitment is made."
         ctaLabel={site.primaryCta.label}
       />
+      {/* Right above the footer (2026-09-15 17:08): the channel's latest uploads, newest first. */}
+      <YoutubeRibbon />
     </>
   );
 }
