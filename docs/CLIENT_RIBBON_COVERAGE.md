@@ -25,7 +25,7 @@ The homepage previously called `getFeaturedClients(20)`, omitting every client o
 
 ## Interaction
 
-The complete list participates in the animation. Duration scales with list length so adding marks does not accelerate the ribbon. “View all 94 client entries” exposes a static grid, and reduced-motion visitors receive the complete static list automatically. Duplicate animation copies remain hidden from assistive technology. Colour on hover and pause controls are retained.
+The complete list participates in the animation. Duration scales with list length so adding marks does not accelerate the ribbon. Reduced-motion visitors receive the complete static list automatically; the ribbon carries no controls since 2026-09-15 (the “View all” grid and the pause button were removed on request), and it pauses while offscreen. Duplicate animation copies remain hidden from assistive technology. Colour on hover is retained.
 
 Production permission to display client marks remains subject to the existing legal review. This reconciliation does not establish current customer relationships or new endorsements.
 

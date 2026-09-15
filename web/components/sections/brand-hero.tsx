@@ -3,14 +3,16 @@ import { ArrowDown, ArrowRight } from "lucide-react";
 import { AmbientVideo } from "@/components/media/ambient-video";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
-import { MotionControls } from "@/components/sections/motion-controls";
 import { SapPartnerBadge } from "@/components/ui/sap-partner-badge";
 
 /**
  * Full-screen brand hero on ambient footage (2026-09-15). Layers, bottom to top: the clip, a brand
- * tint, a light veil, the ambient gradient, then the copy block sitting bottom-left on its own
- * feathered wash (`.video-wash-copy`) that carries the readable floor. The alphas are the
- * `--video-*` tokens in globals.css; the contrast spec pins the copy against the worst-case frame.
+ * tint, a light veil, the ambient gradient, then the copy block sitting bottom-left on a full-bleed
+ * canvas band (`.video-wash-copy`) that fades in above the copy, carries the readable floor under it
+ * and fades out below, so it merges with the footage. The alphas are the `--video-*` tokens in
+ * globals.css; the contrast spec pins the copy against the worst-case frame. There is no visible
+ * pause control (removed 2026-09-15 pm): MotionObserver pauses the clip under reduced motion and
+ * hidden tabs.
  */
 export function BrandHero() {
   return (
@@ -55,11 +57,10 @@ export function BrandHero() {
             </Link>
           </div>
         </div>
-        {/* Both cues sit bottom-left, under the copy block, clear of the fixed quick-contact button in
-            the bottom-right corner. Below `sm` the row itself ends under that button, so the Discover
-            cue is hidden there: the page scroll is the affordance on a phone. */}
+        {/* The Discover cue sits bottom-left under the copy block, clear of the fixed quick-contact
+            button in the bottom-right corner. Below `sm` the row itself ends under that button, so
+            the cue is hidden there: the page scroll is the affordance on a phone. */}
         <div className="flex flex-wrap items-center justify-start gap-4">
-          <MotionControls />
           <Link
             href="#featured-services"
             aria-label="Scroll to featured services"

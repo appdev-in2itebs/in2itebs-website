@@ -13,9 +13,12 @@ test("every source client has an asset and appears in the homepage ribbon", asyn
     expect(client.logo, client.name).toBeTruthy();
     expect(existsSync(path.join(process.cwd(), "public", client.logo!)), client.name).toBeTruthy();
   }
+  // The ribbon has no controls since 2026-09-15 pm (no view-all grid, no pause button); reduced
+  // motion is what lays the complete list out as a static grid.
+  await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");
   await expect(page.locator(".client-ribbon-list [role=listitem]")).toHaveCount(clients.length);
-  await page.getByRole("button", { name: `View all ${clients.length} client entries` }).click();
+  await expect(page.getByRole("button", { name: /client ribbon|client entries/ })).toHaveCount(0);
   await expect(page.locator(".client-ribbon-copy")).toBeHidden();
   for (const client of clients) {
     const logo = page.locator(`.client-ribbon-list [data-client="${client.slug}"] img`);
@@ -25,8 +28,6 @@ test("every source client has an asset and appears in the homepage ribbon", asyn
       .poll(() => logo.evaluate((img: HTMLImageElement) => img.complete && img.naturalWidth > 0))
       .toBeTruthy();
   }
-  await page.getByRole("button", { name: "Back to animated ribbon" }).click();
-  await expect(page.getByRole("button", { name: "Pause client ribbon", exact: true })).toBeVisible();
 });
 
 test("complete client grid fits mobile and preserves colour on hover", async ({ page }) => {

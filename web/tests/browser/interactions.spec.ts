@@ -51,11 +51,12 @@ test("comparison remains scrollable at 320px", async ({ page }) => {
   await expect.poll(() => table.evaluate((el) => el.scrollLeft)).toBeGreaterThan(0);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy();
 });
-test("pause never hides the hero and reduced motion exposes all client marks", async ({ page }) => {
-  await page.goto("/");
-  await page.getByRole("button", { name: "Pause page animation", exact: true }).click();
-  await expect(page.getByRole("heading", { level: 2 }).first()).toHaveCSS("opacity", "1");
+test("reduced motion never hides the hero and exposes all client marks", async ({ page }) => {
+  // The visible pause controls went on 2026-09-15 pm; `prefers-reduced-motion` is the pause now.
   await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/");
+  await expect(page.getByRole("button", { name: /page animation|client ribbon|client entries/ })).toHaveCount(0);
+  await expect(page.getByRole("heading", { level: 2 }).first()).toHaveCSS("opacity", "1");
   await expect(page.locator(".client-ribbon-copy")).toBeHidden();
   await expect(page.locator(".client-ribbon-list")).toHaveCSS("flex-wrap", "wrap");
 });
@@ -64,6 +65,8 @@ test("unconfirmed direct visits never claim lead delivery", async ({ page }) => 
   await expect(page.locator("main")).toContainText("There is no recent enquiry confirmation");
 });
 test("heading scale and client hover treatment are intact", async ({ page }) => {
+  // Reduced motion holds the ribbon still for the hover; there is no pause button to press any more.
+  await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");
   expect(
     await page
@@ -71,7 +74,7 @@ test("heading scale and client hover treatment are intact", async ({ page }) => 
       .first()
       .evaluate((el) => parseFloat(getComputedStyle(el).fontSize)),
   ).toBeGreaterThan(32);
-  await page.getByRole("button", { name: "Pause client ribbon", exact: true }).click();
+  await expect(page.getByRole("button", { name: /client ribbon|client entries/ })).toHaveCount(0);
   const logo = page.locator(".client-ribbon-list img").first();
   await logo.hover();
   await expect(logo).toHaveCSS("filter", "grayscale(0) saturate(1)");
@@ -97,7 +100,8 @@ test("the quick-contact button keeps keyboard focus near the footer", async ({ p
   await expect(button).toBeHidden();
 });
 test("below-the-fold reveals become visible on scroll on an observer-owned page", async ({ page }) => {
-  // Premium restyle: /about/ has no MotionControls, so MotionObserver owns the motion flags and drives the reveals.
+  // MotionObserver owns the motion flags on every page and drives the reveals (the hero's pause
+  // control, the only other owner, went on 2026-09-15).
   await page.setViewportSize({ width: 1280, height: 800 });
   await page.goto("/about/");
   await expect(page.locator("html")).toHaveAttribute("data-motion-ready", "true");

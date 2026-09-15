@@ -50,32 +50,11 @@ html[data-motion-paused="true"] .reveal {
 html:not([data-motion-ready]) .client-ribbon {
   overflow-x: auto;
 }
-.client-ribbon[data-expanded="true"] {
-  overflow: visible;
-}
-.client-ribbon[data-expanded="true"] .client-ribbon-track {
-  width: 100%;
-  transform: none;
-  animation: none !important;
-}
-.client-ribbon[data-expanded="true"] .client-ribbon-list {
-  width: 100%;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1px;
-}
-.client-ribbon[data-expanded="true"] .client-ribbon-copy {
-  display: none;
-}
 .client-ribbon-list img {
   max-width: 100%;
 }
-/* Only in the static wall: rounded corners meeting across the 1px gap leave a cross of exposed
-   canvas between four tiles, which reads as a grid pattern on the noir dark ground. */
-.client-ribbon[data-expanded="true"] .client-ribbon-list > div {
-  width: min(11rem, calc(50% - 1px));
-  border-radius: 0;
-}
+/* The ribbon's view-all grid and pause button went on 2026-09-15; the reduced-motion block below
+   is the only static layout of the complete list now. */
 @media (prefers-reduced-motion: reduce) {
   .client-ribbon {
     overflow: visible;
@@ -149,13 +128,13 @@ html:not([data-motion-ready]) .client-ribbon {
     --glass-alpha: 0.62;
     --glass-alpha-elevated: 0.78;
     --glass-blur: 18px;
-    /* Ambient video sections (2026-09-15): brand tint over the clip, a light veil over the tint
-       (base: hero, base-loose: the methods section), and a readable floor that follows each text
-       block (copy). The floor is the smallest value that keeps small gold text at 4.5:1 over a
-       black frame; tests/browser/theme-contrast.spec.ts pins it. */
+    /* Ambient video sections (2026-09-15): brand tint over both clips; in the hero a light veil
+       over the tint (base) and a full-bleed band behind the copy block (copy) that carries the
+       readable floor. The floor is the smallest value that keeps small gold text at 4.5:1 over a
+       black frame; tests/browser/theme-contrast.spec.ts pins it. The methods section runs on the
+       tint alone. */
     --video-tint-alpha: 0.2;
     --video-wash-base: 0.3;
-    --video-wash-base-loose: 0.45;
     --video-wash-copy: 0.93;
     --gradient-heading: linear-gradient(
       135deg,
@@ -228,7 +207,6 @@ html:not([data-motion-ready]) .client-ribbon {
     /* Champagne gold on the noir wash has far more headroom than deep gold on white. */
     --video-tint-alpha: 0.2;
     --video-wash-base: 0.2;
-    --video-wash-base-loose: 0.3;
     --video-wash-copy: 0.75;
     --gradient-heading: linear-gradient(
       135deg,
@@ -859,10 +837,11 @@ html:not([data-motion-ready]) .client-ribbon {
   .stagger {
     --stagger-step: 70ms;
   }
-  /* Ambient video layers. `.video-wash` is a uniform veil over the whole clip; `.video-wash-copy`
-     is a soft rectangle that follows a text block (its wrapper is `relative isolate`) and carries
-     the readable floor, feathered outwards with a blurred shadow of the same colour, so the clip
-     opens up everywhere the copy is not. */
+  /* Ambient video layers. `.video-wash` is a uniform veil over the whole clip. `.video-wash-copy`
+     is the hero's readable floor: a full-bleed band behind the copy block (its wrapper is
+     `relative isolate`; the section's overflow clips the overshoot) that fades in from nothing over
+     the 8rem above the block, holds `--video-wash-copy` under it and fades out over the 5rem below,
+     with no radius and no shadow, so it merges with the footage instead of reading as a box. */
   .ambient-video {
     object-fit: cover;
   }
@@ -872,16 +851,20 @@ html:not([data-motion-ready]) .client-ribbon {
   .video-wash {
     background-color: oklch(var(--color-bg-canvas) / var(--video-wash-base));
   }
-  .video-wash-loose {
-    background-color: oklch(var(--color-bg-canvas) / var(--video-wash-base-loose));
-  }
   .video-wash-copy {
     position: absolute;
-    inset: -1.25rem -1.75rem;
+    top: -8rem;
+    bottom: -5rem;
+    left: -100vw;
+    right: -100vw;
     z-index: -1;
-    border-radius: 2rem;
-    background-color: oklch(var(--color-bg-canvas) / var(--video-wash-copy));
-    box-shadow: 0 0 5rem 2.5rem oklch(var(--color-bg-canvas) / var(--video-wash-copy));
+    background-image: linear-gradient(
+      to bottom,
+      oklch(var(--color-bg-canvas) / 0) 0,
+      oklch(var(--color-bg-canvas) / var(--video-wash-copy)) 8rem,
+      oklch(var(--color-bg-canvas) / var(--video-wash-copy)) calc(100% - 5rem),
+      oklch(var(--color-bg-canvas) / 0) 100%
+    );
     pointer-events: none;
   }
   .hero-ambient {

@@ -79,6 +79,9 @@ test("video layer tokens exist in both theme blocks", () => {
     assert.ok(light.includes(token), `light theme lacks ${token}`);
     assert.ok(dark.includes(token), `dark theme lacks ${token}`);
   }
+  // The methods section lost its veil on 2026-09-15 pm, and the looser token with it.
+  assert.ok(!light.includes("--video-wash-base-loose:"), "the loose veil token should be gone");
+  assert.ok(!css().includes(".video-wash-loose"), "the loose veil class should be gone");
 });
 
 test("every glass, gradient and motion utility the components use is defined", () => {
@@ -138,18 +141,23 @@ test("Reveal, Stagger and StaggerItem render the reveal hooks", () => {
   assert.match(source, /Math\.round\(delay \* 1000\)/);
 });
 
-test("MotionObserver is mounted before main and MotionControls declares ownership", () => {
+test("MotionObserver is mounted before main and is the only owner of the motion flags", () => {
   const layout = read("app/layout.tsx");
   const observerAt = layout.indexOf("<MotionObserver />");
   assert.ok(observerAt >= 0, "MotionObserver is not mounted in the root layout");
   assert.ok(observerAt < layout.indexOf('<main id="main">'), "MotionObserver must precede main");
-  const controls = read("components/sections/motion-controls.tsx");
-  assert.match(controls, /dataset\.motionOwner = "controls"/);
-  assert.match(controls, /delete document\.documentElement\.dataset\.motionOwner/);
+  // The hero's pause control went on 2026-09-15 pm, and the ownership handshake with it.
+  assert.ok(
+    !existsSync(path.join(process.cwd(), "components/sections/motion-controls.tsx")),
+    "motion-controls.tsx should be gone",
+  );
   const observer = read("components/motion/motion-observer.tsx");
   assert.match(observer, /IntersectionObserver/);
   assert.match(observer, /dataset\.reveal = "in"/);
-  assert.match(observer, /motionOwner/);
+  assert.doesNotMatch(observer, /motionOwner/);
+  // The offscreen pause for the client ribbon moved here from the control.
+  assert.match(observer, /motionOffscreen/);
+  assert.match(observer, /\.client-ribbon/);
 });
 
 test("the ambient video gates on motion state and never autoplays under reduced motion or data saver", () => {

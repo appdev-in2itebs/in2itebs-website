@@ -1,44 +1,20 @@
-"use client";
-import { useState } from "react";
 import type { Client } from "@/content/types";
 import { ClientLogo } from "./client-logo";
+
+/**
+ * The ribbon carries no controls (2026-09-15 pm; the view-all grid and the pause button were
+ * removed on request). `prefers-reduced-motion` lays the complete list out as a static grid, and
+ * MotionObserver pauses the loop while the ribbon is offscreen.
+ */
 export function LogoMarquee({ clients, duration = clients.length * 2.6 }: { clients: Client[]; duration?: number }) {
-  const [paused, setPaused] = useState(false);
-  const [expanded, setExpanded] = useState(false);
   if (!clients.length) return null;
   return (
     <div role="region" aria-label="Client and client-brand logos">
-      <div className="mb-4 flex flex-wrap justify-end gap-3">
-        <button
-          type="button"
-          aria-expanded={expanded}
-          aria-controls="homepage-client-ribbon"
-          onClick={() => setExpanded(!expanded)}
-          className="min-h-11 rounded-full border border-border-strong bg-surface px-3 text-sm text-foreground hover:border-gold hover:text-gold"
-        >
-          {expanded ? "Back to animated ribbon" : `View all ${clients.length} client entries`}
-        </button>
-        {!expanded && (
-          <button
-            type="button"
-            aria-pressed={paused}
-            onClick={() => setPaused(!paused)}
-            className="min-h-11 rounded-full border border-border-strong bg-surface px-3 text-sm text-foreground hover:border-gold hover:text-gold"
-          >
-            {paused ? "Play client ribbon" : "Pause client ribbon"}
-          </button>
-        )}
-      </div>
       <div
-        id="homepage-client-ribbon"
-        data-expanded={expanded}
         className="client-ribbon overflow-hidden"
         style={{ "--marquee-duration": `${duration}s` } as React.CSSProperties}
       >
-        <div
-          className="client-ribbon-track flex w-max animate-marquee items-center"
-          style={{ animationPlayState: paused ? "paused" : "running" }}
-        >
+        <div className="client-ribbon-track flex w-max animate-marquee items-center">
           {[0, 1].map((copy) => (
             <div
               key={copy}

@@ -47,12 +47,27 @@ test("desktop: the brand hero video plays, muted and inline, under the light was
   await expect(page.locator(`${brandHero} .video-wash`)).toHaveCount(1);
   await expect(page.locator(`${brandHero} .video-wash-copy`)).toHaveCount(1);
   await expect(page.locator(`${brandHero} .hero-ambient`)).toHaveCount(1);
+  // The copy wash is a full-bleed band (2026-09-15 pm): edge to edge of the viewport, fading in above
+  // the copy and out below it, with no rounded corners and no halo, so it merges with the footage.
+  const band = page.locator(`${brandHero} .video-wash-copy`);
+  const bandBox = (await band.boundingBox())!;
+  expect(bandBox.x).toBeLessThanOrEqual(0);
+  expect(bandBox.x + bandBox.width).toBeGreaterThanOrEqual(1440);
+  const bandStyle = await band.evaluate((el) => {
+    const s = getComputedStyle(el);
+    return { image: s.backgroundImage, shadow: s.boxShadow, radius: s.borderRadius };
+  });
+  expect(bandStyle.image).toContain("linear-gradient");
+  expect(bandStyle.shadow).toBe("none");
+  expect(bandStyle.radius).toBe("0px");
   // The copy sits in the lower half of the hero (2026-09-15), so the clip owns the upper half.
   const hero = (await page.locator(brandHero).boundingBox())!;
   const headline = (await page.locator(`${brandHero} h1`).boundingBox())!;
   expect(headline.y).toBeGreaterThan(hero.y + hero.height / 2);
   expect(headline.x).toBeLessThan(hero.x + hero.width / 4);
   await discoverClearOfQuickContact(page);
+  // The page pause control left the hero (2026-09-15 pm); reduced motion and hidden tabs still pause.
+  await expect(page.getByRole("button", { name: /page animation/ })).toHaveCount(0);
   // The sculpture is gone for good.
   await expect(page.locator("[data-hero-3d]")).toHaveCount(0);
   await expect(page.locator(`${carousel} img[srcset]`)).toHaveCount(3);
@@ -83,20 +98,16 @@ test("reduced motion shows the poster and never plays the clip", async ({ page }
   await expect(page.locator(methodsVideo)).toHaveAttribute("data-ambient-video", "poster");
 });
 
-test("the page pause control pauses and resumes the hero video", async ({ page }) => {
+test("the motion-paused flag still pauses and resumes the hero video without a control", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/");
   await expect(page.locator(heroVideo)).toHaveAttribute("data-ambient-video", "playing", { timeout: 15000 });
-  // The control sits at the bottom of the hero; clicking scrolls it into view. Returning to the top
-  // isolates the pause flag as the only thing gating playback.
-  const press = async (name: string) => {
-    await page.getByRole("button", { name, exact: true }).click();
-    await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
-  };
-  await press("Pause page animation");
+  // The visible pause control went on 2026-09-15 pm; MotionObserver still sets the flag for reduced
+  // motion and hidden tabs, and the clip must keep honouring it.
+  await page.evaluate(() => (document.documentElement.dataset.motionPaused = "true"));
   await expect(page.locator(heroVideo)).toHaveAttribute("data-ambient-video", "paused");
   expect(await page.locator(`${heroVideo} video`).evaluate((v: HTMLVideoElement) => v.paused)).toBe(true);
-  await press("Resume page animation");
+  await page.evaluate(() => (document.documentElement.dataset.motionPaused = "false"));
   await expect(page.locator(heroVideo)).toHaveAttribute("data-ambient-video", "playing");
 });
 
@@ -109,14 +120,12 @@ test("the methods video plays only while its section is on screen", async ({ pag
   await page.locator(methods).scrollIntoViewIfNeeded();
   await expect(page.locator(methodsVideo)).toHaveAttribute("data-ambient-video", "playing", { timeout: 15000 });
   await expect(page.locator(`${methodsVideo} video`)).toHaveAttribute("poster", /methods-office-poster\.jpg$/);
-  // Heading column and method list each carry their own readable floor.
-  await expect(page.locator(`${methods} .video-wash-copy`)).toHaveCount(2);
-  // The heading panel hugs its copy instead of stretching to the list's height (lg:self-start), so
-  // the clip shows through the lower left of the section.
-  const [headingPanel, listPanel] = await Promise.all(
-    (await page.locator(`${methods} .video-wash-copy`).all()).map((panel) => panel.boundingBox()),
-  );
-  expect(headingPanel!.height).toBeLessThan(listPanel!.height - 80);
+  // The methods clip is unveiled (2026-09-15 pm): no canvas veil, no copy panels and no section tint
+  // above it. Only the brand tint remains between the clip and the copy.
+  await expect(page.locator(`${methods} .video-wash-copy`)).toHaveCount(0);
+  await expect(page.locator(`${methods} .video-wash`)).toHaveCount(0);
+  await expect(page.locator(`${methods} .section-tint-b`)).toHaveCount(0);
+  await expect(page.locator(`${methods} .video-tint`)).toHaveCount(1);
   await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
   await expect(page.locator(methodsVideo)).toHaveAttribute("data-ambient-video", "paused");
   await expect(page.locator(heroVideo)).toHaveAttribute("data-ambient-video", "playing");
