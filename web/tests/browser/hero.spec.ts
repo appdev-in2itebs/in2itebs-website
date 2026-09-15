@@ -120,12 +120,15 @@ test("the methods video plays only while its section is on screen", async ({ pag
   await page.locator(methods).scrollIntoViewIfNeeded();
   await expect(page.locator(methodsVideo)).toHaveAttribute("data-ambient-video", "playing", { timeout: 15000 });
   await expect(page.locator(`${methodsVideo} video`)).toHaveAttribute("poster", /methods-office-poster\.jpg$/);
-  // The methods clip is unveiled (2026-09-15 pm): no canvas veil, no copy panels and no section tint
-  // above it. Only the brand tint remains between the clip and the copy.
+  // The methods clip sits under the brand tint and one translucent white-to-blue wash
+  // (`.video-wash-methods`, 2026-09-15 pm): no copy panels, no uniform veil, no section tint.
   await expect(page.locator(`${methods} .video-wash-copy`)).toHaveCount(0);
   await expect(page.locator(`${methods} .video-wash`)).toHaveCount(0);
   await expect(page.locator(`${methods} .section-tint-b`)).toHaveCount(0);
   await expect(page.locator(`${methods} .video-tint`)).toHaveCount(1);
+  const methodsWash = page.locator(`${methods} .video-wash-methods`);
+  await expect(methodsWash).toHaveCount(1);
+  expect(await methodsWash.evaluate((el) => getComputedStyle(el).backgroundImage)).toContain("linear-gradient");
   await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
   await expect(page.locator(methodsVideo)).toHaveAttribute("data-ambient-video", "paused");
   await expect(page.locator(heroVideo)).toHaveAttribute("data-ambient-video", "playing");

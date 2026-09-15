@@ -129,13 +129,15 @@ html:not([data-motion-ready]) .client-ribbon {
     --glass-alpha-elevated: 0.78;
     --glass-blur: 18px;
     /* Ambient video sections (2026-09-15): brand tint over both clips; in the hero a light veil
-       over the tint (base) and a full-bleed band behind the copy block (copy) that carries the
-       readable floor. The floor is the smallest value that keeps small gold text at 4.5:1 over a
-       black frame; tests/browser/theme-contrast.spec.ts pins it. The methods section runs on the
-       tint alone. */
+       over the tint (base) and a full-bleed blue-to-white band behind the copy block (copy); in
+       the methods section one white-to-blue wash (methods). Owner ruling 2026-09-15 pm: footage
+       shows through both, so body and muted copy hold 4.5:1 and the small gold labels 3:1 over a
+       black frame at these alphas (canvas at 0.8 on black: muted 4.83, gold 3.35);
+       tests/browser/theme-contrast.spec.ts pins them and caps copy at 0.85. */
     --video-tint-alpha: 0.2;
     --video-wash-base: 0.3;
-    --video-wash-copy: 0.93;
+    --video-wash-copy: 0.8;
+    --video-wash-methods: 0.82;
     --gradient-heading: linear-gradient(
       135deg,
       oklch(var(--color-fg-primary)) 0%,
@@ -204,10 +206,12 @@ html:not([data-motion-ready]) .client-ribbon {
     --glass-alpha: 0.65;
     --glass-alpha-elevated: 0.78;
     --glass-blur: 24px;
-    /* Champagne gold on the noir wash has far more headroom than deep gold on white. */
+    /* Champagne gold on the noir wash has far more headroom than deep gold on white
+       (canvas at 0.7 over a white frame: muted 6.68, gold 4.04). */
     --video-tint-alpha: 0.2;
     --video-wash-base: 0.2;
-    --video-wash-copy: 0.75;
+    --video-wash-copy: 0.7;
+    --video-wash-methods: 0.7;
     --gradient-heading: linear-gradient(
       135deg,
       #ffffff 0%,
@@ -839,9 +843,13 @@ html:not([data-motion-ready]) .client-ribbon {
   }
   /* Ambient video layers. `.video-wash` is a uniform veil over the whole clip. `.video-wash-copy`
      is the hero's readable floor: a full-bleed band behind the copy block (its wrapper is
-     `relative isolate`; the section's overflow clips the overshoot) that fades in from nothing over
-     the 8rem above the block, holds `--video-wash-copy` under it and fades out over the 5rem below,
-     with no radius and no shadow, so it merges with the footage instead of reading as a box. */
+     `relative isolate`; the section's overflow clips the overshoot) that rises from nothing
+     through a brand-navy haze over the 8rem above the block into canvas at `--video-wash-copy`,
+     holds that under the copy and falls back through the haze to nothing over the 5rem below,
+     with no radius and no shadow, so it merges with the footage instead of reading as a box.
+     `.video-wash-methods` is the methods section's single wash: canvas across the copy zone,
+     the same navy haze across the top and bottom padding. The blue only ever sits where there is
+     no text; the contrast spec composites the copy against the canvas stop. */
   .ambient-video {
     object-fit: cover;
   }
@@ -860,12 +868,23 @@ html:not([data-motion-ready]) .client-ribbon {
     z-index: -1;
     background-image: linear-gradient(
       to bottom,
-      oklch(var(--color-bg-canvas) / 0) 0,
+      oklch(var(--color-bg-brand) / 0) 0,
+      oklch(var(--color-bg-brand) / 0.3) 3rem,
       oklch(var(--color-bg-canvas) / var(--video-wash-copy)) 8rem,
       oklch(var(--color-bg-canvas) / var(--video-wash-copy)) calc(100% - 5rem),
-      oklch(var(--color-bg-canvas) / 0) 100%
+      oklch(var(--color-bg-brand) / 0.25) calc(100% - 2rem),
+      oklch(var(--color-bg-brand) / 0) 100%
     );
     pointer-events: none;
+  }
+  .video-wash-methods {
+    background-image: linear-gradient(
+      to bottom,
+      oklch(var(--color-bg-brand) / 0.35) 0,
+      oklch(var(--color-bg-canvas) / var(--video-wash-methods)) 7rem,
+      oklch(var(--color-bg-canvas) / var(--video-wash-methods)) calc(100% - 7rem),
+      oklch(var(--color-bg-brand) / 0.35) 100%
+    );
   }
   .hero-ambient {
     background-image:

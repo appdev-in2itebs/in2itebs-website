@@ -251,10 +251,12 @@ export default function HomePage() {
         data-methods
         className="seamless-section relative overflow-hidden bg-surface py-24 text-foreground md:py-32"
       >
-        {/* Ambient footage under the brand tint alone (2026-09-15 pm): no veil, no copy panels and
-            no section tint, so the clip shows at full strength beneath the copy. */}
+        {/* Ambient footage under the brand tint and one translucent white-to-blue wash
+            (`.video-wash-methods`, 2026-09-15 pm): white where the copy is, a navy haze across the
+            top and bottom padding, and no panels around the text. */}
         <AmbientVideo src="/video/methods-office-720.mp4" poster="/video/methods-office-poster.jpg" />
         <div aria-hidden className="video-tint pointer-events-none absolute inset-0" />
+        <div aria-hidden className="video-wash-methods pointer-events-none absolute inset-0" />
         <div aria-hidden className="motion-rail absolute left-0 right-0 top-0 h-px bg-border-subtle">
           <span />
         </div>
