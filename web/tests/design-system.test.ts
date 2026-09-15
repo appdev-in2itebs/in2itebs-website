@@ -75,7 +75,7 @@ test("three.js left with the WebGL hero", () => {
 test("video layer tokens exist in both theme blocks", () => {
   const light = block(css(), ".theme-light {");
   const dark = block(css(), ".theme-dark {");
-  for (const token of ["--video-tint-alpha:", "--video-wash-edge:", "--video-wash-copy:", "--video-wash-clear:"]) {
+  for (const token of ["--video-tint-alpha:", "--video-wash-base:", "--video-wash-copy:"]) {
     assert.ok(light.includes(token), `light theme lacks ${token}`);
     assert.ok(dark.includes(token), `dark theme lacks ${token}`);
   }

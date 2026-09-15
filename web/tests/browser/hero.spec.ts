@@ -15,6 +15,18 @@ async function state(page: Page, selector: string) {
   return page.locator(selector).getAttribute("data-ambient-video");
 }
 
+/** The Discover cue must never sit under the fixed quick-contact button in the bottom-right corner. */
+async function discoverClearOfQuickContact(page: Page) {
+  const discover = (await page.getByRole("link", { name: "Scroll to featured services" }).boundingBox())!;
+  const contact = (await page.locator('button[aria-controls="quick-contact-panel"]').boundingBox())!;
+  const overlaps =
+    discover.x < contact.x + contact.width &&
+    discover.x + discover.width > contact.x &&
+    discover.y < contact.y + contact.height &&
+    discover.y + discover.height > contact.y;
+  expect(overlaps, "the Discover cue overlaps the quick-contact button").toBe(false);
+}
+
 test("desktop: the brand hero video plays, muted and inline, under the light wash", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/");
@@ -29,10 +41,18 @@ test("desktop: the brand hero video plays, muted and inline, under the light was
   ]);
   await expect(video).toHaveAttribute("poster", /hero-team-poster\.jpg$/);
   expect(await video.evaluate((v: HTMLVideoElement) => v.currentSrc)).toMatch(/hero-team-1080\.mp4$/);
-  // Tint and wash sit between the clip and the copy, and the ambient gradient survives on top.
+  // Tint and a light veil sit between the clip and the copy; the readable floor follows the copy
+  // block itself (`.video-wash-copy`), and the ambient gradient survives on top.
   await expect(page.locator(`${brandHero} .video-tint`)).toHaveCount(1);
   await expect(page.locator(`${brandHero} .video-wash`)).toHaveCount(1);
+  await expect(page.locator(`${brandHero} .video-wash-copy`)).toHaveCount(1);
   await expect(page.locator(`${brandHero} .hero-ambient`)).toHaveCount(1);
+  // The copy sits in the lower half of the hero (2026-09-15), so the clip owns the upper half.
+  const hero = (await page.locator(brandHero).boundingBox())!;
+  const headline = (await page.locator(`${brandHero} h1`).boundingBox())!;
+  expect(headline.y).toBeGreaterThan(hero.y + hero.height / 2);
+  expect(headline.x).toBeLessThan(hero.x + hero.width / 4);
+  await discoverClearOfQuickContact(page);
   // The sculpture is gone for good.
   await expect(page.locator("[data-hero-3d]")).toHaveCount(0);
   await expect(page.locator(`${carousel} img[srcset]`)).toHaveCount(3);
@@ -45,6 +65,8 @@ test("phones get the 720p hero source", async ({ page }) => {
   expect(await page.locator(`${heroVideo} video`).evaluate((v: HTMLVideoElement) => v.currentSrc)).toMatch(
     /hero-team-720\.mp4$/,
   );
+  // The cue row ends under the fixed quick-contact button on a phone, so Discover is hidden there.
+  await expect(page.locator('a[aria-label="Scroll to featured services"]')).toBeHidden();
 });
 
 test("reduced motion shows the poster and never plays the clip", async ({ page }) => {
@@ -87,6 +109,14 @@ test("the methods video plays only while its section is on screen", async ({ pag
   await page.locator(methods).scrollIntoViewIfNeeded();
   await expect(page.locator(methodsVideo)).toHaveAttribute("data-ambient-video", "playing", { timeout: 15000 });
   await expect(page.locator(`${methodsVideo} video`)).toHaveAttribute("poster", /methods-office-poster\.jpg$/);
+  // Heading column and method list each carry their own readable floor.
+  await expect(page.locator(`${methods} .video-wash-copy`)).toHaveCount(2);
+  // The heading panel hugs its copy instead of stretching to the list's height (lg:self-start), so
+  // the clip shows through the lower left of the section.
+  const [headingPanel, listPanel] = await Promise.all(
+    (await page.locator(`${methods} .video-wash-copy`).all()).map((panel) => panel.boundingBox()),
+  );
+  expect(headingPanel!.height).toBeLessThan(listPanel!.height - 80);
   await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
   await expect(page.locator(methodsVideo)).toHaveAttribute("data-ambient-video", "paused");
   await expect(page.locator(heroVideo)).toHaveAttribute("data-ambient-video", "playing");

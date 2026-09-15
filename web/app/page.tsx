@@ -251,18 +251,19 @@ export default function HomePage() {
         data-methods
         className="seamless-section relative overflow-hidden bg-surface py-24 text-foreground md:py-32"
       >
-        {/* Ambient footage under the same tint and wash as the brand hero. The method list runs across
-            the right half in dark text, so the wash keeps its copy-column alpha edge to edge here. */}
+        {/* Ambient footage under the same tint as the brand hero, with a looser veil; the heading
+            column and the method list each sit on their own feathered wash (`.video-wash-copy`). */}
         <AmbientVideo src="/video/methods-office-720.mp4" poster="/video/methods-office-poster.jpg" />
         <div aria-hidden className="video-tint pointer-events-none absolute inset-0" />
-        <div aria-hidden className="video-wash-even pointer-events-none absolute inset-0" />
+        <div aria-hidden className="video-wash video-wash-loose pointer-events-none absolute inset-0" />
         <div aria-hidden className="absolute inset-0 section-tint-b" />
         <div aria-hidden className="motion-rail absolute left-0 right-0 top-0 h-px bg-border-subtle">
           <span />
         </div>
         <Container className="relative">
           <div className="grid gap-10 lg:grid-cols-12">
-            <Reveal className="lg:col-span-5">
+            <Reveal className="relative isolate lg:col-span-5 lg:self-start">
+              <div aria-hidden className="video-wash-copy" />
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-gold">In2IT delivery intelligence</p>
               <h2 className="mt-5 max-w-[12ch] text-[clamp(2.5rem,4.6vw,4.75rem)] font-semibold leading-[0.96] tracking-[-0.05em]">
                 Methods that make delivery observable.
@@ -273,36 +274,39 @@ export default function HomePage() {
               </p>
             </Reveal>
 
-            <Stagger className="method-list relative border-t border-border-strong lg:col-span-7">
-              {operatingSystem.map((item) => (
-                <StaggerItem key={item.title}>
-                  <Link
-                    href={item.href}
-                    className="method-row group grid gap-4 border-b border-border-subtle py-7 transition-colors duration-200 sm:grid-cols-[3rem_3rem_1fr_auto] sm:items-start"
-                  >
-                    <span className="pt-3 text-[0.65rem] font-semibold tabular-nums tracking-[0.14em] text-gold">
-                      {item.code}
-                    </span>
-                    <span className="icon-tile h-11 w-11 rounded-surface">
-                      <item.Icon aria-hidden size={18} strokeWidth={1.55} />
-                    </span>
-                    <span>
-                      <span className="block text-xl font-semibold tracking-[-0.02em] text-foreground md:text-2xl">
-                        {item.title}
+            <div className="relative isolate lg:col-span-7">
+              <div aria-hidden className="video-wash-copy" />
+              <Stagger className="method-list relative border-t border-border-strong">
+                {operatingSystem.map((item) => (
+                  <StaggerItem key={item.title}>
+                    <Link
+                      href={item.href}
+                      className="method-row group grid gap-4 border-b border-border-subtle py-7 transition-colors duration-200 sm:grid-cols-[3rem_3rem_1fr_auto] sm:items-start"
+                    >
+                      <span className="pt-3 text-[0.65rem] font-semibold tabular-nums tracking-[0.14em] text-gold">
+                        {item.code}
                       </span>
-                      <span className="mt-2 block max-w-[52ch] text-sm leading-relaxed text-foreground-muted">
-                        {item.copy}
+                      <span className="icon-tile h-11 w-11 rounded-surface">
+                        <item.Icon aria-hidden size={18} strokeWidth={1.55} />
                       </span>
-                    </span>
-                    <ArrowUpRight
-                      aria-hidden
-                      size={19}
-                      className="mt-3 text-gold transition-transform duration-200 group-hover:-translate-y-1 group-hover:translate-x-1"
-                    />
-                  </Link>
-                </StaggerItem>
-              ))}
-            </Stagger>
+                      <span>
+                        <span className="block text-xl font-semibold tracking-[-0.02em] text-foreground md:text-2xl">
+                          {item.title}
+                        </span>
+                        <span className="mt-2 block max-w-[52ch] text-sm leading-relaxed text-foreground-muted">
+                          {item.copy}
+                        </span>
+                      </span>
+                      <ArrowUpRight
+                        aria-hidden
+                        size={19}
+                        className="mt-3 text-gold transition-transform duration-200 group-hover:-translate-y-1 group-hover:translate-x-1"
+                      />
+                    </Link>
+                  </StaggerItem>
+                ))}
+              </Stagger>
+            </div>
           </div>
         </Container>
       </section>

@@ -95,8 +95,8 @@ for (const theme of ["light", "dark"])
         });
       // Ambient video sections (2026-09-15). The copy sits on a canvas-coloured wash over a brand
       // tint over moving footage. Nothing can measure that live, so pin the worst case: the wash
-      // at the alpha it keeps under the copy column, over the tint, over a pure black and a pure
-      // white frame. The two alphas are read from the hero itself so a retune is caught here.
+      // at the alpha each `.video-wash-copy` block carries, over the tint, over a pure black and a
+      // pure white frame. The alphas are read from the hero itself so a retune is caught here.
       const hero = document.querySelector("section[data-brand-hero]");
       const heroStyles = hero ? getComputedStyle(hero) : styles;
       const videoTint = Number(heroStyles.getPropertyValue("--video-tint-alpha"));
@@ -115,10 +115,30 @@ for (const theme of ["light", "dark"])
             ratio: contrast(luminance(fg), relative(washed)),
           });
       }
-      return { panelAlpha, cardAlpha, videoTint, videoWash, results };
+      // The hero's Discover link sits on a glass pill over the veil, not over the copy wash.
+      const videoBase = Number(heroStyles.getPropertyValue("--video-wash-base"));
+      const pillAlpha = Number(styles.getPropertyValue("--glass-alpha-elevated"));
+      for (const [frame, pixel] of [
+        ["black", [0, 0, 0]],
+        ["white", [255, 255, 255]],
+      ] as [string, number[]][]) {
+        const veiled = composite(
+          paint(token("bg-canvas")),
+          composite(paint(token("bg-brand")), pixel, videoTint),
+          videoBase,
+        );
+        results.push({
+          fg: "fg-secondary",
+          bg: `glass pill ${pillAlpha} over video veil ${videoBase} over ${frame} frame`,
+          minimum: 4.5,
+          ratio: contrast(luminance("fg-secondary"), relative(composite(paint(glass), veiled, pillAlpha))),
+        });
+      }
+      return { panelAlpha, cardAlpha, videoTint, videoWash, videoBase, results };
     });
     expect(measured.videoTint, "hero --video-tint-alpha").toBeGreaterThan(0);
     expect(measured.videoWash, "hero --video-wash-copy").toBeGreaterThan(0);
+    expect(measured.videoBase, "hero --video-wash-base").toBeGreaterThan(0);
     // A1: the panel carries its own elevated alpha, and the composite pairs above are only valid
     // for the value it actually has.
     expect(measured.panelAlpha, "mega-menu panel --glass-alpha-elevated").toBeGreaterThanOrEqual(0.92);

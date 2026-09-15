@@ -8,9 +8,9 @@ import { SapPartnerBadge } from "@/components/ui/sap-partner-badge";
 
 /**
  * Full-screen brand hero on ambient footage (2026-09-15). Layers, bottom to top: the clip, a brand
- * tint, a canvas-coloured wash that stays near-opaque under the copy column and clears towards the
- * right, the ambient gradient, then the copy. The four alphas are the `--video-*` tokens in
- * globals.css; the contrast spec pins the copy column against the worst-case frame.
+ * tint, a light veil, the ambient gradient, then the copy block sitting bottom-left on its own
+ * feathered wash (`.video-wash-copy`) that carries the readable floor. The alphas are the
+ * `--video-*` tokens in globals.css; the contrast spec pins the copy against the worst-case frame.
  */
 export function BrandHero() {
   return (
@@ -27,8 +27,9 @@ export function BrandHero() {
       <div aria-hidden className="video-tint pointer-events-none absolute inset-0" />
       <div aria-hidden className="video-wash pointer-events-none absolute inset-0" />
       <div aria-hidden className="hero-ambient pointer-events-none absolute inset-0" />
-      <Container className="relative z-10 flex flex-1 flex-col justify-center py-8 md:py-10">
-        <div className="max-w-[52rem]">
+      <Container className="relative z-10 flex flex-1 flex-col justify-end gap-10 py-8 md:py-10">
+        <div className="relative isolate max-w-[52rem]">
+          <div aria-hidden className="video-wash-copy" />
           <SapPartnerBadge />
           <p className="mt-8 text-sm font-semibold text-gold">Enterprise transformation, under control</p>
           <h1
@@ -54,12 +55,15 @@ export function BrandHero() {
             </Link>
           </div>
         </div>
-        <div className="mt-auto flex flex-wrap items-end justify-between gap-5 pt-8">
+        {/* Both cues sit bottom-left, under the copy block, clear of the fixed quick-contact button in
+            the bottom-right corner. Below `sm` the row itself ends under that button, so the Discover
+            cue is hidden there: the page scroll is the affordance on a phone. */}
+        <div className="flex flex-wrap items-center justify-start gap-4">
           <MotionControls />
           <Link
             href="#featured-services"
             aria-label="Scroll to featured services"
-            className="inline-flex min-h-12 items-center gap-3 text-xs font-semibold uppercase tracking-[0.14em] text-foreground-muted hover:text-gold"
+            className="glass-pill hidden min-h-12 items-center gap-3 px-5 text-xs font-semibold uppercase tracking-[0.14em] text-foreground-muted hover:text-gold sm:inline-flex"
           >
             Discover <ArrowDown size={18} aria-hidden />
           </Link>
