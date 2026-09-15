@@ -117,6 +117,7 @@ test("every glass, gradient and motion utility the components use is defined", (
     "glass-card-selected",
     "glass-card-bezel",
     "glass-pill",
+    "glass-liquid",
     "glass-gold",
     "rule-gold",
     "hero-ambient",
