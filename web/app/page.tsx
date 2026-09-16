@@ -14,7 +14,6 @@ import {
   Network,
   Route,
   ScanSearch,
-  Workflow,
   type LucideIcon,
 } from "lucide-react";
 import { Container } from "@/components/ui/container";
@@ -23,6 +22,8 @@ import { CtaSection } from "@/components/sections/cta-section";
 import { LogoMarquee } from "@/components/sections/logo-marquee";
 import { HomePartners } from "@/components/sections/home-partners";
 import { YoutubeRibbon } from "@/components/sections/youtube-ribbon";
+import { LeadershipCarousel } from "@/components/sections/leadership-carousel";
+import { ClientStories } from "@/components/sections/client-stories";
 import { BrandHero } from "@/components/sections/brand-hero";
 import { AmbientVideo } from "@/components/media/ambient-video";
 import { PlatformPracticeLinks } from "@/components/sections/platform-practice-links";
@@ -74,40 +75,6 @@ const operatingSystem: Array<{
     copy: "A governed plan, build and run system for dependable delivery at scale.",
     href: "/delivery-excellence/#factory",
     Icon: Boxes,
-  },
-];
-
-const transformationStages: Array<{
-  number: string;
-  title: string;
-  body: string;
-  points: string[];
-  Icon: LucideIcon;
-  className: string;
-}> = [
-  {
-    number: "01",
-    title: "Decide",
-    body: "Make the programme legible before committing the organisation.",
-    points: ["Business case", "Architecture", "Risk and sequencing"],
-    Icon: ScanSearch,
-    className: "lg:col-span-4 lg:mt-12",
-  },
-  {
-    number: "02",
-    title: "Transform",
-    body: "Connect process, platform, data and adoption through one accountable programme.",
-    points: ["Design and build", "Migration", "Change and assurance"],
-    Icon: Workflow,
-    className: "text-foreground lg:col-span-5",
-  },
-  {
-    number: "03",
-    title: "Operate",
-    body: "Move from go-live to stable operations and continuous improvement.",
-    points: ["AMS transition", "Service control", "Optimisation"],
-    Icon: Gauge,
-    className: "lg:col-span-3 lg:mt-24",
   },
 ];
 
@@ -305,68 +272,6 @@ export default function HomePage() {
       </section>
 
       <section
-        id="operating-model"
-        className="seamless-section relative scroll-mt-20 overflow-hidden bg-surface py-24 md:py-32"
-      >
-        <div aria-hidden className="absolute inset-0 section-tint-c" />
-        <Container className="relative">
-          <Reveal className="grid gap-8 lg:grid-cols-12 lg:items-end">
-            <div className="lg:col-span-8">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-gold">From decision to operation</p>
-              <h2 className="mt-5 max-w-[14ch] text-[clamp(2.65rem,5vw,5.25rem)] font-semibold leading-[0.96] tracking-[-0.05em]">
-                One continuous line of accountability.
-              </h2>
-            </div>
-            <p className="max-w-[48ch] text-base leading-relaxed text-foreground-muted lg:col-span-4">
-              Clear gates connect strategy, implementation and operation. The same context moves forward instead of
-              being rediscovered at every hand-off.
-            </p>
-          </Reveal>
-
-          <Stagger className="relative mt-16 grid gap-3 lg:grid-cols-12">
-            <div aria-hidden className="absolute left-[6%] right-[6%] top-10 hidden h-px bg-border-strong lg:block">
-              <span className="flow-signal absolute top-1/2 h-2 w-2 -translate-y-1/2 rounded-full bg-action" />
-            </div>
-            {transformationStages.map((stage) => (
-              <StaggerItem key={stage.title} className={stage.className}>
-                <article
-                  className={`stage-card relative min-h-[24rem] overflow-hidden border p-7 text-foreground md:p-9 ${stage.number === "02" ? "stage-card-featured glass-elevated rounded-feature border-gold-soft/70" : "glass-card rounded-feature"}`}
-                >
-                  <div
-                    aria-hidden
-                    className={`absolute inset-0 ${stage.number === "02" ? "stage-featured-tint" : "blueprint-light opacity-30"}`}
-                  />
-                  <div className="relative flex h-full flex-col">
-                    <div className="flex items-center justify-between">
-                      <span className="text-[0.65rem] font-semibold tabular-nums tracking-[0.16em] text-gold">
-                        {stage.number}
-                      </span>
-                      <span className="icon-tile h-12 w-12 rounded-surface">
-                        <stage.Icon aria-hidden size={21} strokeWidth={1.5} />
-                      </span>
-                    </div>
-                    <h3 className="mt-12 text-3xl font-semibold tracking-[-0.035em] md:text-4xl">{stage.title}</h3>
-                    <p className="mt-4 max-w-[36ch] text-sm leading-relaxed text-foreground-muted">{stage.body}</p>
-                    <ul className="mt-auto border-t border-border-subtle pt-5">
-                      {stage.points.map((point) => (
-                        <li
-                          key={point}
-                          className="flex items-center gap-3 py-1.5 text-xs font-semibold uppercase tracking-[0.1em]"
-                        >
-                          <span className="h-1 w-1 bg-gold" />
-                          {point}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </article>
-              </StaggerItem>
-            ))}
-          </Stagger>
-        </Container>
-      </section>
-
-      <section
         id="industries"
         className="seamless-section relative scroll-mt-20 overflow-hidden bg-surface py-24 md:py-32"
       >
@@ -468,7 +373,10 @@ export default function HomePage() {
         body="We will bring the right platform, architecture and delivery specialists—and map the decisions that matter before the next commitment is made."
         ctaLabel={site.primaryCta.label}
       />
-      {/* Right above the footer (2026-09-15 17:08): the channel's latest uploads, newest first. */}
+      {/* The homepage closes with three automatic carousels (2026-09-16): the leadership cards and the
+          client stories copied from in2itebs.com, then the channel's latest uploads above the footer. */}
+      <LeadershipCarousel />
+      <ClientStories />
       <YoutubeRibbon />
     </>
   );

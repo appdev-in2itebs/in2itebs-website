@@ -40,7 +40,7 @@ test("the ribbon is a scroll-snap carousel that the arrows page through", async 
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/");
   await page.locator(ribbon).scrollIntoViewIfNeeded();
-  const track = page.locator(`${ribbon} [data-youtube-track]`);
+  const track = page.locator(`${ribbon} [data-auto-track]`);
   expect(await track.evaluate((el) => getComputedStyle(el).scrollSnapType)).toContain("x");
   expect(await track.evaluate((el) => el.scrollWidth > el.clientWidth)).toBe(true);
   expect(await track.evaluate((el) => el.scrollLeft)).toBe(0);
